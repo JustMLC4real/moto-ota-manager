@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.moto.ota.core.ReadinessTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-10-28T20:57:28" hostname="DESKTOP-HQR3CUP" time="0.011">
+  <properties/>
+  <testcase name="unknownModuleInventoryBlocksPreflight" classname="nl.moto.ota.core.ReadinessTest" time="0.003"/>
+  <testcase name="noRootBlocksEvenWithValidBackup" classname="nl.moto.ota.core.ReadinessTest" time="0.0"/>
+  <testcase name="staleAndFutureDatedObservationsCannotAuthorizeActions" classname="nl.moto.ota.core.ReadinessTest" time="0.001"/>
+  <testcase name="observedCompatibleDeviceAndAuthenticatedBackupPassPreflight" classname="nl.moto.ota.core.ReadinessTest" time="0.0"/>
+  <testcase name="batteryAndUnknownVirtualAbAreBlocked" classname="nl.moto.ota.core.ReadinessTest" time="0.001"/>
+  <testcase name="futureAndroidAndUnknownBootSecurityRequireProfileReview" classname="nl.moto.ota.core.ReadinessTest" time="0.001"/>
+  <testcase name="unknownFutureMagiskVersionFailsClosed" classname="nl.moto.ota.core.ReadinessTest" time="0.0"/>
+  <testcase name="engineErrorAndPendingRebootBlockNewUpdate" classname="nl.moto.ota.core.ReadinessTest" time="0.002"/>
+  <testcase name="simulatedCompatibleDeviceNeverAuthorizesRealFlow" classname="nl.moto.ota.core.ReadinessTest" time="0.0"/>
+  <testcase name="missingSlotOrInitBootPartitionBlocks" classname="nl.moto.ota.core.ReadinessTest" time="0.0"/>
+  <testcase name="wrongModelAndRegionAreBlockedIndependently" classname="nl.moto.ota.core.ReadinessTest" time="0.0"/>
+  <testcase name="missingOrUnprovenBackupBlocks" classname="nl.moto.ota.core.ReadinessTest" time="0.0"/>
+  <testcase name="activeOrUnknownSnapshotStatesAlwaysBlock" classname="nl.moto.ota.core.ReadinessTest" time="0.001"/>
+  <testcase name="insufficientStorageBlocks" classname="nl.moto.ota.core.ReadinessTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

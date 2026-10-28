@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.moto.ota.core.PrivacyTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-28T20:57:28" hostname="DESKTOP-HQR3CUP" time="0.007">
+  <properties/>
+  <testcase name="probeKeysCannotInjectRawOutputOrAdditionalReportLines" classname="nl.moto.ota.core.PrivacyTest" time="0.006"/>
+  <testcase name="userControlledNewlinesCannotForgeSuccessInReport" classname="nl.moto.ota.core.PrivacyTest" time="0.0"/>
+  <testcase name="simulatedObservationsAreExplicitlyMarked" classname="nl.moto.ota.core.PrivacyTest" time="0.0"/>
+  <testcase name="sensitiveFieldsAreOmittedRatherThanExportedWithCosmeticRedaction" classname="nl.moto.ota.core.PrivacyTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

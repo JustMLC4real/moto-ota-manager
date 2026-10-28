@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.moto.ota.core.BackupValidatorTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-10-28T20:57:25" hostname="DESKTOP-HQR3CUP" time="0.066">
+  <properties/>
+  <testcase name="differentCurrentBuildRejectsOldBackup" classname="nl.moto.ota.core.BackupValidatorTest" time="0.036"/>
+  <testcase name="unauthenticatedManifestCannotDeclareImageStock" classname="nl.moto.ota.core.BackupValidatorTest" time="0.002"/>
+  <testcase name="shellOutputOf83ExtraBytesIsRejected" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001"/>
+  <testcase name="validGzipHasSameContentHashAsRaw" classname="nl.moto.ota.core.BackupValidatorTest" time="0.005"/>
+  <testcase name="gzipWithDamagedCrcIsRejected" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001"/>
+  <testcase name="validCurrentReferenceAcceptsOnlyMatchingBytes" classname="nl.moto.ota.core.BackupValidatorTest" time="0.002"/>
+  <testcase name="truncatedImageIsRejected" classname="nl.moto.ota.core.BackupValidatorTest" time="0.009"/>
+  <testcase name="gzipWithTrailingShellOutputIsRejected" classname="nl.moto.ota.core.BackupValidatorTest" time="0.004"/>
+  <testcase name="fingerprintAliasIsNeverSilentlyTreatedAsEquivalent" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001"/>
+  <testcase name="patchedContentMismatchRejectsEvenWellFormedHeader" classname="nl.moto.ota.core.BackupValidatorTest" time="0.0"/>
+  <testcase name="unknownHeaderVersionStopsSafely" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001"/>
+  <testcase name="bootImageWithKernelIsNotInitBoot" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001"/>
+  <testcase name="referenceForWrongRegionOrPartitionIsRejected" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001"/>
+  <testcase name="unknownPartitionSizeAndMissingInputAreBlocked" classname="nl.moto.ota.core.BackupValidatorTest" time="0.0"/>
+  <testcase name="existingBootImgGzDoesNotProveCurrentStock" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

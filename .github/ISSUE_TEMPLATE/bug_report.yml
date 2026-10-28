@@ -1,0 +1,26 @@
+name: Diagnose of softwarefout
+description: Meld een fout zonder persoonlijke toestelgegevens of firmwaretokens.
+body:
+  - type: textarea
+    id: observed
+    attributes:
+      label: Wat gebeurde er?
+      description: Geef stappen, verwachte uitkomst en werkelijke uitkomst. Geen getekende download-URL of ruwe XML.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostic
+    attributes:
+      label: Geanonimiseerd rapport
+      description: Gebruik uitsluitend het rapport uit de app; controleer het voor het plaatsen.
+  - type: input
+    id: version
+    attributes:
+      label: Appversie of commit
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Controle
+      options:
+        - label: Ik heb geen IMEI, serienummer, accounts of ondertekende URL's toegevoegd.
+          required: true

@@ -1,0 +1,181 @@
+
+Welcome to Gradle 8.11.1!
+
+Here are the highlights of this release:
+ - Parallel load and store for Configuration Cache
+ - Java compilation errors at the end of the build output
+ - Consolidated report for warnings and deprecations
+
+For more details see https://docs.gradle.org/8.11.1/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDebugBuildConfig
+> Task :core:compileKotlin
+> Task :core:compileJava NO-SOURCE
+> Task :core:classes UP-TO-DATE
+> Task :app:checkDebugAarMetadata
+> Task :core:jar
+> Task :app:generateDebugResValues
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :core:compileTestKotlin
+> Task :core:compileTestJava NO-SOURCE
+> Task :core:testClasses UP-TO-DATE
+
+> Task :core:test
+
+BackupValidatorTest > differentCurrentBuildRejectsOldBackup PASSED
+
+BackupValidatorTest > unauthenticatedManifestCannotDeclareImageStock PASSED
+
+BackupValidatorTest > shellOutputOf83ExtraBytesIsRejected PASSED
+
+BackupValidatorTest > validGzipHasSameContentHashAsRaw PASSED
+
+BackupValidatorTest > gzipWithDamagedCrcIsRejected PASSED
+
+BackupValidatorTest > validCurrentReferenceAcceptsOnlyMatchingBytes PASSED
+
+BackupValidatorTest > truncatedImageIsRejected PASSED
+
+BackupValidatorTest > gzipWithTrailingShellOutputIsRejected PASSED
+
+BackupValidatorTest > fingerprintAliasIsNeverSilentlyTreatedAsEquivalent PASSED
+
+BackupValidatorTest > patchedContentMismatchRejectsEvenWellFormedHeader PASSED
+
+BackupValidatorTest > unknownHeaderVersionStopsSafely PASSED
+
+BackupValidatorTest > bootImageWithKernelIsNotInitBoot PASSED
+
+BackupValidatorTest > referenceForWrongRegionOrPartitionIsRejected PASSED
+
+BackupValidatorTest > unknownPartitionSizeAndMissingInputAreBlocked PASSED
+
+BackupValidatorTest > existingBootImgGzDoesNotProveCurrentStock PASSED
+
+ReadinessTest > noRootBlocksEvenWithValidBackup PASSED
+
+ReadinessTest > staleAndFutureDatedObservationsCannotAuthorizeActions PASSED
+
+ReadinessTest > observedCompatibleDeviceAndAuthenticatedBackupPassPreflight PASSED
+
+ReadinessTest > batteryAndUnknownVirtualAbAreBlocked PASSED
+
+ReadinessTest > unknownFutureMagiskVersionFailsClosed PASSED
+
+ReadinessTest > engineErrorAndPendingRebootBlockNewUpdate PASSED
+
+ReadinessTest > simulatedCompatibleDeviceNeverAuthorizesRealFlow PASSED
+
+ReadinessTest > missingSlotOrInitBootPartitionBlocks PASSED
+
+ReadinessTest > wrongModelAndRegionAreBlockedIndependently PASSED
+
+ReadinessTest > missingOrUnprovenBackupBlocks PASSED
+
+ReadinessTest > activeOrUnknownSnapshotStatesAlwaysBlock PASSED
+
+ReadinessTest > insufficientStorageBlocks PASSED
+
+WorkflowTest > missingDownloadOrPackageVerificationBlocks PASSED
+
+WorkflowTest > wrongActiveSlotIsNotSuccessEvenOnTargetBuild PASSED
+
+WorkflowTest > corruptUnknownVersionOrIncompleteJournalStopsSafely PASSED
+
+WorkflowTest > otaEngineErrorIsTerminalAndNotHiddenByLaterIdle PASSED
+
+WorkflowTest > fingerprintAliasAfterRebootNeedsManualInvestigation PASSED
+
+WorkflowTest > processDeathRestoresJournalThenReconcilesLiveObservations PASSED
+
+WorkflowTest > currentBuildChangeWithoutNewBootIsContradiction PASSED
+
+WorkflowTest > unchangedOrUnknownTargetIsBlocked PASSED
+
+WorkflowTest > preflightFromDifferentObservationCannotStartWorkflow PASSED
+
+WorkflowTest > activeMergeOrUnknownMergeCannotComplete PASSED
+
+WorkflowTest > lostRootAfterRebootCannotBeSuccess PASSED
+
+WorkflowTest > unsuccessfulOrUnknownBootCannotComplete PASSED
+
+WorkflowTest > failedInactiveSlotMagiskStepIsRecordedAsFailure PASSED
+
+WorkflowTest > compatibleUpdateStartsGuidanceWithoutClaimingStockRestored PASSED
+
+WorkflowTest > missingModulesAndChangedSecurityAreNotFullSuccess PASSED
+
+WorkflowTest > noUpdateKeepsIdleAndDoesNotClaimNoServerOffer PASSED
+
+WorkflowTest > oldSlotAfterPendingOtaIsPossibleRollback PASSED
+
+WorkflowTest > fullObservedOutcomeIncludesSuccessfulBootRootAndMerge PASSED
+
+WorkflowTest > persistedManualNotesAndLineBreaksRoundTrip PASSED
+
+WorkflowTest > targetBootWithoutPriorObservedOtaDoesNotProveWholeWorkflow PASSED
+
+WorkflowTest > staleObservationsCannotConfirmPersistedSuccess PASSED
+
+WorkflowTest > magiskCannotBeReportedBeforeObservedOta PASSED
+
+WorkflowTest > manualStockRestoreNeverCountsAsObservedOta PASSED
+
+WorkflowTest > simulatedAndRealEvidenceNeverMix PASSED
+
+WorkflowTest > enginePendingRebootIsDistinctFromMagiskPreparedAndSuccess PASSED
+
+WorkflowTest > unexpectedRebootBeforeOtaRequiresRecovery PASSED
+
+> Task :app:packageDebugResources
+> Task :app:parseDebugLocalResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:mergeDebugResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:javaPreCompileDebug
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeDebugShaders
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:processDebugResources
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:desugarDebugFileDependencies
+> Task :app:compileDebugKotlin
+> Task :app:checkDebugDuplicateClasses
+> Task :app:compileDebugJavaWithJavac
+> Task :app:dexBuilderDebug
+> Task :app:processDebugJavaRes
+> Task :app:mergeDebugGlobalSynthetics
+> Task :app:mergeExtDexDebug
+> Task :app:mergeLibDexDebug
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeDebugJavaResource
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:mergeDebugNativeLibs
+> Task :app:writeDebugSigningConfigVersions
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so.
+
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+
+BUILD SUCCESSFUL in 3m 46s
+41 actionable tasks: 41 executed

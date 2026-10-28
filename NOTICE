@@ -1,0 +1,10 @@
+Moto OTA Manager is an independent project.
+No Motorola firmware, Magisk binaries, firmware images or private user data are included.
+
+Gradle wrapper scripts and gradle-wrapper.jar originate from Gradle v8.11.1:
+https://github.com/gradle/gradle/tree/v8.11.1
+Copyright Gradle, Inc. and contributors. Licensed under Apache License 2.0.
+https://www.apache.org/licenses/LICENSE-2.0
+
+AndroidX, Kotlin and kotlinx.coroutines dependencies retain their upstream licenses.
+Source references in docs/RESEARCH.md document evidence; no upstream Magisk code is copied.

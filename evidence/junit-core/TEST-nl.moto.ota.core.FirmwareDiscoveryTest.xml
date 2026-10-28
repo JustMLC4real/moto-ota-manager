@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.moto.ota.core.FirmwareDiscoveryTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-28T20:57:26" hostname="DESKTOP-HQR3CUP" time="0.009">
+  <properties/>
+  <testcase name="arbitraryExternalDownloadHostDoesNotBecomeOfficial" classname="nl.moto.ota.core.FirmwareDiscoveryTest" time="0.005"/>
+  <testcase name="missingUpdaterAndMetadataRemainUnknown" classname="nl.moto.ota.core.FirmwareDiscoveryTest" time="0.0"/>
+  <testcase name="alreadyInstalledCachedBuildIsNotNewUpdate" classname="nl.moto.ota.core.FirmwareDiscoveryTest" time="0.0"/>
+  <testcase name="cachedAllowedUrlIsOnlyCandidateUntilPackageValidation" classname="nl.moto.ota.core.FirmwareDiscoveryTest" time="0.002"/>
+  <testcase name="externalReportAloneCannotSupplyTrustedDownload" classname="nl.moto.ota.core.FirmwareDiscoveryTest" time="0.0"/>
+  <testcase name="noCachedMetadataDoesNotAssertThatMotorolaHasNoUpdate" classname="nl.moto.ota.core.FirmwareDiscoveryTest" time="0.0"/>
+  <testcase name="externalReleaseDoesNotOverrideUpToDateMotorolaResponse" classname="nl.moto.ota.core.FirmwareDiscoveryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

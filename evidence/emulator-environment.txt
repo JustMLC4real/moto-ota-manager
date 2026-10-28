@@ -1,0 +1,25 @@
+Read-only emulator feasibility inspection, 2026-10-28 Europe/Amsterdam
+
+Name                                    : 13th Gen Intel(R) Core(TM) i7-13620H
+VirtualizationFirmwareEnabled           : False
+SecondLevelAddressTranslationExtensions : False
+VMMonitorModeExtensions                 : False
+
+
+HypervisorPresent : True
+
+
+Name                                    InstallState
+----                                    ------------
+VirtualMachinePlatform                             1
+HypervisorPlatform                                 2
+Microsoft-Hyper-V-All                              2
+Microsoft-Hyper-V                                  2
+Microsoft-Hyper-V-Tools-All                        2
+Microsoft-Hyper-V-Management-PowerShell            2
+Microsoft-Hyper-V-Hypervisor                       2
+Microsoft-Hyper-V-Services                         2
+Microsoft-Hyper-V-Management-Clients               2
+
+List of devices attached
+
