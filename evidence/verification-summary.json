@@ -1,0 +1,20 @@
+{
+  "release": "0.1.0-safe",
+  "date": "2026-10-28",
+  "applicationId": "nl.moto.ota",
+  "apkBytes": 26680925,
+  "apkSha256": "d0adf0f3379fd48fd69e2a1c6cd6561879f8c7f8a873aac576fd56410b30f6a0",
+  "coreTests": 129,
+  "androidJvmTests": 51,
+  "instrumentationTests": 6,
+  "totalTests": 186,
+  "failures": 0,
+  "errors": 0,
+  "lintErrors": 0,
+  "lintWarnings": 7,
+  "emulator": "API 35 x86_64 Pixel 5",
+  "realDeviceTested": false,
+  "partitionWritesImplemented": false,
+  "otaInstallationImplemented": false,
+  "rebootImplemented": false
+}

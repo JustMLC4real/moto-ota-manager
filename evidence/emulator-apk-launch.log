@@ -1,0 +1,7 @@
+Starting: Intent { cmp=nl.moto.ota/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: nl.moto.ota/.MainActivity
+TotalTime: 1724
+WaitTime: 1725
+Complete

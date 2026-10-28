@@ -37,6 +37,7 @@ class PlatformSafetyTest {
             assertArrayEquals(data, imported.readBytes())
             imported.delete()
         } finally { source.delete() }
+        Unit
     }
 
     @Test fun atomicAndroidJournalRestoresExpectationsWithoutClaimingSuccess() {

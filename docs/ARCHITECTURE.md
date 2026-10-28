@@ -6,7 +6,7 @@ Het project heeft een platformonafhankelijke Kotlin/JVM-module `core` en een And
 
 ```mermaid
 flowchart TD
-    UI[Compose Material 3] --> VM[MotoViewModel / Flow]
+    UI[Compose Material 3] --> VM[MotoViewModel / Compose State]
     VM --> DI[DeviceInspector]
     DI --> SH[ReadOnlyShell: vaste allowlist]
     SH --> OS[Properties, su, bootctl, snapshotctl, engine callback]

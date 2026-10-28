@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testsuite name="AndroidApi35Emulator" tests="6" failures="0" errors="0" time="14.061">
+  <testcase classname="nl.moto.ota.PlatformSafetyTest" name="unsignedPackageCannotPassActualDeviceCertificateVerification" />
+  <testcase classname="nl.moto.ota.PlatformSafetyTest" name="privateFileImportCommitsExactBytesWithoutShell" />
+  <testcase classname="nl.moto.ota.PlatformSafetyTest" name="atomicAndroidJournalRestoresExpectationsWithoutClaimingSuccess" />
+  <testcase classname="nl.moto.ota.SafeUiTest" name="rootDiagnosticsRequiresAnExplicitDialogAndCanBeCancelled" />
+  <testcase classname="nl.moto.ota.SafeUiTest" name="startsWithLocalReadOnlyDashboard" />
+  <testcase classname="nl.moto.ota.SafeUiTest" name="demonstrationIsExplicitAndSeparateFromRealJournal" />
+</testsuite>

@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -29,7 +30,10 @@ import java.util.Locale
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         setContent { MotoApp() }
     }
 }
@@ -79,6 +83,7 @@ fun MotoApp(vm: MotoViewModel = viewModel()) {
                             else InfoCard("Lokaal · uitsluitend uitlezend", vm.message)
                             when (tab) {
                                 0 -> {
+                                    Button(onClick = { rootDialog = true }, enabled = !vm.busy, modifier = Modifier.fillMaxWidth()) { Text("Controleer en bereid update voor") }
                                     Panel {
                                         Text("Jouw toestel", style = MaterialTheme.typography.titleLarge)
                                         Text(vm.device.model.ifBlank { "Model nog onbekend" }, style = MaterialTheme.typography.headlineSmall, color = colors.primary)
@@ -96,7 +101,6 @@ fun MotoApp(vm: MotoViewModel = viewModel()) {
                                         Detail("UpdateEngine", vm.device.engine.name)
                                         Detail("Originele back-up", if (vm.backup?.usableAsStock == true) "herkomst geverifieerd" else "herkomst niet bewezen")
                                         Detail("OTA-aanbod", if (vm.candidateAvailable) "lokale Motorola-downloadverwijzing gevonden; mogelijk verouderd" else "niet vastgesteld; controleer officiële updater")
-                                        Button(onClick = { rootDialog = true }, enabled = !vm.busy, modifier = Modifier.fillMaxWidth()) { Text("Controleer en bereid update voor") }
                                         Text("Deze knop leest diagnostiek. Schrijven naar partities, installeren en herstarten zijn niet geïmplementeerd.", style = MaterialTheme.typography.bodySmall)
                                     }
                                     Panel {

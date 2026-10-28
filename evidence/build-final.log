@@ -74,23 +74,23 @@ Daemon will be stopped at the end of the build
 > Task :app:writeDebugAndroidTestSigningConfigVersions UP-TO-DATE
 > Task :app:compileDebugKotlin
 > Task :app:compileDebugJavaWithJavac UP-TO-DATE
-> Task :app:bundleDebugClassesToRuntimeJar
 > Task :app:bundleDebugClassesToCompileJar
+> Task :app:bundleDebugClassesToRuntimeJar
 > Task :app:processDebugJavaRes UP-TO-DATE
-> Task :app:dexBuilderDebug
-> Task :app:mergeDebugGlobalSynthetics UP-TO-DATE
-> Task :app:mergeDebugJavaResource UP-TO-DATE
-> Task :app:mergeProjectDexDebug
-> Task :app:packageDebug
-> Task :app:createDebugApkListingFileRedirect UP-TO-DATE
-> Task :app:assembleDebug
-> Task :app:generateDebugAndroidTestLintModel
 > Task :app:compileDebugUnitTestKotlin
-> Task :app:generateDebugLintReportModel
+> Task :app:dexBuilderDebug
 > Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
 > Task :app:processDebugUnitTestJavaRes UP-TO-DATE
 > Task :app:testDebugUnitTest
+> Task :app:mergeDebugGlobalSynthetics UP-TO-DATE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:generateDebugAndroidTestLintModel
+> Task :app:mergeProjectDexDebug
+> Task :app:generateDebugLintReportModel
 > Task :app:generateDebugUnitTestLintModel
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebug
 > Task :app:lintAnalyzeDebugAndroidTest
 > Task :app:lintAnalyzeDebugUnitTest
 > Task :app:compileDebugAndroidTestKotlin
@@ -104,8 +104,11 @@ Daemon will be stopped at the end of the build
 > Task :app:createDebugAndroidTestApkListingFileRedirect UP-TO-DATE
 > Task :app:assembleDebugAndroidTest UP-TO-DATE
 > Task :app:lintAnalyzeDebug
-> Task :app:lintReportDebug UP-TO-DATE
+
+> Task :app:lintReportDebug
+Wrote HTML report to file:///[USER_HOME]/Documents/Codex/2026-10-28/new-chat/outputs/moto-ota-manager/app/build/reports/lint-results-debug.html
+
 > Task :app:lintDebug
 
-BUILD SUCCESSFUL in 39s
-84 actionable tasks: 16 executed, 68 up-to-date
+BUILD SUCCESSFUL in 55s
+84 actionable tasks: 17 executed, 67 up-to-date

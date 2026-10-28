@@ -16,6 +16,8 @@ Een echte Kotlin/Jetpack Compose-app voor het uitlezen en veilig begeleiden van 
 
 Lees vóór gebruik de [veiligheidsgrenzen](docs/SAFETY.md) en [toesteltestchecklist](docs/MANUAL-TESTS.md). Na terugkeer uit Magisk of Motorola kies je opnieuw uitlezen. De app bedient hun knoppen niet.
 
+<img src="evidence/app-overview-api35.png" alt="Werkelijke APK op de Android-emulator; geen Motorola-toesteltest" width="300">
+
 ## Werkende implementaties en hun bewijsgrenzen
 
 | Onderdeel | Implementatie | Nog te valideren op XT2607-1 |
@@ -76,6 +78,8 @@ core/ pure Kotlin JVM
 ```
 
 De app vraagt uitsluitend `INTERNET`; bestanden gaan via de Android-bestandskiezer. Geen `MANAGE_EXTERNAL_STORAGE`, verborgen UpdateEngine-reflectie, accessibility-automatisering, platformhandtekening of algemene shellconsole. Er is geen automatische telemetrie, firmware-scraping, notificatiepolling of upload.
+
+AndroidX voegt daarnaast een eigen signaturepermission voor niet-geëxporteerde dynamische receivers toe. Dat is geen brede toestel- of opslagtoestemming.
 
 ## Documentatie
 

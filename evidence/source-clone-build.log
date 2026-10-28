@@ -1,0 +1,377 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugBuildConfig
+> Task :app:checkDebugAarMetadata
+> Task :app:generateDebugResValues
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:mergeDebugResources
+> Task :app:packageDebugResources
+> Task :app:parseDebugLocalResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources
+> Task :app:javaPreCompileDebug
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:mergeDebugShaders
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:desugarDebugFileDependencies
+> Task :app:checkDebugDuplicateClasses
+> Task :core:compileKotlin
+> Task :core:compileJava NO-SOURCE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar
+> Task :app:mergeExtDexDebug
+> Task :core:compileTestKotlin
+> Task :core:compileTestJava NO-SOURCE
+> Task :core:testClasses UP-TO-DATE
+
+> Task :core:test
+
+BackupValidatorTest > differentCurrentBuildRejectsOldBackup PASSED
+
+BackupValidatorTest > unauthenticatedManifestCannotDeclareImageStock PASSED
+
+BackupValidatorTest > shellOutputOf83ExtraBytesIsRejected PASSED
+
+BackupValidatorTest > validGzipHasSameContentHashAsRaw PASSED
+
+BackupValidatorTest > gzipWithDamagedCrcIsRejected PASSED
+
+BackupValidatorTest > validCurrentReferenceAcceptsOnlyMatchingBytes PASSED
+
+BackupValidatorTest > truncatedImageIsRejected PASSED
+
+BackupValidatorTest > gzipWithTrailingShellOutputIsRejected PASSED
+
+BackupValidatorTest > fingerprintAliasIsNeverSilentlyTreatedAsEquivalent PASSED
+
+BackupValidatorTest > patchedContentMismatchRejectsEvenWellFormedHeader PASSED
+
+BackupValidatorTest > unknownHeaderVersionStopsSafely PASSED
+
+BackupValidatorTest > bootImageWithKernelIsNotInitBoot PASSED
+
+BackupValidatorTest > referenceForWrongRegionOrPartitionIsRejected PASSED
+
+BackupValidatorTest > unknownPartitionSizeAndMissingInputAreBlocked PASSED
+
+BackupValidatorTest > existingBootImgGzDoesNotProveCurrentStock PASSED
+
+FirmwareDiscoveryTest > arbitraryExternalDownloadHostDoesNotBecomeOfficial PASSED
+
+FirmwareDiscoveryTest > missingUpdaterAndMetadataRemainUnknown PASSED
+
+FirmwareDiscoveryTest > alreadyInstalledCachedBuildIsNotNewUpdate PASSED
+
+FirmwareDiscoveryTest > cachedAllowedUrlIsOnlyCandidateUntilPackageValidation PASSED
+
+FirmwareDiscoveryTest > externalReportAloneCannotSupplyTrustedDownload PASSED
+
+FirmwareDiscoveryTest > noCachedMetadataDoesNotAssertThatMotorolaHasNoUpdate PASSED
+
+FirmwareDiscoveryTest > externalReleaseDoesNotOverrideUpToDateMotorolaResponse PASSED
+
+FirmwareValidatorTest > userdataWipeIsRejected PASSED
+
+FirmwareValidatorTest > deviceWrongRegionIsRejected PASSED
+
+FirmwareValidatorTest > payloadHashMismatchNeverCountsAsVerified PASSED
+
+FirmwareValidatorTest > vendorFingerprintCannotReplaceRequiredSystemFingerprint PASSED
+
+FirmwareValidatorTest > absentAndroidMetadataIsRejected PASSED
+
+FirmwareValidatorTest > malformedTargetAndroidVersionIsRejected PASSED
+
+FirmwareValidatorTest > targetIncrementalMustMatchItsFingerprint PASSED
+
+FirmwareValidatorTest > equalTimestampRequiresReview PASSED
+
+FirmwareValidatorTest > targetOfAnotherCodenameIsRejected PASSED
+
+FirmwareValidatorTest > conflictingRegionAnnotationsAreRejected PASSED
+
+FirmwareValidatorTest > shortPayloadIsRejected PASSED
+
+FirmwareValidatorTest > duplicateMetadataKeysAreRejected PASSED
+
+FirmwareValidatorTest > differentChannelIsRejected PASSED
+
+FirmwareValidatorTest > targetOfAnotherManufacturerIsRejected PASSED
+
+FirmwareValidatorTest > excessiveManifestLengthIsRejected PASSED
+
+FirmwareValidatorTest > metadataHashMismatchIsRejected PASSED
+
+FirmwareValidatorTest > malformedTimestampIsRejected PASSED
+
+FirmwareValidatorTest > wrongSourceIncrementalIsRejected PASSED
+
+FirmwareValidatorTest > alreadyInstalledBuildIsNotOfferedAgain PASSED
+
+FirmwareValidatorTest > officialUrlPolicyAllowsOnlyExactTlsHost PASSED
+
+FirmwareValidatorTest > metadataSizeMismatchIsRejected PASSED
+
+FirmwareValidatorTest > missingSourceIncrementalCannotProveCompatibility PASSED
+
+FirmwareValidatorTest > absentTargetPatchDateIsRejected PASSED
+
+FirmwareValidatorTest > compatiblePackageStillRequiresActualDeviceSignatureVerification PASSED
+
+FirmwareValidatorTest > differentModelIsRejected PASSED
+
+FirmwareValidatorTest > absentCurrentPatchDateIsRejected PASSED
+
+FirmwareValidatorTest > payloadFileSizeMismatchIsRejected PASSED
+
+FirmwareValidatorTest > invalidPayloadMagicIsRejected PASSED
+
+FirmwareValidatorTest > userdebugFirmwareIsRejected PASSED
+
+FirmwareValidatorTest > differentDeviceCodenameIsRejected PASSED
+
+FirmwareValidatorTest > nonZipInputIsRejectedWithoutException PASSED
+
+FirmwareValidatorTest > absentPropertiesEntryIsRejected PASSED
+
+FirmwareValidatorTest > wrongSourceFingerprintIsRejected PASSED
+
+FirmwareValidatorTest > invalidCalendarPatchDateIsRejected PASSED
+
+FirmwareValidatorTest > emptyInputIsRejectedWithoutException PASSED
+
+FirmwareValidatorTest > futurePayloadVersionIsRejected PASSED
+
+FirmwareValidatorTest > malformedTargetFingerprintIsRejected PASSED
+
+FirmwareValidatorTest > androidDowngradeIsRejected PASSED
+
+FirmwareValidatorTest > unknownCurrentTimestampIsRejected PASSED
+
+FirmwareValidatorTest > missingCurrentIncrementalDoesNotFallBackToBuildId PASSED
+
+FirmwareValidatorTest > olderTimestampIsRejected PASSED
+
+FirmwareValidatorTest > absentPayloadEntryIsRejected PASSED
+
+FirmwareValidatorTest > absentRegionMetadataIsExplicitlyUnproven PASSED
+
+FirmwareValidatorTest > malformedHashEncodingIsRejected PASSED
+
+FirmwareValidatorTest > zipTraversalEntryIsRejectedEvenWithoutExtraction PASSED
+
+FirmwareValidatorTest > testFirmwareIsRejected PASSED
+
+FirmwareValidatorTest > unknownCurrentAndroidVersionIsRejected PASSED
+
+FirmwareValidatorTest > missingSourceFingerprintCannotProveCompatibility PASSED
+
+FirmwareValidatorTest > missingTimestampIsRejected PASSED
+
+FirmwareValidatorTest > nonAbPackageIsRejected PASSED
+
+FirmwareValidatorTest > absoluteZipEntryIsRejected PASSED
+
+FirmwareValidatorTest > patchRollbackIsRejected PASSED
+
+FirmwareValidatorTest > explicitDowngradeIsRejected PASSED
+
+PackageTransferTest > oversizeOrMisdeclaredDownloadIsRejected PASSED
+
+PackageTransferTest > truncatedDownloadNeverBecomesCompletedFile PASSED
+
+PackageTransferTest > networkFailureMidStreamPreservesPreviousPackageAndRemovesPartial PASSED
+
+PackageTransferTest > emptyInputNeverReplacesExistingPackage PASSED
+
+PackageTransferTest > successfulReplacementIsAtomicAndLeavesNoStalePartial PASSED
+
+PackageTransferTest > completedExactLengthTransferCommitsOnlyPackageBytes PASSED
+
+PackageTransferTest > storageExhaustionPreservesExistingFile PASSED
+
+PackageTransferTest > coroutineCancellationLeavesNoCompletedDownload PASSED
+
+PrivacyTest > probeKeysCannotInjectRawOutputOrAdditionalReportLines PASSED
+
+PrivacyTest > userControlledNewlinesCannotForgeSuccessInReport PASSED
+
+PrivacyTest > simulatedObservationsAreExplicitlyMarked PASSED
+
+PrivacyTest > sensitiveFieldsAreOmittedRatherThanExportedWithCosmeticRedaction PASSED
+
+ReadinessTest > unknownModuleInventoryBlocksPreflight PASSED
+
+ReadinessTest > noRootBlocksEvenWithValidBackup PASSED
+
+ReadinessTest > staleAndFutureDatedObservationsCannotAuthorizeActions PASSED
+
+ReadinessTest > observedCompatibleDeviceAndAuthenticatedBackupPassPreflight PASSED
+
+ReadinessTest > batteryAndUnknownVirtualAbAreBlocked PASSED
+
+ReadinessTest > futureAndroidAndUnknownBootSecurityRequireProfileReview PASSED
+
+ReadinessTest > unknownFutureMagiskVersionFailsClosed PASSED
+
+ReadinessTest > engineErrorAndPendingRebootBlockNewUpdate PASSED
+
+ReadinessTest > simulatedCompatibleDeviceNeverAuthorizesRealFlow PASSED
+
+ReadinessTest > missingSlotOrInitBootPartitionBlocks PASSED
+
+ReadinessTest > wrongModelAndRegionAreBlockedIndependently PASSED
+
+ReadinessTest > missingOrUnprovenBackupBlocks PASSED
+
+ReadinessTest > activeOrUnknownSnapshotStatesAlwaysBlock PASSED
+
+ReadinessTest > insufficientStorageBlocks PASSED
+
+WorkflowTest > missingDownloadOrPackageVerificationBlocks PASSED
+
+WorkflowTest > unmeasuredRootAfterRebootIsNotFalselyReportedAsRootLoss PASSED
+
+WorkflowTest > wrongActiveSlotIsNotSuccessEvenOnTargetBuild PASSED
+
+WorkflowTest > corruptUnknownVersionOrIncompleteJournalStopsSafely PASSED
+
+WorkflowTest > otaEngineErrorIsTerminalAndNotHiddenByLaterIdle PASSED
+
+WorkflowTest > fingerprintAliasAfterRebootNeedsManualInvestigation PASSED
+
+WorkflowTest > processDeathRestoresJournalThenReconcilesLiveObservations PASSED
+
+WorkflowTest > currentBuildChangeWithoutNewBootIsContradiction PASSED
+
+WorkflowTest > unchangedOrUnknownTargetIsBlocked PASSED
+
+WorkflowTest > preflightFromDifferentObservationCannotStartWorkflow PASSED
+
+WorkflowTest > activeMergeOrUnknownMergeCannotComplete PASSED
+
+WorkflowTest > lostRootAfterRebootCannotBeSuccess PASSED
+
+WorkflowTest > unsuccessfulOrUnknownBootCannotComplete PASSED
+
+WorkflowTest > failedInactiveSlotMagiskStepIsRecordedAsFailure PASSED
+
+WorkflowTest > compatibleUpdateStartsGuidanceWithoutClaimingStockRestored PASSED
+
+WorkflowTest > missingModulesAndChangedSecurityAreNotFullSuccess PASSED
+
+WorkflowTest > unknownModuleInventoryAndUnreviewedMagiskDoNotComplete PASSED
+
+WorkflowTest > noUpdateKeepsIdleAndDoesNotClaimNoServerOffer PASSED
+
+WorkflowTest > oldSlotAfterPendingOtaIsPossibleRollback PASSED
+
+WorkflowTest > fullObservedOutcomeIncludesSuccessfulBootRootAndMerge PASSED
+
+WorkflowTest > persistedManualNotesAndLineBreaksRoundTrip PASSED
+
+WorkflowTest > targetBootWithoutPriorObservedOtaDoesNotProveWholeWorkflow PASSED
+
+WorkflowTest > staleObservationsCannotConfirmPersistedSuccess PASSED
+
+WorkflowTest > magiskCannotBeReportedBeforeObservedOta PASSED
+
+WorkflowTest > manualStockRestoreNeverCountsAsObservedOta PASSED
+
+WorkflowTest > simulatedAndRealEvidenceNeverMix PASSED
+
+WorkflowTest > enginePendingRebootIsDistinctFromMagiskPreparedAndSuccess PASSED
+
+WorkflowTest > unexpectedRebootBeforeOtaRequiresRecovery PASSED
+
+> Task :app:mergeLibDexDebug
+> Task :app:mergeDebugJniLibFolders
+> Task :app:compileDebugKotlin
+> Task :app:mergeDebugNativeLibs
+> Task :app:compileDebugJavaWithJavac
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:processDebugJavaRes
+> Task :app:dexBuilderDebug
+> Task :app:mergeDebugGlobalSynthetics
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:testDebugUnitTest
+> Task :app:mergeProjectDexDebug
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so.
+
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues
+> Task :app:mergeDebugJavaResource
+> Task :app:generateDebugAndroidTestLintModel
+> Task :app:extractProguardFiles
+> Task :app:generateDebugLintReportModel
+> Task :app:generateDebugUnitTestLintModel
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+> Task :app:lintAnalyzeDebugAndroidTest
+> Task :app:lintAnalyzeDebugUnitTest
+> Task :app:processDebugAndroidTestManifest
+> Task :app:generateDebugAndroidTestBuildConfig
+> Task :app:checkDebugAndroidTestAarMetadata
+> Task :app:mapDebugAndroidTestSourceSetPaths
+> Task :app:generateDebugAndroidTestResources
+> Task :app:mergeDebugAndroidTestResources
+> Task :app:processDebugAndroidTestResources
+> Task :app:compileDebugAndroidTestKotlin
+> Task :app:javaPreCompileDebugAndroidTest
+> Task :app:compileDebugAndroidTestJavaWithJavac
+> Task :app:mergeDebugAndroidTestShaders
+> Task :app:compileDebugAndroidTestShaders NO-SOURCE
+> Task :app:generateDebugAndroidTestAssets UP-TO-DATE
+> Task :app:mergeDebugAndroidTestAssets
+> Task :app:compressDebugAndroidTestAssets
+> Task :app:desugarDebugAndroidTestFileDependencies
+> Task :app:dexBuilderDebugAndroidTest
+> Task :app:mergeDebugAndroidTestGlobalSynthetics
+> Task :app:processDebugAndroidTestJavaRes
+> Task :app:mergeDebugAndroidTestJavaResource
+> Task :app:checkDebugAndroidTestDuplicateClasses
+> Task :app:mergeExtDexDebugAndroidTest
+> Task :app:mergeLibDexDebugAndroidTest
+> Task :app:mergeProjectDexDebugAndroidTest
+> Task :app:mergeDebugAndroidTestJniLibFolders
+> Task :app:mergeDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningDebugAndroidTest
+> Task :app:writeDebugAndroidTestSigningConfigVersions
+> Task :app:packageDebugAndroidTest
+> Task :app:createDebugAndroidTestApkListingFileRedirect
+> Task :app:assembleDebugAndroidTest
+> Task :app:lintAnalyzeDebug
+
+> Task :app:lintReportDebug
+Wrote HTML report to file:///[USER_HOME]/Documents/Codex/2026-10-28/new-chat/work/repro-build/app/build/reports/lint-results-debug.html
+
+> Task :app:lintDebug
+
+BUILD SUCCESSFUL in 1m 14s
+84 actionable tasks: 84 executed

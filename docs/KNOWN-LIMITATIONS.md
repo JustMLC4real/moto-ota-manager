@@ -12,5 +12,6 @@
 10. **Geen brede externe firmware-indexintegratie.** Er worden geen onbekende firmwarebestanden gescrapet. Dat voorkomt een onbewezen regio-/modelkeuze.
 11. **Geen automatische successuggestie voor modules.** De aanwezigheid van een module betekent niet dat Wallet, Play Integrity of de module na een nieuwe Android-versie werkt. Deze app implementeert geen spoofingmethode.
 12. **Debug-APK.** De geleverde APK is voor gecontroleerd lokaal testen. Een publieke productie-uitgave vraagt een eigen beheerde releasesleutel, verdere apparaatvalidatie en releasebeheer.
+13. **Geen automatische achtergrondcontrole of OTA-meldingen.** Controles en downloads worden door de gebruiker gestart. Zonder bewezen actuele officiële aanbodbron wordt een oude lokale kandidaat niet als nieuwe beschikbare update gemeld.
 
 Het concrete buildresultaat en de daadwerkelijk uitgevoerde tests zijn uitsluitend vastgelegd in `BUILD-REPORT.md` en de geleverde buildlogs. Ontwerpmogelijkheden in het onderzoek zijn geen claim dat ieder onderdeel al op hardware werkt.
