@@ -35,7 +35,9 @@ data class DeviceState(
     val incrementalBuild: String = "",
     val buildTimestamp: Long = 0,
     val moduleInventoryKnown: Boolean = false,
-    val rootChecked: Boolean = false
+    val rootChecked: Boolean = false,
+    val securityPropertyMismatch: Boolean = false,
+    val securityEvidenceSource: String = "ANDROID_PROPERTIES"
 ) {
     val inactiveSlot: String get() = when (slot) { "_a" -> "_b"; "_b" -> "_a"; else -> "" }
     val exactProfileMatch: Boolean get() = manufacturer.equals("motorola", true) &&

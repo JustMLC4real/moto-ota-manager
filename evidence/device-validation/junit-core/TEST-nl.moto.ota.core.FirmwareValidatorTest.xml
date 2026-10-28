@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="nl.moto.ota.core.FirmwareValidatorTest" tests="62" skipped="0" failures="0" errors="0" timestamp="2026-10-28T22:05:38" hostname="local-validation-host" time="8.95">
+  <properties />
+  <testcase name="userdataWipeIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.082" />
+  <testcase name="deviceWrongRegionIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.065" />
+  <testcase name="oemVendorMetadataAndSystemPayloadRemainSeparateAndBlocked" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.055" />
+  <testcase name="payloadHashMismatchNeverCountsAsVerified" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.023" />
+  <testcase name="vendorFingerprintCannotReplaceRequiredSystemFingerprint" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.063" />
+  <testcase name="absentAndroidMetadataIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.028" />
+  <testcase name="malformedTargetAndroidVersionIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.051" />
+  <testcase name="targetIncrementalMustMatchItsFingerprint" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.059" />
+  <testcase name="equalTimestampRequiresReview" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.054" />
+  <testcase name="targetOfAnotherCodenameIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.057" />
+  <testcase name="conflictingRegionAnnotationsAreRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.057" />
+  <testcase name="shortPayloadIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.046" />
+  <testcase name="standardMetadataCannotMasqueradeAsPayloadFingerprintProperties" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.059" />
+  <testcase name="duplicateMetadataKeysAreRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.046" />
+  <testcase name="differentChannelIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.063" />
+  <testcase name="payloadSystemSourceCannotAliasVendorMetadataSource" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.007" />
+  <testcase name="targetOfAnotherManufacturerIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.059" />
+  <testcase name="excessiveManifestLengthIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.058" />
+  <testcase name="metadataHashMismatchIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.06" />
+  <testcase name="malformedTimestampIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.053" />
+  <testcase name="wrongSourceIncrementalIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.051" />
+  <testcase name="partialPayloadFingerprintPairDoesNotReplaceStandardTarget" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.056" />
+  <testcase name="alreadyInstalledBuildIsNotOfferedAgain" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.06" />
+  <testcase name="officialUrlPolicyAllowsOnlyExactTlsHost" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.002" />
+  <testcase name="metadataSizeMismatchIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.061" />
+  <testcase name="missingSourceIncrementalCannotProveCompatibility" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.048" />
+  <testcase name="absentTargetPatchDateIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.062" />
+  <testcase name="invalidPayloadFingerprintCannotBeExportedOrUsedAsTarget" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.308" />
+  <testcase name="compatiblePackageStillRequiresActualDeviceSignatureVerification" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.048" />
+  <testcase name="differentModelIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.015" />
+  <testcase name="absentCurrentPatchDateIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.005" />
+  <testcase name="installedOemSystemTargetIsNotMisreportedAsAndroid15Downgrade" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.039" />
+  <testcase name="payloadFileSizeMismatchIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.044" />
+  <testcase name="invalidPayloadMagicIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.061" />
+  <testcase name="userdebugFirmwareIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.071" />
+  <testcase name="differentDeviceCodenameIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.051" />
+  <testcase name="nonZipInputIsRejectedWithoutException" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.004" />
+  <testcase name="absentPropertiesEntryIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.042" />
+  <testcase name="wrongSourceFingerprintIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.039" />
+  <testcase name="invalidCalendarPatchDateIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.052" />
+  <testcase name="emptyInputIsRejectedWithoutException" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.001" />
+  <testcase name="futurePayloadVersionIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.049" />
+  <testcase name="malformedTargetFingerprintIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.056" />
+  <testcase name="androidDowngradeIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.041" />
+  <testcase name="unknownCurrentTimestampIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.005" />
+  <testcase name="missingCurrentIncrementalDoesNotFallBackToBuildId" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.005" />
+  <testcase name="olderTimestampIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.039" />
+  <testcase name="absentPayloadEntryIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.044" />
+  <testcase name="absentRegionMetadataIsExplicitlyUnproven" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.049" />
+  <testcase name="matchingPayloadPairDoesNotWeakenSourceIncrementalChecks" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.054" />
+  <testcase name="malformedHashEncodingIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.054" />
+  <testcase name="zipTraversalEntryIsRejectedEvenWithoutExtraction" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.058" />
+  <testcase name="matchingPayloadAndAndroidFingerprintsRetainExistingCompatibilityChecks" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.054" />
+  <testcase name="observedHistoricalPackageIsCorrectlyDiagnosedWhenExplicitlyProvided" classname="nl.moto.ota.core.FirmwareValidatorTest" time="5.863" />
+  <testcase name="testFirmwareIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.061" />
+  <testcase name="unknownCurrentAndroidVersionIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.046" />
+  <testcase name="missingSourceFingerprintCannotProveCompatibility" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.054" />
+  <testcase name="missingTimestampIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.038" />
+  <testcase name="nonAbPackageIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.045" />
+  <testcase name="absoluteZipEntryIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.055" />
+  <testcase name="patchRollbackIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.052" />
+  <testcase name="explicitDowngradeIsRejected" classname="nl.moto.ota.core.FirmwareValidatorTest" time="0.055" />
+  <system-out>Retained OTA: structure=true; payloadHash=true; targetAndroid=17; alreadyInstalled=true; OEM review required; compatible=false
+</system-out>
+  <system-err />
+</testsuite>

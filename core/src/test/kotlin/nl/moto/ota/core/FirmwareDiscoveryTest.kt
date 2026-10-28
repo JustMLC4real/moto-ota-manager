@@ -14,7 +14,8 @@ class FirmwareDiscoveryTest {
     }
 
     @Test fun cachedAllowedUrlIsOnlyCandidateUntilPackageValidation() {
-        val result = FirmwareDiscovery.assess(DiscoveryEvidence(localTargetBuild = "NEXT", localDownloadUrl = url), "CURRENT")
+        val result = FirmwareDiscovery.assess(DiscoveryEvidence(localTargetBuild = "NEXT", localDownloadUrl = url,
+            localContentKind = LocalContentKind.OTA_ZIP), "CURRENT")
         assertEquals(DiscoveryStatus.CACHED_OFFICIAL_CANDIDATE, result.status)
         assertTrue(result.canDownloadCandidate)
         assertFalse(result.authoritativeUpdateAvailable)
@@ -48,5 +49,38 @@ class FirmwareDiscoveryTest {
 
     @Test fun missingUpdaterAndMetadataRemainUnknown() {
         assertEquals(DiscoveryStatus.UNKNOWN, FirmwareDiscovery.assess(DiscoveryEvidence(), "CURRENT").status)
+    }
+
+    @Test fun allowlistedUrlAloneNeverProvesFullOtaCandidate() {
+        val result = FirmwareDiscovery.assess(DiscoveryEvidence(localDownloadUrl = url), "CURRENT")
+        assertEquals(DiscoveryStatus.UNTRUSTED_LOCAL_METADATA, result.status)
+        assertFalse(result.canDownloadCandidate)
+        assertFalse(result.authoritativeUpdateAvailable)
+    }
+
+    @Test fun metadataResourceCannotBeDownloadedAsFullOtaEvenOnOfficialHost() {
+        val result = FirmwareDiscovery.assess(DiscoveryEvidence(localDownloadUrl = url,
+            localContentKind = LocalContentKind.METADATA_ONLY, localMetadataObserved = true), "CURRENT")
+        assertEquals(DiscoveryStatus.METADATA_ONLY, result.status)
+        assertFalse(result.canDownloadCandidate)
+        assertFalse(result.authoritativeUpdateAvailable)
+    }
+
+    @Test fun oldMetadataForInstalledTargetIsExplicitlyStale() {
+        val result = FirmwareDiscovery.assess(DiscoveryEvidence(localTargetBuild = "CURRENT", localDownloadUrl = url,
+            localContentKind = LocalContentKind.METADATA_ONLY, localMetadataObserved = true), "CURRENT")
+        assertEquals(DiscoveryStatus.ALREADY_INSTALLED, result.status)
+        assertFalse(result.canDownloadCandidate)
+    }
+
+    @Test fun unsupportedSchemaRemainsVisibleAsUntrustedLocalEvidence() {
+        val result = FirmwareDiscovery.assess(DiscoveryEvidence(localMetadataObserved = true), "CURRENT")
+        assertEquals(DiscoveryStatus.UNTRUSTED_LOCAL_METADATA, result.status)
+        assertFalse(result.canDownloadCandidate)
+    }
+
+    @Test fun signedDownloadReferenceDoesNotAppearInEvidenceString() {
+        assertFalse(DiscoveryEvidence(localDownloadUrl = url).toString().contains(url))
+        assertFalse(DiscoveryEvidence(localDownloadUrl = url).toString().contains("temporary"))
     }
 }

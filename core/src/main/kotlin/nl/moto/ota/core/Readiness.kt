@@ -30,7 +30,7 @@ object Readiness {
         check(device.capturedAtMillis > 0 && nowMillis >= device.capturedAtMillis && nowMillis - device.capturedAtMillis <= 120_000, "OBSERVATIONS_STALE", "Diagnostiek is onbekend of ouder dan twee minuten; voer de controle opnieuw uit.")
         check(!device.simulated, "SIMULATED", "Gesimuleerde diagnostiek geeft nooit toestemming voor een echte update.")
         check(device.bootId.isNotBlank(), "BOOT_ID_UNKNOWN", "Opstartsessie is onbekend; herstel na een herstart kan niet betrouwbaar worden gevolgd.")
-        check(device.bootSuccessful == true, "BOOT_NOT_CONFIRMED", "De actieve slot moet door de boot-controlservice als succesvol zijn gemarkeerd.")
+        check(device.bootSuccessful == true, "BOOT_NOT_CONFIRMED", "De actieve slot moet aantoonbaar succesvol zijn gemarkeerd via de service of CRC-gecontroleerde bootmetadata.")
         check(device.bootloaderUnlocked == true && device.verifiedBootState == "orange", "BOOT_SECURITY_UNKNOWN", "Het onderzochte profiel vereist een ontgrendelde bootloader met Verified Boot-status orange; afwijkingen vereisen handmatige beoordeling.")
         check(device.moduleInventoryKnown, "MODULE_INVENTORY_UNKNOWN", "Magisk-module-inventaris ontbreekt; behoud kan na de update niet betrouwbaar worden getoetst.")
         return ReadinessResult(blockers, listOf(CheckResult("GUIDED_ONLY", "Deze versie voert geen herstel, OTA-installatie, Magisk-patching of herstart uit. Definitieve signature- en compatibiliteitscontrole blijft bij de officiële updater.")), device)

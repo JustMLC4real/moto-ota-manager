@@ -8,3 +8,11 @@ https://www.apache.org/licenses/LICENSE-2.0
 
 AndroidX, Kotlin and kotlinx.coroutines dependencies retain their upstream licenses.
 Source references in docs/RESEARCH.md document evidence; no upstream Magisk code is copied.
+
+AOSP UpdateEngine AIDL interface declarations originate from Android Open Source Project,
+Copyright 2015 The Android Open Source Project, Apache License 2.0.
+Pinned source: system/update_engine 4591637f51644f5429f9e2fe589ab22b92f61842.
+Original license notices are retained in app/src/main/aidl/android/os/.
+Only the platform-only UnsupportedAppUsage annotation was removed for public-SDK compilation;
+method order, arguments, Binder descriptors and oneway declarations are unchanged.
+Full Apache License 2.0 text is included in gradle/LICENSE-APACHE-2.0.txt.

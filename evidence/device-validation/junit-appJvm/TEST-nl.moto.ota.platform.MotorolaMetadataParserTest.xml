@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="nl.moto.ota.platform.MotorolaMetadataParserTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-10-28T22:05:55" hostname="local-validation-host" time="0.048">
+  <properties />
+  <testcase name="jsonDuplicatesMalformedSyntaxAndReaderLimitsFailClosed" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.008" />
+  <testcase name="signedReferenceNeverAppearsInDiagnosticString" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.004" />
+  <testcase name="officialMetadataUrlRemainsMetadataOnlyWithNestedStringResource" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.001" />
+  <testcase name="exactObservedPayloadMetadataNameRequiresPositiveOffsetAndNeverEnablesZipDownload" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.001" />
+  <testcase name="unsupportedEnvelopeAndNewSchemaFieldsFailClosed" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.001" />
+  <testcase name="sanitizedObservedSchemaIsHistoricalMetadataForInstalledTarget" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.004" />
+  <testcase name="resourceApprovalAndNumericBoundsFailClosed" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.001" />
+  <testcase name="typedZipCandidateStillDoesNotProveCurrentServerOffer" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.0" />
+  <testcase name="unknownKindOrRangedZipDoesNotBecomeFullOtaCandidate" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.0" />
+  <testcase name="xmlEntitiesDuplicatesAndOversizedPreferencesFailClosed" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.022" />
+  <testcase name="malformedExplicitFingerprintDoesNotBecomeBuildIdentity" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.001" />
+  <testcase name="targetBuildComesOnlyFromExplicitTargetFingerprint" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.0" />
+  <testcase name="xmlEscapingAndBothJsonResourceRepresentationsAreSupported" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.003" />
+  <testcase name="absentInputsAreDifferentFromUnrecognizedLocalEvidence" classname="nl.moto.ota.platform.MotorolaMetadataParserTest" time="0.0" />
+  <system-out />
+  <system-err />
+</testsuite>

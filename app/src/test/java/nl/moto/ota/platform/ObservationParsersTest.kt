@@ -9,8 +9,58 @@ import java.util.zip.GZIPOutputStream
 class ObservationParsersTest {
     private fun ok(text: String) = ProbeResult(0, text, "")
 
+    // Format fixtures checked against SnapshotManager::Dump and operator<<(UpdateState)
+    // in Android 17 AOSP fs_mgr commit 157112fcbaa00b6e84c63146cfde249c56cd652c.
+    // Values are synthetic; these fixtures do not claim to be phone measurements.
+    private val aospIdleDump = """
+        Update state: none
+        Using snapuserd: 0
+        Using userspace snapshots: 0
+        Current slot: _b
+        Source build fingerprint:
+    """.trimIndent()
+    private val aospMergingDump = """
+        Update state: merging
+        Using snapuserd: 1
+        Using userspace snapshots: 1
+        Current slot: _b
+        Merge completion: 27.5%
+        Merge phase: first
+    """.trimIndent()
+
     @Test fun freshNoneFromBothSourcesIsIdleSnapshotEvidence() {
-        assertEquals("NONE", ObservationParsers.snapshot(ok("Update state: 0\n"), ok("none\n")).state)
+        assertEquals("NONE", ObservationParsers.snapshot(ok(aospIdleDump), ok("none\n")).state)
+    }
+
+    @Test fun aospLowercaseAndHyphenatedGlobalStateNamesAreRecognized() {
+        mapOf("none" to "NONE", "initiated" to "INITIATED", "unverified" to "UNVERIFIED",
+            "merging" to "MERGING", "merge-needs-reboot" to "MERGE_NEEDS_REBOOT",
+            "merge-completed" to "COMPLETE", "merge-failed" to "FAILED", "cancelled" to "CANCELLED").forEach { (printed, state) ->
+            assertEquals(printed, state, ObservationParsers.snapshot(ok("Update state: $printed\n"), null).state)
+        }
+    }
+
+    @Test fun unknownOrMixedCaseSnapshotNamesStayUnknown() {
+        listOf("NONE", "MeRgInG", "merge-completed-extra", "merge--completed", "future-state").forEach { printed ->
+            assertEquals(printed, "UNKNOWN", ObservationParsers.snapshot(ok("Update state: $printed\n"), ok("none")).state)
+        }
+    }
+
+    @Test fun aospHalSummaryCannotHideMorePreciseNonIdleGlobalStates() {
+        mapOf("initiated" to ("none" to "INITIATED"),
+            "unverified" to ("snapshotted" to "UNVERIFIED"),
+            "merge-needs-reboot" to ("none" to "MERGE_NEEDS_REBOOT"),
+            "merge-completed" to ("none" to "COMPLETE"),
+            "merge-failed" to ("merging" to "FAILED")).forEach { (global, expected) ->
+            assertEquals(global, expected.second, ObservationParsers.snapshot(ok("Update state: $global"), ok(expected.first)).state)
+        }
+        assertEquals("UNVERIFIED", ObservationParsers.snapshot(ok("Update state: unverified"), ok("none")).state)
+    }
+
+    @Test fun inconsistentHalSummaryStillBlocksRatherThanLosingActiveMerge() {
+        assertEquals("UNKNOWN", ObservationParsers.snapshot(ok("Update state: merging"), ok("none")).state)
+        assertEquals("UNKNOWN", ObservationParsers.snapshot(ok("Update state: none"), ok("merging")).state)
+        assertEquals("UNKNOWN", ObservationParsers.snapshot(ok("Update state: merge-completed"), ok("unknown")).state)
     }
 
     @Test fun perPartitionStateDoesNotMasqueradeAsGlobalState() {
@@ -18,7 +68,7 @@ class ObservationParsersTest {
     }
 
     @Test fun mergingUsesOnlyGlobalEnumAndBoundsPercentage() {
-        val value = ObservationParsers.snapshot(ok("Update state: 3\nMerge completion: 27.5%\n"), ok("merging"))
+        val value = ObservationParsers.snapshot(ok(aospMergingDump), ok("merging"))
         assertEquals("MERGING", value.state)
         assertEquals(27.5, value.mergePercent!!, 0.001)
         assertNull(ObservationParsers.snapshot(ok("Update state: 3\nMerge completion: 101%\n"), null).mergePercent)

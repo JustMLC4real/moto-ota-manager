@@ -1,0 +1,109 @@
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.ReadOnlyDeviceValidationTest:
+INSTRUMENTATION_STATUS: test=actualBackupMatchesTheAuthenticatedStockAndUpdaterResolvesExplicitly
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=actualBackupMatchesTheAuthenticatedStockAndUpdaterResolvesExplicitly
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=existingHistoricalOtaPassesTheActualPlatformSignatureVerifier
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: motoOtaVerification={"schema":1,"packageBytes":3417373748,"sha256":"7b548666bfb8ca2ef8a65026f449af35b87354a8b098424fda52c434d0502c90","signatureVerified":true,"reason":"","source":"SystemOTACerts"}
+INSTRUMENTATION_STATUS_CODE: 2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=existingHistoricalOtaPassesTheActualPlatformSignatureVerifier
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=realDiagnosticsMatchTheIndependentReadOnlyBaseline
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: motoReadOnlyReport=Moto OTA Manager 0.2.0-safe — lokaal rapport
+Bron: toestelobservatie
+Model: XT2607-1 / merc / reteu
+Android: 17; build: A171WMH.44-25; patch: 2026-09-01
+Actieve slot: _b; inactieve slot: _a
+Root: true; Magisk-code: 31100
+Virtual A/B: true; snapshot: NONE; engine: IDLE
+Boot succesvol: true; bootloader ontgrendeld: true; Verified Boot: orange
+Beveiligingsbron: KERNEL_BOOTCONFIG; properties wijken af: true
+Back-upkandidaten: 1; moduleaantal: 12
+Workflow: IDLE
+Probe BACKUPS: OK
+Probe BOOT_CONFIG: OK
+Probe BOOT_ID: OK
+Probe CURRENT_SLOT: UNAVAILABLE
+Probe DOWNLOAD_PREFS: OK
+Probe ENGINE_CALLBACK: OK
+Probe ENGINE_FOLLOW: UNAVAILABLE
+Probe MAGISK_CODE: OK
+Probe MAGISK_VERSION: OK
+Probe MISC_BOOT_CONTROL: OK
+Probe MISC_VIRTUAL_AB: OK
+Probe MODULES: OK
+Probe NEXT_SLOT: UNAVAILABLE
+Probe OTA_PREFS: OK
+Probe PARTITIONS: OK
+Probe PRIV_PROP_RO_BOOT_CARRIER: OK
+Probe PRIV_PROP_RO_BOOT_CID: OK
+Probe PRIV_PROP_RO_BOOT_SLOT: OK
+Probe PRIV_PROP_RO_VIRTUAL_AB_ENABLED: OK
+Probe ROOT_ID: OK
+Probe SLOT_A_SUCCESS: UNAVAILABLE
+Probe SLOT_B_SUCCESS: UNAVAILABLE
+Probe SLOT_COUNT: UNAVAILABLE
+Probe SNAPSHOT_DIRECTORY: OK
+Probe SNAPSHOT_DUMP: UNAVAILABLE
+Probe SNAPSHOT_HAL: UNAVAILABLE
+Probe SNAPSHOT_STATE_FILE: OK
+Geen serienummers, boot-id, IMEI, accounts, fingerprints, ruwe logs of download-URL's geëxporteerd.
+Een build of rapport bewijst geen veilige OTA-installatie op een echt toestel.
+
+INSTRUMENTATION_STATUS_CODE: 2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=realDiagnosticsMatchTheIndependentReadOnlyBaseline
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=cachedMotorolaMetadataDoesNotOfferTheInstalledUpdateAgain
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=cachedMotorolaMetadataDoesNotOfferTheInstalledUpdateAgain
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 17,692
+
+OK (4 tests)
+
+
+INSTRUMENTATION_CODE: -1

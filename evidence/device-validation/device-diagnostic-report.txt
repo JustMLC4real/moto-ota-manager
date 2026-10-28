@@ -1,0 +1,40 @@
+Moto OTA Manager 0.2.0-safe — lokaal rapport
+Bron: toestelobservatie
+Model: XT2607-1 / merc / reteu
+Android: 17; build: A171WMH.44-25; patch: 2026-09-01
+Actieve slot: _b; inactieve slot: _a
+Root: true; Magisk-code: 31100
+Virtual A/B: true; snapshot: NONE; engine: IDLE
+Boot succesvol: true; bootloader ontgrendeld: true; Verified Boot: orange
+Beveiligingsbron: KERNEL_BOOTCONFIG; properties wijken af: true
+Back-upkandidaten: 1; moduleaantal: 12
+Workflow: IDLE
+Probe BACKUPS: OK
+Probe BOOT_CONFIG: OK
+Probe BOOT_ID: OK
+Probe CURRENT_SLOT: UNAVAILABLE
+Probe DOWNLOAD_PREFS: OK
+Probe ENGINE_CALLBACK: OK
+Probe ENGINE_FOLLOW: UNAVAILABLE
+Probe MAGISK_CODE: OK
+Probe MAGISK_VERSION: OK
+Probe MISC_BOOT_CONTROL: OK
+Probe MISC_VIRTUAL_AB: OK
+Probe MODULES: OK
+Probe NEXT_SLOT: UNAVAILABLE
+Probe OTA_PREFS: OK
+Probe PARTITIONS: OK
+Probe PRIV_PROP_RO_BOOT_CARRIER: OK
+Probe PRIV_PROP_RO_BOOT_CID: OK
+Probe PRIV_PROP_RO_BOOT_SLOT: OK
+Probe PRIV_PROP_RO_VIRTUAL_AB_ENABLED: OK
+Probe ROOT_ID: OK
+Probe SLOT_A_SUCCESS: UNAVAILABLE
+Probe SLOT_B_SUCCESS: UNAVAILABLE
+Probe SLOT_COUNT: UNAVAILABLE
+Probe SNAPSHOT_DIRECTORY: OK
+Probe SNAPSHOT_DUMP: UNAVAILABLE
+Probe SNAPSHOT_HAL: UNAVAILABLE
+Probe SNAPSHOT_STATE_FILE: OK
+Geen serienummers, boot-id, IMEI, accounts, fingerprints, ruwe logs of download-URL's geëxporteerd.
+Een build of rapport bewijst geen veilige OTA-installatie op een echt toestel.

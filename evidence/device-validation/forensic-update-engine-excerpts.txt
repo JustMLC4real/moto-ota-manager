@@ -1,0 +1,39 @@
+Geselecteerde technische logregels. Bronnummers verwijzen naar de lokaal behouden originele bestanden.
+Tijdstempels zijn zoals door de telefoon gelogd; tijdzone is niet onafhankelijk vastgesteld.
+URL, token, account, unieke toestelidentifiers en boot-ID zijn weggelaten.
+
+Bron: update_engine.20261026-212129
+89: [1028/112905.250768] [ERROR:partition_writer.cc(316)] The hash of the source data on disk for this operation doesn't match the expected value. This could mean that the delta update payload was targeted for another version, or that the source partition was modified after it was installed, for example, by mounting a filesystem.
+90: [1028/112905.251472] [ERROR:partition_writer.cc(321)] Expected:   sha256|hex = 056ECE9D539C096DD62121A1685A4C3D09B4A49A1E879CA264E4A71A7F36A00A
+91: [1028/112905.251899] [ERROR:partition_writer.cc(324)] Calculated: sha256|hex = 55A3C92F5AD61ABA84346D13989D3A0FDDD2A26737882504B202A6E1F80D8F83
+92: [1028/112905.252188] [ERROR:partition_writer.cc(335)] Operation source (offset:size) in blocks: 0:1,756:1,2047:1
+93: [1028/112905.252552] [INFO:update_attempter_android.cc(876)] Trying to open ECC source partition for init_boot(/dev/block/by-name/init_boot_a) and rectify the corrupted partition
+94: [1028/112905.254521] [ERROR:update_attempter_android.cc(881)] Unable to open ECC source partition init_boot on slot A, file /dev/block/by-name/init_boot_a: No such file or directory (2)
+95: [1028/112905.255707] [INFO:update_attempter_android.cc(885)] Failed to open FECFileDescriptor for /dev/block/by-name/init_boot_a
+468: [1028/201409.605529] [INFO:delta_performer.cc(283)] PartitionInfo old init_boot sha256: 2813C93926EAE599BD3BD14C4E9E39B10BC3B2DD30134BFF8FE594A3F8A67D29 size: 8388608
+469: [1028/201409.605840] [INFO:delta_performer.cc(283)] PartitionInfo new init_boot sha256: 9972073A2FDC3BD63EA3B33B3E26EC39F78DDEA82ED3BE274ACC086A88C7C5EA size: 8388608
+677: [1028/202214.155718] [INFO:partition_writer.cc(165)] Opening /dev/block/by-name/init_boot_b partition without O_DSYNC
+679: [1028/202214.157265] [INFO:partition_writer.cc(177)] Applying 5 operations to partition "init_boot"
+798: [1028/202431.909455] [INFO:filesystem_verifier_action.cc(386)] Hashing partition 32 (init_boot) on device /dev/block/by-name/init_boot_b
+799: [1028/202431.936986] [INFO:filesystem_verifier_action.cc(491)] Hash of init_boot: 9972073A2FDC3BD63EA3B33B3E26EC39F78DDEA82ED3BE274ACC086A88C7C5EA
+855: [1028/202437.703238] [INFO:postinstall_runner_action.cc(480)] All post-install commands succeeded
+868: [1028/202438.942741] [INFO:action_processor.cc(125)] ActionProcessor: finished last action PostinstallRunnerAction with code ErrorCode::kSuccess
+872: [1028/202438.978178] [INFO:update_attempter_android.cc(943)] Update successfully applied, waiting to reboot.
+
+Bron: update_engine.20261028-210411
+553: [1028/211233.775579] [INFO:snapshot.cpp(1541)] CheckTargetMergeState for vendor_b returned: MergeCompleted
+554: [1028/211233.776489] [INFO:snapshot.cpp(1476)] CheckMergeState for snapshots returned: MergeCompleted
+555: [1028/211233.777031] [INFO:snapshot.cpp(348)] Removing all update state.
+556: [1028/211233.897737] [INFO:snapshot.cpp(1441)] ProcessUpdateState handling state: MergeCompleted
+557: [1028/211233.898529] [INFO:cleanup_previous_update_action.cc(355)] Merge finished with state MergeCompleted.
+559: [1028/211233.903165] [INFO:cleanup_previous_update_action.cc(527)] Writing merge stats to /data/misc/update_engine_log/merge_stats.json:MergeCompleted in 168432ms (resumed 0 times), using 0 bytes of COW image, ublk_used=0, install_time_ms=0, verification_time_ms=0
+561: [1028/211233.908725] [INFO:action_processor.cc(127)] ActionProcessor: finished last action CleanupPreviousUpdateAction with code ErrorCode::kSuccess
+566: [1028/211233.923301] [INFO:update_attempter_android.cc(1249)] Clearing update complete marker.
+568: [1028/211233.928001] [INFO:update_attempter_android.cc(1798)] CleanupSuccessfulUpdate()
+569: [1028/211233.928784] [INFO:update_attempter_android.cc(1800)] CleanupSuccessfulUpdate has previously completed with ErrorCode::kSuccess
+
+Bron: update_engine.20261028-211634
+16: [1028/211646.584286] [INFO:snapshot.cpp(1476)] CheckMergeState for snapshots returned: None
+17: [1028/211646.584507] [INFO:snapshot.cpp(1441)] ProcessUpdateState handling state: None
+18: [1028/211646.585456] [INFO:cleanup_previous_update_action.cc(322)] Can't find any snapshot to merge.
+25: [1028/211646.597037] [INFO:action_processor.cc(127)] ActionProcessor: finished last action CleanupPreviousUpdateAction with code ErrorCode::kSuccess

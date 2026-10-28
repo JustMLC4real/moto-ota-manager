@@ -1,40 +1,40 @@
 # Moto OTA Manager
 
-Een echte Kotlin/Jetpack Compose-app voor het uitlezen en veilig begeleiden van officiële OTA-updates op **Motorola XT2607-1 / merc / reteu**. Material 3, lokale verwerking, beperkte root-allowlist, firmwarevalidatie en een duurzaam workflowjournaal.
+**0.2.0-safe** is een Kotlin/Jetpack Compose-app voor uitlezende diagnostiek en begeleiding op **Motorola XT2607-1 / merc / reteu**. De echte Android 17-build `A171WMH.44-25` is onderzocht: slot `_b`, werkende Magisk 31.1-root, geen actieve snapshot-merge en een live enginecallback met `IDLE`. De huidige stockback-up is onafhankelijk gekoppeld aan het ondertekende historische OTA-doelmanifest. Zie [de toestelmetingen en hun grenzen](docs/DEVICE-VALIDATION.md).
 
 **Deze release schrijft geen partities, installeert geen OTA, patcht geen Magisk en herstart niet.** Daarvoor zijn op dit toestel geen bewezen stabiele externe Motorola-/Magisk-interfaces vastgesteld. De app biedt de best onderbouwde veilige fallback: diagnostiek, pakketonderzoek en begeleiding naar de officiële apps. Een geslaagde build bewijst geen veilige OTA-installatie.
 
 ## Direct gebruiken
 
-1. Installeer de geleverde `moto-ota-manager-debug.apk` handmatig via Android. De ontwikkelsessie installeert niets op je telefoon.
+1. Installeer de geleverde `moto-ota-manager-debug.apk` handmatig via Android. De meegeleverde APK is een debugbuild.
 2. Open de app. De eerste controle leest alleen niet-geprivilegieerde eigenschappen.
 3. Verleen voor uitgebreide diagnostiek vooraf toegang aan Moto OTA Manager in **Magisk → Superuser**. Magisk 31.1 heeft reactieve rootprompts verwijderd.
-4. Kies **Controleer en bereid update voor → Start uitlezen**. Controleer vooral de actuele snapshotstatus; de historische merge uit de specificatie wordt nooit als afgerond aangenomen.
-5. Open **Firmware** voor de officiële updater, een gevonden lokale Motorola-downloadverwijzing of een handmatig gekozen OTA-ZIP. Een gevonden verwijzing kan oud of verlopen zijn.
-6. Onderzoek het pakket en kies afzonderlijk **Verifieer officiële ondertekening**. Die controle gebruikt `RecoverySystem.verifyPackage` en de echte `/system/etc/security/otacerts.zip` van het toestel.
+4. Kies **Controleer en bereid update voor → Start uitlezen**. Iedere nieuwe controle leest de actuele slot-, snapshot- en enginetoestand; historische succesvolle metingen worden niet als actuele gereedheid ingevuld.
+5. Open **Firmware** voor de officiële updater of een handmatig gekozen OTA-ZIP. De onderzochte lokale downloadjob betreft `payload_metadata.bin` van de al geïnstalleerde update: metadata-only, geen nieuwe OTA-download.
+6. Onderzoek een geselecteerd pakket en kies afzonderlijk **Verifieer officiële ondertekening**. De implementatie gebruikt `RecoverySystem.verifyPackage` tegen de echte toesteltruststore. De historische OTA is zowel onafhankelijk op de host als positief met die echte Android-API op de telefoon geverifieerd, zonder installatie. De resultaten staan in het buildrapport.
 7. Exporteer via **Diagnose** desgewenst een lokaal rapport. De veilige simulatie werkt volledig los van het echte workflowjournaal.
 
 Lees vóór gebruik de [veiligheidsgrenzen](docs/SAFETY.md) en [toesteltestchecklist](docs/MANUAL-TESTS.md). Na terugkeer uit Magisk of Motorola kies je opnieuw uitlezen. De app bedient hun knoppen niet.
 
-<img src="evidence/app-overview-api35.png" alt="Werkelijke APK op de Android-emulator; geen Motorola-toesteltest" width="300">
+<img src="evidence/device-validation/device-readiness.png" alt="Werkelijke 0.2.0-APK op XT2607-1: root, snapshot NONE, engine IDLE en stockherkomst bevestigd" width="300">
 
 ## Werkende implementaties en hun bewijsgrenzen
 
-| Onderdeel | Implementatie | Nog te valideren op XT2607-1 |
+| Onderdeel | Implementatie | Bewijs en grens |
 |---|---|---|
-| Toestelprofiel | Werkelijke getprops; exact model/SKU, codenaam, kanaal, build, fingerprints | Werkelijke propertynamen en onderlinge consistentie |
-| Root/Magisk | Alleen op verzoek `su -c id`, `magisk -v/-V`; timeout en aparte stdout/stderr | Magisk 31.1-policy, SELinux en binarypaden |
-| A/B en Virtual A/B | Slotproperties, uitlezende bootctl-probes, snapshotctl-dump en HAL-status | Beschikbaarheid/OEM-uitvoer; onbekend of conflict blokkeert |
-| UpdateEngine | Korte, uitsluitend uitlezende `--follow`-statusobservatie | Callbacktoegang; er wordt geen verzonnen Android `--status` gebruikt |
-| Magisk-back-ups | Begrensde gzip-uitlezing, grootte, header, SHA-256/SHA-1, directorycontrole | Werkelijk partitietype en actuele stock-herkomst blijven onbewezen |
-| Lokale imagekluis | SAF-import in app-private opslag; strikte gzip/imagevalidatie | Geen automatische geauthenticeerde stockreferentie beschikbaar |
-| Firmwaredetectie | Voorkeur voor officiële updater; read-only `downloadRequest.contentResource.wifiUrl` | Fragiele private metadata; geen publieke discovery-API vastgesteld |
+| Toestelprofiel | Getprops, technisch SKU, kernelbootconfig en bronconflicten | XT2607-1, merc, reteu, Android 17 en huidige build werkelijk gemeten; marketingnaam alleen is geen SKU |
+| Root/Magisk | Expliciet aangevraagde root, vaste allowlist, timeouts, aparte stdout/stderr | UID 0 en versiecode 31100 bevestigd; ontbrekende gewone appproperties worden pas na rootverlening opnieuw gelezen |
+| A/B en Virtual A/B | Toolprobes plus begrensde directe metadata met CRC-/formaatcontrole | Tools ontbreken op dit toestel; geldige boot-controlmetadata bevestigt succesvolle slot b, snapshotbronnen bevestigen `NONE` |
+| UpdateEngine | Tijdelijke callback; SDK 37-roothelper met echte frameworkbindings als fallback | Live `IDLE` bevestigd; helper doet alleen `bind`/`unbind`, geen payload- of cleanupaanroep |
+| Magisk-back-ups | Volledige begrensde gzip, uitgepakte omvang, v4-header, hashes en actuele referentie | Werkelijke 8 MiB-back-up matcht het geauthenticeerde Android 17-doelmanifest |
+| Lokale imagekluis | SAF-import, strikte gzip/imagevalidatie en `VerifiedStockCatalog` | Referentie uitsluitend voor exacte huidige build/fingerprint/profiel én passende OTA-trustanchor; andere builds blijven onbewezen |
+| Firmwaredetectie | Getypeerde, begrensde parser voor de werkelijk gevonden preference-envelop | Huidige metadata is historisch en verwijst naar de geïnstalleerde build; geen geverifieerde publieke Motorola-discovery-API |
 | Download | Expliciet verzoek, HTTPS-hostallowlist, geen redirects, lengte/ruimte, atomair opslaan | Actuele geldige Motorola-link en servergedrag |
-| OTA-validatie | ZIP, A/B-metadata, exact bronfingerprint/incremental, model/kanaal, CrAU-v2, payload- en metadatahash, datum/SPL | Whole-file signaturecheck werkt tegen toestelcertificaten; payload/installer beslist definitief |
+| OTA-validatie | ZIP, A/B-metadata, exacte bronidentiteit, model/kanaal, CrAU-v2, hashes en datum/SPL | Historische handtekening en payloadhashes onafhankelijk bevestigd; afwijkende OEM-fingerprintnamespaces vereisen review, oude doelbuild is al geïnstalleerd |
 | Workflow | Atomair journaal, procesherstel, onafhankelijke waarnemingen, rollback/root/mergecontrole | Echte updateketen is niet uitgevoerd |
 | Simulatie | Synthetische demo en mocktests, permanent gelabeld | Levert nooit toestemming voor een echte update |
 
-Een Magisk-back-up, een SHA-256 of de naam `boot.img.gz` bewijst **niet** dat dit de originele Android 17-`init_boot` is. Ook `cid50`, een URL-hostnaam of `release-keys` in een bestandsnaam bewijst geen geschikte officiële firmware. De historische Android 16-hash wordt nooit als huidige stockreferentie ingebouwd.
+Een Magisk-directory, losse SHA-256 of naam `boot.img.gz` bewijst op zichzelf geen stockherkomst. De nieuwe ingebouwde referentie steunt op volledige back-upbytes, het geauthenticeerde OTA-doelmanifest en de exact gemeten huidige identiteit. Zij omvat geen imagebytes en geldt niet voor toekomstige builds. Ook `cid50`, een URL-hostnaam of `release-keys` in een bestandsnaam bewijst geen geschikte officiële firmware. De historische Android 16-image blijft ongeschikt als stock voor de huidige build.
 
 Zonder onafhankelijke actuele stockherkomst en kanaalbewijs blijft het echte voorbereidingsjournaal geblokkeerd. Deze release bevat bewust geen knop die een onbewezen image toch herstelbaar verklaart. De handmatige handleiding blijft beschikbaar.
 
@@ -65,10 +65,17 @@ app/  Kotlin + Compose Material 3
   platform/DeviceInspector    getprop, accu, ruimte, beperkte rootprobes
   platform/ReadOnlyShell      vaste allowlist; geen vrije shellinvoer
   platform/ObservationParsers snapshot/engine/XML met fail-closed parsing
+  platform/MetadataObservations begrensde boot-/snapshotmetadata en bronvergelijking
+  platform/MotorolaMetadataParser typed cachebewijs; metadata-only versus OTA-ZIP
+  platform/OfficialApps       system-only resolver, expliciete officiële componenten
+  rootprobe/EngineProbe       aparte SDK 37-rootcallback, uitsluitend bind/unbind
+  rootprobe/FirmwareSignatureProbe bestaande Motorola-ZIP uitsluitend lezen en verifiëren
   platform/FirmwareFiles     SAF, HTTPS en toestelcertificaten
   platform/WorkflowStore     AtomicFile-journaal, geen simulatiepersistentie
 core/ pure Kotlin JVM
   BackupValidator    gzip, v4 init_boot-header, exacte omvang en stockreferentie
+  VerifiedStockCatalog exact geauditeerd profiel plus toestel-OTA-trustanchor
+  ReadOnlyMetadata   CRC, boot-control, Virtual A/B en snapshot-protobuf
   FirmwareValidator  ZIP/metadata, fingerprint, antirollback en hashes
   PackageTransfer    begrensde overdracht, fsync, atomische commit en cleanup
   FirmwareDiscovery  lokaal cachebewijs versus officieel aanbod/externe claim
@@ -77,17 +84,20 @@ core/ pure Kotlin JVM
   Privacy            export op basis van een kleine veldallowlist
 ```
 
-De app vraagt uitsluitend `INTERNET`; bestanden gaan via de Android-bestandskiezer. Geen `MANAGE_EXTERNAL_STORAGE`, verborgen UpdateEngine-reflectie, accessibility-automatisering, platformhandtekening of algemene shellconsole. Er is geen automatische telemetrie, firmware-scraping, notificatiepolling of upload.
+De app vraagt uitsluitend `INTERNET`; bestanden gaan via de Android-bestandskiezer. Er is geen brede opslagpermission, accessibility-automatisering, platformhandtekening of algemene shellconsole. De expliciet aangevraagde roothelper gebruikt beperkte reflectie voor `ServiceManager`, uitsluitend op SDK 37 en met de werkelijk geladen frameworkinterfaces; geweigerde toegang blijft onbekend. Zij wijzigt geen hidden-API-beleid of SELinux-instelling. De twee vaste Motorola-preference-uitlezingen en de expliciete verificatie van een bestaande ZIP in Motorola's map gebruiken de globale Magisk-mountnamespace met `su --target 0`, uitsluitend voor de nieuwe uitlezende subprocess.
+
+De officiële updater wordt met `MATCH_SYSTEM_ONLY` gevonden, vereist een positieve prioriteit en een ingeschakelde geëxporteerde Motorola-systeemactivity en krijgt een expliciete component. De actionstring staat letterlijk in de code omdat de publieke Settings-constante pas vanaf 36.1 bestaat en dit project tegen SDK 35 bouwt. Ontbrekende updater of verborgen Magisk-installatie geeft handmatige navigatie. Er is geen automatische telemetrie, firmware-scraping, notificatiepolling of upload.
 
 AndroidX voegt daarnaast een eigen signaturepermission voor niet-geëxporteerde dynamische receivers toe. Dat is geen brede toestel- of opslagtoestemming.
 
 ## Documentatie
 
 - [Concrete buildresultaten en testbewijs](docs/BUILD-REPORT.md)
+- [Werkelijke toestelmetingen, OTA-oorzaak en stockherkomst](docs/DEVICE-VALIDATION.md)
 - [Onderzoek en haalbaarheidsmatrix met primaire bronnen](docs/RESEARCH.md)
 - [Alle twintig gevraagde testscenario's](docs/TEST-MATRIX.md)
 - [Veiligheid](docs/SAFETY.md), [bekende beperkingen](docs/KNOWN-LIMITATIONS.md)
 - [Compatibiliteit](docs/COMPATIBILITY.md), [Android 18-roadmap](docs/ROADMAP.md)
 - [Handmatige toesteltestchecklist](docs/MANUAL-TESTS.md)
 
-Licentievoorstel en oorspronkelijke projectcode: MIT. De Gradle Wrapper behoudt zijn eigen Apache-2.0-voorwaarden; Magisk-broncode wordt niet meegeleverd of uitgevoerd. Dit onafhankelijke project is niet uitgegeven of goedgekeurd door Motorola of Magisk.
+Oorspronkelijke projectcode: MIT; zie [LICENSE](LICENSE) en [NOTICE](NOTICE) voor de overgenomen componenten en hun voorwaarden. Dit onafhankelijke project is niet uitgegeven of goedgekeurd door Motorola of Magisk.

@@ -29,10 +29,11 @@ fun Inspection.toDeviceState(): DeviceState {
     val slotProperty = property("ro.boot.slot")
     val slotSuffix = suffixProperty.takeIf { it in setOf("_a", "_b") }.orEmpty()
     val slotFromName = when (slotProperty) { "a" -> "_a"; "b" -> "_b"; else -> "" }
-    val sourceSlots = listOf(slotSuffix, slotFromName).filter { it.isNotEmpty() }.distinct()
+    val kernelSlot = if (rootGranted) kernelBootConfig["slot_suffix"].orEmpty() else ""
+    val sourceSlots = listOf(slotSuffix, slotFromName, kernelSlot).filter { it.isNotEmpty() }.distinct()
     val suffixInvalid = suffixProperty.isNotBlank() && slotSuffix.isBlank()
     val nameInvalid = slotProperty.isNotBlank() && slotFromName.isBlank()
-    val candidateSlot = if (!suffixInvalid && !nameInvalid && sourceSlots.size == 1) sourceSlots.single() else ""
+    val candidateSlot = if (!suffixInvalid && !nameInvalid && sourceSlots.size == 1 && sourceSlots.single() in setOf("_a", "_b")) sourceSlots.single() else ""
     val expectedIndex = when (candidateSlot) { "_a" -> "0"; "_b" -> "1"; else -> "" }
     val observedIndex = rootProbe(ReadOnlyProbe.CURRENT_SLOT)
     val observedCount = rootProbe(ReadOnlyProbe.SLOT_COUNT)
@@ -58,7 +59,7 @@ fun Inspection.toDeviceState(): DeviceState {
         modules.map { it.substringBefore('|') }.distinct().size == modules.size
 
     val success = probes[(if (slot == "_a") ReadOnlyProbe.SLOT_A_SUCCESS else ReadOnlyProbe.SLOT_B_SUCCESS).name]
-    val bootSuccessful = if (!rootGranted || slot.isBlank() || success == null || success.timedOut || success.truncated || success.failure != null) null
+    val toolBootSuccessful = if (!rootGranted || slot.isBlank() || success == null || success.timedOut || success.truncated || success.failure != null) null
         else when {
             success.exitCode == 0 && success.stdout.trim() == "1" -> true
             success.exitCode == 70 && success.stdout.trim() == "0" -> false
@@ -67,6 +68,14 @@ fun Inspection.toDeviceState(): DeviceState {
     val vbmetaUnlocked = when (property("ro.boot.vbmeta.device_state")) { "unlocked" -> true; "locked" -> false; else -> null }
     val flashUnlocked = when (property("ro.boot.flash.locked")) { "0" -> true; "1" -> false; else -> null }
     val lockObservations = listOfNotNull(vbmetaUnlocked, flashUnlocked).distinct()
+    val directBoot = if (rootGranted && bootControl?.slotCount == 2 && slot in setOf("_a", "_b") && bootControl.recordedSlotSuffix in setOf("", slot)) {
+        bootControl.slots[if (slot == "_a") 0 else 1].let { it.markedSuccessful && !it.verityCorrupted }
+    } else null
+    val bootSuccessful = if (toolBootSuccessful != null && directBoot != null && toolBootSuccessful != directBoot) null else toolBootSuccessful ?: directBoot
+    val kernelUnlocked = if (rootGranted) when (kernelBootConfig["vbmeta.device_state"]) { "unlocked" -> true; "locked" -> false; else -> null } else null
+    val kernelVerifiedBoot = if (rootGranted) kernelBootConfig["verifiedbootstate"]?.takeIf { it in setOf("orange", "green", "yellow", "red") }.orEmpty() else ""
+    val securityMismatch = (kernelUnlocked != null && lockObservations.any { it != kernelUnlocked }) ||
+        (kernelVerifiedBoot.isNotBlank() && property("ro.boot.verifiedbootstate").let { it.isNotBlank() && it != kernelVerifiedBoot })
     return DeviceState(
         manufacturer = property("ro.product.manufacturer"), model = if (compatibleModel) "XT2607-1" else model.takeUnless { it == "XT2607-1" }.orEmpty(),
         device = property("ro.product.device"), channel = channels.singleOrNull().orEmpty(),
@@ -83,9 +92,11 @@ fun Inspection.toDeviceState(): DeviceState {
         bootId = probe(ReadOnlyProbe.BOOT_ID).takeIf { it.matches(Regex("[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}")) }.orEmpty(),
         partitions = if (partitionsValid) partitionNames else emptyList(),
         modules = if (modulesValid) modules else emptyList(), capturedAtMillis = inspectedAtMillis,
-        bootSuccessful = bootSuccessful, bootloaderUnlocked = lockObservations.singleOrNull(),
-        verifiedBootState = property("ro.boot.verifiedbootstate"), incrementalBuild = property("ro.build.version.incremental"),
+        bootSuccessful = bootSuccessful, bootloaderUnlocked = kernelUnlocked ?: lockObservations.singleOrNull(),
+        verifiedBootState = kernelVerifiedBoot.ifBlank { property("ro.boot.verifiedbootstate") }, incrementalBuild = property("ro.build.version.incremental"),
         buildTimestamp = property("ro.build.date.utc").toLongOrNull()?.takeIf { it > 0 } ?: 0,
-        moduleInventoryKnown = rootGranted && modulesProbe?.successful == true && modulesValid
+        moduleInventoryKnown = rootGranted && modulesProbe?.successful == true && modulesValid,
+        securityPropertyMismatch = securityMismatch,
+        securityEvidenceSource = if (kernelVerifiedBoot.isNotBlank() && kernelUnlocked != null) "KERNEL_BOOTCONFIG" else "ANDROID_PROPERTIES"
     )
 }

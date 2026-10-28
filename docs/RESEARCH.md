@@ -1,6 +1,8 @@
 # Technisch onderzoek en haalbaarheid
 
-Onderzocht op 28 oktober 2026. Dit onderzoek gebruikt officiële Magisk-, AOSP-, Android Developers- en Motorola-bronnen. De beschrijving van de eigen Motorola Edge 70 Pro en de eerdere geslaagde OTA komt uit de aangeleverde projectspecificatie; deze ontwikkelsessie heeft die observaties niet zelfstandig op het echte toestel herhaald.
+Onderzocht op 28 oktober 2026. Dit onderzoek gebruikt officiële Magisk-, AOSP-, Android Developers- en Motorola-bronnen. De eerste onderzoeksfase gebruikte de aangeleverde projectspecificatie. In de daaropvolgende 0.2.0-fase zijn de telefoon, bewaarde logs en firmware zelfstandig uitlezend gevalideerd; zie de aanvulling hieronder.
+
+**Aanvulling 0.2.0:** de oorspronkelijke tekst hieronder documenteert het onderzoek vóór hardwarevalidatie. De telefoon is inmiddels daadwerkelijk uitlezend onderzocht en de APK is fysiek getest. De ontbrekende binaries, feitelijke statusformats en app-isolatie leidden tot aanvullende veilige adapters. De historische bronhashfout is in bewaarde logs teruggevonden; de actuele stock17-back-up is onafhankelijk geauthenticeerd. Ook Androids echte whole-file-verificatie is positief op de bestaande telefoon-ZIP uitgevoerd. De actuele conclusies en grenzen staan in [DEVICE-VALIDATION.md](DEVICE-VALIDATION.md) en [BUILD-REPORT.md](BUILD-REPORT.md); zij vervangen de eerdere onzekerheden waar nieuw bewijs beschikbaar is.
 
 ## Conclusie voor deze versie
 

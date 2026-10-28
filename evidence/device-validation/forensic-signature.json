@@ -1,0 +1,21 @@
+{
+  "signature_der_sha256": "a6f5c6609d0f1f825a188b96d952a26a772b0f5fc8e3a3c2809745cc62542d8a",
+  "embedded_certificate_count": 1,
+  "embedded_spki_sha256": [
+    "19acf5edb7a55816a55163183171097a785bdb5d815230b46d446d6e6004f8cc"
+  ],
+  "signed_byte_count": 3417371721,
+  "wholefile_signature_cryptographically_valid": true,
+  "truststore_key_match": true,
+  "trusted_anchor_count": 1,
+  "trusted_anchor_spki_sha256": [
+    "19acf5edb7a55816a55163183171097a785bdb5d815230b46d446d6e6004f8cc"
+  ],
+  "signature_digest_algorithm": "sha256",
+  "signed_attributes_present": false,
+  "signed_range_digest": "03f622ae5020f2368466ab58b6e6c94fd6aaaacb160bc27f1dc592e20e58a539",
+  "signature_bytes": 512,
+  "device_truststore_signature_verified": true,
+  "independent_openssl_rsa_verify_exit_code": 0,
+  "method": "RecoverySystem ZIP-footer signed range; streaming digest; RSA PKCS#1 v1.5; independent Python cryptography and OpenSSL verification; signer key matched device OTA trust anchors"
+}

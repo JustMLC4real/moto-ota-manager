@@ -21,9 +21,16 @@ data class FirmwareReport(
     val packageBytes: Long = 0,
     val sha256: String = "",
     val issues: List<CheckResult> = emptyList(),
-    val metadata: Map<String, String> = emptyMap()
+    val metadata: Map<String, String> = emptyMap(),
+    val payloadProperties: Map<String, String> = emptyMap()
 ) {
     val readyForOfficialReview: Boolean get() = structureValid && compatible && payloadHashValid && signatureVerified && regionVerified
+    val androidMetadataSourceFingerprint: String get() = metadata["pre-build"].orEmpty()
+    val androidMetadataTargetFingerprint: String get() = metadata["post-build"].orEmpty()
+    val payloadSourceFingerprint: String get() = payloadProperties["SOURCE_FP"].orEmpty()
+    val payloadTargetFingerprint: String get() = payloadProperties["TARGET_FP"].orEmpty()
+    /** Informational package target; it never relaxes the Android metadata preconditions. */
+    val targetAndroidVersion: String get() = targetFingerprint.split('/').getOrNull(2)?.substringAfter(':', "").orEmpty()
 }
 
 /** Local checks are independent of the platform whole-file signature check. No package is applied here. */
@@ -103,17 +110,32 @@ object FirmwareValidator {
                 val sourceFp = metadata["pre-build"].orEmpty()
                 if (sourceFp.isNotBlank() && sourceFp.split('|').none { it in fps }) issues += CheckResult("SOURCE_FINGERPRINT", "Bronfingerprint komt niet exact overeen met de actuele systeemfingerprint; vendor-/productaliases worden niet gelijkgesteld.")
                 if (source.isBlank() != sourceFp.isBlank()) issues += CheckResult("SOURCE_INCOMPLETE", "Incrementele metadata moet zowel pre-build als pre-build-incremental bevatten.")
-                val targetFp = metadata["post-build"].orEmpty()
+                val androidTargetFp = metadata["post-build"].orEmpty()
+                val androidTargetParts = androidTargetFp.split('/')
+                if (androidTargetParts.size != 6 || androidTargetParts[0] != "motorola" ||
+                    androidTargetParts[1].isBlank() || androidTargetFp.any { it.isWhitespace() } ||
+                    androidTargetParts[2].substringBefore(':') != "merc" ||
+                    androidTargetParts[4].substringBefore(':') != metadata["post-build-incremental"] ||
+                    androidTargetParts[4].substringAfter(':', "") != "user" || androidTargetParts[5] != "release-keys" || androidTargetParts[3].isBlank()) {
+                    issues += CheckResult("TARGET_FINGERPRINT", "Doelfingerprint mist een geldige Motorola/merc user/release-keys-indeling of consistente incremental.")
+                }
+                // Motorola can describe vendor Android 15 in standard metadata while the payload
+                // properties describe system Android 16 -> 17. Keep both namespaces: the payload
+                // pair improves target information only, and never becomes a compatibility alias.
+                val payloadSource = payloadFingerprint(props["SOURCE_FP"])
+                val payloadTarget = payloadFingerprint(props["TARGET_FP"])
+                val payloadPairPresent = props.containsKey("SOURCE_FP") || props.containsKey("TARGET_FP")
+                val payloadPairValid = payloadSource != null && payloadTarget != null
+                if (payloadPairPresent && !payloadPairValid) {
+                    issues += CheckResult("PAYLOAD_FINGERPRINTS_INVALID", "Payload SOURCE_FP en TARGET_FP moeten beide geldige Motorola/merc user/release-keys-fingerprints zijn.")
+                }
+                if (payloadPairValid && (payloadSource !in sourceFp.split('|') || payloadTarget != androidTargetFp)) {
+                    issues += CheckResult("OEM_METADATA_REVIEW_REQUIRED", "Motorola-payloadproperties en standaard Android-metadata gebruiken verschillende fingerprints. Doelinformatie wordt apart getoond; compatibiliteit vereist OEM-beoordeling.")
+                }
+                val targetFp = if (payloadPairValid) payloadTarget!! else androidTargetFp
                 val targetParts = targetFp.split('/')
                 val target = targetParts.getOrNull(3).orEmpty()
                 val targetAndroid = targetParts.getOrNull(2)?.substringAfter(':', "").orEmpty()
-                if (targetParts.size != 6 || targetParts[0] != "motorola" ||
-                    targetParts[1].isBlank() || targetFp.any { it.isWhitespace() } ||
-                    targetParts[2].substringBefore(':') != "merc" ||
-                    targetParts[4].substringBefore(':') != metadata["post-build-incremental"] ||
-                    targetParts[4].substringAfter(':', "") != "user" || targetParts[5] != "release-keys" || target.isBlank()) {
-                    issues += CheckResult("TARGET_FINGERPRINT", "Doelfingerprint mist een geldige Motorola/merc user/release-keys-indeling of consistente incremental.")
-                }
                 val currentAndroidVersion = device.androidVersion.takeIf { it.matches(Regex("[1-9][0-9]?")) }?.toIntOrNull()
                 val targetAndroidVersion = targetAndroid.takeIf { it.matches(Regex("[1-9][0-9]?")) }?.toIntOrNull()
                 if (currentAndroidVersion == null || targetAndroidVersion == null) {
@@ -141,8 +163,12 @@ object FirmwareValidator {
                 } else if (targetPatch < currentPatch) {
                     issues += CheckResult("PATCH_ROLLBACK", "Het beveiligingspatchniveau zou teruggaan.")
                 }
+                val reportPayloadProperties = mutableMapOf<String, String>().apply {
+                    payloadSource?.let { put("SOURCE_FP", it) }
+                    payloadTarget?.let { put("TARGET_FP", it) }
+                }
                 result = FirmwareReport(true, issues.none { it.code !in setOf("REGION_UNPROVEN", "PAYLOAD_HASH") }, hashValid,
-                    false, regionOk, source, target, metadata["post-build"].orEmpty(), file.length(), fullHash, issues.toList(), metadata)
+                    false, regionOk, source, target, targetFp, file.length(), fullHash, issues.toList(), metadata, reportPayloadProperties)
             }
         } catch (_: Exception) {
             result = result.copy(issues = issues + CheckResult("INVALID_PACKAGE", "Ongeldig of niet-ondersteund A/B-pakket: ZIP, metadata, header of payload-properties ontbreken of zijn inconsistent."))
@@ -164,6 +190,11 @@ object FirmwareValidator {
 
     private fun patchDate(text: String): LocalDate? = text.takeIf { it.matches(Regex("[0-9]{4}-[0-9]{2}-[0-9]{2}")) }
         ?.let { runCatching { LocalDate.parse(it) }.getOrNull() }
+
+    /** Deliberately narrow and safe to include in diagnostics; URLs/tokens never become fingerprint fields. */
+    private fun payloadFingerprint(value: String?): String? = value?.takeIf {
+        it.length <= 512 && it.matches(Regex("motorola/[A-Za-z0-9._-]+/merc:[1-9][0-9]?/[A-Za-z0-9._+-]+/[A-Za-z0-9._+-]+:user/release-keys"))
+    }
 
     private fun digest(input: java.io.InputStream): ByteArray {
         val md = MessageDigest.getInstance("SHA-256")

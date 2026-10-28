@@ -5,7 +5,7 @@ import android.os.BatteryManager
 import android.os.StatFs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
+import nl.moto.ota.core.*
 import java.io.ByteArrayInputStream
 import java.security.MessageDigest
 import java.util.zip.GZIPInputStream
@@ -28,42 +28,60 @@ class DeviceInspector(private val shell: ReadOnlyShell = ReadOnlyShell()) {
         probes[ReadOnlyProbe.BOOT_ID.name] = shell.run(ReadOnlyProbe.BOOT_ID)
         var backups = emptyList<BackupCandidate>()
         var counters = emptyMap<String, String>()
-        var wifiUrl: String? = null
+        var metadata = MotorolaMetadataObservation()
         if (rootRequested) {
             val root = shell.run(ReadOnlyProbe.ROOT_ID)
             probes[ReadOnlyProbe.ROOT_ID.name] = root
             val rootGranted = root.successful && Regex("(?:^|\\s)uid=0(?:\\(|\\s|$)").containsMatchIn(root.stdout)
             if (rootGranted) {
+                // Some property contexts (observed: ro.virtual_ab.enabled) are
+                // unreadable to an ordinary app even when getprop exits 0.
+                // Retry only missing allowlisted values after root was granted.
+                for (name in ReadOnlyShell.PROPERTY_NAMES.filter { properties[it].isNullOrBlank() }) {
+                    val privileged = shell.property(name, asRoot = true)
+                    probes["PRIV_PROP_" + name.uppercase().replace('.', '_')] = privileged
+                    if (privileged.successful && privileged.stdout.isNotBlank()) properties[name] = privileged.stdout.trim()
+                }
                 for (probe in ReadOnlyProbe.entries.filter { it.requiresRoot && it != ReadOnlyProbe.ROOT_ID }) {
                     probes[probe.name] = shell.run(probe)
                 }
-                backups = inventoryBackups(probes[ReadOnlyProbe.BACKUPS.name])
+                if (ObservationParsers.engine(probes[ReadOnlyProbe.ENGINE_FOLLOW.name]) == "UNKNOWN" && properties["ro.build.version.sdk"] == "37") {
+                    probes["ENGINE_CALLBACK"] = shell.engineCallback(context.applicationInfo.sourceDir)
+                }
                 val preferences = probes[ReadOnlyProbe.OTA_PREFS.name]?.takeIf { it.successful }
                     ?.let { runCatching { ObservationParsers.preferences(it.stdout) }.getOrNull() }.orEmpty()
                 counters = preferences.filterKeys { it in COUNTER_KEYS }
-                val download = probes[ReadOnlyProbe.DOWNLOAD_PREFS.name]?.takeIf { it.successful }
-                    ?.let { runCatching { ObservationParsers.preferences(it.stdout) }.getOrNull() }
-                wifiUrl = download?.get("downloadRequest")?.let { request ->
-                    runCatching {
-                        val json = JSONObject(request)
-                        val resource = when (val value = json.opt("contentResource")) {
-                            is JSONObject -> value
-                            is String -> JSONObject(value)
-                            else -> null
-                        }
-                        resource?.optString("wifiUrl")?.takeIf { it.isNotBlank() && it.length <= 16_384 }
-                    }.getOrNull()
-                }
+                metadata = MotorolaMetadataParser.parse(
+                    probes[ReadOnlyProbe.DOWNLOAD_PREFS.name]?.takeIf { it.successful }?.stdout,
+                    probes[ReadOnlyProbe.OTA_PREFS.name]?.takeIf { it.successful }?.stdout)
             }
         }
-        Inspection(properties, probes, backups,
+        val kernel = MetadataObservations.kernelConfig(probes[ReadOnlyProbe.BOOT_CONFIG.name])
+        val bootControl = MetadataObservations.hex(probes[ReadOnlyProbe.MISC_BOOT_CONTROL.name], 32)?.let(ReadOnlyMetadata::parseBootControl)
+        val vab = MetadataObservations.hex(probes[ReadOnlyProbe.MISC_VIRTUAL_AB.name], 64)?.let(ReadOnlyMetadata::parseVirtualAb)
+        val snapshotFile = MetadataObservations.snapshotFile(probes[ReadOnlyProbe.SNAPSHOT_STATE_FILE.name])
+        val sourceSlots = listOf(properties["ro.boot.slot_suffix"], kernel["slot_suffix"]).filterNotNull().filter { it in listOf("_a", "_b") }.distinct()
+        val snapshot = MetadataObservations.combineSnapshot(
             ObservationParsers.snapshot(probes[ReadOnlyProbe.SNAPSHOT_DUMP.name], probes[ReadOnlyProbe.SNAPSHOT_HAL.name]),
-            ObservationParsers.engine(probes[ReadOnlyProbe.ENGINE_FOLLOW.name]),
-            inspectionStartedAtMillis, rootRequested, counters, wifiUrl)
+            snapshotFile, vab, sourceSlots.singleOrNull().orEmpty(), probes[ReadOnlyProbe.SNAPSHOT_DIRECTORY.name],
+            probes.containsKey(ReadOnlyProbe.SNAPSHOT_STATE_FILE.name),
+            probes[ReadOnlyProbe.SNAPSHOT_DUMP.name]?.successful == true || probes[ReadOnlyProbe.SNAPSHOT_HAL.name]?.successful == true)
+        val commandEngine = ObservationParsers.engine(probes[ReadOnlyProbe.ENGINE_FOLLOW.name])
+        val engine = if (commandEngine != "UNKNOWN") commandEngine else MetadataObservations.engineCallback(probes["ENGINE_CALLBACK"])
+        val result = Inspection(properties, probes, backups, snapshot, engine, inspectionStartedAtMillis, rootRequested,
+            counters, metadata.downloadUrl, metadata, kernel, bootControl, vab, snapshotFile)
+        if (result.toDeviceState().rootGranted) {
+            backups = inventoryBackups(probes[ReadOnlyProbe.BACKUPS.name], result.toDeviceState(),
+                probes[ReadOnlyProbe.PARTITIONS.name]?.stdout.orEmpty(), DeviceTrustAnchors.spkiSha256())
+        }
+        result.copy(backupInventory = backups)
     }
 
-    private fun inventoryBackups(probe: ProbeResult?): List<BackupCandidate> {
+    private fun inventoryBackups(probe: ProbeResult?, device: DeviceState, partitions: String, trustAnchors: Set<String>): List<BackupCandidate> {
         if (probe?.successful != true) return emptyList()
+        val expectedBytes = partitions.lineSequence().firstOrNull { it.startsWith("init_boot${device.slot}=") }
+            ?.substringAfter('=')?.trim()?.toLongOrNull() ?: -1L
+        val reference = VerifiedStockCatalog.referenceFor(device, trustAnchors)
         return probe.stdout.lineSequence().filter { it.isNotBlank() }.take(20).mapNotNull { line ->
             val parts = line.trim().split('|')
             val directory = parts.firstOrNull() ?: return@mapNotNull null
@@ -78,11 +96,12 @@ class DeviceInspector(private val shell: ReadOnlyShell = ReadOnlyShell()) {
                 return@mapNotNull BackupCandidate(directory, compressedSize, null, null, null, false,
                     listOf("Back-up kon niet volledig en stabiel worden gelezen"))
             }
-            inspectBackup(directory, binary.bytes)
+            inspectBackup(directory, binary.bytes, expectedBytes, device, reference)
         }.toList()
     }
 
-    internal fun inspectBackup(directory: String, gzip: ByteArray): BackupCandidate {
+    internal fun inspectBackup(directory: String, gzip: ByteArray, expectedBytes: Long = -1,
+                               device: DeviceState = DeviceState(), reference: StockReference? = null): BackupCandidate {
         val sha256 = MessageDigest.getInstance("SHA-256")
         val sha1 = MessageDigest.getInstance("SHA-1")
         var count = 0L
@@ -107,12 +126,17 @@ class DeviceInspector(private val shell: ReadOnlyShell = ReadOnlyShell()) {
             }
             val sha1Text = sha1.digest().hex()
             val validHeader = headerCount == 8 && header.toString(Charsets.US_ASCII) == "ANDROID!"
+            val validation = if (expectedBytes > 0) BackupValidator.inspect(ByteArrayInputStream(gzip), true, expectedBytes, device, reference) else null
             val errors = buildList {
                 if (!validHeader) add("Geen Android boot-imageheader; partitietype onbekend")
                 if (sha1Text != directory.removePrefix("magisk_backup_").lowercase()) add("Magisk SHA1-directory komt niet overeen met image")
-                add("Build en init_boot-herkomst niet bewezen; niet geschikt voor automatisch herstel")
+                if (validation?.usableAsStock != true) {
+                    addAll(validation?.issues.orEmpty().map { it.message })
+                    add("Build en init_boot-herkomst niet bewezen; niet geschikt voor automatisch herstel")
+                }
             }
-            BackupCandidate(directory, gzip.size.toLong(), count, sha256.digest().hex(), sha1Text, validHeader, errors)
+            BackupCandidate(directory, gzip.size.toLong(), count, sha256.digest().hex(), sha1Text, validHeader, errors,
+                provenanceVerified = validation?.usableAsStock == true && errors.isEmpty(), validation = validation)
         } catch (_: Exception) {
             BackupCandidate(directory, gzip.size.toLong(), count, null, null, false,
                 listOf("Beschadigde gzip, onvolledige image of decompressielimiet overschreden"))

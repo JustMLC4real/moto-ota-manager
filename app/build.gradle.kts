@@ -10,11 +10,11 @@ android {
         applicationId = "nl.moto.ota"
         minSdk = 33
         targetSdk = 35
-        versionCode = 1
-        versionName = "0.1.0-safe"
+        versionCode = 2
+        versionName = "0.2.0-safe"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures { compose = true; buildConfig = true }
+    buildFeatures { compose = true; buildConfig = true; aidl = true }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
     kotlinOptions { jvmTarget = "17" }
     testOptions { unitTests.isReturnDefaultValues = true }

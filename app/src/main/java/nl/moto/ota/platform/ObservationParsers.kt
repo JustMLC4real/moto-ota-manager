@@ -6,16 +6,21 @@ import org.xml.sax.InputSource
 
 object ObservationParsers {
     private val snapshotNames = mapOf(
-        "0" to "NONE", "None" to "NONE", "1" to "INITIATED", "Initiated" to "INITIATED",
-        "2" to "UNVERIFIED", "Unverified" to "UNVERIFIED", "3" to "MERGING", "Merging" to "MERGING",
-        "4" to "MERGE_NEEDS_REBOOT", "MergeNeedsReboot" to "MERGE_NEEDS_REBOOT",
-        "5" to "COMPLETE", "MergeCompleted" to "COMPLETE", "6" to "FAILED", "MergeFailed" to "FAILED",
-        "7" to "CANCELLED", "Cancelled" to "CANCELLED"
+        // SnapshotManager's stream operator emits these lowercase, hyphenated names.
+        // Numeric/protobuf-name aliases remain explicit; unknown formats stay unknown.
+        "none" to "NONE", "0" to "NONE", "None" to "NONE",
+        "initiated" to "INITIATED", "1" to "INITIATED", "Initiated" to "INITIATED",
+        "unverified" to "UNVERIFIED", "2" to "UNVERIFIED", "Unverified" to "UNVERIFIED",
+        "merging" to "MERGING", "3" to "MERGING", "Merging" to "MERGING",
+        "merge-needs-reboot" to "MERGE_NEEDS_REBOOT", "4" to "MERGE_NEEDS_REBOOT", "MergeNeedsReboot" to "MERGE_NEEDS_REBOOT",
+        "merge-completed" to "COMPLETE", "5" to "COMPLETE", "MergeCompleted" to "COMPLETE",
+        "merge-failed" to "FAILED", "6" to "FAILED", "MergeFailed" to "FAILED",
+        "cancelled" to "CANCELLED", "7" to "CANCELLED", "Cancelled" to "CANCELLED"
     )
 
     fun snapshot(dump: ProbeResult?, hal: ProbeResult?): SnapshotObservation {
         val evidence = mutableListOf<String>()
-        val globalStates = if (dump?.successful == true) Regex("(?m)^Update state: *([A-Za-z0-9]+) *$")
+        val globalStates = if (dump?.successful == true) Regex("(?m)^Update state: *([A-Za-z0-9-]+) *$")
             .findAll(dump.stdout).map { snapshotNames[it.groupValues[1]] ?: "UNKNOWN" }.toList() else emptyList()
         val globalStateLines = if (dump?.successful == true) Regex("(?m)^Update state:").findAll(dump.stdout).count() else 0
         // A failed/absent tool can fall back to the HAL. A successful but malformed or
@@ -31,12 +36,21 @@ object ObservationParsers {
         } else null
         if (global != null) evidence += "snapshotctl: $global"
         if (halState != null) evidence += "boot HAL: $halState"
-        // A disagreement about idle is never permission to start another update.
+        // The HAL has fewer states than SnapshotManager. In AOSP, initiated,
+        // needs-reboot and completed all map to HAL none, and failed maps to merging.
+        // HAL may also report none for unverified while still on the source slot.
+        // Preserve the more precise global state, which still blocks preparation.
+        val consistentHalStates = mapOf(
+            "NONE" to setOf("NONE"), "INITIATED" to setOf("NONE"),
+            "UNVERIFIED" to setOf("UNVERIFIED", "NONE"), "MERGING" to setOf("MERGING"),
+            "MERGE_NEEDS_REBOOT" to setOf("NONE"), "COMPLETE" to setOf("NONE"),
+            "FAILED" to setOf("MERGING"), "CANCELLED" to setOf("CANCELLED")
+        )
         val state = when {
             malformedDump -> "UNKNOWN"
             global == null && halState == null -> "UNKNOWN"
             global == "UNKNOWN" || halState == "UNKNOWN" -> "UNKNOWN"
-            global != null && halState != null && global != halState -> "UNKNOWN"
+            global != null && halState != null && halState !in consistentHalStates[global].orEmpty() -> "UNKNOWN"
             else -> global ?: halState ?: "UNKNOWN"
         }
         val percent = if (state == "MERGING" && dump?.successful == true) {

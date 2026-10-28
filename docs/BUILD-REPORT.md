@@ -1,119 +1,113 @@
-# Build-, test- en opleverrapport
+# Build- en toesteltestrapport — 0.2.0-safe
 
-Datum: **28 oktober 2026**. Release: **0.1.0-safe**. Package: **nl.moto.ota**.
+**28 oktober 2026 · nl.moto.ota · versionCode 2**
 
-## Resultaat
+De definitieve APK is daadwerkelijk gebouwd, geïnstalleerd en uitlezend getest op de aangesloten **Motorola Edge 70 Pro, XT2607-1 / merc / reteu, Android 17, build A171WMH.44-25**. **266 tests slagen: 161 core-JVM-tests, 98 Android-JVM-tests en 7 fysieke toesteltests. Geen fouten of overgeslagen tests.**
 
-De echte Kotlin/Jetpack Compose-app is gecompileerd, debug-ondertekend, geïnstalleerd en gestart op een Android-emulator. **180 JVM-tests en 6 Android-instrumentatietests slagen: 186 tests, nul fouten.** Android-lint slaagt met nul fouten en zeven waarschuwingen.
+De zeven fysieke tests omvatten vier echte diagnose-/firmwarecontroles en drie Compose-UI-tests. De op de telefoon geïnstalleerde APK en de opgeleverde APK hebben aantoonbaar dezelfde SHA-256. Er is geen OTA geïnstalleerd, image teruggeschreven, Magisk gepatcht, slot gewijzigd of telefoon herstart.
 
-De fysieke Motorola is niet aangesloten, onderzocht, geflasht, bijgewerkt of herstart. Deze oplevering bewijst werkende softwarebouw en de hieronder genoemde tests; zij bewijst geen geslaagde OTA of rootbehoud op XT2607-1.
+## Definitieve bestanden
 
-## Bestanden
+- `moto-ota-manager-debug.apk`: **26.658.417 bytes**.
+- SHA-256: **50ebb65e43a1ad7b3f720902b72f7df86d97c3ef965d2dc6486fd8656ad585bc**.
+- APK Signature Scheme v2: `apksigner verify` geslaagd.
+- ARM64 inbegrepen; minSdk 33, compile/targetSdk 35. De echte runtime is SDK 37.
+- `moto-ota-manager-source.zip`: actuele broncode, echte Gradle Wrapper, tests, documentatie, CI en geschoond bewijs.
+- `SHA256SUMS.txt`: checksums van de definitieve APK en het bronarchief.
 
-Naast de repositorymap worden `moto-ota-manager-debug.apk`, `moto-ota-manager-source.zip` en `SHA256SUMS.txt` opgeleverd. Het bronarchief bevat project, Gradle Wrapper, tests, documentatie, GitHub Actions en bewijsbestanden. Lokale SDK-paden, buildcaches, sleutels en gedownloade toolchains zitten niet in het bronarchief.
+[Identieke geïnstalleerde/opgeleverde APK](../evidence/device-validation/installed-apk-verification.json) · [APK-handtekening](../evidence/device-validation/apk-signature.txt) · [Manifest](../evidence/device-validation/apk-badging.txt).
 
-Definitieve APK:
+De actuele 0.2.0-bewijsbestanden staan onder **evidence/device-validation/**. De oudere bestanden rechtstreeks onder `evidence/` en [het historische 0.1.0-verslag](BUILD-REPORT-0.1.0.md) documenteren de eerdere ontwikkelfase; zij zijn niet het finale toestelbewijs voor 0.2.0.
 
-- Bestand: `moto-ota-manager-debug.apk`
-- Omvang: **26.680.925 bytes**
-- SHA-256: **d0adf0f3379fd48fd69e2a1c6cd6561879f8c7f8a873aac576fd56410b30f6a0**
-- Ondertekening: Android Debug, APK Signature Scheme v2; `apksigner verify` geslaagd.
-- Minimum API 33; target/compile API 35. Native libraries omvatten arm64-v8a, armeabi-v7a, x86 en x86_64.
-- Het daadwerkelijk geteste APK-bestand is hetzelfde bestand dat als download wordt opgeleverd.
+## Build en geautomatiseerde tests
 
-Bewijs: [APK-signaturecontrole](../evidence/apk-signature.txt), [manifest/badging](../evidence/apk-badging.txt).
-
-## Gebruikte toolchain
-
-| Onderdeel | Versie |
-|---|---|
-| Java | Eclipse Temurin JDK 17.0.20.1+1, x64 Windows |
-| Gradle Wrapper | 8.11.1; distributie en wrapper-JAR vergeleken met officiële SHA-256 |
-| Android Gradle Plugin | 8.9.2 |
-| Kotlin / Compose compilerplugin | 2.1.20 |
-| Compose BOM | 2025.04.01 |
-| Android SDK / Build Tools | Platform 35 / 35.0.0 |
-| Emulator | Officiële emulator 37.2.12, WHPX |
-| Virtueel toestel | Pixel 5, Android 15 / API 35 Google APIs, x86_64, 1080×2340 |
-
-JDK en SDK zijn taaklokaal geïnstalleerd. De oorspronkelijke Java 8 en bestaande Gradlecaches zijn niet als bouwomgeving gebruikt. Er is geen Magisk-code of Motorola-firmware meegeleverd.
-
-## Buildopdrachten en resultaat
-
-Definitieve build:
+Toolchain: Temurin JDK 17.0.20.1+1, Gradle Wrapper 8.11.1, AGP 8.9.2, Kotlin/Compose compilerplugin 2.1.20, SDK Platform 35 en Build Tools 35.0.0. Wrapper en distributie zijn eerder met de officiële SHA-256 gecontroleerd. JDK/SDK/cache zijn taaklokaal; geen globale Java- of Android-instellingen zijn vervangen.
 
 ```text
-gradlew.bat :core:test :app:testDebugUnitTest :app:assembleDebug :app:lintDebug :app:assembleDebugAndroidTest --console=plain --no-daemon
+gradlew.bat :core:test :app:testDebugUnitTest :app:assembleDebug :app:assembleDebugAndroidTest :app:lintDebug --console=plain --no-daemon
 BUILD SUCCESSFUL in 55s
-84 actionable tasks: 17 executed, 67 up-to-date
+85 actionable tasks: 26 executed, 59 up-to-date
 ```
 
-[Definitieve volledige buildlog](../evidence/build-final.log).
+Voor de optionele echte firmwaretest is `MOTO_OTA_PATH` expliciet naar de al aanwezige historische OTA gezet. Die test was daadwerkelijk uitgevoerd, niet overgeslagen: de volledige ZIP-/payloadhashes en de OEM-fingerprintverschillen zijn met de echte 3,42 GB-ZIP gecontroleerd. Dezelfde test wordt in CI zonder eigen firmwarebestand overgeslagen; de overige synthetische gevallen blijven beschikbaar.
 
-Een zelfstandige lokale Git-clone is daarnaast zonder `local.properties`, bestaande buildoutputs of IDE-projectbestanden gebouwd: **84 van 84 taken uitgevoerd, BUILD SUCCESSFUL in 1m 14s**. De SDK is via de procesomgeving gevonden. Dit bevestigt dat de repository zelfstandig bouwt; er wordt geen bit-identieke APK-reproductie beloofd. [Build van zelfstandige clone](../evidence/source-clone-build.log).
+[Definitieve buildlog](../evidence/device-validation/build-final.log) · [Core JUnit XML](../evidence/device-validation/junit-core) · [Android-JVM JUnit XML](../evidence/device-validation/junit-appJvm).
 
-De overige `build-01` tot en met `build-06`-logs tonen de ontwikkeling, waaronder gecorrigeerde compileer- en testfouten. De definitieve build en uiteindelijke XML-resultaten zijn leidend. De UI-correctie en de instrumentatietests zijn opgenomen in de definitieve build.
-
-## Uitgevoerde tests
-
-| Suite | Tests | Fouten |
+| JVM-suite | Tests | Fouten |
 |---|---:|---:|
 | BackupValidatorTest | 15 | 0 |
-| FirmwareDiscoveryTest | 7 | 0 |
-| FirmwareValidatorTest | 53 | 0 |
+| FirmwareDiscoveryTest | 12 | 0 |
+| FirmwareValidatorTest, inclusief echte historische ZIP | 62 | 0 |
 | PackageTransferTest | 8 | 0 |
 | PrivacyTest | 4 | 0 |
 | ReadinessTest | 14 | 0 |
+| ReadOnlyMetadataTest | 13 | 0 |
+| VerifiedStockCatalogTest | 5 | 0 |
 | WorkflowTest | 28 | 0 |
+| EngineProbeSafetyTest | 3 | 0 |
 | FirmwareSecurityReviewTest | 5 | 0 |
-| InspectionMapperTest | 25 | 0 |
-| ObservationParsersTest | 21 | 0 |
-| PlatformSafetyTest, echte Android-runtime | 3 | 0 |
-| SafeUiTest, echte Compose-runtime | 3 | 0 |
-| **Totaal** | **186** | **0** |
+| FirmwareSignatureProbeSafetyTest | 3 | 0 |
+| InspectionMapperTest | 28 | 0 |
+| MetadataObservationsTest | 13 | 0 |
+| MotorolaMetadataParserTest | 14 | 0 |
+| ObservationParsersTest | 25 | 0 |
+| OfficialAppsTest | 7 | 0 |
+| **JVM-totaal** | **259** | **0** |
 
-De JVM-testresultaten staan in [junit-core](../evidence/junit-core) en [junit-app](../evidence/junit-app). [De testmatrix](TEST-MATRIX.md) koppelt de twintig verlangde situaties aan concrete testnamen.
+### Fysieke Android-tests
 
-De instrumentatietests zijn met expliciete emulatorselectie uitgevoerd, zodat een later aangesloten telefoon geen installatiedoel kan worden:
+De toestelselectie was steeds expliciet; het serienummer staat alleen in de private werkmap. Er is geen algemene installopdracht op een willekeurig ADB-target gebruikt. De app-APK en test-APK zijn met behoud van appdata geïnstalleerd/bijgewerkt. De gebruiker heeft de diagnose-app zelf Superuser-toegang verleend; de testcode heeft geen Magisk-policy aangepast.
 
 ```text
-adb -s emulator-5556 shell getprop ro.kernel.qemu
-1
-adb -s emulator-5556 install -r app-debug.apk
-Success
-adb -s emulator-5556 install -r app-debug-androidTest.apk
-Success
-adb -s emulator-5556 shell am instrument -w -r nl.moto.ota.test/androidx.test.runner.AndroidJUnitRunner
-Time: 14.061
-OK (6 tests)
+adb -s <expliciet-toestel> shell am instrument -w -r -e class nl.moto.ota.ReadOnlyDeviceValidationTest -e motoReadOnlyValidation yes nl.moto.ota.test/androidx.test.runner.AndroidJUnitRunner
+Time: 17,692
+OK (4 tests)
+
+adb -s <expliciet-toestel> shell am instrument -w -r -e class nl.moto.ota.SafeUiTest nl.moto.ota.test/androidx.test.runner.AndroidJUnitRunner
+Time: 8,496
+OK (3 tests)
 ```
 
-[Ruwe instrumentatieresultaten](../evidence/instrumentation-results.log), [appinstallatie](../evidence/emulator-apk-install.log), [test-APK-installatie](../evidence/emulator-test-apk-install.log), [geslaagde appstart](../evidence/emulator-apk-launch.log).
+De vier echte uitleestests bewijzen samen:
 
-De drie platformtests testen echte Android-bestandsimport, een atomair Android-journaal en afwijzing van een onondertekend pakket door `RecoverySystem.verifyPackage`. De drie UI-tests controleren het uitlezende beginscherm, expliciete rootbevestiging met annuleren, en de afzonderlijk gelabelde simulatie. Er is geen root verleend en geen externe updater gestart door deze tests.
+1. De huidige SKU/codenaam/regio/build, root 31100, slots b/a, succesvolle boot, kernelbeveiligingsbron, Virtual A/B, snapshot `NONE`, live UpdateEngine `IDLE`, module-inventaris en geslaagde gereedheidscontroles.
+2. De echte Magisk-gzip is een volledige 8 MiB-stock-`init_boot` van deze build, geauthenticeerd door OTA-manifest en toesteltrustanchor; de officiële updater resolveert expliciet naar Motorola.
+3. De bestaande Motorola-downloadjob is alleen metadata voor de reeds geïnstalleerde build: `ALREADY_INSTALLED`, geen aangeboden OTA-download.
+4. Androids daadwerkelijke `RecoverySystem.verifyPackage` accepteert de al aanwezige historische telefoon-ZIP tegen de toesteltruststore. Omvang en SHA-256 matchen exact het onafhankelijk geverifieerde pakket. De helper heeft geen bestand gestaged of gewijzigd en geen installatie-API aangeroepen.
 
-### Lint
+De drie UI-tests bevestigen het uitlezende beginscherm, expliciete rootbevestiging met annuleren en de afzonderlijk gelabelde simulatie. De telefoon is na de demonstratie teruggebracht naar een echte, opnieuw uitgelezen diagnose.
 
-Nul fouten, zeven waarschuwingen: zes meldingen over nieuwere dependencyversies en één melding dat `StorageManager` reclaimbare cache kan meenemen bij ruimteberekening. De app gebruikt bewust een conservatieve controle van werkelijk vrije ruimte en wist geen gebruikerscache. Dependencies zijn vastgezet op de in deze build geteste combinaties.
+[Vier uitleestests](../evidence/device-validation/physical-readonly-tests.log) · [Drie UI-tests](../evidence/device-validation/physical-ui-tests.log) · [Gecombineerde fysieke JUnit XML](../evidence/device-validation/junit-physical.xml) · [Echte Android-signature-uitkomst](../evidence/device-validation/platform-signature-verification.json).
 
-[Lint HTML](../evidence/lint/lint-results-debug.html), [lint XML](../evidence/lint/lint-results-debug.xml). De GitHub Actions-workflow is opgenomen; deze sessie heeft geen externe GitHub-run gestart.
+## Gevonden en herstelde bugs
 
-## Visuele controle
+- Snapshottekst gebruikte echte lowercase-/hyphennamen en een andere HAL-samenvatting dan de oorspronkelijke parser verwachtte. Beide zijn gecorrigeerd met AOSP-bronnen en regressietests.
+- `bootctl`, `snapshotctl` en `update_engine_client` ontbreken werkelijk op dit toestel. De app leest nu bestaande boot-/Virtual A/B-/snapshotmetadata, controleert formaat en CRC en vraagt de actuele enginecallback via uitsluitend `bind`/`unbind` in een begrensd rootproces op SDK 37. De geladen interfacebindings komen uit het draaiende framework; er worden geen Binder-nummers gegokt.
+- Een gewone app kreeg een lege `ro.virtual_ab.enabled`; dezelfde allowlisted property is na rootverlening wel leesbaar. Lege waarden worden gecontroleerd opnieuw gelezen.
+- Androids app-isolatie verbergt de private Motorola-prefs voor een rootproces dat de appnamespace erft. De twee vaste voorkeur-uitlezingen gebruiken nu het gedocumenteerde `su --target 0`, zonder permanente namespace-, permissie- of beleidswijziging.
+- De werkelijke JSON-envelop en technische bestandsnaam `payload_metadata.bin` werden aanvankelijk gemist. Ze zijn nu getypeerd herkend; oude metadata wordt geen nieuwe OTA.
+- `locked/green` in Android-properties werd los van `unlocked/orange` in de kernelbootconfig behandeld. De app toont het verschil en gebruikt de kernelbron voor de gemelde boottoestand.
+- De huidige stockback-up krijgt nu alleen bij de exact geauditeerde build, fingerprint, inhoudshash en echte OTA-trustanchor een geverifieerde herkomst. Andere builds en aliases blijven geweigerd.
+- De officiële updateactivity wordt system-only en met een expliciet Motorola-component geselecteerd. Werkelijke vendor-15/system-17-pakketmetadata wordt afzonderlijk getoond en blijft een compatibiliteitsreview vereisen.
 
-De echte APK is gestart, de uitlezende scan is voltooid, het firmwaretabblad is geopend en beide schermen zijn als screenshot vastgelegd. De statusbalkiconen zijn na visuele inspectie gecorrigeerd; de hoofdknop is direct zichtbaar. De screenshots tonen echte emulatorgegevens, geen nagebouwde mockup en geen fysieke Motorola.
+De eerste fysieke testruns legden de property-/namespace-/bestandsnaamfouten bloot. [Eerste foutreproductie](../evidence/device-validation/debug-physical-01.log) · [Tweede foutreproductie](../evidence/device-validation/debug-physical-02.log). De finale zeven fysieke tests zijn groen.
 
-[Overzicht](../evidence/app-overview-api35.png) · [Firmware](../evidence/app-firmware-api35.png)
+## Controle op behoud van toestelstatus
 
-## Werkend, gesimuleerd en nog te bewijzen
+De begin- en eindmeting bevestigen:
 
-**Werkende implementaties:** echte Android-properties en accu/ruimte, begrensde uitleesprobes, strikte observatieparsing, image- en OTA-validatie, expliciete HTTPS-overdracht met atomisch opslaan, Android-certificaatverificatie, duurzaam journaal, lokale privacybeperkte export en officiële-appoverdracht met foutafhandeling.
+- SHA-256 onveranderd voor `boot_a`, `boot_b`, `init_boot_a`, `init_boot_b`, `vendor_boot_a`, `vendor_boot_b`.
+- De gecomprimeerde stockback-up is ongewijzigd.
+- De twaalf modules en hun aan/uit-/verwijdermarkeringen zijn identiek.
+- Android-build, actieve slot, Magisk-versie, kernelbootbeveiliging en opstartsessie zijn gelijk gebleven: geen telefoonherstart.
+- `/metadata/ota/state`, `ota_prefs.xml` en `dl_prefs.xml` hebben dezelfde hashes als bij aanvang.
 
-**Gesimuleerd:** volledige OTA-/Magisk-/rollbacktrajecten in unit-tests, synthetische firmware en back-ups, externe discoverymeldingen en de expliciete demo. Dit wordt nergens als een echte geslaagde installatie gepresenteerd.
+[Volledige vergelijking en exacte meetomvang](../evidence/device-validation/non-mutation-audit.json). De controle claimt niet dat alle Android-achtergrondlogs of alle userdata van een draaiende telefoon bit voor bit stilstaan. Eigen app-/testinstallatie en app-private diagnosebestanden zijn de geautoriseerde testartefacten; er is niets van bestaande gebruikersgegevens gewist.
 
-**Op het echte toestel te testen:** getprops/SKU, Magisk 31.1-rootpolicy en -binaries, SELinux, bootctl/snapshotctl/enginecallback, Motorola's private metadataschema, de bestaande back-up en de vertrouwde OTA-certificaten. Een werkelijk geldig officieel OTA-pakket is in deze sessie niet geleverd of positief op de Motorola geverifieerd. De emulator test de negatieve signaturecontrole.
+## Lint en resterende grenzen
 
-**Veilige fallback:** geen aangetoonde stabiele externe Motorola-/Magisk-installatie-API, geen bewezen huidige stock-imageherkomst en geen universeel kanaalbewijs. Daarom ontbreken partitieschrijven, automatische stockrestore, OTA-toepassing, Magisk-patching, slotwissels en herstart in de uitvoeradapter. Zonder onafhankelijk actuele stockherkomst en geschikt pakket blijft updatevoorbereiding geblokkeerd. De handleiding en uitleesdiagnostiek blijven beschikbaar.
+Lint: **nul fouten, negen waarschuwingen**. Zes melden nieuwere vastgezette dependencies. Eén betreft conservatieve vrije-ruimtecontrole. Twee betreffen de bewust beperkte, SDK-37/root-only `ServiceManager`-reflectie en de vast begrensde bestaande Motorola-opslaglocatie. De actuele uitleesroute is fysiek getest; dit bewijst geen blijvende ondersteuning op toekomstige firmware. [Lint HTML](../evidence/device-validation/lint-results-debug.html) · [Lint XML](../evidence/device-validation/lint-results-debug.xml).
 
-Er is ook geen automatische achtergrondcontrole of OTA-notificatie. Lokale metadata levert uitsluitend een mogelijke kandidaat. De app kan Motorola's serveraanbod of de historische oorzaak van `ALREADY_UP_TO_DATE` niet bewijzen of resetten.
+Deze validatie bewijst de bestaande uitlees- en verificatiefuncties op dit profiel. Een toekomstige OTA-installatie, Magisk-restore/-patch, herstart, Android 18, functionele modulecompatibiliteit, Wallet en Play Integrity zijn niet door een schrijfflow getest en worden niet automatisch uitgevoerd. De historische oorzaak van `ALREADY_UP_TO_DATE` blijft onbekend. De oorspronkelijke **bronhashmismatch zelf**, de latere succesvolle OTA/merge en de huidige stock17-back-up zijn wel onafhankelijk bewezen; zie [het forensische rapport](DEVICE-VALIDATION.md).
 
-Dit is de aantoonbaar bouwbare veilige oplevering, met de expliciet toegestane fallbacks voor integraties die zonder verder toestelbewijs niet verantwoord te automatiseren zijn. Volg voor fysieke validatie de [read-only checklist](MANUAL-TESTS.md); deze ontwikkelsessie heeft geen toestemming voor een destructieve toesteltest gebruikt.
+[Echte overzichtscreenshot](../evidence/device-validation/device-overview.png) · [Echte gereedheidsscreenshot](../evidence/device-validation/device-readiness.png) · [Geanonimiseerd app-rapport](../evidence/device-validation/device-diagnostic-report.txt) · [Machineleesbare resultaten](../evidence/device-validation/verification-summary.json).

@@ -3,6 +3,7 @@ package nl.moto.ota.platform
 import nl.moto.ota.core.EngineState
 import nl.moto.ota.core.Readiness
 import nl.moto.ota.core.SnapshotState
+import nl.moto.ota.core.ReadOnlyMetadata
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -152,5 +153,32 @@ class InspectionMapperTest {
 
     @Test fun unexpectedBootSessionOutputCannotDriveRecoveryReconciliation() {
         assertEquals("", observation(changedProbes = mapOf(ReadOnlyProbe.BOOT_ID to ok("unexpected stdout\n12345678"))).toDeviceState().bootId)
+    }
+
+    @Test fun realMotorolaBootMetadataWorksWhenBootctlIsAbsent() {
+        val raw = "00000000424341420102000007009f000000000000000000000000006fc8849e".chunked(2).map { it.toInt(16).toByte() }.toByteArray()
+        val observed = observation(removedProbes = setOf(ReadOnlyProbe.CURRENT_SLOT, ReadOnlyProbe.SLOT_COUNT, ReadOnlyProbe.SLOT_B_SUCCESS))
+            .copy(bootControl = ReadOnlyMetadata.parseBootControl(raw), kernelBootConfig = mapOf("slot_suffix" to "_b"))
+        assertEquals("_b", observed.toDeviceState().slot)
+        assertEquals(true, observed.toDeviceState().bootSuccessful)
+    }
+
+    @Test fun realKernelBootFactsRemainDistinctFromSpoofableProperties() {
+        val observed = observation(properties = mapOf("ro.boot.vbmeta.device_state" to "locked", "ro.boot.flash.locked" to "1", "ro.boot.verifiedbootstate" to "green"))
+            .copy(kernelBootConfig = mapOf("vbmeta.device_state" to "unlocked", "verifiedbootstate" to "orange", "slot_suffix" to "_b"))
+        val device = observed.toDeviceState()
+        assertEquals(true, device.bootloaderUnlocked)
+        assertEquals("orange", device.verifiedBootState)
+        assertTrue(device.securityPropertyMismatch)
+        assertEquals("KERNEL_BOOTCONFIG", device.securityEvidenceSource)
+    }
+
+    @Test fun failedRootCannotPromoteKernelFactsAndContradictorySlotsRemainUnknown() {
+        val facts = mapOf("vbmeta.device_state" to "unlocked", "verifiedbootstate" to "orange", "slot_suffix" to "_a")
+        assertEquals("", observation().copy(kernelBootConfig = facts).toDeviceState().slot)
+        val unprivileged = observation(rootRequested = false, properties = mapOf("ro.boot.verifiedbootstate" to "green"))
+            .copy(kernelBootConfig = facts).toDeviceState()
+        assertEquals("green", unprivileged.verifiedBootState)
+        assertFalse(unprivileged.securityPropertyMismatch)
     }
 }

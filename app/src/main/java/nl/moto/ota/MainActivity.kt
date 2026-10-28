@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import nl.moto.ota.core.WorkflowPhase
+import nl.moto.ota.platform.OfficialApps
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
@@ -56,9 +57,9 @@ fun MotoApp(vm: MotoViewModel = viewModel()) {
         val backupPicker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { it?.let(vm::importBackup) }
         val reportPicker = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/plain")) { it?.let(vm::export) }
         fun openOfficial(magisk: Boolean) {
-            val intent = if (magisk) context.packageManager.getLaunchIntentForPackage("com.topjohnwu.magisk")
-            else Intent("android.settings.SYSTEM_UPDATE_SETTINGS")
-            if (intent == null) { launchFailure = "Magisk-app niet gevonden. Open Magisk zelf vanuit je startscherm."; return }
+            val intent = if (magisk) OfficialApps.magiskIntent(context.packageManager)
+            else OfficialApps.systemUpdaterIntent(context.packageManager)
+            if (intent == null) { launchFailure = if (magisk) "Magisk-app niet gevonden. Open Magisk zelf vanuit je startscherm." else "Geen toegankelijke officiële Motorola-updateactiviteit gevonden. Open Instellingen → Systeemupdates zelf."; return }
             try { context.startActivity(intent) }
             catch (_: ActivityNotFoundException) { launchFailure = "Geen toegankelijke updateactiviteit. Open Instellingen → Systeem → Systeemupdates handmatig." }
             catch (_: SecurityException) { launchFailure = "Deze activiteit is niet toegankelijk; gebruik de officiële app via je startscherm." }
@@ -100,18 +101,21 @@ fun MotoApp(vm: MotoViewModel = viewModel()) {
                                         Detail("Snapshot-merge", vm.device.snapshot.name + (vm.inspection?.snapshot?.mergePercent?.let { " · $it%" } ?: ""))
                                         Detail("UpdateEngine", vm.device.engine.name)
                                         Detail("Originele back-up", if (vm.backup?.usableAsStock == true) "herkomst geverifieerd" else "herkomst niet bewezen")
-                                        Detail("OTA-aanbod", if (vm.candidateAvailable) "lokale Motorola-downloadverwijzing gevonden; mogelijk verouderd" else "niet vastgesteld; controleer officiële updater")
+                                        Detail("OTA-aanbod", vm.discovery.explanation)
                                         Text("Deze knop leest diagnostiek. Schrijven naar partities, installeren en herstarten zijn niet geïmplementeerd.", style = MaterialTheme.typography.bodySmall)
                                     }
                                     Panel {
                                         Text("Wat houdt voorbereiding tegen?", style = MaterialTheme.typography.titleMedium)
                                         vm.readiness.blockers.forEach { Text("• ${it.message}", style = MaterialTheme.typography.bodyMedium) }
+                                        if (vm.readiness.ready) Text("De toestelcontroles zijn geslaagd. Een nieuwe geschikte OTA moet nog afzonderlijk worden vastgesteld.")
+                                        if (vm.device.securityPropertyMismatch) Text("Android-properties verschillen van de kernelbootgegevens. De app gebruikt de kernelgegevens voor de boottoestand en wijzigt je configuratie niet.", color = Color(0xFFFFD08A))
                                     }
                                 }
                                 1 -> {
                                     Panel {
                                         Text("Officiële updatebronnen", style = MaterialTheme.typography.titleLarge)
                                         Text("Motorola's eigen updater heeft voorrang. Er is geen bewezen publieke firmwarecatalogus voor dit toestel. Lokale metadata is een aanwijzing, geen actuele serveraanbieding.")
+                                        Text(vm.discovery.explanation, color = colors.primary)
                                         Button(onClick = { openOfficial(false) }, enabled = !vm.demo && !vm.busy) { Text("Open systeemupdates") }
                                         OutlinedButton(onClick = vm::download, enabled = vm.candidateAvailable && !vm.busy && !vm.demo) { Text("Download gevonden Motorola-pakket") }
                                         Text("Downloads starten alleen op jouw verzoek. Verlopen links, omleidingen en onbekende hosts worden geweigerd.", style = MaterialTheme.typography.bodySmall)
@@ -180,6 +184,12 @@ fun MotoApp(vm: MotoViewModel = viewModel()) {
                                         Detail("Systeemfingerprint", vm.device.fingerprint)
                                         Detail("Vendor-fingerprint", vm.device.vendorFingerprint)
                                         Detail("Virtual A/B", vm.device.virtualAb?.toString().orEmpty())
+                                        Detail("Boot succesvol gemarkeerd", vm.device.bootSuccessful?.toString().orEmpty())
+                                        Detail("Bootloader / Verified Boot", "${vm.device.bootloaderUnlocked?.let { if (it) "ontgrendeld" else "vergrendeld" } ?: "onbekend"} / ${vm.device.verifiedBootState}")
+                                        Detail("Beveiligingsbron", vm.device.securityEvidenceSource)
+                                        Detail("Gerapporteerde Android-property", vm.inspection?.properties?.get("ro.boot.verifiedbootstate").orEmpty())
+                                        if (vm.device.securityPropertyMismatch) Text("Kernelbootgegevens en Android-properties verschillen; dit bronverschil wordt niet als een nieuwe beveiligingswijziging verborgen.", color = Color(0xFFFFD08A))
+                                        vm.inspection?.snapshot?.evidence?.forEach { Text(it, style = MaterialTheme.typography.bodySmall) }
                                         Detail("Partities", vm.device.partitions.joinToString(", "))
                                         Detail("Modules", "${vm.device.modules.size} waargenomen; compatibiliteit niet bewezen")
                                         vm.inspection?.counters?.forEach { (key, value) -> Detail(key.substringAfterLast('.'), value) }
@@ -193,6 +203,7 @@ fun MotoApp(vm: MotoViewModel = viewModel()) {
                                             Text("Kandidaat ${index + 1}", fontWeight = FontWeight.Bold)
                                             Detail("Gzip → image", "${size(b.gzipBytes ?: -1)} → ${size(b.uncompressedBytes ?: -1)}")
                                             Text("SHA-256: ${b.sha256 ?: "onbekend"}", style = MaterialTheme.typography.bodySmall)
+                                            Detail("Stock-herkomst", if (b.provenanceVerified) "Exacte init_boot van de ondertekende OTA voor deze build; toesteltrustanchor gecontroleerd" else "niet bewezen")
                                             b.errors.forEach { Text("• $it") }
                                         }
                                     }
@@ -202,7 +213,7 @@ fun MotoApp(vm: MotoViewModel = viewModel()) {
                                         Button(onClick = { reportPicker.launch("moto-ota-diagnose.txt") }, enabled = !vm.busy) { Text("Exporteer diagnostisch rapport") }
                                         OutlinedButton(onClick = { vm.scan(false) }, enabled = !vm.busy) { Text("Controle zonder root") }
                                         OutlinedButton(onClick = vm::showDemo, enabled = !vm.busy) { Text("Bekijk veilige simulatie") }
-                                        Text("0.1.0-safe · handmatige toestelvalidatie vereist", style = MaterialTheme.typography.bodySmall)
+                                        Text("${BuildConfig.VERSION_NAME} · uitsluitend uitlezende toestelcontrole", style = MaterialTheme.typography.bodySmall)
                                     }
                                 }
                             }

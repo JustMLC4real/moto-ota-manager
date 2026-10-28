@@ -1,0 +1,33 @@
+{
+  "checkedAtUtc": "2026-10-28T22:10:11.646236+00:00",
+  "checks": {
+    "sixFirmwarePartitionHashesUnchanged": true,
+    "stockBackupGzipHashUnchanged": true,
+    "moduleInventoryAndEnableFlagsUnchanged": true,
+    "sameBootSessionNoPhoneReboot": true,
+    "magiskVersionCodeUnchanged": true,
+    "buildUnchanged": true,
+    "slotUnchanged": true,
+    "snapshotStateAndMotorolaPreferenceFilesUnchanged": true,
+    "kernelBootSecurityUnchanged": true,
+    "allFinalReadsSuccessful": true
+  },
+  "moduleCount": 12,
+  "partitionSha256Before": {
+    "boot_a": "06ebffcc1bd24b24e4c617cce6e44b2d80192a818d79a1c3e6c83d9110b20717",
+    "boot_b": "3d729cc0436162f60d4441c1667e71caf578510486fdbf2c7ddb2639ab9aafd4",
+    "init_boot_a": "2813c93926eae599bd3bd14c4e9e39b10bc3b2dd30134bff8fe594a3f8a67d29",
+    "init_boot_b": "ec99ff0bc4607b2d7a936f4654850e748963b3f25e625695d77c91fc1d4f89c1",
+    "vendor_boot_a": "28bfa24cee24aca01884869e734d4e047cab99125a87b6a4c712f7b7244f866a",
+    "vendor_boot_b": "8f2a2ab4bd99db90c79a890fc652dc1bbf452fec6e59c84ecd4309dc98217ec0"
+  },
+  "partitionSha256After": {
+    "boot_a": "06ebffcc1bd24b24e4c617cce6e44b2d80192a818d79a1c3e6c83d9110b20717",
+    "boot_b": "3d729cc0436162f60d4441c1667e71caf578510486fdbf2c7ddb2639ab9aafd4",
+    "init_boot_a": "2813c93926eae599bd3bd14c4e9e39b10bc3b2dd30134bff8fe594a3f8a67d29",
+    "init_boot_b": "ec99ff0bc4607b2d7a936f4654850e748963b3f25e625695d77c91fc1d4f89c1",
+    "vendor_boot_a": "28bfa24cee24aca01884869e734d4e047cab99125a87b6a4c712f7b7244f866a",
+    "vendor_boot_b": "8f2a2ab4bd99db90c79a890fc652dc1bbf452fec6e59c84ecd4309dc98217ec0"
+  },
+  "scope": "Hash checks cover the six named firmware partitions, stock backup, snapshot state and two updater prefs; module preservation covers inventory/enable flags. App/test APK installation and app-private test data are separate authorized validation artifacts. User granted app root policy manually."
+}

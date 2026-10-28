@@ -1,0 +1,18 @@
+{
+  "downloadRequest": {
+    "contentResource": "{\"proceed\":true,\"wifiUrl\":\"REDACTED\",\"cellUrl\":\"REDACTED\",\"adminApnUrl\":\"\",\"trackingId\":\"REDACTED\"}",
+    "wifiOnly": false,
+    "time": -1,
+    "size": 1853495,
+    "fileName": "REDACTED/payload_metadata.bin",
+    "hostName": "REDACTED",
+    "port": -1,
+    "disallowedNetworks": "REDACTED",
+    "backOffValues": "REDACTED",
+    "maxRetryCount": 2,
+    "upgradeSourceType": "upgrade",
+    "allowOnRoaming": false,
+    "maxDLSpeed": -1,
+    "startingOffset": 4744
+  }
+}

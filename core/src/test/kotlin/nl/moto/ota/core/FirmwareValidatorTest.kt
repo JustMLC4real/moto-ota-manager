@@ -1,6 +1,7 @@
 package nl.moto.ota.core
 
 import org.junit.Assert.*
+import org.junit.Assume.assumeTrue
 import org.junit.Test
 import java.io.File
 import java.nio.ByteBuffer
@@ -81,6 +82,104 @@ class FirmwareValidatorTest {
     @Test fun absoluteZipEntryIsRejected() = fixture(extraEntries = mapOf("/unsafe" to byteArrayOf(0))) { assertInvalid(it) }
     @Test fun duplicateMetadataKeysAreRejected() = fixture(rawMetadataSuffix = "\npre-device=other\n") { assertInvalid(it) }
 
+    @Test fun oemVendorMetadataAndSystemPayloadRemainSeparateAndBlocked() = oemFixture { report ->
+        assertTrue(report.structureValid); assertTrue(report.payloadHashValid)
+        assertIssue(report, "OEM_METADATA_REVIEW_REQUIRED")
+        assertEquals("TARGET_17", report.targetBuild)
+        assertEquals("17", report.targetAndroidVersion)
+        assertEquals(oemSystemTarget, report.targetFingerprint)
+        assertEquals(oemVendorSource, report.androidMetadataSourceFingerprint)
+        assertEquals(oemVendorTarget, report.androidMetadataTargetFingerprint)
+        assertEquals(oemSystemSource, report.payloadSourceFingerprint)
+        assertEquals(oemSystemTarget, report.payloadTargetFingerprint)
+        assertEquals(oemVendorTarget, report.metadata["post-build"])
+        assertFalse(report.signatureVerified)
+        assertFalse(report.copy(signatureVerified = true).readyForOfficialReview)
+    }
+
+    @Test fun installedOemSystemTargetIsNotMisreportedAsAndroid15Downgrade() = oemFixture(
+        observed = device.copy(androidVersion = "17", build = "TARGET_17", fingerprint = oemSystemTarget,
+            incrementalBuild = "target-system")) { report ->
+        assertIssue(report, "ALREADY_INSTALLED")
+        assertIssue(report, "OEM_METADATA_REVIEW_REQUIRED")
+        assertEquals("17", report.targetAndroidVersion)
+        assertFalse(report.issues.any { it.code == "ANDROID_ROLLBACK" })
+    }
+
+    @Test fun matchingPayloadPairDoesNotWeakenSourceIncrementalChecks() = fixture(
+        changes = mapOf("pre-build-incremental" to "another-source"),
+        propertyChanges = mapOf("SOURCE_FP" to sourceFp, "TARGET_FP" to targetFp)) {
+        assertIssue(it, "SOURCE_BUILD")
+    }
+
+    @Test fun matchingPayloadAndAndroidFingerprintsRetainExistingCompatibilityChecks() = fixture(
+        propertyChanges = mapOf("SOURCE_FP" to sourceFp, "TARGET_FP" to targetFp)) { report ->
+        assertTrue(report.compatible)
+        assertEquals(targetFp, report.targetFingerprint)
+        assertEquals(targetFp, report.payloadTargetFingerprint)
+        assertFalse(report.issues.any { it.code == "OEM_METADATA_REVIEW_REQUIRED" })
+        assertFalse(report.signatureVerified); assertFalse(report.readyForOfficialReview)
+    }
+
+    @Test fun payloadSystemSourceCannotAliasVendorMetadataSource() = oemFixture { report ->
+        assertIssue(report, "SOURCE_FINGERPRINT")
+        assertIssue(report, "SOURCE_BUILD")
+    }
+
+    @Test fun partialPayloadFingerprintPairDoesNotReplaceStandardTarget() = fixture(
+        propertyChanges = mapOf("SOURCE_FP" to sourceFp)) { report ->
+        assertIssue(report, "PAYLOAD_FINGERPRINTS_INVALID")
+        assertEquals(targetFp, report.targetFingerprint)
+        assertEquals("18", report.targetAndroidVersion)
+        assertEquals("", report.payloadTargetFingerprint)
+    }
+
+    @Test fun invalidPayloadFingerprintCannotBeExportedOrUsedAsTarget() {
+        listOf("https://example.invalid/ota?token=synthetic", targetFp.replace("/merc:", "/other:"),
+            targetFp.replace("release-keys", "test-keys"), targetFp.replace("motorola/", "other/"),
+            targetFp.replace(":18/", ":unknown/")).forEach { invalid ->
+            fixture(propertyChanges = mapOf("SOURCE_FP" to sourceFp, "TARGET_FP" to invalid)) { report ->
+                assertIssue(report, "PAYLOAD_FINGERPRINTS_INVALID")
+                assertEquals(targetFp, report.targetFingerprint)
+                assertEquals("", report.payloadTargetFingerprint)
+                assertFalse(report.payloadProperties.values.contains(invalid))
+            }
+        }
+    }
+
+    @Test fun standardMetadataCannotMasqueradeAsPayloadFingerprintProperties() = fixture(
+        changes = mapOf("SOURCE_FP" to sourceFp, "TARGET_FP" to targetFp)) { report ->
+        assertEquals("", report.payloadSourceFingerprint)
+        assertEquals("", report.payloadTargetFingerprint)
+        assertTrue(report.payloadProperties.isEmpty())
+    }
+
+    /** Explicit opt-in; reads the host file only and does not bundle or modify firmware. */
+    @Test fun observedHistoricalPackageIsCorrectlyDiagnosedWhenExplicitlyProvided() {
+        val path = System.getenv("MOTO_OTA_PATH").orEmpty()
+        assumeTrue("Set MOTO_OTA_PATH to opt in to the retained historical-package check.", path.isNotBlank())
+        val file = File(path)
+        assertTrue("The explicit historical-package input is not a readable file.", file.isFile && file.canRead())
+        val current = device.copy(androidVersion = "17", build = "A171WMH.44-25",
+            incrementalBuild = "0347f0-d290bf",
+            fingerprint = "motorola/merc_g_syseq/merc:17/A171WMH.44-25/0347f0-d290bf:user/release-keys")
+        val report = FirmwareValidator.inspect(file, current)
+        assertTrue(report.structureValid); assertTrue(report.payloadHashValid)
+        assertEquals(3_417_373_748L, report.packageBytes)
+        assertEquals("7b548666bfb8ca2ef8a65026f449af35b87354a8b098424fda52c434d0502c90", report.sha256)
+        assertEquals("A171WMH.44-25", report.targetBuild)
+        assertEquals("17", report.targetAndroidVersion)
+        assertTrue(report.androidMetadataTargetFingerprint.contains("merc_g_vext/merc:15/"))
+        assertTrue(report.payloadTargetFingerprint.contains("merc_g_sys/merc:17/"))
+        assertEquals(report.payloadTargetFingerprint, report.targetFingerprint)
+        assertIssue(report, "OEM_METADATA_REVIEW_REQUIRED")
+        assertIssue(report, "ALREADY_INSTALLED")
+        assertFalse(report.issues.any { it.code == "ANDROID_ROLLBACK" })
+        // Whole-file signature verification is performed separately against the actual device keys.
+        assertFalse(report.signatureVerified); assertFalse(report.readyForOfficialReview)
+        println("Retained OTA: structure=true; payloadHash=true; targetAndroid=17; alreadyInstalled=true; OEM review required; compatible=false")
+    }
+
     @Test fun nonZipInputIsRejectedWithoutException() {
         val file = File.createTempFile("ota-notzip-", ".zip")
         try { file.writeText("not a ZIP"); assertInvalid(FirmwareValidator.inspect(file, device)) } finally { file.delete() }
@@ -117,6 +216,22 @@ class FirmwareValidatorTest {
 
     private fun b64(bytes: ByteArray) = Base64.getEncoder().encodeToString(bytes)
     private fun sha(bytes: ByteArray) = MessageDigest.getInstance("SHA-256").digest(bytes)
+
+    // Synthetic payload bytes plus the observed vendor-15/system-16-to-17 relationship.
+    // No proprietary firmware bytes or signed download links are included in these fixtures.
+    private val oemVendorSource = "motorola/merc_g_vext/merc:15/SOURCE_16/source:user/release-keys"
+    private val oemVendorTarget = "motorola/merc_g_vext/merc:15/TARGET_17/target:user/release-keys"
+    private val oemSystemSource = "motorola/merc_g_sys/merc:16/SOURCE_16/source-system:user/release-keys"
+    private val oemSystemTarget = "motorola/merc_g_sys/merc:17/TARGET_17/target-system:user/release-keys"
+
+    private fun oemFixture(
+        observed: DeviceState = device.copy(androidVersion = "16", build = "SOURCE_16",
+            fingerprint = oemSystemSource, incrementalBuild = "source-system"),
+        assertion: (FirmwareReport) -> Unit
+    ) = fixture(observed = observed, changes = mapOf("pre-build" to oemVendorSource,
+        "pre-build-incremental" to "source", "post-build" to oemVendorTarget,
+        "post-build-incremental" to "target", "post-sdk-level" to "35"),
+        propertyChanges = mapOf("SOURCE_FP" to oemSystemSource, "TARGET_FP" to oemSystemTarget), assertion = assertion)
 
     private fun fixture(
         changes: Map<String, String> = emptyMap(), remove: Set<String> = emptySet(), observed: DeviceState = device,

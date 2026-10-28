@@ -1,0 +1,116 @@
+{
+  "zip_size": 3417373748,
+  "zip_sha256": "7b548666bfb8ca2ef8a65026f449af35b87354a8b098424fda52c434d0502c90",
+  "has_required_entries": true,
+  "payload_header": {
+    "major": 2,
+    "manifest_size": 1852948,
+    "metadata_signature_size": 523
+  },
+  "metadata_hash_matches": true,
+  "metadata_size_matches": true,
+  "block_size": 4096,
+  "minor_version": 9,
+  "actual_payload_size": 3417360736,
+  "payload_size_matches": true,
+  "actual_payload_sha256": "94b294284ee22524e25dff332ea5b70a95bb1ee39ca5c2d7703e67eb5be09b96",
+  "payload_file_hash_matches": true,
+  "payload_zip_compression_method": 0,
+  "payload_zip_data_offset": 4744,
+  "payload_metadata_with_signatures_size": 1853495,
+  "payload_metadata_with_signatures_sha256": "b57a21a1817f1aa02cfc828b2b3b32ead0dcfb33f08a6def770438393cfe257f",
+  "payload_properties": {
+    "SOURCE_FP": "motorola/merc_g_sys/merc:16/W3WMS36.40-75-5-2/defc86-b0137:user/release-keys",
+    "TARGET_FP": "motorola/merc_g_sys/merc:17/A171WMH.44-25/0347f0-d290bf:user/release-keys",
+    "FILE_SIZE": "3417360736",
+    "FILE_HASH": "lLKUKE7iJSTiXf8zLqW3CpW7HuOcpcLXcD5n61vgm5Y=",
+    "METADATA_SIZE": "1852972",
+    "METADATA_HASH": "TuYZamKxKOdFGm86EBQ99IUmFSeaTA+s6diHUyarXRQ="
+  },
+  "android_metadata": {
+    "ota-type": "AB",
+    "pre-device": "merc",
+    "pre-build": "motorola/merc_g_vext/merc:15/W3WMS36.40-75-5-2/defc86:user/release-keys",
+    "post-build": "motorola/merc_g_vext/merc:15/A171WMH.44-25/0347f0:user/release-keys",
+    "pre-build-incremental": "defc86",
+    "post-build-incremental": "0347f0",
+    "post-sdk-level": "35",
+    "post-security-patch-level": "2026-09-01"
+  },
+  "init_boot": [
+    {
+      "name": "init_boot",
+      "old_info": {
+        "size": 8388608,
+        "sha256": "2813c93926eae599bd3bd14c4e9e39b10bc3b2dd30134bff8fe594a3f8a67d29"
+      },
+      "new_info": {
+        "size": 8388608,
+        "sha256": "9972073a2fdc3bd63ea3b33b3e26ec39f78ddea82ed3be274acc086a88c7c5ea"
+      },
+      "operations": [
+        {
+          "index": 0,
+          "type": 10,
+          "source_extents": [
+            {
+              "start_block": 0,
+              "num_blocks": 1
+            },
+            {
+              "start_block": 756,
+              "num_blocks": 1
+            },
+            {
+              "start_block": 2047,
+              "num_blocks": 1
+            }
+          ],
+          "expected_source_sha256": "056ece9d539c096dd62121a1685a4c3d09b4a49a1e879ca264e4a71a7f36a00a",
+          "stock_source_extents_sha256": "056ece9d539c096dd62121a1685a4c3d09b4a49a1e879ca264e4a71a7f36a00a",
+          "source_hash_matches": true
+        },
+        {
+          "index": 1,
+          "type": 10,
+          "source_extents": [
+            {
+              "start_block": 1,
+              "num_blocks": 755
+            }
+          ],
+          "expected_source_sha256": "cd53a44d09052149b93f8a44e7ae4f4861a43ad0634e8c148bcb700422f563bb",
+          "stock_source_extents_sha256": "cd53a44d09052149b93f8a44e7ae4f4861a43ad0634e8c148bcb700422f563bb",
+          "source_hash_matches": true
+        },
+        {
+          "index": 2,
+          "type": 6,
+          "source_extents": [],
+          "expected_source_sha256": "",
+          "stock_source_extents_sha256": null,
+          "source_hash_matches": null
+        },
+        {
+          "index": 3,
+          "type": 6,
+          "source_extents": [],
+          "expected_source_sha256": "",
+          "stock_source_extents_sha256": null,
+          "source_hash_matches": null
+        },
+        {
+          "index": 4,
+          "type": 6,
+          "source_extents": [],
+          "expected_source_sha256": "",
+          "stock_source_extents_sha256": null,
+          "source_hash_matches": null
+        }
+      ],
+      "local_stock_old_info_match": true
+    }
+  ],
+  "candidate_kind": "HISTORICAL_INSTALLED_OTA_WITH_RETAINED_METADATA_RANGE",
+  "compatibility": "BLOCKED_ALREADY_INSTALLED_AND_OEM_METADATA_REVIEW_REQUIRED"
+}

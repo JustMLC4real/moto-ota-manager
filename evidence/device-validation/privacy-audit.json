@@ -1,0 +1,7 @@
+{
+  "filesScanned": 156,
+  "privateReferenceValuesChecked": 4,
+  "privateReferenceMatches": 0,
+  "matchedFiles": [],
+  "scope": "Actual ADB serial, retained private signed download URLs, selected secret/token/identifier fields and 15-digit candidates; no private values are published."
+}

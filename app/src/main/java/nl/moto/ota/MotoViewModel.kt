@@ -28,7 +28,9 @@ class MotoViewModel(application: Application) : AndroidViewModel(application) {
     var demo by mutableStateOf(false); private set
     var verificationProgress by mutableStateOf<Int?>(null); private set
     val readiness get() = Readiness.evaluate(device, backup, firmware?.packageBytes ?: 0)
-    val discovery get() = FirmwareDiscovery.assess(DiscoveryEvidence(localDownloadUrl = inspection?.otaWifiUrl), device.build)
+    val discovery get() = inspection?.otaMetadata.let { metadata -> FirmwareDiscovery.assess(
+        DiscoveryEvidence(localDownloadUrl = metadata?.downloadUrl, localTargetBuild = metadata?.targetBuild.orEmpty(),
+            localContentKind = metadata?.contentKind ?: LocalContentKind.UNKNOWN, localMetadataObserved = metadata?.observed == true), device.build) }
     val candidateAvailable get() = discovery.canDownloadCandidate
     val report get() = Privacy.diagnosticReport(device, inspection?.probes.orEmpty().mapValues { (_, value) ->
         when { value.timedOut -> "TIMEOUT"; value.truncated -> "TRUNCATED"; value.successful -> "OK"; else -> "UNAVAILABLE" }
@@ -57,6 +59,7 @@ class MotoViewModel(application: Application) : AndroidViewModel(application) {
             firmware = null
             backup = null
         }
+        observed.backupInventory.firstOrNull { it.provenanceVerified }?.validation?.let { backup = it }
         workflow = Workflow.reconcile(store.load(), device)
         withContext(Dispatchers.IO) { store.save(workflow) }
         message = if (root && !device.rootGranted) "Geen roottoegang. Verleen deze app vooraf toegang in Magisk → Superuser en probeer opnieuw." else "Controle voltooid. Onbekende of onbewezen gegevens blokkeren updatevoorbereiding."

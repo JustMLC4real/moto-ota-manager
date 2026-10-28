@@ -1,0 +1,100 @@
+{
+  "validationDate": "2026-10-28",
+  "device": {
+    "ro.product.manufacturer": "motorola",
+    "ro.boot.hardware.sku": "XT2607-1",
+    "ro.product.device": "merc",
+    "ro.carrier": "reteu",
+    "ro.build.version.release": "17",
+    "ro.build.version.sdk": "37",
+    "ro.build.id": "A171WMH.44-25",
+    "ro.build.version.incremental": "0347f0-d290bf",
+    "ro.build.version.security_patch": "2026-09-01",
+    "ro.build.fingerprint": "motorola/merc_g_syseq/merc:17/A171WMH.44-25/0347f0-d290bf:user/release-keys",
+    "ro.boot.slot_suffix": "_b"
+  },
+  "root": {
+    "uid": 0,
+    "magiskVersion": "31.1",
+    "magiskVersionCode": 31100,
+    "installedApkSha256": "89cefac0a318afa39fb3880c45c87b036c05bc1ebf02a7a715b7f8d7c26ac6e7",
+    "officialReleaseApkSha256": "89cefac0a318afa39fb3880c45c87b036c05bc1ebf02a7a715b7f8d7c26ac6e7"
+  },
+  "securityProperties": {
+    "ro.boot.verifiedbootstate": "green",
+    "ro.boot.vbmeta.device_state": "locked",
+    "ro.boot.flash.locked": "1"
+  },
+  "kernelBootconfig": {
+    "vbmeta.device_state": "unlocked",
+    "verifiedbootstate": "orange",
+    "slot_suffix": "_b"
+  },
+  "securityPropertyMismatch": true,
+  "snapshotStateFile": {
+    "exists": true,
+    "bytes": 0,
+    "readConsistently": true,
+    "protobufDefaultState": "NONE",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "snapshotDirectoryEmpty": true,
+  "miscBootControl": {
+    "version": 1,
+    "slotCount": 2,
+    "crc32Valid": true,
+    "slots": [
+      {
+        "slot": "_a",
+        "priority": 7,
+        "triesRemaining": 0,
+        "successfulBoot": false,
+        "verityCorrupted": false
+      },
+      {
+        "slot": "_b",
+        "priority": 15,
+        "triesRemaining": 1,
+        "successfulBoot": true,
+        "verityCorrupted": false
+      }
+    ]
+  },
+  "miscVirtualAb": {
+    "version": 2,
+    "rawMergeStatusCode": 0,
+    "rawMergeStatus": "NONE",
+    "sourceSlot": 1
+  },
+  "engineCallback": {
+    "schema": 1,
+    "status": "IDLE",
+    "statusCode": 0,
+    "percent": 0.0,
+    "completionCode": null,
+    "source": "UpdateEngine.bind(callback)",
+    "reason": ""
+  },
+  "engineProbeProcess": {
+    "exitCode": 0,
+    "timedOut": false,
+    "truncated": false,
+    "elapsedSeconds": 0.314
+  },
+  "stockBackup": {
+    "compressedBytes": 2412155,
+    "bytes": 8388608,
+    "sha256": "9972073a2fdc3bd63ea3b33b3e26ec39f78ddea82ed3be274acc086a88c7c5ea",
+    "sha1": "da444102f5a0e669ca3db7ba1de6a6c839b65f41",
+    "header": {
+      "magic": "ANDROID!",
+      "kernel_size": 0,
+      "ramdisk_size": 2739212,
+      "header_size": 1584,
+      "header_version": 4
+    },
+    "currentMagiskConfigSha1": "da444102f5a0e669ca3db7ba1de6a6c839b65f41",
+    "signedOtaTargetInitBootSha256": "9972073a2fdc3bd63ea3b33b3e26ec39f78ddea82ed3be274acc086a88c7c5ea"
+  },
+  "scope": "Forensic state observations only; final app instrumentation and APK build results are documented separately."
+}

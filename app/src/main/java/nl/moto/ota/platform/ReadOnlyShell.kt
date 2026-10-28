@@ -10,13 +10,17 @@ internal data class BinaryResult(val bytes: ByteArray, val result: ProbeResult)
 /** Only enum commands and strictly validated Magisk backup identifiers can reach the process API. */
 class ReadOnlyShell {
     fun run(probe: ReadOnlyProbe): ProbeResult = execute(
-        if (probe.requiresRoot) listOf("su", "-c", probe.command) else listOf("/system/bin/sh", "-c", probe.command),
+        if (probe.requiresRoot) {
+            if (probe.globalMountNamespace) listOf("su", "--target", "0", "-c", probe.command)
+            else listOf("su", "-c", probe.command)
+        } else listOf("/system/bin/sh", "-c", probe.command),
         probe.timeoutMillis, 1_048_576
     ).let { binary -> binary.result.copy(stdout = binary.bytes.toString(Charsets.UTF_8)) }
 
-    fun property(name: String): ProbeResult {
+    fun property(name: String, asRoot: Boolean = false): ProbeResult {
         require(name in PROPERTY_NAMES) { "Property outside allowlist" }
-        return execute(listOf("/system/bin/getprop", name), 2_000, 8_192)
+        val arguments = if (asRoot) listOf("su", "-c", "/system/bin/getprop $name") else listOf("/system/bin/getprop", name)
+        return execute(arguments, 2_000, 8_192)
             .let { it.result.copy(stdout = it.bytes.toString(Charsets.UTF_8).trim()) }
     }
 
@@ -24,6 +28,25 @@ class ReadOnlyShell {
         require(Regex("magisk_backup_[a-fA-F0-9]{40}").matches(directoryId)) { "Invalid backup directory" }
         // No shell metacharacters, path separators, spaces or user-selected paths are accepted.
         return execute(listOf("su", "-c", "cat /data/$directoryId/boot.img.gz"), 10_000, 16 * 1_048_576)
+    }
+
+    /** The only dynamic value is the OS-supplied path of this installed APK. */
+    internal fun engineCallback(apkPath: String): ProbeResult {
+        require(apkPath.matches(Regex("/data/app/[A-Za-z0-9/._~=+\\-]+/base[.]apk"))) { "Unexpected installed APK path" }
+        val command = "CLASSPATH='$apkPath' /system/bin/app_process /system/bin nl.moto.ota.rootprobe.EngineProbe"
+        return execute(listOf("su", "-c", command), 8_000, 65_536).let {
+            it.result.copy(stdout = it.bytes.toString(Charsets.UTF_8))
+        }
+    }
+
+    /** Explicit diagnostic of an existing updater-owned ZIP. No staging or applying. */
+    internal fun firmwareSignature(apkPath: String, packagePath: String): ProbeResult {
+        require(apkPath.matches(Regex("/data/app/[A-Za-z0-9/._~=+\\-]+/base[.]apk"))) { "Unexpected installed APK path" }
+        require(packagePath.matches(Regex("/(?:sdcard|storage/emulated/0)/Android/data/com[.]motorola[.]ccc[.]ota/files/[A-Za-z0-9_.-]+[.]zip"))) { "Unexpected updater package path" }
+        val command = "CLASSPATH='$apkPath' /system/bin/app_process /system/bin nl.moto.ota.rootprobe.FirmwareSignatureProbe '$packagePath'"
+        return execute(listOf("su", "--target", "0", "-c", command), 190_000, 65_536).let {
+            it.result.copy(stdout = it.bytes.toString(Charsets.UTF_8))
+        }
     }
 
     private fun execute(arguments: List<String>, timeoutMillis: Long, outputLimit: Int): BinaryResult {

@@ -1,16 +1,16 @@
-# Roadmap na de veilige uitlezende release
+# Roadmap na 0.2.0-safe
 
-## 1. Het echte toestel kwalificeren
+## 1. De bevestigde uitleespaden blijven kwalificeren
 
-Verzamel met deze app een lokaal rapport voor `XT2607-1 / merc / reteu` en voer [de handmatige checklist](MANUAL-TESTS.md) uit. Leg de exacte properties, bootctl/HAL-versie, snapshotdump, Magisk 31.1 daemoncode en de geïnstalleerde Motorola-updater-versie vast. Verwijder onbekende statusblokkades alleen op basis van een betrouwbare uitleesbron.
+De [toestelvalidatie](DEVICE-VALIDATION.md) bevestigt uitlezende metingen voor `XT2607-1 / merc / reteu`, Android 17, build `A171WMH.44-25`, slot `_b` en Magisk `31100`. Ontbrekende commandotools zijn op dit toestel opgevangen met begrensde AOSP-metadata en een actuele rootcallback. Herhaal [de handmatige checklist](MANUAL-TESTS.md) bij nieuwe firmware, helperwijzigingen en root-/OEM-versies. Bewaar bronconflicten en verwijder onbekende statusblokkades alleen met nieuw uitleesbewijs. Het [buildrapport](BUILD-REPORT.md) houdt APK- en instrumentatieresultaten gescheiden van de forensische metingen.
 
-## 2. Huidige stock-image aantoonbaar koppelen
+## 2. De geauditeerde stockcatalogus gecontroleerd uitbreiden
 
-Verkrijg een officiële image van exact de huidige build met controleerbare herkomst. Vergelijk die met de uitgepakte Magisk-back-up, type, omvang en SHA-256. Bewaar een lokaal provenance-record met toestelprofiel, volledige buildidentiteit, partitietype, hash, gemeten partitiegrootte en bron. Een dergelijke registratie heeft alleen waarde wanneer de bron zelf authentiek is; een door de gebruiker ingetypte buildnaam is geen attestatie.
+De huidige stock17-back-up is inhoudelijk gekoppeld aan het manifest van de onafhankelijk geauthenticeerde historische OTA. De ingebouwde catalogus vereist het exacte gemeten profiel, de build, de fingerprint en de passende toestel-OTA-sleutel. Voeg een toekomstige referentie pas toe na dezelfde onafhankelijke authenticiteitscontrole en volledige imagevergelijking. Bewaar omvang, SHA-256, partitietype, bronbewijs en meetprofiel; neem de imagebytes niet als testfixture op. Een geïmporteerd JSON-record of ingetypte buildnaam mag geen vertrouwensbron worden.
 
 ## 3. Motorola-integratie bewijzen
 
-Onderzoek de lokaal geïnstalleerde APK en geëxporteerde componenten uitsluitend met toegestane, uitlezende middelen. Zoek een gedocumenteerd OEM-contract of laat een gecontroleerd eigen testtoestel aantonen welke interface werkt. Versiescope, authenticiteit, timeouts en foutgedrag moeten worden vastgelegd. Een private preferencesleutel of één succesvolle handmatige ZIP-import rechtvaardigt nog geen algemene installatiefunctie.
+Het openen van de officiële updater is nu begrensd tot een ingeschakelde geëxporteerde Motorola-systeemactivity met positieve resolverprioriteit en een expliciet component. Dit bewijst geen discovery- of installatiecontract. Onderzoek toekomstige OEM-contracten uitsluitend met toegestane middelen en leg versiescope, authenticiteit, timeouts en foutgedrag vast. De huidige private downloadmetadata hoort bij de al geïnstalleerde OTA; zij rechtvaardigt geen nieuwe updateclaim of algemene installatiefunctie.
 
 ## 4. Begeleiding versterken
 
@@ -26,7 +26,7 @@ Voeg pas na onafhankelijke review, versiegebonden integratiebewijs, herstelstrat
 
 ## 7. Android 18 en nieuwe Magisk-versies
 
-Voeg Android 18 eerst toe als onbekend platform met uitlezende tests. Controleer SDK/API-wijzigingen, init_boot/kernelvoorwaarden, OTA-manifest en antirollback, Boot Control HAL, snapshotformaat, rootbeleid, Magisk-back-ups en Motorola-updatercomponenten opnieuw. Test migratie van opgeslagen sessies en nieuwe enumwaarden. De bestaande defaults moeten blijven blokkeren totdat bewijs is toegevoegd.
+Android 18 is ongetest en moet eerst als onbekend platform met uitlezende tests worden onderzocht. Controleer SDK/API-wijzigingen, de versiegebonden enginecallback, init_boot/kernelvoorwaarden, OTA-manifest en antirollback, Boot Control HAL, snapshotformaat, rootbeleid, Magisk-back-ups en Motorola-updatercomponenten opnieuw. Test migratie van opgeslagen sessies en nieuwe enumwaarden. De bestaande defaults en stockcatalogus mogen geen ondersteuning suggereren totdat nieuw bewijs is toegevoegd.
 
 ## Releasecriteria
 

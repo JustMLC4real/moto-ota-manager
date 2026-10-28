@@ -45,6 +45,12 @@ De tests toetsen ook onbekende toekomstige Magisk-versies, onbekende snapshot-en
 
 ## Wat deze suite bewust niet bewijst
 
+### Aanvulling: daadwerkelijke 0.2.0-toesteltests
+
+Op de aangesloten XT2607-1 zijn vier opt-in tests uit `ReadOnlyDeviceValidationTest` geslaagd: `realDiagnosticsMatchTheIndependentReadOnlyBaseline`, `cachedMotorolaMetadataDoesNotOfferTheInstalledUpdateAgain`, `actualBackupMatchesTheAuthenticatedStockAndUpdaterResolvesExplicitly` en `existingHistoricalOtaPassesTheActualPlatformSignatureVerifier`. Zij meten echte root, bootmetadata, snapshots, callbacks, trustanchor, back-up, Motorola-cache en positieve Android-signatureverificatie; geen mockwaarden of schrijfacties. De drie `SafeUiTest`-gevallen slagen ook op dit toestel.
+
+Daarnaast is `FirmwareValidatorTest.observedHistoricalPackageIsCorrectlyDiagnosedWhenExplicitlyProvided` op de host uitgevoerd met de echte bestaande 3,42 GB-ZIP. In CI zonder expliciete `MOTO_OTA_PATH` is dit opt-in-geval overgeslagen. De live toestelklasse vereist eveneens expliciete autorisatie via het runnerargument; zij draait niet automatisch op een andere telefoon. [Alle actuele aantallen en logbestanden](BUILD-REPORT.md).
+
 - Werkelijke Motorola-serveraanbiedingen, gefaseerde uitrol of de oorzaak van `ALREADY_UP_TO_DATE`.
 - De betrouwbaarheid van een interne Motorola-map als toekomstige installatie-interface.
 - Werkelijk herstel van een stockimage of Magisk-patching in een andere slot.
