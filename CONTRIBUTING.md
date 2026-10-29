@@ -1,6 +1,6 @@
 # Ontwikkelen
 
-Gebruik JDK 17 en de meegeleverde Gradle Wrapper. Voer de taken uit de README uit vóór een wijzigingsvoorstel. Pure beslisregels horen in `core`; toestelinteracties staan uitsluitend in `app/platform`. Voeg regressietests toe voor echte fouten in compatibiliteit, vertrouwen, parsing of herstelgedrag.
+Gebruik JDK 17 en de meegeleverde Gradle Wrapper. Voer de taken uit de README uit vóór een wijzigingsvoorstel. Pure beslisregels horen in `core`; toestelinteracties staan in de platform- en rootprobeonderdelen van `app`. Voeg regressietests toe voor echte fouten in compatibiliteit, vertrouwen, parsing of herstelgedrag.
 
 Gebruik bij apparaatinteracties standaard mocks of een emulator. Voer geen firmware-, partitie-, slot- of rebootactie uit op een fysiek toestel als onderdeel van deze tests. Houd simulatie gescheiden van echte observaties en van het persistente journaal.
 

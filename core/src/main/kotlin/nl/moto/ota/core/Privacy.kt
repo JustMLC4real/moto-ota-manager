@@ -3,7 +3,7 @@ package nl.moto.ota.core
 /** Export a small allowlist; root stdout, module names, file names and URL paths are never exported. */
 object Privacy {
     fun diagnosticReport(device: DeviceState, probeStatus: Map<String, String>, backupCount: Int, workflow: String): String = buildString {
-        appendLine("Moto OTA Manager 0.2.0-safe — lokaal rapport")
+        appendLine("Moto OTA Manager 0.3.0 — lokaal rapport")
         appendLine("Bron: " + if (device.simulated) "SIMULATIE" else "toestelobservatie")
         appendLine("Model: ${safe(device.model)} / ${safe(device.device)} / ${safe(device.channel)}")
         appendLine("Android: ${safe(device.androidVersion)}; build: ${safe(device.build)}; patch: ${safe(device.securityPatch)}")

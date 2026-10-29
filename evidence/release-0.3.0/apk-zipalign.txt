@@ -1,0 +1,3 @@
+17917636 lib/arm64-v8a/libmoto_stage_publish.so (OK - compressed)
+17922158 lib/x86_64/libmoto_stage_publish.so (OK - compressed)
+Verification succesful

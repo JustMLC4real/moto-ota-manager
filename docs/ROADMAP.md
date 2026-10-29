@@ -1,33 +1,39 @@
-# Roadmap na 0.2.0-safe
+# Roadmap na 0.3.0
 
-## 1. De bevestigde uitleespaden blijven kwalificeren
+De broncode bevat opt-in WorkManager-monitoring, hervatbare expliciete downloads, private pakketpinning en stockbewijs, een bewaakt stockherstelcontract, een duurzame begeleide workflow, een bestandssandbox en apart bevestigde Motorola-staging met native publicatie. Dit zijn geen toekomstige placeholders. Uitgevoerde tests staan uitsluitend in [BUILD-REPORT.md](BUILD-REPORT.md) en [TEST-MATRIX.md](TEST-MATRIX.md).
 
-De [toestelvalidatie](DEVICE-VALIDATION.md) bevestigt uitlezende metingen voor `XT2607-1 / merc / reteu`, Android 17, build `A171WMH.44-25`, slot `_b` en Magisk `31100`. Ontbrekende commandotools zijn op dit toestel opgevangen met begrensde AOSP-metadata en een actuele rootcallback. Herhaal [de handmatige checklist](MANUAL-TESTS.md) bij nieuwe firmware, helperwijzigingen en root-/OEM-versies. Bewaar bronconflicten en verwijder onbekende statusblokkades alleen met nieuw uitleesbewijs. Het [buildrapport](BUILD-REPORT.md) houdt APK- en instrumentatieresultaten gescheiden van de forensische metingen.
+## Nieuwe functies op het werkelijke profiel kwalificeren
 
-## 2. De geauditeerde stockcatalogus gecontroleerd uitbreiden
+Houd het uitlezende 0.2.0-bewijs in [DEVICE-VALIDATION.md](DEVICE-VALIDATION.md) gescheiden van nieuwe functies. De huidige fase voert geen ADB-acties op de telefoon uit. Een latere hardwarefase begint pas met afzonderlijk toegestane uitlezende validatie van de nieuwe APK, roottoekenning, actuele build, engine, snapshots, certificaten en private mappen. Echte schrijfacties vragen daarnaast een concreet herstelplan en eigen toestemming; een emulatorresultaat autoriseert die fase niet.
 
-De huidige stock17-back-up is inhoudelijk gekoppeld aan het manifest van de onafhankelijk geauthenticeerde historische OTA. De ingebouwde catalogus vereist het exacte gemeten profiel, de build, de fingerprint en de passende toestel-OTA-sleutel. Voeg een toekomstige referentie pas toe na dezelfde onafhankelijke authenticiteitscontrole en volledige imagevergelijking. Bewaar omvang, SHA-256, partitietype, bronbewijs en meetprofiel; neem de imagebytes niet als testfixture op. Een geïmporteerd JSON-record of ingetypte buildnaam mag geen vertrouwensbron worden.
+Kwalificeer stockherstel en staging afzonderlijk. Bewijs voor herstel de volledige gepatchte back-up, fsync, tijdsgrenzen, interruptie, writerlock en readback. Onderzoek voor staging de echte gebruikers-0-namespace, FUSE-mount, native bibliotheek, `RENAME_NOREPLACE`, directory-fsync en Motorola's reactie. Behoud vóór iedere lokale publicatie de eis van ondertekend `motorola-channel`/`pre-channel` exact `reteu` én `report.regionVerified`. Onbekend kanaal blijft `STAGING_CHANNEL_UNPROVEN`, ook als de ZIP-handtekening geldig is. Ontbrekende ondersteuning blijft een verklaarbare blokkade.
 
-## 3. Motorola-integratie bewijzen
+## Motorola-aanbod en mapgedrag onderbouwen
 
-Het openen van de officiële updater is nu begrensd tot een ingeschakelde geëxporteerde Motorola-systeemactivity met positieve resolverprioriteit en een expliciet component. Dit bewijst geen discovery- of installatiecontract. Onderzoek toekomstige OEM-contracten uitsluitend met toegestane middelen en leg versiescope, authenticiteit, timeouts en foutgedrag vast. De huidige private downloadmetadata hoort bij de al geïnstalleerde OTA; zij rechtvaardigt geen nieuwe updateclaim of algemene installatiefunctie.
+Er is geen publiek stabiel servercontract aangetoond voor toestelgeschikte OTA-detectie. Houd cachewaarneming, extern releasebericht, downloadreferentie en werkelijk OEM-aanbod uit elkaar. Een nieuwe provider vereist aangetoonde authenticiteit, profiel-/regiobinding, uitrolstatus, versiescope en foutgedrag. Zonder die bron belooft de monitor geen actuele beschikbaarheid.
 
-## 4. Begeleiding versterken
+Leg voor staging vast of, wanneer en bij welke OEM-versie de updater een gepubliceerd bestand ziet, verplaatst, weigert of verwerkt. Maak daarvan geen algemene Android-import-API en publiceer geen pakket met onbekende regio om Motorola de geschiktheid achteraf te laten bepalen. Host, cache en transferreceipt zijn geen kanaalprovenance. Zonder ondertekend kanaalbewijs blijft de normale officiële aanbodroute de fallback; lokale import, download en inspectie blijven beschikbaar. Onderzoek een eventueel gedocumenteerd OEM-contract als alternatief voor het interne mappad.
 
-Verbeter onafhankelijke detectie van werkelijk afgeronde stappen: imagecorrespondentie, update-engine gereed voor reboot, juiste voorbereide slot, nieuwe buildboot, rootterugkeer en mergeafronding. Handmatige bevestigingen blijven aantekeningen. Ontbreekt een betrouwbaar extern Magisk-resultaat, houd de stap begeleid en toon de onzekerheid expliciet.
+## Magisk-bewijs aan het authentieke doel binden
 
-## 5. Downloads en meldingen
+De productieflow gebruikt de officiële Magisk-app en onderscheidt handmatige melding van gemeten root na boot. Een toekomstige onafhankelijke imagecontrole moet de gelezen doelslot, volledige bytes, gebruikte Magisk-tool en embedded stockhash aan de authentieke stockimage van de doelbuild koppelen. Twee gelijk ingevulde hashvelden volstaan niet. Houd de stap handmatig zolang die producent/herkomstketen ontbreekt; interne Magisk-installerfuncties zijn geen vervangend publiek contract.
 
-Een toekomstige achtergrondcontrole kan alleen een bewezen, geschikte officiële bron gebruiken. Notificeer op een nieuwe bevestigde kandidaat, geen oude URL of generieke indexmelding. Geef onbetrouwbare of externe meldingen hun eigen bewijsniveau. Achtergrondwerk mag geen update installeren, batterij-/netwerkkeuze overrulen of gevoelige diagnostiek uploaden.
+## Bewijsopslag en migraties blijven testen
 
-## 6. Eventuele schrijffuncties als apart veiligheidsproject
+Test migratie van monitorinstellingen, downloadjournal, Keystore-geheimen, Vault-feiten, workflows en consumptiemarkers. Corruptie, ingetrokken sleutels, lege bestanden, volle opslag en procesonderbreking moeten onbekend, pauze of expliciete herstelbeoordeling opleveren. Appstart herhaalt geen partitieschrijf- of stagingopdracht.
 
-Voeg pas na onafhankelijke review, versiegebonden integratiebewijs, herstelstrategie, hardwaretests en expliciete gebruikerstoestemming een muterende adapter toe. Houd die adapter gescheiden van de leeslaag. Vereis alle voorafcontroles en vlak vóór de write nieuwe waarnemingen; verifieer daarna echte bytes en systeemstatus. Hergebruik een gesimuleerde geslaagde workflow nooit als toestelautorisatie.
+Breid de stockcatalogus alleen uit na onafhankelijke OTA-authenticatie en volledige inhoudsvergelijking. Bewaar hash, omvang, type, bronbewijs en exact meetprofiel. Gebruikersmanifesten en verzonnen fingerprintaliases mogen de vertrouwensbasis niet uitbreiden.
 
-## 7. Android 18 en nieuwe Magisk-versies
+## Achtergrondgedrag en opslag volgen
 
-Android 18 is ongetest en moet eerst als onbekend platform met uitlezende tests worden onderzocht. Controleer SDK/API-wijzigingen, de versiegebonden enginecallback, init_boot/kernelvoorwaarden, OTA-manifest en antirollback, Boot Control HAL, snapshotformaat, rootbeleid, Magisk-back-ups en Motorola-updatercomponenten opnieuw. Test migratie van opgeslagen sessies en nieuwe enumwaarden. De bestaande defaults en stockcatalogus mogen geen ondersteuning suggereren totdat nieuw bewijs is toegevoegd.
+Onderzoek hoe Motorola-energiebeheer periodiek werk en foregrounddownloads beïnvloedt. Los aangetoonde problemen op zonder stilzwijgend een permanente service, exacte alarmgarantie of batterij-uitzondering te eisen. Behoud stille ongewijzigde controles, expliciete netwerkkeuze, geen automatische download na een melding en beperkte historie.
+
+Meet de tijdelijke ruimte voor grote partials, pinning, back-ups en staging. Opruimen raakt alleen intern beheerde bestanden; afgebroken downloads vervangen nooit een gecommitteerde selectie.
+
+## Nieuwe Android-, Magisk- en toestelvarianten
+
+Behandel Android 18 en nieuwe Magisk/OEM-versies eerst als ongekwalificeerd. Onderzoek frameworkinterfaces, SELinux/namespace, kernel/init_boot, Boot Control, snapshots, engine, back-ups, certificaten, fingerprints, rollback en updateractiviteiten opnieuw. Voeg ondersteuning met bewijs toe; versoepel onbekende waarden niet om een groen scherm te krijgen.
 
 ## Releasecriteria
 
-Een nieuwe release vereist een reproduceerbare APK-build, geslaagde betekenisvolle unit- en platformtests, bijgewerkte bronreferenties, changelog en exacte functiestatus. Een toekomstige OTA-release vereist daarnaast een hardwaretestrapport dat toestel, firmware, images, slotresultaat, rootbehoud en volledig afgeronde merge benoemt. Een APK-build alleen is daarvoor onvoldoende.
+Iedere release vraagt een reproduceerbare APK, betekenisvolle geslaagde checks voor gewijzigde code, actuele functiestatus, concrete logs en documentatie. Een **hardwarebewezen OTA-keten** vraagt een afzonderlijk rapport met bron-/doelfirmware, werkelijk gelezen images, herstelkopie, slotresultaat, root en afgeronde merge. Tot dat bewijs bestaat blijft live implementatie gescheiden van sandboxuitvoering en historisch uitleesbewijs.

@@ -9,13 +9,16 @@ internal data class BinaryResult(val bytes: ByteArray, val result: ProbeResult)
 
 /** Only enum commands and strictly validated Magisk backup identifiers can reach the process API. */
 class ReadOnlyShell {
-    fun run(probe: ReadOnlyProbe): ProbeResult = execute(
+    fun run(probe: ReadOnlyProbe): ProbeResult {
+        if (!probe.enabled) return ProbeResult(null, "", "", failure = "UNSAFE_INITIALIZER_DISABLED")
+        return execute(
         if (probe.requiresRoot) {
             if (probe.globalMountNamespace) listOf("su", "--target", "0", "-c", probe.command)
             else listOf("su", "-c", probe.command)
         } else listOf("/system/bin/sh", "-c", probe.command),
         probe.timeoutMillis, 1_048_576
-    ).let { binary -> binary.result.copy(stdout = binary.bytes.toString(Charsets.UTF_8)) }
+        ).let { binary -> binary.result.copy(stdout = binary.bytes.toString(Charsets.UTF_8)) }
+    }
 
     fun property(name: String, asRoot: Boolean = false): ProbeResult {
         require(name in PROPERTY_NAMES) { "Property outside allowlist" }

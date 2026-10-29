@@ -1,0 +1,49 @@
+{
+  "verified": true,
+  "libraries": [
+    {
+      "file": "lib/arm64-v8a/libandroidx.graphics.path.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "relroEndModulo16384": [
+        8192
+      ]
+    },
+    {
+      "file": "lib/x86_64/libandroidx.graphics.path.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "relroEndModulo16384": [
+        12288
+      ]
+    },
+    {
+      "file": "lib/arm64-v8a/libmoto_stage_publish.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "relroEndModulo16384": [
+        0
+      ]
+    },
+    {
+      "file": "lib/x86_64/libmoto_stage_publish.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "relroEndModulo16384": [
+        0
+      ]
+    }
+  ]
+}

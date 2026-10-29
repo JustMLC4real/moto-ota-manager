@@ -1,46 +1,52 @@
-# Compatibiliteit en bewijsniveau
+# Compatibiliteit en bewijsniveau — 0.3.0
 
-## Toestelprofielen
+Een geïmplementeerde functie, een emulatorproef en een meting op de Motorola hebben verschillende bewijsniveaus. Dit document beschrijft de broncodegrenzen. Alleen [BUILD-REPORT.md](BUILD-REPORT.md) en [TEST-MATRIX.md](TEST-MATRIX.md) bepalen welke builds en tests daadwerkelijk zijn uitgevoerd.
 
-| Profiel | Status | Toelichting |
+## Android, ABI en toestelprofiel
+
+| Onderdeel | Huidige grens |
+|---|---|
+| Android-app | `minSdk 33`, `compileSdk 35`, `targetSdk 35`; Kotlin/JVM 17 |
+| Native stagingbibliotheek | `arm64-v8a` en `x86_64`; NDK `27.2.12479018` |
+| Onderzocht toestelprofiel | Motorola, technisch SKU `XT2607-1`, codenaam `merc`, kanaal `reteu` |
+| Begeleide updatevoorbereiding | Android `17`, gemeten Magisk-code `31100`, actuele succesvolle A/B-boot, bekende modules en veilige boot-/snapshot-/enginetoestand |
+| Live roothelpers voor engine, firmwarecontrole, stockherstel en staging | Werkelijke UID `0` en SDK `37`; geen toegang via alleen een manifestpermission |
+| Stockherstel naar partitie | Alleen de huidige `init_boot_a` of `init_boot_b`, precies `8.388.608` bytes; geen willekeurig partitiepad |
+| Externe Motorola-staging | Alleen Android-gebruiker `0` en vaste externe appmappen; ondertekend `motorola-channel`/`pre-channel` exact `reteu` én `report.regionVerified` vereist vóór publicatie |
+| Achtergrondmonitor | Exact profiel en Android `17`; melding alleen bij gemeten root, verse diagnostiek, snapshot `NONE`, engine `IDLE` en herkende nieuwe lokale metadata |
+| Andere modellen, kanalen of onbekende layout/SDK | Diagnostiek kan informatie tonen; versiegebonden live acties stoppen bij ontbrekend profiel-/runtimebewijs |
+| Android 18 of andere Magisk-code | Geen gevalideerde begeleide updateketen; geen automatische uitbreiding van SDK-37-helpers |
+
+Installatie op API 33 of hoger is geen ondersteuning van alle rootacties op die Android-versie. Downloads zijn een afzonderlijke byteoverdracht met profiel- en broncontroles; zij autoriseren geen stockherstel, staging of installatie.
+
+De mapper accepteert de marketingnaam `motorola edge 70 pro` niet zelfstandig. Een technisch model/SKU is vereist; tegenstrijdige technische modellen of carrierproperties maken het profiel onbekend. Android-metadata, payloadproperties, vendor en de draaiende systeemimage behouden hun afzonderlijke fingerprints.
+
+## Historisch toestelbewijs en de nieuwe ontwikkelfase
+
+De uitlezende validatie van **0.2.0-safe** staat in [DEVICE-VALIDATION.md](DEVICE-VALIDATION.md): Android 17/SDK 37, build `A171WMH.44-25`, slot `_b`, Magisk `31100`, succesvolle boot, snapshot `NONE`, actuele engine `IDLE` en de geauthenticeerde huidige stockback-up. De historische handmatige Android-16-naar-17-update is geen door 0.3.0 uitgevoerde OTA.
+
+De nieuwe ontwikkelfase gebruikt de echte telefoon niet via ADB. JVM-, emulator- en native tests promoveren de nieuwe partitieschrijver of Motorola-mapintegratie niet tot hardwarebewezen functies. Nieuwe fysieke kwalificatie van 0.3.0 blijft afzonderlijk nodig. Hiermee is geen nieuwe OTA, restore, slotwissel, Magisk-installatie of reboot op de telefoon aangetoond.
+
+## Integraties in 0.3.0
+
+| Integratie | Geïmplementeerd gedrag | Resterende grens |
 |---|---|---|
-| Motorola Edge 70 Pro, XT2607-1, merc, reteu | Exclusief onderzocht doelprofiel | Werkelijke uitlezende metingen vastgelegd; definitieve APK-testresultaten afzonderlijk in het buildrapport |
-| Android 17, SDK 37, A171WMH.44-25 | Werkelijk gemeten huidige situatie | Slot b, Magisk 31100, snapshot `NONE` en live engine `IDLE` bevestigd; iedere nieuwe controle leest opnieuw |
-| Android 16, W3WMS36.40-75-5-2 | Historische situatie | De oude stock-image en OTA zijn geen basis voor een volgende Android 17-update |
-| Andere XT2607-varianten, regio's of codenames | Geblokkeerd | Vereisen een apart onderzocht en getest profiel |
-| Android 18 | Nog niet ondersteund als gevalideerde updateketen | Nieuwe platform- en OEM-controles vereist |
+| Magisk 31.1 | Root/versie meten, bestaande back-ups lezen en valideren, officiële app openen | Geen stabiele externe installer-API aangetoond; installatie naar de andere slot blijft handmatig gemeld tot nieuwe boot/root is gemeten |
+| Motorola-updater | Beveiligde systeemactivity-resolver, getypeerde lokale metadata, expliciete overdracht | Geen publiek bevestigd aanbod- of installatiecontract voor dit model |
+| WorkManager 2.10.5 | Opt-in periodieke lokale controle en expliciete foregrounddownload | Android bepaalt uitvoeringstijd; ontbrekende metadata bewijst geen ontbrekend serveraanbod |
+| Firmwareverificatie | Structuur, payload-/metadatahashes, bronvoorwaarden en `RecoverySystem.verifyPackage` tegen toestelcertificaten | Authenticiteit bewijst geen kanaal, passende bronblokken, OEM-geschiktheid of aanbod |
+| FirmwareVault | Private pin via hardlink/gecontroleerde kopie; selectie en ondertekende init_boot-targetfeiten bewaren | Een pad is geen verificatiebewijs; targetfeiten worden pas na een passende waargenomen doelboot aan de systeemfingerprint gebonden |
+| Bestaande Motorola-ZIP importeren | Begrensde lijst en expliciet gekozen file uit de vaste OEM-map naar een private transactie kopiëren en terughashen | Uitlezende bronoverdracht via UID 0/SDK 37; geen aanbod-, ondertekenings- of compatibiliteitsbewijs |
+| Begeleid stockherstel | Expliciet plan, kort geldig HMAC, éénmalige bevestiging, volledige gepatchte back-up, tweede scan en readback | Echte partitieschrijfactie; nieuwe hardwarekwalificatie ontbreekt; geen automatische retry/rollback |
+| Motorola-staging | Apart bevestigde voorbereide kopie via JNI atomair zonder overschrijven publiceren, uitsluitend met ondertekend bewezen `reteu`-kanaal | Onbekend kanaal blokkeert met `STAGING_CHANNEL_UNPROVEN`; intern mapgedrag kan meteen OEM-verwerking starten en is geen publieke API |
+| Sandbox | Begeleide keten en herstelcontracten tegen private gewone bestanden | OTA, Magisk, slot en reboot worden gesimuleerd; geen live autorisatie |
 
-De marketingnaam `motorola edge 70 pro` is op het toestel gemeten, met technisch SKU `XT2607-1`. De mapper accepteert de marketingnaam niet zelfstandig: een passend technisch model/SKU is vereist en tegenstrijdige technische modelnummers blokkeren. Voor het kanaal worden alleen bekende carrierproperties gebruikt; een lege of tegenstrijdige waarde blijft onduidelijk. Zie [de werkelijke identiteit en bronconflicten](DEVICE-VALIDATION.md).
+WorkManager 2.10 is met SDK 35 gebouwd; 2.10.5 is de vastgelegde patchversie. [Officiële releasegegevens](https://developer.android.com/jetpack/androidx/releases/work#version_2105). De Magisk A/B-volgorde is een referentie, maar de officiële gids noemt Pixel als getest platform en geeft geen Motorola-garantie. [Magisk OTA-gids](https://topjohnwu.github.io/Magisk/ota.html).
 
-De begeleide voorbereiding is bewust strenger dan de technische minimum-SDK: zij vereist een werkelijk gemeten Android-versie 17, Magisk-code 31100, een ontgrendelde bootloader met verified-bootstatus `orange`, een als succesvol gemarkeerde huidige bootslot en een bekende module-inventaris. Ontbrekende of andere waarden blokkeren. De app blijft dan wel uitlezende diagnostiek aanbieden. Dit beleid beweert niet dat andere combinaties per definitie onveilig zijn; zij zijn voor dit product nog niet onderzocht.
+Een geldige ZIP-ondertekening, downloadhost, cacheverwijzing of transferreceipt bewijst het pakketkanaal niet. Bij ontbrekend ondertekend kanaalbewijs blijven importeren, downloaden en onderzoeken beschikbaar; de fallback is Motorola's normale officiële aanbodroute, zonder het lokale pakket te publiceren.
 
-## Integraties
+## Herkwalificatie
 
-| Integratie | Onderzochte referentie | Bewijs op dit toestel |
-|---|---|---|
-| Magisk 31.1 | Officiële tag v31.1, commit `0972f67d97f9b6302b67c5171283330c74114b4a` | Werkelijke root UID 0, versiecode 31100 en back-up gemeten; APK-hash matcht officiële release |
-| Latere Magisk-versies | Geen automatische compatibiliteitsbelofte | Nieuwe CLI-/backup-/installercontrole vereist |
-| Motorola com.motorola.ccc.ota | Werkelijk gelezen private schema en systeemactivity | Nested downloadjob is historische metadata; secure resolver kiest ingeschakelde geëxporteerde Motorola-component met positieve prioriteit |
-| Android UpdateEngine | Gepind AOSP-interfacecontract en werkelijk geladen SDK 37-frameworkbindings | Uitsluitend rootcallback `bind`/`unbind` gaf live `IDLE`; geen directe installatie of cleanup |
-| Boot-controlmetadata | AOSP-layout, 32-byte record met CRC | `bootctl` ontbreekt; directe beperkte uitlezing bevestigt twee slots en succesvolle slot b |
-| Snapshotmetadata / Virtual A/B | AOSP-protobuf en 64-byte VAB-record | `snapshotctl` ontbreekt; consistente bestands-/directory-/VAB-bronnen bevestigen geen actieve merge |
-| Toestel-OTA-truststore | Werkelijk gelezen otacerts-publickey | Historische whole-file-OTA-signatuur onafhankelijk op host geverifieerd met Python en OpenSSL; definitieve appverificatie apart gerapporteerd |
-| Geauditeerde stockcatalogus | Authentiek OTA-doelmanifest en volledige actuele back-upbytes | Alleen exacte huidige fingerprint/build/model/device/kanaal/Android 17 plus passende toesteltrustanchor; geen algemene stockdatabase |
+Hercontroleer bij nieuwe firmware, Magisk, toestelvariant of certificaatstore properties en kernelbootfeiten, init_boot-layout/grootte, bootmetadata, snapshots, frameworkcallback, namespace, back-upschema, Motorola-mappen/activities en herkomstketen. Voor staging horen daar FUSE-mount, `renameat2(RENAME_NOREPLACE)`, directory-fsync en native libraryloading bij. Onbekend blijft een blokkade.
 
-De gewone app kon een Virtual A/B-property ondanks exitcode 0 niet lezen; de root-herlezing leverde de werkelijke waarde. Private preferences vereisten op dit toestel de tijdelijke globale Magisk-mountnamespace voor uitsluitend twee vaste uitlezingen. Deze bevindingen zijn versiegebonden en vervangen geen nieuw onderzoek na een firmwarewijziging.
-
-De actuele systeemfingerprint verschilt van vendor-/systeemaliases in de historische OTA. Die verschillen worden niet algemeen gelijkgesteld. De historische doelbuild is al geïnstalleerd en de afwijkende OEM-metadata blijft review vereisen, ook wanneer de handtekening geldig is.
-
-## Begrippen in schermen en rapporten
-
-- **Werkend geïmplementeerd:** de app voert de functie echt uit; tests/buildbewijs staan in het buildrapport. Dit zegt op zichzelf niets over geteste OEM-runtime.
-- **Gesimuleerd:** testdata of een mockadapter. Geen waarneming van de echte telefoon.
-- **Uitlezend op toestel bevestigd:** het genoemde diagnostische pad leverde een echte meting op het vastgelegde profiel. Dit bewijst geen geslaagde OTA-, restore- of rebootflow.
-- **Nog op toestel te testen:** de implementatie is aanwezig maar het specifieke runtimepad of de definitieve APK-test is niet als voltooid gerapporteerd.
-- **Onbewezen/uitgeschakeld:** er is geen betrouwbare externe integratie aangetoond; de app begeleidt of stopt.
-
-## Herkwalificatie na een grote upgrade
-
-Controleer opnieuw properties en fingerprints, kernel/init_boot-indeling, bootslot-HAL, snapshotenum en dumpformaat, engine-statuscallback, Magisk-back-upschema, rootrechtenmodel, Motorola-activiteiten/prefs, certificaatstore, metadataregels, batterij/opslagbeleid en het exportfilter. Test eerst zonder schrijfacties. Een versiecode alleen promoveert een nieuw platform niet tot ondersteund.
-
-De onderbouwde metingen staan in [DEVICE-VALIDATION.md](DEVICE-VALIDATION.md); uitgevoerde build-, APK- en instrumentatiechecks staan afzonderlijk in [BUILD-REPORT.md](BUILD-REPORT.md). Er is geen uitgevoerde volledige OTA-keten vanuit deze app en Android 18 blijft ongetest.
+Zie [MONITORING-AND-DOWNLOADS.md](MONITORING-AND-DOWNLOADS.md), [UPDATE-WORKFLOW.md](UPDATE-WORKFLOW.md) en [KNOWN-LIMITATIONS.md](KNOWN-LIMITATIONS.md).

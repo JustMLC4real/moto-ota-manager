@@ -33,6 +33,6 @@ object Readiness {
         check(device.bootSuccessful == true, "BOOT_NOT_CONFIRMED", "De actieve slot moet aantoonbaar succesvol zijn gemarkeerd via de service of CRC-gecontroleerde bootmetadata.")
         check(device.bootloaderUnlocked == true && device.verifiedBootState == "orange", "BOOT_SECURITY_UNKNOWN", "Het onderzochte profiel vereist een ontgrendelde bootloader met Verified Boot-status orange; afwijkingen vereisen handmatige beoordeling.")
         check(device.moduleInventoryKnown, "MODULE_INVENTORY_UNKNOWN", "Magisk-module-inventaris ontbreekt; behoud kan na de update niet betrouwbaar worden getoetst.")
-        return ReadinessResult(blockers, listOf(CheckResult("GUIDED_ONLY", "Deze versie voert geen herstel, OTA-installatie, Magisk-patching of herstart uit. Definitieve signature- en compatibiliteitscontrole blijft bij de officiële updater.")), device)
+        return ReadinessResult(blockers, listOf(CheckResult("GUIDED_ONLY", "Stockherstel vereist een afzonderlijk gecontroleerd plan en expliciete bevestiging. OTA-installatie, Magisk op de doelslot en herstart verlopen via de officiële apps. Definitieve signature- en compatibiliteitscontrole blijft bij Motorola.")), device)
     }
 }

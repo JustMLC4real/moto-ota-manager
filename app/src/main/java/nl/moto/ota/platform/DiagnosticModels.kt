@@ -56,7 +56,7 @@ data class Inspection(
 
 /** Complete command allowlist. There is deliberately no public raw-shell entry point. */
 enum class ReadOnlyProbe(val command: String, val requiresRoot: Boolean, val timeoutMillis: Long = 6_000,
-                         val globalMountNamespace: Boolean = false) {
+                         val globalMountNamespace: Boolean = false, val enabled: Boolean = true) {
     ROOT_ID("id", true),
     BOOT_CONFIG("grep -E '^androidboot\\.(verifiedbootstate|vbmeta\\.device_state|flash\\.locked|slot_suffix) ' /proc/bootconfig", true),
     MISC_BOOT_CONTROL("od -An -v -tx1 -j 2048 -N 32 /dev/block/by-name/misc", true),
@@ -65,12 +65,17 @@ enum class ReadOnlyProbe(val command: String, val requiresRoot: Boolean, val tim
     SNAPSHOT_DIRECTORY("if [ -d /metadata/ota/snapshots ]; then find /metadata/ota/snapshots -mindepth 1 -maxdepth 1 -type f -print; else exit 66; fi", true),
     MAGISK_VERSION("magisk -v", true),
     MAGISK_CODE("magisk -V", true),
-    CURRENT_SLOT("bootctl get-current-slot", true),
-    SLOT_COUNT("bootctl get-number-slots", true),
-    NEXT_SLOT("bootctl get-active-boot-slot", true),
-    SLOT_A_SUCCESS("bootctl is-slot-marked-successful 0", true),
-    SLOT_B_SUCCESS("bootctl is-slot-marked-successful 1", true),
-    SNAPSHOT_HAL("bootctl get-snapshot-merge-status", true),
+    AUTO_UPDATE_SETTING("/system/bin/settings get global ota_disable_automatic_update", true),
+    ACTIVE_INIT_BOOT_HASH("s=\$(/system/bin/getprop ro.boot.slot_suffix); case \"\$s\" in _a|_b) /system/bin/sha256sum \"/dev/block/by-name/init_boot\$s\";; *) exit 65;; esac", true),
+    // AOSP BootControl::Init can repair invalid metadata even for getter commands.
+    // Keep evidence keys for decoding old reports/tests, but never launch bootctl.
+    // This profile uses read-only CRC-checked misc metadata plus kernel properties.
+    CURRENT_SLOT("", true, enabled = false),
+    SLOT_COUNT("", true, enabled = false),
+    NEXT_SLOT("", true, enabled = false),
+    SLOT_A_SUCCESS("", true, enabled = false),
+    SLOT_B_SUCCESS("", true, enabled = false),
+    SNAPSHOT_HAL("", true, enabled = false),
     SNAPSHOT_DUMP("snapshotctl dump", true),
     // --follow only subscribes to callbacks. Never use --merge, --update or reset flags.
     ENGINE_FOLLOW("/system/bin/toybox timeout 3 /system/bin/update_engine_client --follow", true, 5_000),

@@ -72,16 +72,16 @@ class DeviceInspector(private val shell: ReadOnlyShell = ReadOnlyShell()) {
             counters, metadata.downloadUrl, metadata, kernel, bootControl, vab, snapshotFile)
         if (result.toDeviceState().rootGranted) {
             backups = inventoryBackups(probes[ReadOnlyProbe.BACKUPS.name], result.toDeviceState(),
-                probes[ReadOnlyProbe.PARTITIONS.name]?.stdout.orEmpty(), DeviceTrustAnchors.spkiSha256())
+                probes[ReadOnlyProbe.PARTITIONS.name]?.stdout.orEmpty(), DeviceTrustAnchors.spkiSha256(), context)
         }
         result.copy(backupInventory = backups)
     }
 
-    private fun inventoryBackups(probe: ProbeResult?, device: DeviceState, partitions: String, trustAnchors: Set<String>): List<BackupCandidate> {
+    private fun inventoryBackups(probe: ProbeResult?, device: DeviceState, partitions: String, trustAnchors: Set<String>, context: Context): List<BackupCandidate> {
         if (probe?.successful != true) return emptyList()
         val expectedBytes = partitions.lineSequence().firstOrNull { it.startsWith("init_boot${device.slot}=") }
             ?.substringAfter('=')?.trim()?.toLongOrNull() ?: -1L
-        val reference = VerifiedStockCatalog.referenceFor(device, trustAnchors)
+        val reference = VerifiedStockCatalog.referenceFor(device, trustAnchors) ?: FirmwareVault(context).referenceFor(device, trustAnchors)
         return probe.stdout.lineSequence().filter { it.isNotBlank() }.take(20).mapNotNull { line ->
             val parts = line.trim().split('|')
             val directory = parts.firstOrNull() ?: return@mapNotNull null

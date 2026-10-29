@@ -1,0 +1,7 @@
+{
+  "ro.build.version.sdk": "35",
+  "ro.product.cpu.abi": "x86_64",
+  "ro.hardware": "ranchu",
+  "ro.kernel.qemu": "1",
+  "kernelPageBytes": 4096
+}

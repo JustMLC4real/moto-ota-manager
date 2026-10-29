@@ -1,0 +1,13 @@
+<testsuite name="nl.moto.ota.core.PackageTransferTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:09" hostname="local-build" time="0.051">
+  <properties />
+  <testcase name="oversizeOrMisdeclaredDownloadIsRejected" classname="nl.moto.ota.core.PackageTransferTest" time="0.006" />
+  <testcase name="truncatedDownloadNeverBecomesCompletedFile" classname="nl.moto.ota.core.PackageTransferTest" time="0.001" />
+  <testcase name="networkFailureMidStreamPreservesPreviousPackageAndRemovesPartial" classname="nl.moto.ota.core.PackageTransferTest" time="0.004" />
+  <testcase name="emptyInputNeverReplacesExistingPackage" classname="nl.moto.ota.core.PackageTransferTest" time="0.001" />
+  <testcase name="successfulReplacementIsAtomicAndLeavesNoStalePartial" classname="nl.moto.ota.core.PackageTransferTest" time="0.013" />
+  <testcase name="completedExactLengthTransferCommitsOnlyPackageBytes" classname="nl.moto.ota.core.PackageTransferTest" time="0.021" />
+  <testcase name="storageExhaustionPreservesExistingFile" classname="nl.moto.ota.core.PackageTransferTest" time="0.003" />
+  <testcase name="coroutineCancellationLeavesNoCompletedDownload" classname="nl.moto.ota.core.PackageTransferTest" time="0.002" />
+  <system-out />
+  <system-err />
+</testsuite>

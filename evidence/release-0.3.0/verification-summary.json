@@ -1,0 +1,73 @@
+{
+  "version": "0.3.0",
+  "generatedAtUtc": "2026-10-29T08:34:14.488595+00:00",
+  "apk": {
+    "file": "moto-ota-manager-debug.apk",
+    "versionName": "0.3.0",
+    "versionCode": 3,
+    "bytes": 29284877,
+    "sha256": "01ee72a7b707141ec77afa2d5d2176dc26b49903deb8b693a8b8b38ec77f1084",
+    "debugSigned": true,
+    "signerCertificateSha256": "21e80a8850a8f89759b7fba9e6ce693f3fdbe53de921d1a584a3bca130f92865"
+  },
+  "core": {
+    "discovered": 314,
+    "passed": 312,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2,
+    "skippedCases": [
+      "nl.moto.ota.core.importer.MotorolaImportPolicyTest.destinationSymlinkIsRejectedWithoutTouchingItsTarget",
+      "nl.moto.ota.core.importer.MotorolaImportPolicyTest.sourceSymlinksAreNotDiscoveredOrRead"
+    ]
+  },
+  "appJvm": {
+    "discovered": 117,
+    "passed": 117,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "skippedCases": []
+  },
+  "emulator": {
+    "api": 35,
+    "target": "emulator-5556",
+    "passed": 51,
+    "failures": 0,
+    "skipped": 0,
+    "classes": {
+      "nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest": 7,
+      "nl.moto.ota.PlatformSafetyTest": 3,
+      "nl.moto.ota.platform.VaultRuntimeTest": 9,
+      "nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest": 5,
+      "nl.moto.ota.SafeUiTest": 5,
+      "nl.moto.ota.platform.monitoring.MonitorRuntimeTest": 5,
+      "nl.moto.ota.platform.download.DownloadRuntimeTest": 12,
+      "nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest": 5
+    }
+  },
+  "totalPassed": 480,
+  "skippedWindowsTests": 2,
+  "lint": {
+    "errors": 0,
+    "warnings": 24,
+    "categories": {
+      "PrivateApi": 3,
+      "SdCardPath": 8,
+      "GradleDependency": 8,
+      "UnsafeDynamicallyLoadedCode": 1,
+      "UsableSpace": 2,
+      "UseKtx": 2
+    }
+  },
+  "physicalPhoneUsedInThisPhase": false,
+  "partitionsFlashedInThisPhase": false,
+  "otaInstalledInThisPhase": false,
+  "phoneRebootedInThisPhase": false,
+  "runtimeLimits": [
+    "New live root helpers not physically executed",
+    "OTA/Magisk/reboot/merge in sandbox are simulated",
+    "Staging requires signed reteu; no proven public Motorola catalog",
+    "Inactive-slot Magisk remains user reported until observed target boot"
+  ]
+}

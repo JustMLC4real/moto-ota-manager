@@ -1,0 +1,20 @@
+<testsuite name="nl.moto.ota.core.BackupValidatorTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:00" hostname="local-build" time="0.079">
+  <properties />
+  <testcase name="differentCurrentBuildRejectsOldBackup" classname="nl.moto.ota.core.BackupValidatorTest" time="0.043" />
+  <testcase name="unauthenticatedManifestCannotDeclareImageStock" classname="nl.moto.ota.core.BackupValidatorTest" time="0.002" />
+  <testcase name="shellOutputOf83ExtraBytesIsRejected" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001" />
+  <testcase name="validGzipHasSameContentHashAsRaw" classname="nl.moto.ota.core.BackupValidatorTest" time="0.007" />
+  <testcase name="gzipWithDamagedCrcIsRejected" classname="nl.moto.ota.core.BackupValidatorTest" time="0.0" />
+  <testcase name="validCurrentReferenceAcceptsOnlyMatchingBytes" classname="nl.moto.ota.core.BackupValidatorTest" time="0.002" />
+  <testcase name="truncatedImageIsRejected" classname="nl.moto.ota.core.BackupValidatorTest" time="0.01" />
+  <testcase name="gzipWithTrailingShellOutputIsRejected" classname="nl.moto.ota.core.BackupValidatorTest" time="0.004" />
+  <testcase name="fingerprintAliasIsNeverSilentlyTreatedAsEquivalent" classname="nl.moto.ota.core.BackupValidatorTest" time="0.002" />
+  <testcase name="patchedContentMismatchRejectsEvenWellFormedHeader" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001" />
+  <testcase name="unknownHeaderVersionStopsSafely" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001" />
+  <testcase name="bootImageWithKernelIsNotInitBoot" classname="nl.moto.ota.core.BackupValidatorTest" time="0.0" />
+  <testcase name="referenceForWrongRegionOrPartitionIsRejected" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001" />
+  <testcase name="unknownPartitionSizeAndMissingInputAreBlocked" classname="nl.moto.ota.core.BackupValidatorTest" time="0.0" />
+  <testcase name="existingBootImgGzDoesNotProveCurrentStock" classname="nl.moto.ota.core.BackupValidatorTest" time="0.001" />
+  <system-out />
+  <system-err />
+</testsuite>

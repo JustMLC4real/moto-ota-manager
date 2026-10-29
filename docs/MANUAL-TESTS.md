@@ -1,6 +1,6 @@
 # Handmatige validatie op de Edge 70 Pro
 
-Deze checklist is nog niet op de echte `XT2607-1 / merc / reteu` uitgevoerd. Voer alleen uitlezende stappen uit. Zij vraagt geen OTA-installatie, image-restore, wijziging van slots of herstart van de telefoon. Een USB-verbinding of handmatig ADB is niet de normale appworkflow.
+Deze checklist is een uitlezend testplan. Eerdere werkelijk uitgevoerde diagnosemetingen staan apart in [DEVICE-VALIDATION](DEVICE-VALIDATION.md). De nieuwe productie-stockwriter en een volledige toekomstige echte OTA zijn niet fysiek getest. Voer voor deze checklist alleen uitlezende stappen uit: geen OTA-installatie, stockrestore, slotwijziging of telefoonherstart. Een USB-verbinding of handmatig ADB is niet de normale appworkflow.
 
 ## Voorbereiding
 
@@ -46,11 +46,23 @@ Deze checklist is nog niet op de echte `XT2607-1 / merc / reteu` uitgevoerd. Voe
 ## Duurzame workflow en procesherstel
 
 - Gebruik de expliciete simulatie om de negen fasen en foutscenario's te bekijken. Verwacht een zichtbaar simulatielabel.
+- Gebruik de volledige bestandssimulatie: stockrestore → officiële mock-OTA → gerapporteerde mock-Magisk → mockreboot/merge → eindcontrole. Controleer dat bron- en doelpartitie gewone app-private bestanden zijn en dat de volledige gepatchte bronbackup en nieuwe stockbackup bestaan. Geen rootopdracht mag nodig zijn.
 - Sluit alleen Moto OTA Manager via de recente-appslijst of force stop en open opnieuw. Er mag geen toestelherstart nodig zijn.
 - Controleer dat opgeslagen stappen blijven bestaan maar actuele controles opnieuw worden uitgevoerd.
 - Verander in een simulatie de bootslot of rootstatus en controleer dat succes wordt ingetrokken.
 - Een gesimuleerde onverwachte herstart moet tot hercontrole leiden, niet tot automatisch verdergaan met de volgende schrijfstap.
 - Verlaat de simulatie en controleer dat fictieve toestelwaarden, pakketgegevens en succesmeldingen niet als echte diagnose terugkeren.
+- Controleer een bestaand leeg of beschadigd fixturejournaal: het moet herstel vereisen, geen nieuwe lege echte workflow starten.
+- Laat in een sandbox een processtop vóór write en een gedeeltelijke write simuleren. Recovery mag niets opnieuw schrijven. Een volledig onveranderde gepatchte bron kan alleen na expliciete controle plus oude-tokeninvalidatie een nieuw plan vrijgeven; een werkelijk afwijkende gedeeltelijke image moet geblokkeerd blijven.
+- Controleer dat late knoppen/callbacks na targetboot geen oude OTA- of rebootfase opnieuw activeren.
+
+## Voorbereidingsscherm zonder live schrijfvalidatie
+
+- Bekijk de uitleg van de actuele partitie, bronbuild, volledige stockhash, bewaarde gepatchte backup en de regel om niet tussentijds te herstarten. Druk in dit uitlezende testplan niet op de daadwerkelijke schrijfbevestiging.
+- Verifieer in sandbox dat beide expliciete bevestigingen vereist zijn en dat 60 seconden verstreken monotonic-tijd ook bij een teruggezette wallclock blijft verlopen.
+- Controleer dat een onbekende instelling voor automatische updates de live voorbereiding blokkeert; de app mag de systeeminstelling niet zelf wijzigen.
+- Gebruik de officiële Motorola-route met een uit de updater overgenomen doelbuild en zonder ZIP. Eventuele generieke metadata-/regioblokkades mogen niet worden omgezet in `compatible=true`; Motorola blijft de installatiemachtiging beoordelen.
+- Controleer dat Magisk vóór boot slechts als gebruikersmelding verschijnt. Er is momenteel geen productieprobe voor onafhankelijk preboot-imagebewijs.
 
 ## Rapport en privacy
 

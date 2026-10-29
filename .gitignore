@@ -2,6 +2,8 @@
 .idea/
 .kotlin/
 **/build/
+**/.cxx/
+**/.externalNativeBuild/
 local.properties
 *.jks
 *.keystore
