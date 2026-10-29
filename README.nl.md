@@ -6,7 +6,7 @@
 
 Kotlin · Jetpack Compose · Android 13+ · English / Nederlands · MIT
 
-[Aan de slag](docs/nl/INSTALLATION.md) · [Compatibiliteit](docs/nl/COMPATIBILITY.md) · [Buildbewijs](docs/BUILD-REPORT.md) · [English README](README.md)
+[Download 1.0.0](https://github.com/JustMLC4real/moto-ota-manager/releases/tag/v1.0.0) · [Aan de slag](docs/nl/INSTALLATION.md) · [Compatibiliteit](docs/nl/COMPATIBILITY.md) · [Buildbewijs](docs/BUILD-REPORT.md) · [English README](README.md)
 
 </div>
 

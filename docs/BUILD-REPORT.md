@@ -46,6 +46,8 @@ Two optional host cases read an explicitly supplied existing historical OTA and 
 
 Tested source commit: `198f66c41f49b2b6273d27c8e77485fdb768a42e`. Source was extracted with `git archive` into a new directory without `.git`, local SDK configuration or generated module/cache folders. Existing SDK tools and downloaded dependencies were reused. With `--no-build-cache`: **BUILD SUCCESSFUL in 4m 12s; 155 of 155 tasks executed**.
 
+Before the first public GitHub push, historical local user-directory paths were anonymized throughout the unpublished history. The [publication provenance](PUBLICATION-PROVENANCE.md) maps original executed commit IDs to their public equivalents. Every one of the 203 app/core/Gradle build inputs and both APKs remains unchanged; old build records retain the IDs actually executed.
+
 ```sh
 ./gradlew :core:test :app:testDebugUnitTest :app:testReleaseUnitTest \
   :app:assembleDebug :app:assembleSignedRelease :app:assembleReleaseAndroidTest \

@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "checkedAtUtc": "2026-10-29T18:57:37.236408+00:00",
+  "checkedAtUtc": "2026-10-29T19:19:43.675955+00:00",
   "markdownLinks": {
-    "checkedMarkdownFiles": 42,
+    "checkedMarkdownFiles": 45,
     "missing": [],
     "passed": true
   },
   "publicSnapshot": {
-    "checkedFiles": 521,
+    "checkedFiles": 541,
     "passed": true,
     "problems": [],
     "limits": [
@@ -18,7 +18,7 @@
     ]
   },
   "historyPrivateKeyMarkers": {
-    "blobsChecked": 646,
+    "blobsChecked": 741,
     "problems": [],
     "passed": true,
     "limits": [

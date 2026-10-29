@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Public-history privacy redaction before first push",
+  "transformation": "Only historical Windows user-directory path prefixes become [USER_HOME]. Binary blobs and all compiled app/core/Gradle inputs are unchanged.",
+  "previousDeliveryCommit": "c24b78d562ff7af8d982840f864bfb8ca32b4896",
+  "sanitizedDeliveryCommit": "84c8db6590ab7d67fa8cf15e7a78b7a3dd8d4c69",
+  "originalExecutedBuildCommit": "198f66c41f49b2b6273d27c8e77485fdb768a42e",
+  "sanitizedEquivalentBuildCommit": "ea500d8de4a8906e64e8a6826d8535ed5c450940",
+  "compiledInputsVerifiedUnchanged": 203,
+  "buildInputDigest": "dd4896c700aae12517b16a6f8a0ce69bb78ade095dc39f37d5f377aaca2eba02",
+  "commitMap": {
+    "149db84774e8086f84f0840df6c2d5053efb12af": "5cc3fad54d68888fbf2dcc4a3791112112408350",
+    "198f66c41f49b2b6273d27c8e77485fdb768a42e": "ea500d8de4a8906e64e8a6826d8535ed5c450940",
+    "48f664b2ae3d970db8cd369b3f628365ca316898": "38f0f34753bc8a69446771cdc7ff157eb12b3b9b",
+    "78b3656fe7965b3e8b6566e1877e59f9973907ea": "e24b5b802693cd87692f25f241d0040815687ad0",
+    "8554cafa41a2b8766660f241e2aefb17bcd2233f": "fa70d32e4bd06a59486724b1457ae5e8513ac1e9",
+    "9ced6f9e9d92146ca058dc68d6344a88dd7738f2": "9a52651fa60e5617f53ecc6da46f09879a97a054",
+    "c24b78d562ff7af8d982840f864bfb8ca32b4896": "84c8db6590ab7d67fa8cf15e7a78b7a3dd8d4c69",
+    "c335f6d18da364253e3249ff67ab846a7046e960": "8c8d05f26fbc92ca00f82fd9a26b761cbc4c4ec7",
+    "e6946459aa9c0189c037a0e3ca8e8ff1fc2878f9": "78ed7aa1fbfefcb3cc6c01726514483d0f69d954"
+  },
+  "note": "Build reports retain the original IDs actually executed. The mapped commits expose equivalent compiled inputs after historical log redaction; no new APK or new test execution is claimed."
+}
