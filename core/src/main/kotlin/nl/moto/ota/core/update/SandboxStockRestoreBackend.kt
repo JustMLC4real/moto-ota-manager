@@ -42,8 +42,9 @@ class SandboxStockRestoreBackend(
         require(d.simulated) { "A sandbox may not consume real-device observations" }
         val image=partition(d.slot)
         val stock=checkedFile(File(root,"stock.img"))
-        val validation=stock.inputStream().use { BackupValidator.inspect(it,false,image.length(),d,stockReference) }
-        return RestoreEnvironment(d,image.length(),digest(image),automaticUpdatesDisabled(),validation,mode)
+        val validation=stock.inputStream().use { BackupValidator.inspect(it,false,image.length(),d,stockReference,stockReference.partition) }
+        return RestoreEnvironment(d,image.length(),digest(image),automaticUpdatesDisabled(),validation,mode,
+            partitionType=stockReference.partition,runtimeStockSha1=validation.sha1)
     }
 
     fun prepare(runId:String,nowMillis:Long?=null):StockRestorePlan {
@@ -83,9 +84,11 @@ class SandboxStockRestoreBackend(
                     var written=0L
                     source.inputStream().use { input -> RandomAccessFile(partition(plan.slot),"rw").use { output ->
                         output.seek(0)
-                        val buffer=ByteArray(1024)
+                        val buffer=ByteArray(65_536)
                         while(true){
-                            val n=input.read(buffer);if(n<0)break
+                            if(failAfterWrittenBytes!=null && written>=failAfterWrittenBytes)throw java.io.IOException("SIMULATED_WRITE_INTERRUPTION")
+                            val requested=if(failAfterWrittenBytes==null)buffer.size else minOf(buffer.size.toLong(),failAfterWrittenBytes-written).toInt()
+                            val n=input.read(buffer,0,requested);if(n<0)break
                             if(written+n>plan.imageBytes)throw UpdateSafetyException("STOCK_SIZE_CHANGED")
                             output.write(buffer,0,n);written+=n
                             if(failAfterWrittenBytes!=null && written>=failAfterWrittenBytes)throw java.io.IOException("SIMULATED_WRITE_INTERRUPTION")
@@ -156,7 +159,8 @@ class SandboxStockRestoreBackend(
 
     private fun partition(slot:String):File {
         require(slot in setOf("_a","_b"))
-        return checkedFile(File(root,"partitions/init_boot$slot"))
+        require(stockReference.partition in setOf("boot","init_boot"))
+        return checkedFile(File(root,"partitions/${stockReference.partition}$slot"))
     }
     private fun checkedFile(file:File):File {
         require(!Files.isSymbolicLink(file.toPath())) { "Symlink forbidden" }
@@ -173,9 +177,16 @@ class SandboxStockRestoreBackend(
         return tx
     }
     private fun copyExact(source:File,destination:File,expected:Long){
-        val bytes=checkedFile(source).readBytes()
-        if(bytes.size.toLong()!=expected)throw UpdateSafetyException("BACKUP_SIZE_MISMATCH")
-        atomicWrite(destination,bytes)
+        val temp=Files.createTempFile(destination.parentFile.toPath(),".stock-restore-",".tmp").toFile()
+        try{
+            var total=0L
+            checkedFile(source).inputStream().use { input -> FileOutputStream(temp).use { output ->
+                val buffer=ByteArray(65_536)
+                while(true){val n=input.read(buffer);if(n<0)break;total+=n;if(total>expected)throw UpdateSafetyException("BACKUP_SIZE_MISMATCH");output.write(buffer,0,n)}
+                if(total!=expected)throw UpdateSafetyException("BACKUP_SIZE_MISMATCH");output.fd.sync()
+            } }
+            Files.move(temp.toPath(),destination.toPath(),StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING)
+        }finally{Files.deleteIfExists(temp.toPath())}
     }
     private fun persist(file:File,stage:RestoreCheckpoint,plan:StockRestorePlan,backupHash:String){
         val p=Properties().apply { setProperty("schema","1");setProperty("stage",stage.name);setProperty("transaction",plan.transactionId);setProperty("stockSha256",plan.stockSha256);setProperty("backupSha256",backupHash) }

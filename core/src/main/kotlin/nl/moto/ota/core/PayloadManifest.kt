@@ -6,8 +6,12 @@ import java.nio.ByteOrder
 import java.util.zip.ZipFile
 
 data class PartitionDigest(val name: String, val bytes: Long, val sha256: String)
-data class PayloadManifestInfo(val blockSize: Int, val initBootSource: PartitionDigest?, val initBootTarget: PartitionDigest,
-                               val partitionNames: List<String>, val manifestBytes: Int)
+data class PayloadManifestInfo(val blockSize: Int, val initBootSource: PartitionDigest?, val initBootTarget: PartitionDigest?,
+                               val partitionNames: List<String>, val manifestBytes: Int,
+                               val bootSource: PartitionDigest? = null, val bootTarget: PartitionDigest? = null) {
+    val sourceImages: List<PartitionDigest> get() = listOfNotNull(bootSource, initBootSource)
+    val targetImages: List<PartitionDigest> get() = listOfNotNull(bootTarget, initBootTarget)
+}
 
 /** Read-only bounded projection of AOSP DeltaArchiveManifest, never an installer.
  * Schema: system/update_engine 4591637f51644f5429f9e2fe589ab22b92f61842/update_metadata.proto.
@@ -35,8 +39,8 @@ object PayloadManifest {
         var blockSize = 4096
         var explicitBlockSize = false
         val names = linkedSetOf<String>()
-        var source: PartitionDigest? = null
-        var target: PartitionDigest? = null
+        val sources = mutableMapOf<String, PartitionDigest>()
+        val targets = mutableMapOf<String, PartitionDigest>()
         Proto(bytes).fields { field, wire, input ->
             when (field) {
                 3 -> {
@@ -60,15 +64,17 @@ object PayloadManifest {
                     }
                     val partition = requireNotNull(name)
                     require(partition.matches(Regex("[a-z0-9_]{1,64}")) && names.add(partition)) { "PARTITION_NAME" }
-                    if (partition == "init_boot") {
-                        source = old?.let { digest(partition, it) }
-                        target = digest(partition, requireNotNull(new) { "INIT_BOOT_TARGET_MISSING" })
+                    if (partition in setOf("boot", "init_boot")) {
+                        old?.let { sources[partition] = digest(partition, it) }
+                        targets[partition] = digest(partition, requireNotNull(new) { "BOOT_TARGET_MISSING" })
                     }
                 }
                 else -> input.skip(wire)
             }
         }
-        return PayloadManifestInfo(blockSize, source, requireNotNull(target) { "INIT_BOOT_NOT_UPDATED" }, names.toList(), bytes.size)
+        require(targets.isNotEmpty()) { "BOOT_IMAGE_NOT_UPDATED" }
+        return PayloadManifestInfo(blockSize, sources["init_boot"], targets["init_boot"], names.toList(), bytes.size,
+            sources["boot"], targets["boot"])
     }
 
     private fun digest(name: String, bytes: ByteArray): PartitionDigest {
@@ -81,7 +87,7 @@ object PayloadManifest {
                 else -> input.skip(wire)
             }
         }
-        require(size != null && size!! in 4096..(128L * 1024 * 1024) && hash?.size == 32) { "PARTITION_DIGEST" }
+        require(size != null && size!! in 4096..(512L * 1024 * 1024) && hash?.size == 32) { "PARTITION_DIGEST" }
         return PartitionDigest(name, size!!, hash!!.joinToString("") { "%02x".format(it.toInt() and 255) })
     }
 

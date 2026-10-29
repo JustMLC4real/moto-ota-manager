@@ -40,12 +40,14 @@ object MetadataObservations {
     fun combineSnapshot(original: SnapshotObservation, file: SnapshotFileMetadata?, vab: VirtualAbMetadata?, currentSlot: String,
                         directory: ProbeResult?, metadataReadAttempted: Boolean, toolReadPresent: Boolean = false): SnapshotObservation {
         if (!metadataReadAttempted) return original
-        if (toolReadPresent && original.state == "UNKNOWN") return original.copy(evidence = original.evidence + "Onleesbare of tegenstrijdige tooluitvoer blijft blokkerend")
+        if (toolReadPresent && original.state == "UNKNOWN") return original.copy(evidence = original.evidence + "Onleesbare of tegenstrijdige tooluitvoer blijft blokkerend",
+            presentationMessages = original.presentationMessages + DiagnosticMessage("snapshot.tool_unreadable"))
         val index = when (currentSlot) { "_a" -> 0; "_b" -> 1; else -> -1 }
         val hal = vab?.effectiveMergeStatus(index)
         if (file == null || hal == null || hal == VirtualAbMergeStatus.UNKNOWN) {
             // Successful alternate tools remain useful, but partial metadata cannot green-light idle.
-            return if (original.state != "UNKNOWN" && original.state != "NONE") original else SnapshotObservation("UNKNOWN", evidence = original.evidence + "Metadata niet volledig leesbaar of niet ondersteund")
+            return if (original.state != "UNKNOWN" && original.state != "NONE") original else SnapshotObservation("UNKNOWN", evidence = original.evidence + "Metadata niet volledig leesbaar of niet ondersteund",
+                presentationMessages = original.presentationMessages + DiagnosticMessage("snapshot.metadata_unreadable"))
         }
         val allowedHal = when (file.state) {
             SnapshotState.NONE, SnapshotState.INITIATED, SnapshotState.MERGE_NEEDS_REBOOT, SnapshotState.COMPLETE -> setOf(VirtualAbMergeStatus.NONE)
@@ -55,10 +57,11 @@ object MetadataObservations {
             else -> emptySet()
         }
         val evidence = original.evidence + "AOSP statebestand: ${file.state} (${file.format})" + "misc Virtual A/B: $hal"
-        if (hal !in allowedHal) return SnapshotObservation("UNKNOWN", evidence = evidence + "Tegenstrijdige snapshotbronnen")
-        if (file.state == SnapshotState.NONE && (directory?.successful != true || directory.stdout.isNotBlank())) return SnapshotObservation("UNKNOWN", evidence = evidence + "Snapshotdirectory ontbreekt of bevat nog snapshots")
-        if (original.state != "UNKNOWN" && original.state != file.state.name) return SnapshotObservation("UNKNOWN", evidence = evidence + "Tool en directe metadata spreken elkaar tegen")
-        return SnapshotObservation(file.state.name, original.mergePercent, evidence)
+        val messages = original.presentationMessages + DiagnosticMessage("snapshot.file", listOf(file.state.name, file.format.name)) + DiagnosticMessage("snapshot.misc", listOf(hal.name))
+        if (hal !in allowedHal) return SnapshotObservation("UNKNOWN", evidence = evidence + "Tegenstrijdige snapshotbronnen", presentationMessages = messages + DiagnosticMessage("snapshot.conflict"))
+        if (file.state == SnapshotState.NONE && (directory?.successful != true || directory.stdout.isNotBlank())) return SnapshotObservation("UNKNOWN", evidence = evidence + "Snapshotdirectory ontbreekt of bevat nog snapshots", presentationMessages = messages + DiagnosticMessage("snapshot.directory"))
+        if (original.state != "UNKNOWN" && original.state != file.state.name) return SnapshotObservation("UNKNOWN", evidence = evidence + "Tool en directe metadata spreken elkaar tegen", presentationMessages = messages + DiagnosticMessage("snapshot.tool_conflict"))
+        return SnapshotObservation(file.state.name, original.mergePercent, evidence, messages)
     }
 
     fun engineCallback(probe: ProbeResult?): String {

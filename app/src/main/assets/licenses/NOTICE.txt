@@ -1,0 +1,14 @@
+Moto OTA Manager is an independent project. Its own source is MIT licensed.
+
+AndroidX (including Jetpack Compose and WorkManager), Kotlin and kotlinx.coroutines
+retain their upstream Apache License 2.0 notices. A complete Apache License 2.0
+copy is bundled as apache-2.0.txt. The AndroidX native graphics-path dependency
+contains Skia code; its BSD notice and conditions are bundled as skia-bsd.txt.
+
+The compile-time UpdateEngine Binder declarations originate from AOSP commit
+4591637f51644f5429f9e2fe589ab22b92f61842 under Apache License 2.0. Only the
+platform-only UnsupportedAppUsage annotation was removed for SDK compilation.
+
+No Motorola firmware, Magisk binary or private signing key is redistributed.
+Upstream references and resolved dependency versions/hashes are documented in
+docs/RELEASE-ENGINEERING.md and the release dependency inventory.

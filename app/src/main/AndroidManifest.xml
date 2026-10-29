@@ -11,12 +11,13 @@
         <intent><action android:name="android.settings.SYSTEM_UPDATE_SETTINGS" /></intent>
     </queries>
     <application android:allowBackup="false" android:dataExtractionRules="@xml/data_extraction_rules" android:supportsRtl="true"
-        android:usesCleartextTraffic="false" android:label="Moto OTA Manager"
+        android:usesCleartextTraffic="false" android:label="@string/ui_app_name" android:localeConfig="@xml/locale_config"
         android:theme="@android:style/Theme.Material.NoActionBar"
         android:icon="@drawable/ic_moto_ota">
         <receiver android:name=".platform.download.DownloadActionReceiver" android:exported="false" />
         <service android:name="androidx.work.impl.foreground.SystemForegroundService"
             android:foregroundServiceType="dataSync" tools:node="merge" />
+        <service android:name=".platform.update.UpdateAutomationService" android:exported="false" android:foregroundServiceType="dataSync" />
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

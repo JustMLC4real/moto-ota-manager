@@ -17,6 +17,9 @@ data class ProbeResult(
     val successful: Boolean get() = exitCode == 0 && !timedOut && !truncated && failure == null
 }
 
+/** Presentation data contains typed, non-authorizing evidence, never translated cached prose. */
+data class DiagnosticMessage(val key: String, val args: List<String> = emptyList())
+
 data class BackupCandidate(
     val directoryId: String,
     val gzipBytes: Long?,
@@ -27,13 +30,15 @@ data class BackupCandidate(
     val errors: List<String>,
     // Even a matching Magisk SHA1 says nothing about current build or boot/init_boot origin.
     val provenanceVerified: Boolean = false,
-    val validation: BackupValidation? = null
+    val validation: BackupValidation? = null,
+    val presentationMessages: List<DiagnosticMessage> = emptyList()
 )
 
 data class SnapshotObservation(
     val state: String,
     val mergePercent: Double? = null,
-    val evidence: List<String> = emptyList()
+    val evidence: List<String> = emptyList(),
+    val presentationMessages: List<DiagnosticMessage> = emptyList()
 )
 
 data class Inspection(
@@ -51,7 +56,8 @@ data class Inspection(
     val kernelBootConfig: Map<String, String> = emptyMap(),
     val bootControl: BootControlMetadata? = null,
     val virtualAbMetadata: VirtualAbMetadata? = null,
-    val snapshotFileMetadata: SnapshotFileMetadata? = null
+    val snapshotFileMetadata: SnapshotFileMetadata? = null,
+    val backupAssociation: nl.moto.ota.core.BootBackupAssociation? = null
 )
 
 /** Complete command allowlist. There is deliberately no public raw-shell entry point. */
@@ -66,6 +72,7 @@ enum class ReadOnlyProbe(val command: String, val requiresRoot: Boolean, val tim
     MAGISK_VERSION("magisk -v", true),
     MAGISK_CODE("magisk -V", true),
     AUTO_UPDATE_SETTING("/system/bin/settings get global ota_disable_automatic_update", true),
+    ACTIVE_BOOT_HASH("s=\$(/system/bin/getprop ro.boot.slot_suffix); case \"\$s\" in _a|_b) /system/bin/sha256sum \"/dev/block/by-name/boot\$s\";; *) exit 65;; esac", true),
     ACTIVE_INIT_BOOT_HASH("s=\$(/system/bin/getprop ro.boot.slot_suffix); case \"\$s\" in _a|_b) /system/bin/sha256sum \"/dev/block/by-name/init_boot\$s\";; *) exit 65;; esac", true),
     // AOSP BootControl::Init can repair invalid metadata even for getter commands.
     // Keep evidence keys for decoding old reports/tests, but never launch bootctl.
@@ -83,8 +90,9 @@ enum class ReadOnlyProbe(val command: String, val requiresRoot: Boolean, val tim
     // child only. It does not change app isolation, root policy or stored settings.
     OTA_PREFS("cat /data/user/0/com.motorola.ccc.ota/shared_prefs/ota_prefs.xml", true, globalMountNamespace = true),
     DOWNLOAD_PREFS("cat /data/user/0/com.motorola.ccc.ota/shared_prefs/dl_prefs.xml", true, globalMountNamespace = true),
-    PARTITIONS("for p in /dev/block/by-name/boot_a /dev/block/by-name/boot_b /dev/block/by-name/init_boot_a /dev/block/by-name/init_boot_b /dev/block/by-name/vendor_boot_a /dev/block/by-name/vendor_boot_b; do if [ -b \"\$p\" ]; then printf '%s=' \"\${p##*/}\"; blockdev --getsize64 \"\$p\"; fi; done", true),
+    PARTITIONS("for p in /dev/block/by-name/boot /dev/block/by-name/init_boot /dev/block/by-name/vendor_boot /dev/block/by-name/boot_a /dev/block/by-name/boot_b /dev/block/by-name/init_boot_a /dev/block/by-name/init_boot_b /dev/block/by-name/vendor_boot_a /dev/block/by-name/vendor_boot_b; do if [ -b \"\$p\" ]; then printf '%s=' \"\${p##*/}\"; blockdev --getsize64 \"\$p\"; fi; done", true),
     BACKUPS("for d in /data/magisk_backup_*; do if [ -d \"\$d\" ] && [ -f \"\$d/boot.img.gz\" ]; then printf '%s|' \"\${d##*/}\"; wc -c < \"\$d/boot.img.gz\"; fi; done", true),
     MODULES("for d in /data/adb/modules/*; do if [ -d \"\$d\" ]; then printf '%s|' \"\${d##*/}\"; if [ -f \"\$d/disable\" ]; then printf 'disabled'; else printf 'enabled'; fi; if [ -f \"\$d/remove\" ]; then printf '|pending-removal'; fi; printf '\\n'; fi; done", true),
-    BOOT_ID("cat /proc/sys/kernel/random/boot_id", false)
+    BOOT_ID("cat /proc/sys/kernel/random/boot_id", false),
+    ROOT_BOOT_ID("cat /proc/sys/kernel/random/boot_id", true)
 }

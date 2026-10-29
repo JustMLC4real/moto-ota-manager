@@ -33,6 +33,36 @@ class ReadOnlyShell {
         return execute(listOf("su", "-c", "cat /data/$directoryId/boot.img.gz"), 10_000, 16 * 1_048_576)
     }
 
+    /** Streams bounded bytes; a large boot image never enters a ByteArray capture. */
+    internal fun <T> withBackup(directoryId:String,expectedCompressedBytes:Long,consume:(InputStream)->T):T {
+        require(Regex("magisk_backup_[a-fA-F0-9]{40}").matches(directoryId))
+        require(expectedCompressedBytes in 1..nl.moto.ota.core.BootImageStreams.MAX_PACKED_BYTES)
+        val process=ProcessBuilder("su","--target","0","-c","cat /data/$directoryId/boot.img.gz").start()
+        val error=Capture(4096)
+        val err=thread(isDaemon=true){error.read(process.errorStream)}
+        val watchdog=thread(isDaemon=true){try{Thread.sleep(45_000);process.destroyForcibly();process.inputStream.close()}catch(_:InterruptedException){}catch(_:Exception){}}
+        try{
+            var count=0L
+            val bounded=object:java.io.FilterInputStream(process.inputStream){
+                override fun read():Int {val n=super.read();if(n>=0){count++;check(count<=expectedCompressedBytes)};return n}
+                override fun read(bytes:ByteArray,offset:Int,length:Int):Int {
+                    val n=`in`.read(bytes,offset,minOf(length.toLong(),expectedCompressedBytes-count+1).toInt())
+                    if(n>0){count+=n;check(count<=expectedCompressedBytes)};return n
+                }
+            }
+            val result=bounded.use(consume)
+            check(count==expectedCompressedBytes && process.waitFor(2,TimeUnit.SECONDS) && process.exitValue()==0)
+            err.join(500);check(!err.isAlive && error.failure==null && !error.truncated)
+            return result
+        }finally{watchdog.interrupt();process.destroyForcibly();runCatching{process.inputStream.close()}}
+    }
+
+    internal fun magiskRuntime(apkPath:String):ProbeResult {
+        require(apkPath.matches(Regex("/data/app/[A-Za-z0-9/._~=+\\-]+/base[.]apk")))
+        val command="CLASSPATH='$apkPath' /system/bin/app_process /system/bin nl.moto.ota.rootprobe.MagiskRuntimeProbe"
+        return execute(listOf("su","--target","0","-c",command),8_000,4096).let {it.result.copy(stdout=it.bytes.toString(Charsets.UTF_8))}
+    }
+
     /** The only dynamic value is the OS-supplied path of this installed APK. */
     internal fun engineCallback(apkPath: String): ProbeResult {
         require(apkPath.matches(Regex("/data/app/[A-Za-z0-9/._~=+\\-]+/base[.]apk"))) { "Unexpected installed APK path" }

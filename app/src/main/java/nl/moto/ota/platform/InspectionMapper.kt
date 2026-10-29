@@ -22,7 +22,9 @@ fun Inspection.toDeviceState(): DeviceState {
     val model = property("ro.product.model")
     val skuValues = listOf(property("ro.boot.hardware.sku"), property("ro.boot.product.hardware.sku"))
     val technicalModels = (skuValues + model).filter { it.matches(Regex("XT[0-9]+(?:-[0-9]+)?", RegexOption.IGNORE_CASE)) }
-    val compatibleModel = "XT2607-1" in technicalModels && technicalModels.all { it == "XT2607-1" }
+    val distinctModels=technicalModels.distinct()
+    val modelConflict=distinctModels.size>1
+    val resolvedModel=if(modelConflict)"" else distinctModels.singleOrNull()?:model
     val channels = listOf(property("ro.boot.carrier"), property("ro.carrier")).filter { it.isNotBlank() }.distinct()
 
     val suffixProperty = property("ro.boot.slot_suffix")
@@ -49,7 +51,7 @@ fun Inspection.toDeviceState(): DeviceState {
     val consistentCode = stableVersionFormat && versionParts.size == 2 && code == versionParts[0] * 1000 + versionParts[1] * 100
 
     val partitionLines = rootProbe(ReadOnlyProbe.PARTITIONS).lineSequence().filter { it.isNotBlank() }.toList()
-    val partitionPattern = Regex("(?:init_boot|vendor_boot|boot)_[ab]=[0-9]+")
+    val partitionPattern = Regex("(?:init_boot|vendor_boot|boot)(?:_[ab])?=[0-9]+")
     val partitionNames = partitionLines.map { it.substringBefore('=') }
     val partitionsValid = partitionLines.all { line -> partitionPattern.matches(line) && line.substringAfter('=').toLongOrNull()?.let { it in 1..536_870_912L } == true } &&
         partitionNames.distinct().size == partitionNames.size
@@ -76,20 +78,34 @@ fun Inspection.toDeviceState(): DeviceState {
     val kernelVerifiedBoot = if (rootGranted) kernelBootConfig["verifiedbootstate"]?.takeIf { it in setOf("orange", "green", "yellow", "red") }.orEmpty() else ""
     val securityMismatch = (kernelUnlocked != null && lockObservations.any { it != kernelUnlocked }) ||
         (kernelVerifiedBoot.isNotBlank() && property("ro.boot.verifiedbootstate").let { it.isNotBlank() && it != kernelVerifiedBoot })
+    val virtualAb=when(property("ro.virtual_ab.enabled")){"true"->true;"false"->false;else->null}
+    val observedSnapshot=if(rootGranted)runCatching {SnapshotState.valueOf(snapshot.state)}.getOrDefault(SnapshotState.UNKNOWN)else SnapshotState.UNKNOWN
+    val snapshotState=if(virtualAb==false && observedSnapshot in setOf(SnapshotState.UNKNOWN,SnapshotState.NONE))SnapshotState.NOT_APPLICABLE else observedSnapshot
+    val bootPattern=Regex("[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}")
+    val plainBoot=probe(ReadOnlyProbe.BOOT_ID).takeIf(bootPattern::matches)
+    val rootBoot=rootProbe(ReadOnlyProbe.ROOT_BOOT_ID).takeIf(bootPattern::matches)
+    val bootConflict=plainBoot!=null && rootBoot!=null && plainBoot!=rootBoot
+    val observedBoot=if(bootConflict)"" else rootBoot?:plainBoot.orEmpty()
+    val conflicts=buildList {
+        if(modelConflict)add("MODEL_CONFLICT")
+        if(channels.size>1)add("CHANNEL_CONFLICT")
+        if(sourceSlots.size>1 || suffixInvalid || nameInvalid || malformedIndex || malformedCount)add("SLOT_CONFLICT")
+        if(bootConflict)add("BOOT_ID_CONFLICT")
+    }
     return DeviceState(
-        manufacturer = property("ro.product.manufacturer"), model = if (compatibleModel) "XT2607-1" else model.takeUnless { it == "XT2607-1" }.orEmpty(),
+        manufacturer = property("ro.product.manufacturer"), model = resolvedModel,
         device = property("ro.product.device"), channel = channels.singleOrNull().orEmpty(),
         androidVersion = property("ro.build.version.release"), build = property("ro.build.id"),
         fingerprint = property("ro.build.fingerprint"), vendorFingerprint = property("ro.vendor.build.fingerprint"),
         securityPatch = property("ro.build.version.security_patch"), slot = slot,
         rootGranted = rootGranted, rootChecked = rootChecked,
         magiskVersion = version.takeIf { stableVersionFormat }.orEmpty(), magiskCode = code.takeIf { consistentCode } ?: 0,
-        virtualAb = when (property("ro.virtual_ab.enabled")) { "true" -> true; "false" -> false; else -> null },
-        snapshot = if (rootGranted) runCatching { SnapshotState.valueOf(snapshot.state) }.getOrDefault(SnapshotState.UNKNOWN) else SnapshotState.UNKNOWN,
+        virtualAb = virtualAb,
+        snapshot = snapshotState,
         engine = if (rootGranted) runCatching { EngineState.valueOf(engine) }.getOrDefault(EngineState.UNKNOWN) else EngineState.UNKNOWN,
         batteryPercent = property("batteryPercent").toIntOrNull()?.takeIf { it in 0..100 } ?: -1,
         freeBytes = property("freeBytes").toLongOrNull()?.takeIf { it >= 0 } ?: -1,
-        bootId = probe(ReadOnlyProbe.BOOT_ID).takeIf { it.matches(Regex("[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}")) }.orEmpty(),
+        bootId = observedBoot,
         partitions = if (partitionsValid) partitionNames else emptyList(),
         modules = if (modulesValid) modules else emptyList(), capturedAtMillis = inspectedAtMillis,
         bootSuccessful = bootSuccessful, bootloaderUnlocked = kernelUnlocked ?: lockObservations.singleOrNull(),
@@ -97,6 +113,10 @@ fun Inspection.toDeviceState(): DeviceState {
         buildTimestamp = property("ro.build.date.utc").toLongOrNull()?.takeIf { it > 0 } ?: 0,
         moduleInventoryKnown = rootGranted && modulesProbe?.successful == true && modulesValid,
         securityPropertyMismatch = securityMismatch,
-        securityEvidenceSource = if (kernelVerifiedBoot.isNotBlank() && kernelUnlocked != null) "KERNEL_BOOTCONFIG" else "ANDROID_PROPERTIES"
+        securityEvidenceSource = if (kernelVerifiedBoot.isNotBlank() && kernelUnlocked != null) "KERNEL_BOOTCONFIG" else "ANDROID_PROPERTIES",
+        sdkInt=property("ro.build.version.sdk").toIntOrNull()?.takeIf {it>0}?:0,
+        abUpdate=when(property("ro.build.ab_update")){"true"->true;"false"->false;else->if(rootGranted && bootControl?.slotCount==2 && slot.isNotBlank())true else null},
+        partitionInventoryKnown=rootGranted && successful(ReadOnlyProbe.PARTITIONS)!=null && partitionsValid,
+        identityConflicts=conflicts
     )
 }

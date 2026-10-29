@@ -52,8 +52,13 @@ class DownloadController(context: Context) {
         expectedSha256: String? = null,
         wifiOnly: Boolean = false
     ): String = action {
-        require(device.exactProfileMatch && !device.simulated && device.build.matches(BUILD) && device.fingerprint.isNotBlank()) {
-            "Download requires the observed target device profile"
+        require(device.manufacturer.equals("motorola", true) && !device.simulated && device.identityConflicts.isEmpty() &&
+            device.model.matches(Regex("[A-Za-z0-9][A-Za-z0-9_.+ -]{0,79}")) &&
+            device.device.matches(Regex("[A-Za-z0-9_.+-]{1,128}")) && device.channel.matches(Regex("[A-Za-z0-9_.+-]{1,128}")) &&
+            device.build.matches(BUILD) && MotorolaFingerprint.parse(device.fingerprint)?.let {
+                it.device == device.device && it.build == device.build
+            } == true) {
+            "Download requires a consistent observed Motorola identity"
         }
         require(targetBuild.matches(BUILD) && targetBuild != device.build) { "A new explicit target build is required" }
         require(expectedBytes == null || expectedBytes in 1..FirmwareValidator.MAX_PACKAGE_BYTES)

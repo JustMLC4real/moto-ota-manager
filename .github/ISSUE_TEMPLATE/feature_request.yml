@@ -1,0 +1,21 @@
+name: Feature or device evidence / Functie of toestelbewijs
+description: Propose a change or provide non-destructive, sanitized Motorola evidence.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and expected outcome / Probleem en gewenste uitkomst
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and current limits / Bewijs en huidige grenzen
+      description: Do not submit firmware, raw root logs, IMEI/serial numbers or signed URLs. A feature request never authorizes a phone write.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope / Afbakening
+      options:
+        - label: This request contains no private device data or authorization to flash, install or reboot. / Dit verzoek bevat geen persoonlijke gegevens of schrijftoestemming.
+          required: true

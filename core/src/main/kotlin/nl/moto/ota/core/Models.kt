@@ -1,7 +1,7 @@
 package nl.moto.ota.core
 
 /** UNKNOWN is a safety state, never an alias for idle or completed. */
-enum class SnapshotState { UNKNOWN, NONE, INITIATED, UNVERIFIED, MERGING, MERGE_NEEDS_REBOOT, FAILED, CANCELLED, COMPLETE }
+enum class SnapshotState { UNKNOWN, NONE, INITIATED, UNVERIFIED, MERGING, MERGE_NEEDS_REBOOT, FAILED, CANCELLED, COMPLETE, NOT_APPLICABLE }
 enum class EngineState { UNKNOWN, IDLE, DOWNLOADING, VERIFYING, FINALIZING, UPDATED_NEED_REBOOT, ERROR }
 
 /** Immutable observations. Defaults deliberately do not describe a compatible device. */
@@ -37,11 +37,17 @@ data class DeviceState(
     val moduleInventoryKnown: Boolean = false,
     val rootChecked: Boolean = false,
     val securityPropertyMismatch: Boolean = false,
-    val securityEvidenceSource: String = "ANDROID_PROPERTIES"
+    val securityEvidenceSource: String = "ANDROID_PROPERTIES",
+    val sdkInt: Int = 0,
+    val abUpdate: Boolean? = null,
+    val partitionInventoryKnown: Boolean = false,
+    /** Categorical conflicts only; raw property values remain in private diagnostics. */
+    val identityConflicts: List<String> = emptyList()
 ) {
     val inactiveSlot: String get() = when (slot) { "_a" -> "_b"; "_b" -> "_a"; else -> "" }
     val exactProfileMatch: Boolean get() = manufacturer.equals("motorola", true) &&
         model == "XT2607-1" && device == "merc" && channel == "reteu"
 }
 
-data class CheckResult(val code: String, val message: String)
+data class CheckResult(val code: String, val message: String,
+                       val presentationKey: String? = null, val presentationArgs: List<String> = emptyList())

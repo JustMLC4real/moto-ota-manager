@@ -9,6 +9,9 @@ import sys
 import zipfile
 from pathlib import Path
 
+if not __debug__:
+    raise RuntimeError('Run verification without Python optimization; assertions must remain enabled')
+
 
 def verify(apk: Path) -> list[dict]:
     records = []

@@ -15,13 +15,14 @@ import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.RandomAccessFile
+import java.io.FileDescriptor
 import java.security.MessageDigest
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 
 /**
- * Narrow, explicit-consent live writer for the audited 8 MiB init_boot profile.
+ * Proof-qualified streaming boot/init_boot A/B stock writer on reviewed API 33–37.
  * Never sources Magisk scripts, calls bootctl, changes slots/settings, installs OTA,
  * resets update state, restores a backup automatically or reboots.
  *
@@ -33,20 +34,23 @@ import kotlin.concurrent.thread
 object StockRestoreProbe {
     private const val ROOT="/data/user/0/nl.moto.ota/files/update"
     private const val BY_NAME="/dev/block/by-name/"
-    private const val IMAGE_BYTES=8_388_608L
     private var deadlineElapsedMillis=0L
+    @Volatile private var writeInProgress=false
 
     @JvmStatic fun main(args:Array<String>) {
-        deadlineElapsedMillis=SystemClock.elapsedRealtime()+55_000
+        deadlineElapsedMillis=SystemClock.elapsedRealtime()+600_000
         // Killing su alone is not a guarantee that its child has exited. Bound this
         // exact dedicated process too, including a hung OEM Binder call.
         val watchdog=thread(isDaemon=true,name="moto-stock-restore-deadline") {
-            try { Thread.sleep(55_000) }catch(_:InterruptedException){return@thread}
+            try { Thread.sleep(600_000) }catch(_:InterruptedException){return@thread}
+            // A deadline may reject a preparation. It must not deliberately tear
+            // an in-progress block write. A lost result is observation-only recovery.
+            while(writeInProgress){try{Thread.sleep(1000)}catch(_:InterruptedException){return@thread}}
             System.out.println("{\"error\":\"RESTORE_PROCESS_DEADLINE\"}");System.out.flush()
             Runtime.getRuntime().halt(70)
         }
         try {
-            if(android.os.Process.myUid()!=0 || Build.VERSION.SDK_INT!=37 || args.size!=2 || args[0] !in setOf("observe","execute","recover","verify-unchanged"))
+            if(android.os.Process.myUid()!=0 || Build.VERSION.SDK_INT !in DeviceCapabilities.supportedRestoreSdks || args.size!=2 || args[0] !in setOf("observe","execute","recover","verify-unchanged"))
                 throw UpdateSafetyException("UNSUPPORTED_RESTORE_RUNTIME")
             require(args[1].matches(Regex("[a-f0-9-]{36}")))
             val root=File(ROOT).canonicalFile
@@ -58,7 +62,7 @@ object StockRestoreProbe {
             val request=privateFile(File(tx,"request.properties"),owner,16_384)
             val requestBytes=request.inputStream().use { it.readNBytes(16_385) };require(requestBytes.size<=16_384)
             val (plan,consent)=StockRestorePlanCodec.decode(requestBytes.toString(Charsets.UTF_8))
-            require(plan.transactionId==args[1] && plan.mode==ExecutionMode.LIVE && plan.imageBytes==IMAGE_BYTES)
+            require(plan.transactionId==args[1] && plan.mode==ExecutionMode.LIVE && plan.partitionType in setOf("boot","init_boot") && plan.imageBytes in 4096..BootImageStreams.MAX_IMAGE_BYTES)
             val result=when(args[0]) {
                 "observe" -> RestoreRootProtocol.observation(observe(plan,tx,owner))
                 "recover" -> RestoreRootProtocol.receipt(recover(plan,tx,owner))
@@ -77,7 +81,7 @@ object StockRestoreProbe {
 
     private fun observe(plan:StockRestorePlan,tx:File,owner:Int):RestoreEnvironment {
         val started=System.currentTimeMillis()
-        require(android.os.Process.myUid()==0 && Build.VERSION.SDK_INT==37)
+        require(android.os.Process.myUid()==0 && Build.VERSION.SDK_INT in DeviceCapabilities.supportedRestoreSdks)
         fun property(name:String)=command(listOf("/system/bin/getprop",name)).trim()
         val slot=property("ro.boot.slot_suffix")
         require(slot in setOf("_a","_b"))
@@ -91,17 +95,19 @@ object StockRestoreProbe {
         val index=if(slot=="_a")0 else 1
         require(control.slotCount==2 && control.slots[index].markedSuccessful && !control.slots[index].verityCorrupted)
         require(control.recordedSlotSuffix.isEmpty() || control.recordedSlotSuffix==slot)
+        val virtualAb=when(property("ro.virtual_ab.enabled")){"true"->true;"false"->false;else->throw UpdateSafetyException("SNAPSHOT_METADATA_UNPROVEN")}
         val vab=RandomAccessFile(misc,"r").use { f -> f.seek(32768);ByteArray(64).also { f.readFully(it) } }.let(ReadOnlyMetadata::parseVirtualAb)
-            ?: throw UpdateSafetyException("SNAPSHOT_METADATA_UNPROVEN")
-        require(vab.mergeStatus==VirtualAbMergeStatus.NONE)
+        if(virtualAb)require(vab?.mergeStatus==VirtualAbMergeStatus.NONE)
+        else require(vab==null || vab.mergeStatus==VirtualAbMergeStatus.NONE)
         val state=File("/metadata/ota/state")
-        require(state.isFile && state.length()<=65_536)
-        val snapshot=ReadOnlyMetadata.parseSnapshotState(state.readBytes())
-        require(snapshot?.state==SnapshotState.NONE)
+        if(virtualAb || state.exists()){
+            require(state.isFile && state.length()<=65_536)
+            val raw=state.inputStream().use {it.readNBytes(65_537)}
+            require(raw.size<=65_536 && state.length()==raw.size.toLong() && ReadOnlyMetadata.parseSnapshotState(raw)?.state==SnapshotState.NONE)
+        }
         val snapshots=File("/metadata/ota/snapshots")
-        require(snapshots.isDirectory && snapshots.list()?.isEmpty()==true)
+        if(virtualAb || snapshots.exists())require(snapshots.isDirectory && snapshots.list()?.isEmpty()==true)
         if(!freshEngineIdle())throw UpdateSafetyException("ENGINE_NOT_PROVEN_IDLE")
-        require(property("ro.virtual_ab.enabled")=="true")
         val magisk=command(listOf("/system/bin/sh","-c","magisk -V")).trim().toIntOrNull()
         require(magisk==31100)
         val autoDisabled=command(listOf("/system/bin/settings","get","global","ota_disable_automatic_update")).trim()=="1"
@@ -113,34 +119,38 @@ object StockRestoreProbe {
             require(it.name.matches(Regex("[A-Za-z0-9_.-]{1,128}")))
             it.name+"|"+(if(File(it,"disable").exists())"disabled" else "enabled")+(if(File(it,"remove").exists())"|pending-removal" else "")
         }?.sorted() ?: throw UpdateSafetyException("MODULES_UNREADABLE")
-        val current=block("init_boot$slot");val other=block("init_boot"+if(slot=="_a")"_b"else"_a")
-        require(blockBytes(current)==IMAGE_BYTES && blockBytes(other)==IMAGE_BYTES)
+        val current=block(plan.partitionType+slot);val other=block(plan.partitionType+if(slot=="_a")"_b"else"_a")
+        require(blockBytes(current)==plan.imageBytes && blockBytes(other) in 4096..BootImageStreams.MAX_IMAGE_BYTES)
+        require(Os.stat(current.path).st_rdev!=Os.stat(other.path).st_rdev)
         val manufacturer=property("ro.product.manufacturer")
         val technicalModels=listOf(property("ro.boot.hardware.sku"),property("ro.boot.product.hardware.sku"),property("ro.product.model")).filter { it.matches(Regex("XT[0-9]+(?:-[0-9]+)?",RegexOption.IGNORE_CASE)) }.distinct()
-        val sku=if(technicalModels==listOf("XT2607-1"))"XT2607-1"else""
+        val sku=if(technicalModels.size>1)""else technicalModels.singleOrNull()?:property("ro.product.model")
         val channels=listOf(property("ro.boot.carrier"),property("ro.carrier")).filter { it.isNotBlank() }.distinct()
-        val channel=if(channels==listOf("reteu"))"reteu"else""
+        val channel=channels.singleOrNull().orEmpty()
+        val abProperty=when(property("ro.build.ab_update")){"true"->true;"false"->false;else->true} // CRC-verified two-slot boot-control above is positive evidence.
         val device=DeviceState(manufacturer=manufacturer,model=sku,device=property("ro.product.device"),channel=channel,
             androidVersion=property("ro.build.version.release"),build=property("ro.build.id"),fingerprint=property("ro.build.fingerprint"),slot=slot,
-            rootGranted=true,rootChecked=true,magiskCode=magisk?:0,magiskVersion="31.1",virtualAb=true,snapshot=SnapshotState.NONE,engine=EngineState.IDLE,
+            rootGranted=true,rootChecked=true,magiskCode=magisk?:0,magiskVersion="31.1",virtualAb=virtualAb,snapshot=if(virtualAb)SnapshotState.NONE else SnapshotState.NOT_APPLICABLE,engine=EngineState.IDLE,
             batteryPercent=battery,freeBytes=StatFs(tx.path).availableBytes,bootId=File("/proc/sys/kernel/random/boot_id").readText().trim(),
-            partitions=listOf("init_boot_a","init_boot_b"),modules=moduleList,moduleInventoryKnown=true,capturedAtMillis=started,
-            bootSuccessful=true,bootloaderUnlocked=true,verifiedBootState="orange",securityEvidenceSource="KERNEL_BOOTCONFIG")
-        val source=privateFile(File(tx,"stock.img"),owner,IMAGE_BYTES)
-        val reference=StockReference(plan.stockSha256,IMAGE_BYTES,plan.build,plan.fingerprint,plan.device,plan.model,plan.channel,
-            authenticityVerified=true,evidence="App-private HMAC-bound stock claim; app verifies authenticated OTA provenance")
-        val validation=source.inputStream().use { BackupValidator.inspect(it,false,IMAGE_BYTES,device,reference) }
+            partitions=listOf(plan.partitionType+"_a",plan.partitionType+"_b"),modules=moduleList,moduleInventoryKnown=true,capturedAtMillis=started,
+            bootSuccessful=true,bootloaderUnlocked=true,verifiedBootState="orange",securityEvidenceSource="KERNEL_BOOTCONFIG",sdkInt=Build.VERSION.SDK_INT,
+            abUpdate=abProperty,partitionInventoryKnown=true,identityConflicts=buildList{if(technicalModels.size>1)add("MODEL_CONFLICT");if(channels.size>1)add("CHANNEL_CONFLICT")})
+        val source=privateFile(File(tx,"stock.img"),owner,plan.imageBytes)
+        val reference=StockReference(plan.stockSha256,plan.imageBytes,plan.build,plan.fingerprint,plan.device,plan.model,plan.channel,
+            partition=plan.partitionType,authenticityVerified=true,evidence="App-private HMAC-bound authenticated current partition bytes; no OTA-install authorization")
+        val validation=source.inputStream().use { BackupValidator.inspect(it,false,plan.imageBytes,device,reference,plan.partitionType) }
         if(!validation.usableAsStock)throw UpdateSafetyException("STOCK_PROVENANCE")
         // Independent association with the image that actually booted Magisk:
         // getprop identity can legitimately be spoofed by a root module.
-        if(!MagiskRuntimeConfig.matchesStock(runtimeStockSha1(),validation))throw UpdateSafetyException("MAGISK_BACKUP_ASSOCIATION_MISMATCH")
-        val environment=RestoreEnvironment(device,IMAGE_BYTES,digestBlock(current),autoDisabled,validation,ExecutionMode.LIVE,SystemClock.elapsedRealtime())
+        val runtimeSha1=runtimeStockSha1()
+        if(!MagiskRuntimeConfig.matchesStock(runtimeSha1,validation))throw UpdateSafetyException("MAGISK_BACKUP_ASSOCIATION_MISMATCH")
+        val environment=RestoreEnvironment(device,plan.imageBytes,digestBlock(current,plan.imageBytes),autoDisabled,validation,ExecutionMode.LIVE,SystemClock.elapsedRealtime(),plan.partitionType,runtimeSha1)
         val blockers=StockRestorePolicy.blockers(environment)
         if(blockers.isNotEmpty())throw UpdateSafetyException(blockers.first().code)
         return environment
     }
 
-    private fun runtimeStockSha1():String {
+    internal fun runtimeStockSha1():String {
         val path=MagiskRuntimeConfig.configPath(command(listOf("/system/bin/sh","-c","magisk --path")))
             ?: throw UpdateSafetyException("MAGISK_RUNTIME_PATH_UNSUPPORTED")
         try {
@@ -179,18 +189,18 @@ object StockRestoreProbe {
             RandomAccessFile(File(root,"stock-restore.lock"),"rw").channel.use { channel ->
                 val lock=channel.tryLock() ?: throw UpdateSafetyException("RESTORE_ALREADY_RUNNING")
                 lock.use {
-                    StockRestorePolicy.verify(plan,consent,secret,observe(plan,tx,owner))
-                    val source=privateFile(File(tx,"stock.img"),owner,IMAGE_BYTES).inputStream().use { it.readNBytes(IMAGE_BYTES.toInt()+1) }
-                    require(source.size.toLong()==IMAGE_BYTES && digest(source)==plan.stockSha256)
+                    val initial=observe(plan,tx,owner)
+                    StockRestorePolicy.verify(plan,consent,secret,initial)
+                    val authority=RootRunAuthority.verify(owner,plan.runId,File(tx,"operation.properties"),RunAction.RESTORE_STOCK,initial.device)
+                    val source=privateFile(File(tx,"stock.img"),owner,plan.imageBytes)
+                    require(source.length()==plan.imageBytes && RestoreRootProtocol.digest(source)==plan.stockSha256)
                     checkpoint(tx,owner,RestoreCheckpoint.PREPARED,plan,"")
                     val target=block(plan.partition)
                     val backup=File(tx,"patched-backup.img")
                     if(!backup.exists()) {
-                        val current=readBlock(target)
-                        require(digest(current)==plan.previousImageSha256)
-                        writeOwned(backup,current,owner)
+                        require(copyBlockBackup(target,backup,plan.imageBytes,owner)==plan.previousImageSha256)
                     }
-                    backupHash=RestoreRootProtocol.digest(privateFile(backup,owner,IMAGE_BYTES))
+                    backupHash=RestoreRootProtocol.digest(privateFile(backup,owner,plan.imageBytes))
                     if(backupHash!=plan.previousImageSha256)throw UpdateSafetyException("BACKUP_MISMATCH")
                     checkpoint(tx,owner,RestoreCheckpoint.BACKUP_VERIFIED,plan,backupHash)
                     val marker=File(tx,"consent.consumed")
@@ -198,30 +208,44 @@ object StockRestoreProbe {
                     catch(_:Exception){throw UpdateSafetyException("CONSENT_ALREADY_CONSUMED")}
                     try { val b=consent.macSha256.toByteArray(Charsets.US_ASCII);Os.write(markerFd,b,0,b.size);Os.fsync(markerFd) }finally { Os.close(markerFd) }
                     syncDirectory(tx)
+                    RootRunAuthority.consume(authority,owner)
                     checkpoint(tx,owner,RestoreCheckpoint.TOKEN_CONSUMED,plan,backupHash)
                     // Every guard and the complete current partition hash are measured again
                     // after durable backup and immediately before opening the write descriptor.
                     val immediatelyBeforeWrite=observe(plan,tx,owner)
                     StockRestorePolicy.verify(plan,consent,secret,immediatelyBeforeWrite)
-                    require(digest(source)==plan.stockSha256)
-                    if(SystemClock.elapsedRealtime()>deadlineElapsedMillis-10_000)throw UpdateSafetyException("INSUFFICIENT_WRITE_TIME_RESERVE")
+                    require(RestoreRootProtocol.digest(source)==plan.stockSha256)
+                    RootRunAuthority.verify(owner,plan.runId,File(tx,"operation.properties"),RunAction.RESTORE_STOCK,immediatelyBeforeWrite.device)
+                    if(SystemClock.elapsedRealtime()>deadlineElapsedMillis-120_000)throw UpdateSafetyException("INSUFFICIENT_WRITE_TIME_RESERVE")
                     checkpoint(tx,owner,RestoreCheckpoint.WRITE_STARTED,plan,backupHash)
                     StockRestorePolicy.verify(plan,consent,secret,immediatelyBeforeWrite.copy(elapsedRealtimeMillis=SystemClock.elapsedRealtime()))
-                    if(SystemClock.elapsedRealtime()>deadlineElapsedMillis-10_000)throw UpdateSafetyException("INSUFFICIENT_WRITE_TIME_RESERVE")
-                    val fd=Os.open(target.path,OsConstants.O_RDWR or OsConstants.O_CLOEXEC or OsConstants.O_NOFOLLOW,0)
+                    if(SystemClock.elapsedRealtime()>deadlineElapsedMillis-120_000)throw UpdateSafetyException("INSUFFICIENT_WRITE_TIME_RESERVE")
+                    val sourceFd=Os.open(source.path,OsConstants.O_RDONLY or OsConstants.O_CLOEXEC or OsConstants.O_NOFOLLOW,0)
+                    val sourceStat=Os.fstat(sourceFd)
+                    require(OsConstants.S_ISREG(sourceStat.st_mode) && sourceStat.st_uid==owner && sourceStat.st_size==plan.imageBytes)
+                    require(RootUpdateFacts.digestDescriptor(sourceFd,plan.imageBytes,owner)==plan.stockSha256)
+                    val namedSource=Os.lstat(source.path)
+                    require(namedSource.st_dev==sourceStat.st_dev && namedSource.st_ino==sourceStat.st_ino)
+                    val fd=try{Os.open(target.path,OsConstants.O_RDWR or OsConstants.O_CLOEXEC or OsConstants.O_NOFOLLOW,0)}catch(e:Exception){Os.close(sourceFd);throw e}
                     try {
                         val stat=Os.fstat(fd)
                         require(OsConstants.S_ISBLK(stat.st_mode) && stat.st_rdev==Os.stat(target.path).st_rdev)
-                        require(blockBytes(target)==IMAGE_BYTES)
+                        require(blockBytes(target)==plan.imageBytes)
                         Os.lseek(fd,0,OsConstants.SEEK_SET)
                         StockRestorePolicy.verify(plan,consent,secret,immediatelyBeforeWrite.copy(elapsedRealtimeMillis=SystemClock.elapsedRealtime()))
-                        if(SystemClock.elapsedRealtime()>deadlineElapsedMillis-10_000)throw UpdateSafetyException("INSUFFICIENT_WRITE_TIME_RESERVE")
+                        if(SystemClock.elapsedRealtime()>deadlineElapsedMillis-120_000)throw UpdateSafetyException("INSUFFICIENT_WRITE_TIME_RESERVE")
+                        authority.recheck()
+                        writeInProgress=true
                         writeStarted=true
-                        var position=0
-                        while(position<source.size){val count=Os.write(fd,source,position,minOf(65_536,source.size-position));require(count>0);position+=count}
+                        val written=streamExact(sourceFd,plan.imageBytes){buffer,count ->
+                            var at=0;while(at<count){val n=Os.write(fd,buffer,at,count-at);require(n>0);at+=n}
+                        }
+                        require(written==plan.stockSha256)
+                        val sourceAfter=Os.fstat(sourceFd)
+                        require(sourceAfter.st_size==sourceStat.st_size && sourceAfter.st_mtime==sourceStat.st_mtime && sourceAfter.st_ctime==sourceStat.st_ctime)
                         Os.fsync(fd)
-                    }finally { Os.close(fd) }
-                    val observed=digestBlock(target)
+                    }finally { Os.close(fd);Os.close(sourceFd);writeInProgress=false }
+                    val observed=digestBlock(target,plan.imageBytes)
                     if(observed!=plan.stockSha256)throw UpdateSafetyException("READBACK_MISMATCH")
                     checkpoint(tx,owner,RestoreCheckpoint.STOCK_VERIFIED,plan,backupHash)
                     return StockRestoreResult(plan.transactionId,RestoreCheckpoint.STOCK_VERIFIED,observed,backupHash,true)
@@ -230,7 +254,7 @@ object StockRestoreProbe {
         }catch(error:Exception){
             val code=(error as? UpdateSafetyException)?.code ?: if(writeStarted)"WRITE_INTERRUPTED_REQUIRES_REVIEW"else"RESTORE_GUARD_REJECTED"
             checkpoint(tx,owner,RestoreCheckpoint.RECOVERY_REQUIRED,plan,backupHash)
-            return StockRestoreResult(plan.transactionId,RestoreCheckpoint.RECOVERY_REQUIRED,runCatching { digestBlock(block(plan.partition)) }.getOrDefault(""),backupHash,false,code)
+            return StockRestoreResult(plan.transactionId,RestoreCheckpoint.RECOVERY_REQUIRED,runCatching { digestBlock(block(plan.partition),plan.imageBytes) }.getOrDefault(""),backupHash,false,code)
         }
     }
 
@@ -248,8 +272,8 @@ object StockRestoreProbe {
         val currentBuild=command(listOf("/system/bin/getprop","ro.build.id")).trim()
         val currentFingerprint=command(listOf("/system/bin/getprop","ro.build.fingerprint")).trim()
         val backup=File(tx,"patched-backup.img")
-        val backupHash=runCatching { RestoreRootProtocol.digest(privateFile(backup,owner,IMAGE_BYTES)) }.getOrDefault("")
-        val observed=runCatching { digestBlock(block(plan.partition)) }.getOrDefault("")
+        val backupHash=runCatching { RestoreRootProtocol.digest(privateFile(backup,owner,plan.imageBytes)) }.getOrDefault("")
+        val observed=runCatching { digestBlock(block(plan.partition),plan.imageBytes) }.getOrDefault("")
         val restored=currentBoot==plan.bootId && currentSlot==plan.slot && currentBuild==plan.build && currentFingerprint==plan.fingerprint && observed==plan.stockSha256 && backupHash==plan.previousImageSha256
         val unchanged=currentBoot==plan.bootId && currentSlot==plan.slot && currentBuild==plan.build && currentFingerprint==plan.fingerprint && observed==plan.previousImageSha256 && backupHash==plan.previousImageSha256
         if(unchanged && !restored)return StockRestoreResult(plan.transactionId,RestoreCheckpoint.SOURCE_UNCHANGED_VERIFIED,observed,backupHash,false,"PREVIOUS_PATCHED_IMAGE_UNCHANGED")
@@ -264,8 +288,7 @@ object StockRestoreProbe {
                 require(d.bootId==plan.bootId && d.slot==plan.slot && d.build==plan.build && d.fingerprint==plan.fingerprint && env.activeImageSha256==plan.previousImageSha256)
                 val backup=File(tx,"patched-backup.img")
                 if(!backup.exists()){
-                    val current=readBlock(block(plan.partition));require(digest(current)==plan.previousImageSha256)
-                    writeOwned(backup,current,owner);syncDirectory(tx)
+                    require(copyBlockBackup(block(plan.partition),backup,plan.imageBytes,owner)==plan.previousImageSha256);syncDirectory(tx)
                 }
                 val result=recoverLocked(plan,tx,owner)
                 if(result.checkpoint!=RestoreCheckpoint.SOURCE_UNCHANGED_VERIFIED)throw UpdateSafetyException("SOURCE_NOT_UNCHANGED")
@@ -285,18 +308,37 @@ object StockRestoreProbe {
     }
 
     private fun block(name:String):File {
-        require(name in setOf("misc","init_boot_a","init_boot_b"))
+        require(name in setOf("misc","init_boot_a","init_boot_b","boot_a","boot_b"))
         val file=File(BY_NAME+name).canonicalFile
         require(file.path.startsWith("/dev/block/") && OsConstants.S_ISBLK(Os.stat(file.path).st_mode))
         return file
     }
     private fun blockBytes(file:File):Long=command(listOf("/system/bin/blockdev","--getsize64",file.path)).trim().toLong()
-    private fun readBlock(file:File):ByteArray=ByteArray(IMAGE_BYTES.toInt()).also { bytes ->
-        require(blockBytes(file)==IMAGE_BYTES)
-        file.inputStream().use { input -> var p=0;while(p<bytes.size){val n=input.read(bytes,p,bytes.size-p);require(n>0);p+=n};require(input.read()==-1) }
+    private fun digestBlock(file:File,bytes:Long):String {
+        require(bytes in 4096..BootImageStreams.MAX_IMAGE_BYTES && blockBytes(file)==bytes)
+        val fd=Os.open(file.path,OsConstants.O_RDONLY or OsConstants.O_CLOEXEC or OsConstants.O_NOFOLLOW,0)
+        try{require(OsConstants.S_ISBLK(Os.fstat(fd).st_mode));return streamExact(fd,bytes)}finally{Os.close(fd)}
     }
-    private fun digestBlock(file:File):String=digest(readBlock(file))
-    private fun digest(bytes:ByteArray)=MessageDigest.getInstance("SHA-256").digest(bytes).joinToString(""){"%02x".format(it.toInt() and 255)}
+    private fun streamExact(fd:FileDescriptor,bytes:Long,consume:(ByteArray,Int)->Unit={_,_->}):String {
+        val hash=MessageDigest.getInstance("SHA-256");val buffer=ByteArray(65_536);var remaining=bytes
+        while(remaining>0){val n=Os.read(fd,buffer,0,minOf(buffer.size.toLong(),remaining).toInt());require(n>0);hash.update(buffer,0,n);consume(buffer,n);remaining-=n}
+        require(Os.read(fd,buffer,0,1)==0)
+        return hash.digest().joinToString(""){"%02x".format(it.toInt() and 255)}
+    }
+    private fun copyBlockBackup(source:File,destination:File,bytes:Long,owner:Int):String {
+        require(!destination.exists() && blockBytes(source)==bytes)
+        val pending=File(destination.parentFile,destination.name+".pending")
+        val out=Os.open(pending.path,OsConstants.O_WRONLY or OsConstants.O_CREAT or OsConstants.O_EXCL or OsConstants.O_NOFOLLOW or OsConstants.O_CLOEXEC,0x180)
+        var hash=""
+        try{
+            val input=Os.open(source.path,OsConstants.O_RDONLY or OsConstants.O_NOFOLLOW or OsConstants.O_CLOEXEC,0)
+            try{require(OsConstants.S_ISBLK(Os.fstat(input).st_mode));hash=streamExact(input,bytes){buffer,count->var at=0;while(at<count){val n=Os.write(out,buffer,at,count-at);require(n>0);at+=n}}}finally{Os.close(input)}
+            Os.fchown(out,owner,owner);Os.fsync(out)
+        }finally{Os.close(out)}
+        require(pending.length()==bytes && RestoreRootProtocol.digest(pending)==hash)
+        Os.rename(pending.path,destination.path);syncDirectory(requireNotNull(destination.parentFile))
+        return hash
+    }
     private fun privateFile(file:File,owner:Int,maxBytes:Long):File {
         val stat=Os.lstat(file.path)
         require(file.canonicalPath==file.path && OsConstants.S_ISREG(stat.st_mode) && stat.st_uid==owner && stat.st_mode and 0x03f==0 && stat.st_size in 1..maxBytes)

@@ -1,26 +1,40 @@
-name: Diagnose of softwarefout
-description: Meld een fout zonder persoonlijke toestelgegevens of firmwaretokens.
+name: Bug report / Softwarefout
+description: Report reproducible behavior using a sanitized diagnostic report.
 body:
+  - type: markdown
+    attributes:
+      value: |
+        English or Dutch is welcome. / Nederlands of Engels is welkom.
+        Never attach firmware, signing keys, IMEI/serial numbers, boot IDs, accounts,
+        signed OTA URLs or raw updater XML. Gebruik uitsluitend geschoonde gegevens.
   - type: textarea
     id: observed
     attributes:
-      label: Wat gebeurde er?
-      description: Geef stappen, verwachte uitkomst en werkelijke uitkomst. Geen getekende download-URL of ruwe XML.
+      label: Steps and observed behavior / Stappen en waarneming
+      description: Include the expected result and the actual result; state whether this was simulation.
     validations:
       required: true
-  - type: textarea
-    id: diagnostic
-    attributes:
-      label: Geanonimiseerd rapport
-      description: Gebruik uitsluitend het rapport uit de app; controleer het voor het plaatsen.
   - type: input
     id: version
     attributes:
-      label: Appversie of commit
+      label: App version and build type / Appversie en buildtype
+      placeholder: 1.0.0 release, or debug with commit
+    validations:
+      required: true
+  - type: input
+    id: profile
+    attributes:
+      label: Model, codename, channel, Android and Magisk version
+      description: General profile only. Geen unieke toestelidentificatie.
+  - type: textarea
+    id: diagnostic
+    attributes:
+      label: Sanitized in-app report / Geschoond rapport uit de app
+      description: Review the exported report before sharing; do not attach raw root logs.
   - type: checkboxes
     id: privacy
     attributes:
-      label: Controle
+      label: Privacy
       options:
-        - label: Ik heb geen IMEI, serienummer, accounts of ondertekende URL's toegevoegd.
+        - label: I removed unique IDs, accounts, private keys and signed URLs. / Ik heb persoonlijke gegevens en tokens verwijderd.
           required: true

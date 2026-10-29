@@ -39,8 +39,8 @@ class StockRestoreTest {
         rejected("CONSENT_REQUIRED"){StockRestorePolicy.confirm(plan,secret,false,true)}
         rejected("CONSENT_REQUIRED"){StockRestorePolicy.confirm(plan,secret,true,false)}
     }
-    @Test fun liveModeRejectsSmallFixtureAndSimulatedObservations(){
-        assertTrue(StockRestorePolicy.blockers(environment(ExecutionMode.LIVE)).any { it.code=="IMAGE_SIZE" })
+    @Test fun liveModeRequiresRuntimeAssociationAndRejectsSimulatedObservations(){
+        assertTrue(StockRestorePolicy.blockers(environment(ExecutionMode.LIVE)).any { it.code=="MAGISK_BACKUP_ASSOCIATION_MISMATCH" })
         assertTrue(StockRestorePolicy.blockers(environment().copy(mode=ExecutionMode.LIVE)).any { it.code=="EXECUTION_MODE" })
     }
     @Test fun unknownOrEnabledAutomaticUpdatesBlockRestore(){

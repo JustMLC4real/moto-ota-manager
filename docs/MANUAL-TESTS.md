@@ -1,78 +1,51 @@
-# Handmatige validatie op de Edge 70 Pro
+# Read-only manual qualification plan — 1.0.0
 
-Deze checklist is een uitlezend testplan. Eerdere werkelijk uitgevoerde diagnosemetingen staan apart in [DEVICE-VALIDATION](DEVICE-VALIDATION.md). De nieuwe productie-stockwriter en een volledige toekomstige echte OTA zijn niet fysiek getest. Voer voor deze checklist alleen uitlezende stappen uit: geen OTA-installatie, stockrestore, slotwijziging of telefoonherstart. Een USB-verbinding of handmatig ADB is niet de normale appworkflow.
+This plan validates presentation and observations on a selected Motorola. It does not authorize a stock write, OTA, inactive-slot patch, slot change or phone reboot. The current development round uses mocks/emulators; do not connect a phone just to complete these checks. Historical reference-device reads are in [DEVICE-VALIDATION](DEVICE-VALIDATION.md).
 
-## Voorbereiding
+## Setup and presentation
 
-- Controleer de SHA-256 van de geleverde debug-APK tegen het opleverrapport en installeer de APK zelf via Androids pakketinstaller.
-- Open Moto OTA Manager en controleer dat echte gegevens en simulatie duidelijk onderscheiden worden.
-- Vergelijk Android-versie, buildnummer, model en beveiligingspatch met Instellingen → Over de telefoon. De huidige waarden uit de specificatie zijn een vergelijking, geen hardcoded waarheid.
-- Bekijk vóór roottoegang de foutmelding voor ontbrekende rootrechten. De app mag niet vastlopen of de fictieve doelwaarden tonen.
-- Verleen bij Magisk 31.1 desgewenst vooraf toegang in Magisk → Superuser aan Moto OTA Manager. In deze versie verschijnt niet vanzelf een reactieve rootdialoog. Verander geen andere Magisk-instellingen.
+- Verify the exact APK checksum and signing identity from the delivery. Install it yourself only when intended. Preserve local recovery data before any debug/release signing migration.
+- Check the first-run tour, English/Dutch language choice, skip/reopen behavior and system/light/dark appearance. Changing language should update cached messages and notification channel names too.
+- Check narrow/large displays, enlarged text, accessible button descriptions and scrolling. A critical persisted run must remain visible instead of being hidden by onboarding.
+- Before granting root, verify that unavailable root data is shown honestly and the app stays usable for basic diagnostics. ADB root must not imply app Superuser access.
+- If choosing protected diagnostics, grant this app access in Magisk. Do not change unrelated Magisk settings.
 
-## Uitlezende toestelcontrole
+## Read-only device observations
 
-- Voer “Controleer en bereid update voor” uit. Dat moet uitlezen en blokkades tonen; de knop mag geen update starten.
-- Vergelijk werkelijk gemeten `XT2607-1`, `merc` en `reteu`. Als Motorola de modelnaam anders opslaat, noteer de precieze property en laat ondersteuning pas na bewijs aanpassen.
-- Bekijk systeem- en vendor-fingerprint afzonderlijk. De productnaam `merc_g_syseq` mag niet stilzwijgend naar `merc_g_sys` worden herschreven.
-- Controleer huidige en inactieve slot. De oude verwachting `_b` is geen bewijs van de huidige slot. Onbekende of tegenstrijdige metingen moeten blokkeren.
-- Controleer of de relevante `init_boot`-partities worden gevonden en of de metingen van partitieomvang consistent zijn. Doe geen schrijfactie om dit te “testen”.
-- Bekijk snapshotstatus. Een echte merge, ontbrekende tool, ontbrekend percentage of permissiefout mag nooit worden weergegeven als gereed.
-- Vergelijk de status opnieuw na enkele minuten normaal gebruik. Een oud logpercentage moet niet als live percentage terugkeren.
-- Bekijk engine-status en bron. Als er geen uitleesinterface beschikbaar is, moet de app dat onbekend noemen. Zet geen Android-service aan/uit om een groene controle af te dwingen.
-- Controleer Magisk-versie en rootstatus apart. De aanwezigheid van de Magisk-app alleen mag geen werkende root bewijzen.
+Use only **Diagnostics** refresh/root-diagnostics controls. Do not tap **Start update**, stock execution, OEM staging or any reboot action during this plan.
 
-## Back-updiagnostiek
+Compare measured manufacturer/model/device/channel, Android/build and security patch against available local sources. Another model need not equal XT2607-1/merc/reteu. System/vendor fingerprints may legitimately occupy different namespaces; no automatic alias substitution should conceal the difference. If Android properties are spoofed, compare independent kernel security and current-image/runtime association rather than treating the spoofed string as hardware proof.
 
-- Bekijk de geïnventariseerde Magisk-back-ups. De app moet compressiegrootte onderscheiden van uitgepakte bytes.
-- Laat een onbenoemde of niet aan de actuele build gekoppelde back-up als onbewezen zien, ook als de gzip en hash geldig zijn.
-- Controleer dat de oude Android 16-image nooit als stock voor de huidige Android 17-build wordt voorgesteld.
-- Gebruik een aparte onschuldige testkopie voor corruptietests; wijzig geen originele Magisk-bestanden. Een afgekapt gzipbestand of image met extra bytes moet worden afgewezen.
-- Controleer dat een vermelde module alleen “aanwezig” heet. De app mag daaruit geen Android 17- of Android 18-compatibiliteit afleiden.
-- Open eventueel alleen de Magisk-app om de appoverdracht te testen; tik niet op Restore Images, Install of Uninstall.
+Inspect active/inactive slot, measured partition inventory and byte size, successful-boot evidence, root and Magisk version independently. A Magisk app icon alone does not prove live root. Inspect engine and snapshot sources; missing tools, old log percentages, permission errors and contradictory state must stay unknown. Traditional A/B may be positively not applicable for snapshots only with consistent layout evidence.
 
-## Motorola en firmware
+Wait and refresh if a real background merge is already underway. Do not start another action to make its state green. Do not enable services, alter snapshots, reset counters or run bootctl getters for this read-only check.
 
-- Test het openen van de officiële updatepagina. Controleer dat het echt een systeemcomponent is.
-- Gebruik alleen de normale handmatige updatecontrole als je dat zelf wilt. Start geen aangeboden download/installatie binnen deze validatie.
-- Controleer dat nul fouttellers als lokale diagnose worden gepresenteerd; ze bewijzen geen serveraanbod.
-- Indien oude downloadmetadata bestaat: de app mag een kandidaat tonen, maar geen complete ondertekende URL of token exporteren en geen actualiteit claimen.
-- Selecteer via de bestandskiezer een reeds beschikbaar, onafhankelijk verkregen OTA-testbestand. Het bestand mag niet naar de Motorola-appmap of naar een partitie worden gekopieerd.
-- Controleer structurele foutafhandeling met een onschadelijk tekstbestand dat `.zip` heet.
-- Controleer dat een vals testpakket met intern consistente hashes alsnog geen “officieel geverifieerd” resultaat krijgt.
-- Controleer dat model, bronbuild, kanaal en authenticiteit afzonderlijk worden getoond. Een officieel ondertekend maar verkeerd pakket blijft geblokkeerd.
-- Een onbekend kanaal in AOSP-metadata moet een blokkade geven, ook als de bestandsnaam `reteu` of `cid50` suggereert.
+## Backups and package inspection
 
-## Duurzame workflow en procesherstel
+Inspect the Magisk backup inventory: compressed bytes, expanded size, actual boot-image type and hashes are separate facts. An unassociated backup remains unproven even if its gzip is valid. Old authenticated stock bytes cannot become current merely because a displayed build is spoofed. Module inventory means presence/state, not functional compatibility.
 
-- Gebruik de expliciete simulatie om de negen fasen en foutscenario's te bekijken. Verwacht een zichtbaar simulatielabel.
-- Gebruik de volledige bestandssimulatie: stockrestore → officiële mock-OTA → gerapporteerde mock-Magisk → mockreboot/merge → eindcontrole. Controleer dat bron- en doelpartitie gewone app-private bestanden zijn en dat de volledige gepatchte bronbackup en nieuwe stockbackup bestaan. Geen rootopdracht mag nodig zijn.
-- Sluit alleen Moto OTA Manager via de recente-appslijst of force stop en open opnieuw. Er mag geen toestelherstart nodig zijn.
-- Controleer dat opgeslagen stappen blijven bestaan maar actuele controles opnieuw worden uitgevoerd.
-- Verander in een simulatie de bootslot of rootstatus en controleer dat succes wordt ingetrokken.
-- Een gesimuleerde onverwachte herstart moet tot hercontrole leiden, niet tot automatisch verdergaan met de volgende schrijfstap.
-- Verlaat de simulatie en controleer dat fictieve toestelwaarden, pakketgegevens en succesmeldingen niet als echte diagnose terugkeren.
-- Controleer een bestaand leeg of beschadigd fixturejournaal: het moet herstel vereisen, geen nieuwe lege echte workflow starten.
-- Laat in een sandbox een processtop vóór write en een gedeeltelijke write simuleren. Recovery mag niets opnieuw schrijven. Een volledig onveranderde gepatchte bron kan alleen na expliciete controle plus oude-tokeninvalidatie een nieuw plan vrijgeven; een werkelijk afwijkende gedeeltelijke image moet geblokkeerd blijven.
-- Controleer dat late knoppen/callbacks na targetboot geen oude OTA- of rebootfase opnieuw activeren.
+Use only an independent harmless copy for corruption cases. Truncated gzip, bad CRC, impossible image extents, wrong size and trailing shell text must be rejected. Keep originals unchanged. Do not run Magisk Restore Images, Install or Uninstall.
 
-## Voorbereidingsscherm zonder live schrijfvalidatie
+A local ZIP can be selected and inspected in private app storage. It must not be copied to Motorola's watched directory or applied in this plan. Verify malformed `.zip` text rejection, genuine signature requirements and separate model/source/channel results. A filename containing `reteu`/`cid50` is not signed channel proof.
 
-- Bekijk de uitleg van de actuele partitie, bronbuild, volledige stockhash, bewaarde gepatchte backup en de regel om niet tussentijds te herstarten. Druk in dit uitlezende testplan niet op de daadwerkelijke schrijfbevestiging.
-- Verifieer in sandbox dat beide expliciete bevestigingen vereist zijn en dat 60 seconden verstreken monotonic-tijd ook bij een teruggezette wallclock blijft verlopen.
-- Controleer dat een onbekende instelling voor automatische updates de live voorbereiding blokkeert; de app mag de systeeminstelling niet zelf wijzigen.
-- Gebruik de officiële Motorola-route met een uit de updater overgenomen doelbuild en zonder ZIP. Eventuele generieke metadata-/regioblokkades mogen niet worden omgezet in `compatible=true`; Motorola blijft de installatiemachtiging beoordelen.
-- Controleer dat Magisk vóór boot slechts als gebruikersmelding verschijnt. Er is momenteel geen productieprobe voor onafhankelijk preboot-imagebewijs.
+## Optional online check
 
-## Rapport en privacy
+Only if you deliberately allow the stated sharing, test CDS after reviewing its serial/GUID/device/build disclosure. Record result category and whether a full resource exists; do not publish identifiers, signed URLs or raw response bodies. Revoke consent and verify no further identity read/request starts. `NO_OFFER`, network failure and unknown schema are separate states and do not prove a permanent block.
 
-- Exporteer naar een zelfgekozen locatie en open het rapport lokaal.
-- Zoek op `https://`, `token`, `auth`, `imei`, `serial`, `account`, e-mailadres, persoonlijke bestandsnamen en boot-ID. Gevoelige waarden mogen er niet in staan.
-- Vergelijk technische statuscategorieën en foutcodes met het scherm. Het rapport moet het verschil tussen echte en gesimuleerde data behouden.
-- Controleer dat niets automatisch naar GitHub of een andere dienst wordt geüpload.
+Official-updater navigation can be tested without starting its offered installation. Local zero failure counters remain local observations. This plan does not require a production download or the real update start button.
 
-## Resultaten vastleggen
+## Sandbox and process recovery
 
-Noteer APK-hash, appversie, Android-build, Magisk-versie, datum en een lokaal geanonimiseerd rapport. Leg per test `geslaagd`, `afwijking` of `niet beschikbaar` vast. Stuur geen ondertekende downloadlinks of volledige private updaterbestanden mee.
+Use the clearly labelled complete file-backed simulation. Check separate sandbox journal, regular-file partitions, patched source backup and new stock backup. Root/slots/reboot/merge are mock observations; no privileged device call should be required and the live journal must stay unchanged.
 
-Een echte OTA-validatie is een afzonderlijk toekomstig testplan waarvoor firmwarebewijs, herstelvoorbereiding en expliciete toestemming nodig zijn. Deze checklist is daar geen toestemming voor en een geslaagde read-only test bewijst nog geen veilige OTA-installatie.
+Close/reopen the app or force-stop the app only. Saved progress should survive; current measurements must be fresh. Simulated process death, changed boot/slot/root, partial write, stale consent and delayed callbacks must not replay a saved live command or report fake success. A corrupt existing journal must require recovery instead of starting idle.
+
+Check the initial route scope in the UI without starting it. It should describe included writes/root/reboot. File-backed policy tests establish the absence of per-phase confirmation requirements for that scoped route; this read-only manual plan does not click a real write to demonstrate it.
+
+## Report and results
+
+Export the allowlisted report to a chosen local destination and inspect it locally. It should preserve true/simulated and known/unknown categories while omitting raw identifiers, signed URLs/tokens, raw XML, accounts, personal filenames and boot/module IDs. No report is uploaded automatically.
+
+Record app version, APK hash, Android build, Magisk version, date and `pass`, `deviation` or `unavailable` per check. Share only reviewed sanitized output. A successful read-only check is not qualification of a real data-preserving update.
+
+A future physical update plan must specify the exact device/firmware/adapter, independent firmware proof, power/storage/recovery preparation and authorized destructive actions. It is separate from this checklist and the normal CI suite.

@@ -7,6 +7,10 @@ Copyright Gradle, Inc. and contributors. Licensed under Apache License 2.0.
 https://www.apache.org/licenses/LICENSE-2.0
 
 AndroidX, Kotlin and kotlinx.coroutines dependencies retain their upstream licenses.
+The APK bundles Apache 2.0 and Skia BSD notices in assets/licenses/.
+AndroidX graphics-path includes native Skia code; its upstream BSD notice is
+retained. Resolved runtime coordinates and artifact hashes are exported by the
+writeReleaseDependencyInventory Gradle task for each release review.
 Source references in docs/RESEARCH.md document evidence; no upstream Magisk code is copied.
 
 AOSP UpdateEngine AIDL interface declarations originate from Android Open Source Project,

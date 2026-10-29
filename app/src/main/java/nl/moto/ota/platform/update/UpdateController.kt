@@ -30,9 +30,9 @@ class UpdateRunStore(context:Context) {
 class UpdateController(context:Context) {
     private val store=UpdateRunStore(context.applicationContext)
     fun load():UpdateRun=store.load()
-    fun startOfficial(device:DeviceState,backup:BackupValidation?,target:ObservedUpdateTarget):UpdateRun=change {
+    fun startOfficial(device:DeviceState,backup:BackupValidation?,target:ObservedUpdateTarget,runId:String=java.util.UUID.randomUUID().toString()):UpdateRun=change {
         require(it.stage in setOf(UpdateStage.IDLE,UpdateStage.PRECHECK_BLOCKED,UpdateStage.COMPLETE,UpdateStage.COMPLETE_REVIEW,UpdateStage.ROLLBACK)) { "ACTIVE_UPDATE_RUN" }
-        UpdateCoordinator.startOfficialGuidedRun(device,backup,target)
+        UpdateCoordinator.startOfficialGuidedRun(device,backup,target,runId=runId)
     }
     fun reconcile(device:DeviceState,newStockBackup:BackupValidation?=null,activeImageSha256:String?=null):UpdateRun=change {
         UpdateCoordinator.reconcile(it,device,newStockBackup,activeImageSha256)
@@ -46,6 +46,18 @@ class UpdateController(context:Context) {
     fun reportManualRestore():UpdateRun=change { UpdateCoordinator.reportManualStockRestore(it) }
     fun observeStock(bootId:String,slot:String,sha256:String):UpdateRun=change { UpdateCoordinator.observeStockHash(it,bootId,slot,sha256) }
     fun openOfficialOta():UpdateRun=change { UpdateCoordinator.openOfficialOta(it) }
+    fun automaticOtaDispatching():UpdateRun=change {UpdateCoordinator.automaticOtaDispatching(it)}
+    fun recordMagiskResult(result:MagiskInstallResult):UpdateRun=change {
+        UpdateCoordinator.observeMagiskProof(UpdateCoordinator.authenticatedTargetStock(it,result.runId,
+            result.packageSha256,result.proof.targetSlot,result.targetStockSha1),result.proof)
+    }
+    fun automationStopped(expectedRunId:String,code:String):UpdateRun=change {
+        if(it.id!=expectedRunId || it.stage in setOf(UpdateStage.IDLE,UpdateStage.COMPLETE,UpdateStage.COMPLETE_REVIEW,UpdateStage.ROLLBACK))it
+        else if(!it.criticalSession && it.restoreTransactionId.isBlank() && !it.otaAppliedObserved)UpdateCoordinator.cancelBeforeRestore(it)
+        else if(it.stage==UpdateStage.AWAITING_NEW_BOOT)it
+        else it.copy(stage=UpdateStage.RECOVERY_REQUIRED,errorCode=code,presentationKey=null,presentationArgs=emptyList(),
+            message="Automation stopped. Observe the device and saved images; no action is replayed and no restart is attempted.")
+    }
     fun attachVerifiedPackage(report:FirmwareReport):UpdateRun=change { UpdateCoordinator.attachVerifiedPackage(it,report) }
     fun reportMagiskInstalled():UpdateRun=change { UpdateCoordinator.reportMagiskInstalled(it) }
     fun observeMagiskProof(proof:TargetMagiskProof):UpdateRun=change { UpdateCoordinator.observeMagiskProof(it,proof) }

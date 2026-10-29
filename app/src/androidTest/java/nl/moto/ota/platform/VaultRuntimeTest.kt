@@ -14,6 +14,8 @@ import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import java.util.Comparator
 import java.util.UUID
+import java.util.Properties
+import kotlinx.coroutines.runBlocking
 import nl.moto.ota.core.*
 import org.junit.After
 import org.junit.Assert.*
@@ -40,13 +42,32 @@ class VaultRuntimeTest {
     private val payloadFp = "motorola/merc_g_sys/merc:17/A171WMH.44-26/synthetic123:user/release-keys"
     private val actualFp = "motorola/merc_g_syseq/merc:17/A171WMH.44-26/synthetic123:user/release-keys"
     private val syntheticReport = FirmwareReport(structureValid = true, payloadHashValid = true, signatureVerified = true,
-        targetBuild = "A171WMH.44-26", targetFingerprint = payloadFp, sha256 = "b".repeat(64), metadata = mapOf("pre-device" to "merc"))
+        regionVerified = true, targetBuild = "A171WMH.44-26", targetFingerprint = payloadFp, sha256 = "b".repeat(64), metadata = mapOf(
+            "ota-type" to "AB", "pre-device" to "merc", "pre-model" to "XT2607-1", "pre-channel" to "reteu",
+            "post-build" to payloadFp, "post-build-incremental" to "synthetic123", "post-timestamp" to "2000", "post-security-patch-level" to "2026-10-01"))
     private val syntheticManifest = PayloadManifestInfo(4096, null, PartitionDigest("init_boot", 8192, "c".repeat(64)), listOf("init_boot"), 100)
     private fun syntheticTarget() = DeviceState(manufacturer = "motorola", model = "XT2607-1", device = "merc", channel = "reteu",
         androidVersion = "17", build = syntheticReport.targetBuild, fingerprint = actualFp, incrementalBuild = "synthetic123", slot = "_b",
         rootChecked = true, rootGranted = true, snapshot = SnapshotState.NONE, engine = EngineState.IDLE,
         bootSuccessful = true, moduleInventoryKnown = true, bootloaderUnlocked = true, verifiedBootState = "orange",
-        capturedAtMillis = System.currentTimeMillis(), bootId = "synthetic-private-boot-id", modules = listOf("synthetic-private-module"))
+        capturedAtMillis = System.currentTimeMillis(), bootId = "synthetic-private-boot-id", modules = listOf("synthetic-private-module"),
+        vendorFingerprint = payloadFp, buildTimestamp = 2000, securityPatch = "2026-10-01", virtualAb = true)
+
+    /** Storage fixture only: never invokes or bypasses the production signature-verification API. */
+    private fun writeSyntheticStoredFacts() {
+        val e = requireNotNull(StockEvidencePolicy.create(syntheticReport, syntheticManifest, anchors, System.currentTimeMillis()))
+        Properties().apply {
+            setProperty("schema", "2"); setProperty("count", "1")
+            mapOf("package" to e.packageSha256, "build" to e.targetBuild, "android" to e.targetAndroid, "incremental" to e.targetIncremental,
+                "targetFp" to e.payloadTargetFingerprint, "image" to e.imageSha256, "bytes" to e.imageBytes.toString(),
+                "anchors" to e.trustedSpki.joinToString(","), "verifiedAt" to e.verifiedAtMillis.toString(), "measuredFp" to "",
+                "partition" to e.partition, "kind" to e.kind.name, "device" to e.device, "model" to e.model, "channel" to e.channel,
+                "androidFps" to e.androidFingerprints.joinToString("|"), "timestamp" to e.identityTimestamp.toString(),
+                "patch" to e.identitySecurityPatch, "vendorFp" to "", "scope" to e.proofScope)
+                .forEach { (key, value) -> setProperty("0.$key", value) }
+            proofs.outputStream().use { store(it, "Synthetic emulator storage fixture; not real signature evidence") }
+        }
+    }
 
     @Before fun setUp() {
         assumeTrue("Vault runtime tests require a disposable Android emulator", Build.HARDWARE in setOf("ranchu", "goldfish", "cutf_cvm"))
@@ -189,14 +210,14 @@ class VaultRuntimeTest {
     }
 
     @Test fun syntheticStockFactsReloadAndBindOnlyAfterObservedTargetBoot() {
-        vault.recordVerified(syntheticReport, syntheticManifest, anchors)
+        writeSyntheticStoredFacts()
         assertEquals(1, FirmwareVault(context).proofCount())
         val target = syntheticTarget()
         assertNull(vault.referenceFor(target.copy(build = "OLD_BUILD"), anchors))
         assertNull(vault.referenceFor(target.copy(rootGranted = false), anchors))
         val reference = requireNotNull(FirmwareVault(context).referenceFor(target, anchors))
-        assertEquals(syntheticManifest.initBootTarget.sha256, reference.sha256)
-        assertEquals(syntheticManifest.initBootTarget.bytes, reference.bytes)
+        assertEquals(requireNotNull(syntheticManifest.initBootTarget).sha256, reference.sha256)
+        assertEquals(requireNotNull(syntheticManifest.initBootTarget).bytes, reference.bytes)
         assertEquals(actualFp, reference.fingerprint)
         val reloaded = requireNotNull(FirmwareVault(context).referenceFor(target, anchors))
         assertEquals(reference, reloaded)
@@ -210,9 +231,9 @@ class VaultRuntimeTest {
     }
 
     @Test fun malformedOversizedAndInvalidStockEvidenceCannotSupplyReference() {
-        vault.recordVerified(syntheticReport, syntheticManifest, anchors)
+        writeSyntheticStoredFacts()
         val valid = proofs.readText()
-        listOf("schema=1\ncount=1\n", "x".repeat(128 * 1024 + 1),
+        listOf("schema=1\ncount=1\n", "x".repeat(256 * 1024 + 1),
             valid.replace("0.image=" + "c".repeat(64), "0.image=invalid"),
             valid.replace("0.bytes=8192", "0.bytes=-1"), valid + "\nunknown.token=private\n").forEach {
             proofs.writeText(it)
@@ -222,9 +243,12 @@ class VaultRuntimeTest {
         }
     }
 
-    @Test fun unverifiedReportDoesNotBecomePersistedTrust() {
-        mustReject { vault.recordVerified(syntheticReport.copy(signatureVerified = false), syntheticManifest, anchors) }
-        mustReject { vault.recordVerified(syntheticReport.copy(payloadHashValid = false), syntheticManifest, anchors) }
+    @Test fun callerSuppliedSignatureBooleanNeverBecomesPersistedTrust() = runBlocking {
+        replaceSource(bytes(12))
+        val pinned = vault.pinSelected()
+        // Even signatureVerified=true cannot authorize random bytes against the emulator's actual OTA certs.
+        mustReject { runBlocking { vault.recordVerified(pinned, syntheticReport, syntheticTarget()) } }
+        mustReject { runBlocking { vault.recordVerified(source, syntheticReport, syntheticTarget()) } }
         assertEquals(0, vault.proofCount())
         assertNull(vault.referenceFor(syntheticTarget(), anchors))
     }

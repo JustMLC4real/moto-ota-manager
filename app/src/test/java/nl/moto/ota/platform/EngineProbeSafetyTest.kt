@@ -9,7 +9,8 @@ class EngineProbeSafetyTest {
         assertTrue(EngineProbe.supportsRuntime(0, 37))
         assertFalse(EngineProbe.supportsRuntime(2000, 37))
         assertFalse(EngineProbe.supportsRuntime(10000, 37))
-        assertFalse(EngineProbe.supportsRuntime(0, 36))
+        (33..37).forEach { assertTrue(EngineProbe.supportsRuntime(0, it)) }
+        assertFalse(EngineProbe.supportsRuntime(0, 32))
         assertFalse(EngineProbe.supportsRuntime(0, 38))
     }
     @Test fun invalidProgressAndUnrecognizedStatusesRemainUnknown() {

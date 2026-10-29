@@ -98,7 +98,9 @@ object FirmwareValidator {
                 val payloadHash = zip.getInputStream(payload).use { digest(it) }
                 val hashValid = MessageDigest.isEqual(expectedHash, payloadHash)
                 if (!hashValid) issues += CheckResult("PAYLOAD_HASH", "De payload komt niet overeen met FILE_HASH.")
-                if (!device.exactProfileMatch) issues += CheckResult("DEVICE_PROFILE", "Actueel model, codenaam of kanaal wijkt af van XT2607-1 / merc / reteu.")
+                if (!device.manufacturer.equals("motorola", true) || device.model.isBlank() || device.device.isBlank() ||
+                    device.channel.isBlank() || device.identityConflicts.isNotEmpty())
+                    issues += CheckResult("DEVICE_PROFILE", "Actuele Motorola-identiteit is onvolledig of bevat tegenstrijdige waarnemingen.")
                 val devices = metadata["pre-device"].orEmpty().split('|')
                 if (device.device !in devices || device.device.isBlank()) issues += CheckResult("WRONG_DEVICE", "De ondertekende pre-device-lijst bevat de actuele codenaam niet.")
                 val source = metadata["pre-build-incremental"].orEmpty()
@@ -114,20 +116,20 @@ object FirmwareValidator {
                 val androidTargetParts = androidTargetFp.split('/')
                 if (androidTargetParts.size != 6 || androidTargetParts[0] != "motorola" ||
                     androidTargetParts[1].isBlank() || androidTargetFp.any { it.isWhitespace() } ||
-                    androidTargetParts[2].substringBefore(':') != "merc" ||
+                    androidTargetParts[2].substringBefore(':') != device.device ||
                     androidTargetParts[4].substringBefore(':') != metadata["post-build-incremental"] ||
                     androidTargetParts[4].substringAfter(':', "") != "user" || androidTargetParts[5] != "release-keys" || androidTargetParts[3].isBlank()) {
-                    issues += CheckResult("TARGET_FINGERPRINT", "Doelfingerprint mist een geldige Motorola/merc user/release-keys-indeling of consistente incremental.")
+                    issues += CheckResult("TARGET_FINGERPRINT", "Doelfingerprint mist de actuele Motorola-codenaam, user/release-keys-indeling of consistente incremental.")
                 }
                 // Motorola can describe vendor Android 15 in standard metadata while the payload
                 // properties describe system Android 16 -> 17. Keep both namespaces: the payload
                 // pair improves target information only, and never becomes a compatibility alias.
-                val payloadSource = payloadFingerprint(props["SOURCE_FP"])
-                val payloadTarget = payloadFingerprint(props["TARGET_FP"])
+                val payloadSource = payloadFingerprint(props["SOURCE_FP"], device.device)
+                val payloadTarget = payloadFingerprint(props["TARGET_FP"], device.device)
                 val payloadPairPresent = props.containsKey("SOURCE_FP") || props.containsKey("TARGET_FP")
                 val payloadPairValid = payloadSource != null && payloadTarget != null
                 if (payloadPairPresent && !payloadPairValid) {
-                    issues += CheckResult("PAYLOAD_FINGERPRINTS_INVALID", "Payload SOURCE_FP en TARGET_FP moeten beide geldige Motorola/merc user/release-keys-fingerprints zijn.")
+                    issues += CheckResult("PAYLOAD_FINGERPRINTS_INVALID", "Payload SOURCE_FP en TARGET_FP moeten beide geldige Motorola-fingerprints met de actuele codenaam zijn.")
                 }
                 if (payloadPairValid && (payloadSource !in sourceFp.split('|') || payloadTarget != androidTargetFp)) {
                     issues += CheckResult("OEM_METADATA_REVIEW_REQUIRED", "Motorola-payloadproperties en standaard Android-metadata gebruiken verschillende fingerprints. Doelinformatie wordt apart getoond; compatibiliteit vereist OEM-beoordeling.")
@@ -146,10 +148,14 @@ object FirmwareValidator {
                 if (target == device.build) issues += CheckResult("ALREADY_INSTALLED", "Doelbuild is al geïnstalleerd.")
                 val signedChannel = metadata["motorola-channel"] ?: metadata["pre-channel"]
                 val channelConflict = metadata["motorola-channel"] != null && metadata["pre-channel"] != null && metadata["motorola-channel"] != metadata["pre-channel"]
-                val regionOk = !channelConflict && signedChannel == device.channel && device.channel == "reteu"
-                if (signedChannel != null && !regionOk) issues += CheckResult("WRONG_REGION", "Pakketkanaal wijkt af van reteu.")
+                val regionOk = !channelConflict && signedChannel == device.channel && device.channel.matches(Regex("[A-Za-z0-9_.+-]{1,128}"))
+                if (signedChannel != null && !regionOk) issues += CheckResult("WRONG_REGION", "Ondertekend pakketkanaal wijkt af van het gemeten toestelkanaal of is tegenstrijdig.")
                 if (signedChannel == null) issues += CheckResult("REGION_UNPROVEN", "Standaard A/B-metadata bewijst het Motorola-kanaal niet; bestandsnaam of cid50 is onvoldoende bewijs.")
-                if (metadata["ota-downgrade"] == "yes" || metadata["ota-wipe"] == "yes") issues += CheckResult("DOWNGRADE_OR_WIPE", "Downgrade of userdata-wipe wordt geblokkeerd.")
+                val signedModels = listOfNotNull(metadata["pre-model"], metadata["motorola-model"]).map { it.split('|').toSet() }
+                if (signedModels.isNotEmpty() && (signedModels.distinct().size != 1 || device.model !in signedModels.first()))
+                    issues += CheckResult("WRONG_MODEL", "Expliciet ondertekend pakketmodel wijkt af van het actuele model of bevat tegenstrijdige velden.")
+                if (metadata["ota-downgrade"] !in setOf(null, "no") || metadata["ota-wipe"] !in setOf(null, "no"))
+                    issues += CheckResult("DOWNGRADE_OR_WIPE", "Downgrade, userdata-wipe of onbekende instructies daarvoor worden geblokkeerd.")
                 val targetTimestamp = metadata["post-timestamp"]?.toLongOrNull()
                 if (device.buildTimestamp <= 0 || targetTimestamp == null || targetTimestamp <= 0) {
                     issues += CheckResult("TIMESTAMP_UNKNOWN", "Actuele of doel-buildtijd ontbreekt of is ongeldig; anti-rollback niet aangetoond.")
@@ -192,8 +198,8 @@ object FirmwareValidator {
         ?.let { runCatching { LocalDate.parse(it) }.getOrNull() }
 
     /** Deliberately narrow and safe to include in diagnostics; URLs/tokens never become fingerprint fields. */
-    private fun payloadFingerprint(value: String?): String? = value?.takeIf {
-        it.length <= 512 && it.matches(Regex("motorola/[A-Za-z0-9._-]+/merc:[1-9][0-9]?/[A-Za-z0-9._+-]+/[A-Za-z0-9._+-]+:user/release-keys"))
+    private fun payloadFingerprint(value: String?, device: String): String? = value?.takeIf {
+        MotorolaFingerprint.parse(it)?.device == device && device.isNotEmpty()
     }
 
     private fun digest(input: java.io.InputStream): ByteArray {

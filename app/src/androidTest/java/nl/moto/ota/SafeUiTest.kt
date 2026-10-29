@@ -1,78 +1,90 @@
 package nl.moto.ota
 
-import androidx.compose.ui.test.isEnabled
-import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.assertIsNotEnabled
-import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollTo
+import nl.moto.ota.platform.update.UpdateController
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.RuleChain
 
-/** Runs on an emulator only in CI; never grants root or invokes external update tools. */
+/** Disposable-emulator UI checks. Never grants root or invokes an updater. */
 class SafeUiTest {
-    @get:Rule val compose = createAndroidComposeRule<MainActivity>()
+    private val presentation = PresentationStateRule(tourCompleted = true)
+    val compose = createAndroidComposeRule<MainActivity>()
+    @get:Rule val rules: RuleChain = RuleChain.outerRule(presentation).around(compose)
 
     @Test fun startsWithLocalReadOnlyDashboard() {
-        compose.onNodeWithText("OTA Manager").assertExists()
-        compose.onNodeWithText("Lokaal · uitsluitend uitlezend").assertExists()
-        compose.onNodeWithText("Firmware").performClick()
-        compose.onNodeWithText("Officiële updatebronnen").assertExists()
+        compose.onNodeWithText(presentation.text(R.string.ui_app_name)).assertExists()
+        compose.onNodeWithText(presentation.text(R.string.ui_overview_title)).assertExists()
+        compose.onNodeWithTag("nav_firmware").performClick()
+        compose.onNodeWithText(presentation.text(R.string.ui_server_check)).assertExists()
+        assertEquals(false, presentation.rootReadsAllowed())
     }
 
     @Test fun rootDiagnosticsRequiresAnExplicitDialogAndCanBeCancelled() {
         waitUntilReady()
-        compose.onNodeWithText("Controleer en bereid update voor").performScrollTo().performClick()
-        compose.onNodeWithText("Uitlezende rootdiagnose").assertExists()
-        compose.onNodeWithText("Annuleren").performClick()
-        compose.onNodeWithText("OTA Manager").assertExists()
+        val before = UpdateController(compose.activity).load()
+        compose.onNodeWithTag("check_device").performScrollTo().performClick()
+        compose.onNodeWithText(presentation.text(R.string.ui_root_diagnostic_title)).assertExists()
+        compose.onNodeWithText(presentation.text(R.string.ui_cancel)).performClick()
+        compose.onNodeWithText(presentation.text(R.string.ui_root_diagnostic_title)).assertDoesNotExist()
+        assertEquals(false, presentation.rootReadsAllowed())
+        assertEquals(before, UpdateController(compose.activity).load())
     }
 
-    @Test fun demonstrationIsExplicitAndSeparateFromRealJournal() {
+    @Test fun networkCheckRequiresItsOwnDisclosureAndCancelDoesNotEnableIt() {
         waitUntilReady()
-        compose.onNodeWithText("Diagnose").performClick()
-        compose.onNodeWithText("Bekijk veilige simulatie").performScrollTo().performClick()
-        compose.onNodeWithText("SIMULATIE").assertExists()
-        compose.onNodeWithText("Overzicht").performClick()
+        compose.onNodeWithTag("nav_firmware").performClick()
+        compose.onNodeWithTag("check_online").performScrollTo().performClick()
+        compose.onNodeWithText(presentation.text(R.string.ui_online_privacy)).assertExists()
+        compose.onNodeWithText(presentation.text(R.string.ui_cancel)).performClick()
+        compose.onNodeWithText(presentation.text(R.string.ui_online_privacy)).assertDoesNotExist()
+        assertEquals(false, nl.moto.ota.platform.discovery.CdsController(compose.activity).consentGranted())
+    }
+
+    @Test fun demonstrationIsExplicitAndSeparateFromTheLiveJournal() {
+        waitUntilReady()
+        val before = UpdateController(compose.activity).load()
+        openSimulation()
+        compose.onNodeWithText(presentation.text(R.string.ui_simulation)).assertExists()
+        compose.onNodeWithTag("run_simulation").assertExists()
+        compose.onNodeWithTag("start_one_tap_update").assertDoesNotExist()
+        compose.onNodeWithTag("nav_overview").performClick()
         compose.onNodeWithText("DEMO-TARGET", substring = true).assertExists()
+        assertEquals(before, UpdateController(compose.activity).load())
     }
 
     @Test fun emulatorCannotOfferAnUnprovenStockWrite() {
         waitUntilReady()
-        compose.onNodeWithText("Workflow").performClick()
-        compose.onNodeWithText("Start begeleide updatecontrole").performScrollTo().assertIsNotEnabled()
-        compose.onNodeWithText("Maak stockherstelplan ter beoordeling").assertDoesNotExist()
-        compose.onNodeWithText("Schrijf uitsluitend deze stock-image").assertDoesNotExist()
+        compose.onNodeWithTag("nav_update").performClick()
+        compose.onNodeWithTag("start_one_tap_update").performScrollTo().assertIsNotEnabled()
+        compose.onNodeWithText(presentation.text(R.string.ui_manual_restore_write)).assertDoesNotExist()
+        compose.onNodeWithText(presentation.text(R.string.ui_prepare_restore)).assertDoesNotExist()
     }
 
-    @Test fun fullFileBackedSimulationUsesEveryGuidedStepWithoutTouchingLiveJournal() {
+    @Test fun oneStartRunsTheFullFileBackedSimulationWithoutChangingTheLiveJournal() {
         waitUntilReady()
-        val liveStore = nl.moto.ota.platform.update.UpdateController(compose.activity)
-        val liveBefore = liveStore.load()
-        compose.onNodeWithText("Diagnose").performClick()
-        compose.onNodeWithText("Bekijk veilige simulatie").performScrollTo().performClick()
-        compose.onNodeWithText("Workflow").performClick()
-        compose.onNodeWithText("Start volledige updatesimulatie").performScrollTo().performClick()
-        repeat(5) {
-            compose.waitUntil(30_000) {
-                compose.onAllNodes(hasText("Volgende simulatiestap") and isEnabled()).fetchSemanticsNodes().isNotEmpty()
-            }
-            compose.onNodeWithText("Volgende simulatiestap").performScrollTo().performClick()
-            compose.waitForIdle()
+        val before = UpdateController(compose.activity).load()
+        openSimulation()
+        compose.onNodeWithTag("run_simulation").performScrollTo().performClick()
+        compose.waitUntil(60_000) {
+            compose.onAllNodesWithTag("simulation_complete").fetchSemanticsNodes().isNotEmpty()
         }
-        compose.waitUntil(30_000) {
-            compose.onAllNodes(hasText("Simulatie afgerond:", substring=true)).fetchSemanticsNodes().isNotEmpty()
-        }
-        compose.onNodeWithText("SIMULATIE").assertExists()
-        compose.onNodeWithText("Schrijf uitsluitend deze stock-image").assertDoesNotExist()
-        org.junit.Assert.assertEquals(liveBefore, liveStore.load())
+        compose.onNodeWithTag("simulation_complete").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText(presentation.text(R.string.ui_simulation)).assertExists()
+        compose.onNodeWithTag("start_one_tap_update").assertDoesNotExist()
+        assertEquals(before, UpdateController(compose.activity).load())
+    }
+
+    private fun openSimulation() {
+        compose.onNodeWithTag("nav_diagnostics").performClick()
+        compose.onNodeWithTag("open_simulation").performScrollTo().performClick()
     }
 
     private fun waitUntilReady() {
-        compose.onNodeWithText("Controleer en bereid update voor").performScrollTo()
         compose.waitUntil(30_000) {
-            compose.onAllNodes(hasText("Controleer en bereid update voor") and isEnabled()).fetchSemanticsNodes().isNotEmpty()
+            compose.onAllNodes(hasTestTag("check_device") and isEnabled()).fetchSemanticsNodes().isNotEmpty()
         }
     }
 }

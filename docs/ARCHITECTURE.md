@@ -1,100 +1,61 @@
-# Architectuur
+# Architecture — 1.0.0
 
-## Modules
-
-Het project heeft een platformonafhankelijke Kotlin/JVM-module `core` en een Android-appmodule `app`. De core bevat modellen, gereedheidsbeleid, firmwarevalidatie, back-upvalidatie, privacyfilters, transfercontracten en de duurzame workflow. De Android-module verzorgt Compose/Material 3, coroutines, bestandskiezer, echte uitleesprobes, toestelcertificaatverificatie, lokale bestanden en expliciete overdracht naar systeemapps.
+The repository has a pure Kotlin/JVM `core` module and an Android `app` module. Policies and parsers do not depend on Android. Android adapters own transport, storage, system observations, privileged processes and UI. A UI state or saved journal cannot substitute for an observed operating-system result.
 
 ```mermaid
 flowchart TD
-    UI[Compose Material 3] --> VM[MotoViewModel / Compose State]
-    VM --> DI[DeviceInspector]
-    DI --> SH[ReadOnlyShell: vaste allowlist]
-    SH --> OS[Properties, su, begrensde boot-/snapshotmetadata]
-    SH --> RP[SDK 37-roothelper: engine bind/unbind]
-    DI --> MD[ReadOnlyMetadata / MetadataObservations]
-    DI --> SC[VerifiedStockCatalog / FirmwareVault + toestel-OTA-sleutels]
-    VM --> FF[FirmwareFiles: SAF / HTTPS / verifyPackage]
-    VM --> CORE[Core validators en Readiness]
-    VM --> WF[UpdateController / core.update.UpdateCoordinator]
-    WF --> STORE[UpdateRunStore: AtomicFile]
-    VM --> RESTORE[StockRestoreController: expliciet plan + consent]
-    RESTORE --> HELPER[StockRestoreProbe: UID0 SDK37 gates + writerlock]
-    HELPER --> PART[Alleen actuele init_boot: backup / write / readback]
-    VM --> SIM[SandboxUpdateSession: regular-file partitions]
-    VM --> IMPORT[MotorolaPackageImporter: bestaande OEM-ZIP lezen]
-    VM --> STAGE[MotorolaPackageStager: apart bevestigde copy-only staging]
-    VM --> EXPORT[Toegestane rapportvelden / privacyfilter]
-    UI --> APPS[Expliciet openen officiële Motorola- of Magisk-app]
+    UI[Compose / native EN-NL locales / appearance] --> VM[MotoViewModel]
+    VM --> DI[DeviceInspector / fixed read-only probes]
+    DI --> CAP[Measured DeviceCapabilities]
+    DI --> META[Checked boot / snapshot / engine observations]
+    VM --> CDS[Consent-gated CDS production HTTPS]
+    CDS --> DL[Controlled complete-resource downloader]
+    VM --> FF[Private package selection / OEM ZIP import]
+    DL --> FF
+    FF --> VERIFY[Whole-ZIP signature / metadata / payload validation]
+    VERIFY --> VAULT[Current stock provenance vault]
+    VM --> FLOW[UpdateController / UpdateCoordinator]
+    FLOW --> JOURNAL[AtomicFile UpdateRunStore]
+    FLOW --> AUTH[RunAuthorizationStore / short action permits]
+    AUTH --> ROOT[Fixed root entrypoints / fresh gates / durable claims]
+    VAULT --> ROOT
+    ROOT --> STOCK[Exact active boot backup / restore / full readback]
+    VM --> SIM[Separate file-backed SandboxUpdateSession]
+    VM --> OEM[Official Motorola / Magisk navigation fallback]
 ```
 
-Alleen de afzonderlijke, expliciet bevestigde stockherstelroute bereikt een partitie. Er is geen OTA-installer, Magisk-installer, slotwissel of rebootfunctie. Handelingen van de officiële apps worden apart als melding of onafhankelijke waarneming opgeslagen. De nieuwe live schrijver is nog niet op de telefoon uitgevoerd; de sandbox is het uitvoeringsbewijs voor de transactie.
+## Identity, observations and capabilities
 
-## Toestel-, root- en snapshotinspectie
+`ReadOnlyProbe` and the property allowlist bound diagnostic commands. Shell output, elapsed time and byte counts are limited; stderr is separate from image bytes. Protected reads require an actual root grant. `DeviceInspector` combines independent values into `DeviceState` and `Inspection` without filling absent facts from marketing names or fixture defaults.
 
-`ReadOnlyProbe` definieert de vaste diagnostische commando's. `ReadOnlyShell.property` accepteert alleen benoemde properties; een lege niet-geprivilegieerde waarde wordt pas na bevestigde rootverlening met root herlezen. Dit was op het echte toestel nodig voor Virtual A/B. De Magisk-bestandslezer accepteert uitsluitend een directory-ID met het exacte verwachte hashformaat. `ProcessBuilder` houdt stderr gescheiden en begrenst tijd en uitvoer. Een fout of afgekapte observatie wordt niet als geslaagd geparseerd.
+Measured manufacturer/model/device/channel, Android/build namespaces, boot ID, partition inventory, A/B layout, runtime root/Magisk, kernel security evidence, modules, battery and storage remain separate observations. `DeviceCapabilities` grants narrower capabilities as proof becomes available; the historical `merc` profile is not a universal-model requirement. Unsupported critical runtimes remain blocked while diagnostics can still work.
 
-`DeviceInspector` combineert afzonderlijke observaties tot `DeviceState` en een gedetailleerde `Inspection`. Echte metingen krijgen een tijdstip. Rootverlening, Magisk-code, apparaatprofiel, huidige slot, Virtual A/B, module-inventaris, accu en vrije opslag blijven zelfstandige gegevens. Snapshots en engine worden met `ObservationParsers` naar bekende categorieën vertaald; onbekende uitvoer blijft onbekend.
+CRC-checked boot-control and Virtual A/B metadata, snapshot protobuf/directory observations and actual engine callbacks determine state. Traditional A/B can be positively not applicable for snapshot merging; unknown Virtual A/B cannot. The runtime does not invoke `bootctl` getters: their implementation can initialize or repair metadata. `EngineProbe` uses reviewed framework Binder definitions and actual bind/unbind callbacks, without guessed transaction numbers, hidden-API exemptions or SELinux changes. [Compatibility](COMPATIBILITY.md).
 
-Op het onderzochte toestel ontbreken `bootctl`, `snapshotctl` en `update_engine_client`. De fallback leest precies 32 boot-controlbytes en 64 Virtual A/B-bytes uit `misc`; `ReadOnlyMetadata` controleert layout, magic, versie, omvang, CRC en slotgegevens. Snapshot-protobuf, bestandsaanwezigheid, consistente leeslengte, snapshotdirectory en Virtual A/B vormen afzonderlijke bronnen. Een aantoonbaar bestaand leeg proto3-bestand kan `NONE` betekenen; ontbrekende of onleesbare uitvoer kan dat niet. Ongeldige layouts en tegenstrijdige snapshot-/slotgegevens blijven onbekend.
+## Discovery, transfer and authentication
 
-De historische bootctl-enumnamen blijven voor fixtures bestaan, maar zijn runtime expliciet uitgeschakeld. Ook getters kunnen een boot-controlimplementatie initialiseren die metadata repareert; daarom start de app deze tool niet meer. De raw CRC-/kernelmetingen blijven de bron.
+`CdsController` obtains separate online consent before reading identifiers or sending production HTTPS. A dedicated reader keeps serial/GUID outside ordinary diagnostics and export. Strict bounded JSON, current context, target and resource binding govern an offer. The opaque live selection evidence is separate from an OEM package signature or install permit. [CDS provider](CDS-PROVIDER.md).
 
-De aparte `EngineProbe` wordt alleen op verzoek als rootproces uit de geïnstalleerde APK gestart. Zij vereist UID 0 en SDK 37, gebruikt beperkte `ServiceManager`-reflectie en accepteert alleen de werkelijk geladen frameworkbindings. De meegeleverde gepinde AIDL beschrijft het interfacecontract; transactienummers worden niet gegokt. Alleen `bind(callback)` en `unbind(callback)` worden aangeroepen. Callback- en procesdeadlines begrenzen ook een vastgelopen Binder-aanroep; geweigerde toegang of onbekende status blijft `UNKNOWN`. Er worden geen hidden-API-vrijstellingen of VM-/SELinux-beleidswijzigingen uitgevoerd. De werkelijke callback rapporteerde `IDLE`; dit is geen installatiefunctie.
+The downloader stores sensitive references separately, persists resumable jobs and only publishes complete selected bytes under the shared selection lock. Private pinning provides stable validation input, using a durable copy fallback when hardlinks are denied. Existing OEM ZIP import reads a restricted source and writes a unique private staging file; it does not alter the original. The legacy optional OEM staging route has its own signed-channel and no-clobber publication contract. [Monitoring and downloads](MONITORING-AND-DOWNLOADS.md), [staging](MOTOROLA_STAGING.md).
 
-Kernelbootconfig en userspacebeveiligingsproperties blijven apart bewaard. Op het echte toestel botsen `locked/green`-properties met `unlocked/orange` in de kernelbron. De mapper gebruikt de ondersteunde kernelbron en markeert het conflict expliciet; dit is geen hardwareattestatie. Private Motorola-prefs zijn optionele diagnose. Alleen twee vaste `cat`-probes gebruiken `su --target 0` voor de tijdelijke globale Magisk-mountnamespace; zij wijzigen geen bestand of permanent beleid.
+`FirmwareValidator` checks bounded ZIP structures, metadata, payload headers/hashes and projected boot manifests. `RecoverySystem.verifyPackage` supplies actual device-trust authentication in the Android layer. Byte integrity, authenticated signature, source compatibility, channel and image provenance are distinct results.
 
-## Firmware en back-ups
+`BootImageStreams` processes raw/gzip images with bounded buffers, full SHA1/SHA256, gzip CRC/size/trailer checks and reviewed AOSP boot-header layouts. It distinguishes `boot` and `init_boot`; size and type come from actual evidence. `FirmwareVault` binds OEM-authenticated manifest digests to current image identity, measured trust anchors and independent live Magisk association. [Stock provenance](STOCK-PROVENANCE.md).
 
-`FirmwareFiles` importeert een door de gebruiker gekozen content-URI naar de eigen appopslag of downloadt een toegestane HTTPS-kandidaat. Redirects zijn niet stilzwijgend toegestaan. Transfers hebben omvangslimieten en een tussenbestand; pas een afgeronde transfer wordt de geselecteerde lokale kopie. Deze component schrijft niet naar Motorola's map. De aparte, afzonderlijk bevestigde `MotorolaPackageStager` kan een geauthenticeerde, gepinde ZIP met ondertekend bewezen reteu-kanaal daar copy-only klaarzetten; de mogelijke automatische herkenning door Motorola vereist een eigen waarschuwing. Zij roept geen installer aan en is nog niet fysiek gevalideerd. Zie [het stagingcontract](MOTOROLA_STAGING.md).
+## Workflow and privileged boundaries
 
-`MotorolaPackageImporter` leest in omgekeerde richting een reeds bestaande Motorola-ZIP, zodat de afgeschermde Android/data-map niet via SAF of een pc hoeft te worden geopend. De roothelper heeft een vaste UID0/SDK37/profileguard en bronmap, begrenst de bestandslijst en schrijft uitsluitend een unieke app-private stagingfile. De pure `MotorolaImportPolicy` controleert no-follow paden, bronidentiteit vóór/na, volledige SHA256 en readback. Alleen de app publiceert daarna onder `DownloadController.withPausedSelection` de selectie; een orphan rootcopy kan die selectie niet veranderen. De oorspronkelijke OEM-bron wordt niet gewijzigd.
+`UpdateRunStore` uses `AtomicFile` for the persistent journal. Missing, corrupt, stale, user-reported and verified facts are distinct. Source/target identities, expected slots, source boot, package hash, security/module baselines and image evidence are durable. Reconciliation reads actual state after restart and detects target boot, incomplete merge, root denial/loss and possible rollback.
 
-`FirmwareValidator` onderzoekt ZIP-entries, metadata en payloadinhoud binnen grenzen. Hashintegriteit, buildcompatibiliteit en een afzonderlijk verstrekte authentificatiestatus zijn verschillende resultaten. `RecoverySystem.verifyPackage` wordt alleen in de Android-module aangeroepen tegen de echte systeemtruststore en installeert niets. Roottoegang of een testboolean in een unit-test mag een gewone echte ZIP niet authentiek maken.
+`RunAuthorizationPolicy` binds one initial intent to exact device/source/target/package/actions and independent wall-clock/elapsed deadlines. The store narrows an unknown package only to matching authenticated bytes and issues bounded short permits for the active session. App-dispatch and root-consumption markers are separate, durable and one use. Recreating a store does not reactivate a saved run for mutation.
 
-`BackupValidator` onderzoekt volledige uitgepakte bytes, v4-init_boot-formaat, exact gemeten partitieomvang, gzip-CRC/trailer en hashes. Een back-updirectory alleen blijft onbewezen. `VerifiedStockCatalog` bevat nu één geauditeerde actuele referentie: de 8 MiB-stock17-image waarvan de SHA-256 overeenkomt met het onafhankelijk geauthenticeerde OTA-doelmanifest. Alleen het exacte gemeten toestelprofiel, Android-versie, build, fingerprint en een passende werkelijk gelezen toestel-OTA-SPKI activeren die referentie. Dan kan ook de echte Magisk-inventaris `provenanceVerified=true` krijgen na volledige bytevalidatie. Een andere build, sleutel of aliasfingerprint krijgt geen referentie. De huidige gepatchte partitie wordt niet tot stock gepromoveerd; er zijn geen stockimagebytes ingebouwd. Zie [het authenticiteitsbewijs](DEVICE-VALIDATION.md).
+`StockRestoreController` and the fixed root helper derive all transaction paths internally. They require authenticated current bytes and fresh safety gates, copy/hash the full patched source, recheck immediately before the write, consume authority, synchronize and read back the entire partition. Only the measured active `boot` or `init_boot` A/B partition is eligible. Streaming bounds avoid assuming every model has an 8 MiB image.
 
-`PayloadManifest` parseert begrensde new-init_boot-informatie uit de geauthenticeerde payload. `FirmwareVault` bewaart deze ondertekende doelfeiten privé en bindt ze alleen na een verse werkelijke doelboot aan de gemeten systeemidentiteit. Een latere backup moet volledig matchen. Dit maakt volgende Android 17-builds mogelijk zonder één historische imagehash tot universele stockwaarheid te verheffen.
+The exclusive writer lock also applies to read-only recovery. Interrupted work is observed, never silently replayed or rolled back. It cannot lock Motorola's external updater or defeat power/storage failure. Scope MACs protect the app-to-helper contract, not against a separate adversary with full root. [Workflow](UPDATE-WORKFLOW.md), [Safety](SAFETY.md).
 
-`MotorolaMetadataParser` leest begrensde XML en strikte JSON met duplicaat-, diepte- en omvangcontroles. De werkelijke envelop is een `downloadRequest`-object met een als JSON-string opgeslagen `contentResource`. De parser onderscheidt `METADATA_ONLY`, `OTA_ZIP` en `UNKNOWN`; de targetbuild komt uitsluitend uit het expliciete targetfingerprintveld. De aangetroffen `payload_metadata.bin`-job verwijst naar de al geïnstalleerde build en krijgt geen volledige OTA-downloadknop. Een officiële host alleen bewijst geen resourcesoort, authenticiteit of actueel aanbod. De parser logt of exporteert de gevoelige URL niet; een expliciet gestarte hervatbare download bewaart de referentie uitsluitend versleuteld met Android Keystore. Veilige diagnostiek gebruikt enumwaarden.
+## Presentation, privacy and simulation
 
-Het onderzochte ondertekende pakket gebruikt verschillende OEM-fingerprintnamespaces en Android-labels. Een compleet payload-fingerprintpaar mag de informatieve doelweergave verbeteren, maar heft `OEM_METADATA_REVIEW_REQUIRED`, broncontroles of `ALREADY_INSTALLED` niet op. Er bestaat geen algemene aliasvertaalregel.
+Compose Material3 provides overview, firmware, update, diagnostics and settings destinations, adaptive navigation, a first-run tour and system/light/dark appearance. Android 13+ `LocaleManager` manages English/Dutch per-app language. Typed presentation keys resolve cached observations in the current locale; raw saved legacy prose is not a translated UI message. Notification channels are refreshed after language changes.
 
-`OfficialApps` bouwt expliciete intents en start zelf niets. De updaterresolver gebruikt `MATCH_SYSTEM_ONLY`, positieve prioriteit en ingeschakelde geëxporteerde Motorola-systeemactivities. De actionstring is letterlijk vastgelegd voor compileSdk 35; de publieke Settings-constante bestaat pas vanaf 36.1. Ook de Magisk-launcher blijft aan zijn expliciete pakketcomponent gebonden. Ontbrekende geschikte apps leiden tot handmatige navigatie.
+Reports export an allowlist on request. Android backup/transfer are disabled; no automatic diagnostic upload or IMEI collection occurs. Explicit online discovery and downloads disclose their network data. Release signing material stays outside the checkout; production is non-debuggable with dynamic root/JNI/Binder/Worker contracts checked in the actual APK. Version 1.0.0 retains the complete runtime; optional shrinking needs separate qualification. [Release engineering](RELEASE-ENGINEERING.md).
 
-## Gereedheid
-
-`Readiness.evaluate` maakt blockers en waarschuwingen uit dezelfde onveranderlijke `DeviceState`. Het specifieke toestelprofiel moet kloppen, beide init_boot-partities moeten bekend zijn en alleen onderzochte Magisk-compatibiliteit is aanvaardbaar. Snapshot NONE en engine IDLE zijn afzonderlijke eisen. Minimaal 50% accu en een conservatieve opslagraming zijn appbeleid, geen claim over Motorola's exacte engine-reservering.
-
-De observaties moeten recent zijn en bij dezelfde sessie horen. Een onbekende bootidentiteit verhindert betrouwbaar herstel na een onverwachte herstart. Een resultaat zonder blockers is geen schrijfrecht: de aparte `StockRestorePolicy` verlangt aanvullende verse metingen en een HMAC-gebonden eenmalige bevestiging voor een specifiek immutable plan.
-
-De versiegrens voor begeleiding is Android 17 met Magisk 31.1. De ontgrendelde bootloader moet samenhangen met de waargenomen verified-bootstatus `orange`, de huidige slot moet succesvol gemarkeerd zijn en module-inventaris en rootcontrole moeten werkelijk zijn uitgevoerd. Deze conservatieve voorwaarden voorkomen dat een nieuw platform of onvolledige probe ongemerkt toestemming krijgt.
-
-## Duurzame statusmachine
-
-De workflow bewaart verwachte bron- en doelbuild, huidige en verwachte bootslot, pakket-SHA-256, een lokale bootidentificatie en module-/beveiligingsbaseline. Een opgeslagen fase is geen systeemmeting. Het logboek onderscheidt onder meer pakketonderzoek, wachten op stockherstel, wachten op OTA, waargenomen OTA-toepassing, Magiskrapportage, vereiste reboot, nieuwe targetboot, merge en eindcontrole.
-
-`UpdateRunStore` schrijft met Android `AtomicFile`: een mislukte write wordt teruggedraaid naar de vorige volledige toestand. De serialisatie heeft een schema. Ook ontbrekende base met bestaande `.bak`, lege bestaande journals en te grote invoer worden behandeld. Onbekende of beschadigde gegevens leiden tot herstelcontrole. Simulaties hebben hun eigen directory en mogen het echte logboek niet overschrijven.
-
-Na heropenen reconciliëert `UpdateCoordinator` de verwachtingen met nieuwe waarnemingen. Een processtop is geen systeemreboot. Een gewijzigde bootidentiteit triggert controle van build, slot, root en merge. De gedeclareerde doelfingerprint is optioneel; de werkelijk gemeten targetfingerprint wordt apart opgeslagen en niet naar een OEM-alias herschreven. Handmatige meldingen zijn expliciet gemarkeerd en kunnen nooit zelfstandig COMPLETE zetten. Rollback, verloren root, afwijkende slot en ontbrekende modules zijn afzonderlijke fouten; een niet-geïdentificeerde toestand wordt herstelvereist.
-
-De officiële route kan met een werkelijk door Motorola aangeboden doelbuild zonder geïmporteerde ZIP beginnen. Een later geauthenticeerd pakket kan uitsluitend vóór de OTA en buiten een schrijver aan dezelfde doelbuild worden gekoppeld; de generieke compatibiliteitsblokkades blijven bestaan. Root- of module-eindcontrole kan na een herstelbare toestemmingsfout expliciet opnieuw worden gelezen; een OTA-/mergefout wordt daarmee niet gewist.
-
-## Stocktransactie en simulatie
-
-`StockRestoreController` serialiseert prepare/confirm/recover en claimt de verwachte workflow/transactie atomisch in het journaal vóór dispatch. De helper accepteert alleen vaste operaties en UUID's; app-private bron/request/key en het partitiedoel zijn intern afgeleid. De HMAC bindt bronidentiteit, boot-ID, slot, formaat, stockhash, huidige partitiehash en wallclock-/elapsedRealtime-termijnen. De helper meet zelf alle live gates, bewaart de volledige gepatchte partitie en verbruikt een `O_EXCL`-marker vóór schrijven. Alleen exact 8 MiB op de huidige init_boot van het onderzochte SDK37/Magisk31100-profiel wordt ondersteund.
-
-De writerlock is ook verplicht voor uitlezende recovery. Na een crash wordt niets opnieuw geschreven. Stockherstel is pas bevestigd als actieve stockhash én volledige gepatchte backuphash kloppen. Als de bron nog volledig de oorspronkelijke gepatchte image is, kan een expliciete recovery alle gates lezen, de backup zo nodig vastleggen en het oude consent ongeldig maken. Pas daarna is een nieuwe transactie met nieuwe toestemming mogelijk. De helper heeft een eigen 55s deadline, maar vormt geen atomair interlock met de externe Motorola-updater; I/O-stalls blijven een herstelrisico.
-
-`SandboxUpdateSession` gebruikt hetzelfde beleid en dezelfde fases met echte regular-file I/O. Stockrestore/backup/readback en het journaal zijn echte bestandsbewerkingen; OTA, Magisk, reboot, root en merge zijn mockobservaties. Alle staten houden `simulated=true`, en een bestaande sessie wordt niet automatisch herschreven. Zie [het volledige runbook](UPDATE-WORKFLOW.md).
-
-## Privacy en toestemmingen
-
-Het manifest vraagt INTERNET voor een expliciet gestarte firmwaredownload en pakketzichtbaarheid voor de twee doelapps. De beperkte PARTIAL_WAKE_LOCK rond een expliciet bevestigde stockdispatch heeft een timeout van 65 seconden en wordt in `finally` vrijgegeven; hij houdt het scherm niet aan. Bestandsimport en export verlopen via Androids bestandskiezer. Er is geen brede opslagpermission, toegankelijkheidsservice, device-adminfunctie of bootontvanger die een update start. Android-appback-up staat uit.
-
-Rapportage selecteert technische velden en gebruikt privacyfilters. De volledige `Inspection` met mogelijke ondertekende download-URL wordt niet als ruwe dump geëxporteerd. De app uploadt niets. Firmwarebestanden en het logboek blijven in de eigen appopslag tot de gebruiker die appgegevens verwijdert.
-
-## Uitbreidingsregel
-
-De opt-in toesteltest gebruikt daarnaast `FirmwareSignatureProbe` om een al aanwezige Motorola-ZIP rechtstreeks met Androids publieke signatureverificatie te controleren. Dit is een afzonderlijk SDK-37/rootproces met een strikte canonical-path-/omvangcontrole en watchdog. Geen bestand wordt gekopieerd of toegepast. De actuele positieve toesteltest staat in [het buildrapport](BUILD-REPORT.md).
-
-Voeg een nieuw toestel of een nieuwe schrijfintegratie alleen toe met een eigen onderzocht adaptercontract en tests. Verander geen UNKNOWN-default in een optimistische waarde om de UI door te laten gaan. Houd externe API-contracten, lokale voorkeurbestanden, metadata-eigen verklaringen en onafhankelijke observaties gescheiden.
+`SandboxUpdateSession` has a separate journal and regular-file partitions. Its OTA/Magisk/slots/root/reboot/merge are explicitly simulated. It exercises real file transaction and failure logic, cannot authorize live actions and does not change the live journal. Current executions belong in [BUILD-REPORT](BUILD-REPORT.md); historical hardware qualification is labelled separately.

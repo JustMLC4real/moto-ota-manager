@@ -73,7 +73,13 @@ data class UpdateRun(
     val lastActiveHashAtMillis: Long = 0,
     val simulated: Boolean = false,
     val errorCode: String? = null,
-    val message: String = "Nog geen update gestart."
+    val message: String = "Nog geen update gestart.",
+    val presentationKey: String? = null,
+    val presentationArgs: List<String> = emptyList(),
+    val sourceModel: String = "",
+    val sourceDevice: String = "",
+    val sourceChannel: String = "",
+    val stockPartitionType: String = "init_boot"
 ) {
     val criticalSession: Boolean get() = (stage==UpdateStage.STOCK_WRITE_RUNNING ||
         (stage==UpdateStage.RECOVERY_REQUIRED && restoreTransactionId.isNotBlank()) ||
@@ -99,6 +105,9 @@ data class UpdateRun(
         setProperty("lastObservedEngine",lastObservedEngine.name);setProperty("lastObservedSnapshot",lastObservedSnapshot.name)
         setProperty("lastActiveImageSha256",lastActiveImageSha256);setProperty("lastActiveHashAtMillis",lastActiveHashAtMillis.toString())
         setProperty("error", errorCode.orEmpty()); setProperty("message", message)
+        setProperty("sourceModel",sourceModel);setProperty("sourceDevice",sourceDevice);setProperty("sourceChannel",sourceChannel);setProperty("stockPartitionType",stockPartitionType)
+        setProperty("presentationKey",presentationKey.orEmpty());setProperty("presentationArgCount",presentationArgs.size.toString())
+        presentationArgs.forEachIndexed { index,value ->setProperty("presentationArg.$index",value)}
     }.let { p -> StringWriter().also { p.store(it, "Moto OTA Manager durable guided update; no stored state substitutes for live evidence") }.toString() }
 
     companion object {
@@ -123,7 +132,11 @@ data class UpdateRun(
                     lastObservedBootId=p.getProperty("lastObservedBootId", ""),lastObservedBuild=p.getProperty("lastObservedBuild", ""),lastObservedSlot=p.getProperty("lastObservedSlot", ""),
                     lastObservedEngine=EngineState.valueOf(p.getProperty("lastObservedEngine","UNKNOWN")),lastObservedSnapshot=SnapshotState.valueOf(p.getProperty("lastObservedSnapshot","UNKNOWN")),
                     lastActiveImageSha256=p.getProperty("lastActiveImageSha256",""),lastActiveHashAtMillis=p.getProperty("lastActiveHashAtMillis","0").toLong(),
-                    authenticatedTargetStockSha1=p.getProperty("authenticatedTargetStockSha1",""))
+                    authenticatedTargetStockSha1=p.getProperty("authenticatedTargetStockSha1",""),
+                    sourceModel=p.getProperty("sourceModel",""),sourceDevice=p.getProperty("sourceDevice",""),sourceChannel=p.getProperty("sourceChannel",""),stockPartitionType=p.getProperty("stockPartitionType","init_boot").also{require(it in setOf("boot","init_boot"))},
+                    presentationKey=p.getProperty("presentationKey","").ifBlank {null},
+                    presentationArgs=p.getProperty("presentationArgCount","0").toInt().also{require(it in 0..16)}.let {count->
+                        (0 until count).map {index->requireNotNull(p.getProperty("presentationArg.$index")).also{require(it.length<=2048)}}})
                     .also { r ->
                         if (r.stage !in setOf(UpdateStage.IDLE,UpdateStage.PRECHECK_BLOCKED,UpdateStage.RECOVERY_REQUIRED)) {
                             require(r.id.matches(Regex("[A-Za-z0-9_-]{1,80}")))
@@ -138,19 +151,28 @@ data class UpdateRun(
 }
 
 object UpdateCoordinator {
+    private fun safeSnapshot(state:SnapshotState)=state in setOf(SnapshotState.NONE,SnapshotState.NOT_APPLICABLE)
+    private fun matchesSourceDevice(run:UpdateRun,device:DeviceState):Boolean =
+        device.manufacturer.equals("motorola",true) && device.identityConflicts.isEmpty() &&
+        if(run.sourceModel.isBlank() || run.sourceDevice.isBlank() || run.sourceChannel.isBlank()) device.exactProfileMatch
+        else device.model==run.sourceModel && device.device==run.sourceDevice && device.channel==run.sourceChannel
+    private fun planMatchesSource(run:UpdateRun,plan:StockRestorePlan):Boolean =
+        if(run.sourceModel.isBlank()) plan.model=="XT2607-1" && plan.device=="merc" && plan.channel=="reteu" && plan.partitionType=="init_boot"
+        else plan.model==run.sourceModel && plan.device==run.sourceDevice && plan.channel==run.sourceChannel && plan.partitionType==run.stockPartitionType
     /** Explicit sandbox entry point. A simulated run never becomes a live run. */
     fun startSandboxGuidedRun(device:DeviceState,backup:BackupValidation?,target:ObservedUpdateTarget,nowMillis:Long=System.currentTimeMillis()):UpdateRun {
         require(device.simulated)
         return startOfficialGuidedRun(device.copy(simulated=false),backup,target,nowMillis).copy(simulated=true)
     }
     fun startOfficialGuidedRun(device: DeviceState, backup: BackupValidation?, target: ObservedUpdateTarget,
-                               nowMillis: Long = System.currentTimeMillis()): UpdateRun {
+                               nowMillis: Long = System.currentTimeMillis(), runId: String = UUID.randomUUID().toString()): UpdateRun {
+        require(runCatching { UUID.fromString(runId).toString()==runId }.getOrDefault(false))
         val checks = Readiness.evaluate(device, backup, nowMillis=nowMillis)
         val problems=checks.blockers.toMutableList()
         if (target.build.isBlank() || target.build==device.build) problems += CheckResult("TARGET", "Selecteer een werkelijk andere doelbuild uit de officiële updater of een geverifieerd pakket.")
         if (device.simulated) problems += CheckResult("SIMULATION", "Een demo kan geen echte update begeleiden.")
         if (problems.isNotEmpty()) return UpdateRun(stage=UpdateStage.PRECHECK_BLOCKED,errorCode=problems.first().code,message=problems.joinToString("\n"){it.message})
-        return UpdateRun(id=UUID.randomUUID().toString(),stage=UpdateStage.STOCK_PREPARATION,sourceBuild=device.build,sourceFingerprint=device.fingerprint,
+        return UpdateRun(id=runId,sourceModel=device.model,sourceDevice=device.device,sourceChannel=device.channel,stockPartitionType=backup!!.partitionType,stage=UpdateStage.STOCK_PREPARATION,sourceBuild=device.build,sourceFingerprint=device.fingerprint,
             sourceSlot=device.slot,sourceBootId=device.bootId,targetBuild=target.build,declaredTargetFingerprint=target.declaredFingerprint,
             targetSlot=device.inactiveSlot,packageSha256=target.packageSha256,packageVerified=target.packageVerified,stockSha256=backup!!.sha256,
             modulesBaseline=device.modules.sorted(),baselineUnlocked=device.bootloaderUnlocked,baselineVerifiedBoot=device.verifiedBootState,
@@ -165,7 +187,7 @@ object UpdateCoordinator {
     /** Attach authentication facts only; this does not approve compatibility or installation. */
     fun attachVerifiedPackage(run:UpdateRun,report:FirmwareReport,nowMillis:Long=System.currentTimeMillis()):UpdateRun {
         if(run.route!=UpdateRoute.OFFICIAL_MOTOROLA || run.stage !in setOf(UpdateStage.STOCK_PREPARATION,UpdateStage.STOCK_CONFIRMATION,UpdateStage.STOCK_RESTORED,UpdateStage.AWAITING_OFFICIAL_OTA) ||
-            !freshSource(run,nowMillis) || run.lastObservedEngine!=EngineState.IDLE || run.lastObservedSnapshot!=SnapshotState.NONE ||
+            !freshSource(run,nowMillis) || run.lastObservedEngine!=EngineState.IDLE || !safeSnapshot(run.lastObservedSnapshot) ||
             !report.signatureVerified || !report.structureValid || !report.payloadHashValid || !report.sha256.matches(Regex("[a-f0-9]{64}")) || report.targetBuild!=run.targetBuild)return run
         return run.copy(packageSha256=report.sha256,packageVerified=true,
             declaredTargetFingerprint=report.targetFingerprint,
@@ -175,7 +197,7 @@ object UpdateCoordinator {
     fun restorePrepared(run:UpdateRun,plan:StockRestorePlan):UpdateRun {
         if (run.stage !in setOf(UpdateStage.STOCK_PREPARATION,UpdateStage.STOCK_CONFIRMATION))return run
         if (run.id!=plan.runId || run.sourceBootId!=plan.bootId || run.sourceSlot!=plan.slot || run.stockSha256!=plan.stockSha256 ||
-            run.sourceBuild!=plan.build || run.sourceFingerprint!=plan.fingerprint || plan.model!="XT2607-1" || plan.device!="merc" || plan.channel!="reteu" ||
+            run.sourceBuild!=plan.build || run.sourceFingerprint!=plan.fingerprint || !planMatchesSource(run,plan) ||
             run.simulated!=(plan.mode==ExecutionMode.SANDBOX)) return fail(run,"RESTORE_PLAN_MISMATCH","Het herstelplan hoort niet bij deze workflow.")
         return run.copy(stage=UpdateStage.STOCK_CONFIRMATION,restoreTransactionId=plan.transactionId,patchedBackupSha256=plan.previousImageSha256,message=plan.confirmationSummary)
     }
@@ -208,13 +230,30 @@ object UpdateCoordinator {
 
     fun openOfficialOta(run:UpdateRun,nowMillis:Long=System.currentTimeMillis()):UpdateRun = if(run.stage in setOf(UpdateStage.STOCK_RESTORED,UpdateStage.AWAITING_OFFICIAL_OTA,UpdateStage.OTA_APPLYING) &&
         freshSource(run,nowMillis) && run.lastActiveImageSha256==run.stockSha256 && nowMillis-run.lastActiveHashAtMillis in 0..120_000 && run.lastObservedEngine in setOf(EngineState.IDLE,EngineState.DOWNLOADING,EngineState.VERIFYING,EngineState.FINALIZING) &&
-        (run.lastObservedEngine!=EngineState.IDLE || run.lastObservedSnapshot==SnapshotState.NONE) && run.stockRestoreEvidence in setOf(StepEvidence.OBSERVED,StepEvidence.CRYPTOGRAPHIC_IMAGE))run.copy(
+        (run.lastObservedEngine!=EngineState.IDLE || safeSnapshot(run.lastObservedSnapshot)) && run.stockRestoreEvidence in setOf(StepEvidence.OBSERVED,StepEvidence.CRYPTOGRAPHIC_IMAGE))run.copy(
         stage=UpdateStage.AWAITING_OFFICIAL_OTA,otaAuthenticityDelegatedToOfficialUpdater=true,
         message="Gebruik Motorola's officiële updatecontrole en installatie. Motorola verifieert zijn updateketen. Wacht op voltooiing, maar druk nog niet op Herstarten.")else run
 
     fun reportMagiskInstalled(run:UpdateRun):UpdateRun = if(run.otaAppliedObserved && freshSource(run,System.currentTimeMillis()) && run.lastObservedEngine==EngineState.UPDATED_NEED_REBOOT && run.magiskEvidence!=StepEvidence.CRYPTOGRAPHIC_IMAGE && run.stage in setOf(UpdateStage.MAGISK_REQUIRED,UpdateStage.MAGISK_REPORTED_UNVERIFIED))run.copy(
         stage=UpdateStage.MAGISK_REPORTED_UNVERIFIED,magiskEvidence=StepEvidence.USER_REPORTED,
         message="Magisk naar het inactieve slot is door de gebruiker gemeld, niet onafhankelijk bewezen. Controleer de officiële Magisk-log: doelslot ${run.targetSlot}, init_boot${run.targetSlot} en All done. De definitieve rootcontrole volgt na de nieuwe boot.")else run
+
+    fun automaticOtaDispatching(run:UpdateRun):UpdateRun {
+        require(run.stage==UpdateStage.AWAITING_OFFICIAL_OTA && run.packageVerified &&
+            run.stockRestoreEvidence==StepEvidence.CRYPTOGRAPHIC_IMAGE && freshSource(run,System.currentTimeMillis()) &&
+            run.lastObservedEngine==EngineState.IDLE && safeSnapshot(run.lastObservedSnapshot))
+        return run.copy(stage=UpdateStage.OTA_APPLYING,otaAuthenticityDelegatedToOfficialUpdater=false,
+            presentationKey=null,presentationArgs=emptyList(),message="The authenticated official payload is being submitted to Android UpdateEngine. Do not restart.")
+    }
+
+    /** The platform adapter accepts only its independently verified, HMAC-bound root receipt. */
+    fun authenticatedTargetStock(run:UpdateRun,runId:String,packageSha256:String,slot:String,sha1:String):UpdateRun {
+        require(run.id==runId && run.packageVerified && run.packageSha256==packageSha256 && run.targetSlot==slot &&
+            sha1.matches(Regex("[a-f0-9]{40}")) && run.stage==UpdateStage.MAGISK_REQUIRED && run.otaAppliedObserved &&
+            freshSource(run,System.currentTimeMillis()) && run.lastObservedEngine==EngineState.UPDATED_NEED_REBOOT)
+        require(run.authenticatedTargetStockSha1.isBlank() || run.authenticatedTargetStockSha1==sha1)
+        return run.copy(authenticatedTargetStockSha1=sha1)
+    }
 
     fun observeMagiskProof(run:UpdateRun,proof:TargetMagiskProof,nowMillis:Long=System.currentTimeMillis()):UpdateRun {
         if(run.stage !in setOf(UpdateStage.MAGISK_REQUIRED,UpdateStage.MAGISK_REPORTED_UNVERIFIED,UpdateStage.REBOOT_BY_SYSTEM_UPDATER))return run
@@ -247,7 +286,7 @@ object UpdateCoordinator {
     /** A fresh observation may release only the official manual Magisk retry, never an installer. */
     fun retryMagiskStep(run:UpdateRun,device:DeviceState,nowMillis:Long=System.currentTimeMillis()):UpdateRun {
         if(run.stage!=UpdateStage.FAILED || run.errorCode!="MAGISK_INACTIVE_FAILED" || !run.otaAppliedObserved ||
-            device.simulated!=run.simulated || !device.exactProfileMatch || device.androidVersion!="17" ||
+            device.simulated!=run.simulated || !matchesSourceDevice(run,device) || !DeviceCapabilities.knownRestoreRuntime(device) ||
             device.bootId!=run.sourceBootId || device.slot!=run.sourceSlot || device.build!=run.sourceBuild || device.fingerprint!=run.sourceFingerprint ||
             device.capturedAtMillis<=0 || nowMillis-device.capturedAtMillis !in 0..120_000 || !device.rootChecked || !device.rootGranted || device.magiskCode!=31100 ||
             device.engine!=EngineState.UPDATED_NEED_REBOOT || device.snapshot!=SnapshotState.UNVERIFIED || device.virtualAb!=true)return run
@@ -277,7 +316,7 @@ object UpdateCoordinator {
     fun reconcile(run:UpdateRun,device:DeviceState,newStockBackup:BackupValidation?=null,activeImageSha256:String?=null,nowMillis:Long=System.currentTimeMillis()):UpdateRun {
         if(run.stage in setOf(UpdateStage.IDLE,UpdateStage.PRECHECK_BLOCKED,UpdateStage.FAILED,UpdateStage.ROLLBACK))return run
         if(run.simulated!=device.simulated)return run.copy(stage=UpdateStage.RECOVERY_REQUIRED,errorCode="MODE_MISMATCH",message="Simulatie en echte observaties mogen niet worden gemengd.")
-        if(!device.exactProfileMatch || device.capturedAtMillis<=0 || nowMillis-device.capturedAtMillis !in 0..120_000 || device.bootId.isBlank())return run.copy(
+        if(!matchesSourceDevice(run,device) || device.capturedAtMillis<=0 || nowMillis-device.capturedAtMillis !in 0..120_000 || device.bootId.isBlank())return run.copy(
             stage=UpdateStage.RECOVERY_REQUIRED,errorCode="OBSERVATION_INVALID",message="Actuele toestelidentiteit of verse opstartsessie ontbreekt. Lees opnieuw uit; voer geen actie automatisch opnieuw uit.")
         if(device.engine==EngineState.ERROR || device.snapshot==SnapshotState.FAILED)return fail(run,"ENGINE_OR_MERGE_ERROR","De actuele engine of snapshotstatus meldt een fout. Niet herstarten of automatisch terugschrijven; verzamel diagnostiek.")
         val sameBoot=device.bootId==run.sourceBootId
@@ -303,19 +342,19 @@ object UpdateCoordinator {
         if(device.slot==run.sourceSlot && device.build==run.sourceBuild)return updated.copy(stage=if(run.otaAppliedObserved)UpdateStage.ROLLBACK else UpdateStage.RECOVERY_REQUIRED,
             errorCode=if(run.otaAppliedObserved)"POSSIBLE_ROLLBACK" else "UNEXPECTED_REBOOT",message="Na de herstart draait nog de bronbuild/slot. Succes is niet bevestigd; onderzoek de toestand zonder automatische herstelactie.")
         if(device.slot!=run.targetSlot || device.build!=run.targetBuild)return updated.copy(stage=UpdateStage.RECOVERY_REQUIRED,errorCode="WRONG_TARGET",message="De actuele build of slot wijkt af van het verwachte doel.")
-        if(device.androidVersion!="17")return updated.copy(stage=UpdateStage.RECOVERY_REQUIRED,errorCode="TARGET_ANDROID_UNREVIEWED",observedTargetFingerprint=device.fingerprint,
-            message="De verwachte doelbuild/slot draait, maar Android ${device.androidVersion.ifBlank { "onbekend" }} is niet het onderzochte Android 17-profiel. Geen volledige kwalificatie of volgende voorbereiding zonder nieuw platformonderzoek.")
+        if(!DeviceCapabilities.knownRestoreRuntime(device))return updated.copy(stage=UpdateStage.RECOVERY_REQUIRED,errorCode="TARGET_ANDROID_UNREVIEWED",observedTargetFingerprint=device.fingerprint,
+            message="De verwachte doelbuild/slot draait, maar Android ${device.androidVersion.ifBlank { "onbekend" }} valt buiten de onderzochte Android-runtime-adapters. Geen volledige kwalificatie of volgende voorbereiding zonder nieuw platformonderzoek.")
         if(!run.otaAppliedObserved)return updated.copy(stage=UpdateStage.RECOVERY_REQUIRED,errorCode="OTA_APPLICATION_UNOBSERVED",message="Doelbuild draait, maar de OTA-toepassing was niet waargenomen. Onderzoek de updateketen; claim geen volledige begeleide uitvoering.")
         if(!device.rootChecked)return updated.copy(stage=UpdateStage.TARGET_BOOTED,observedTargetFingerprint=device.fingerprint,message="Doelbuild/slot gestart; root is nog niet gemeten. Voer de uitlezende rootcontrole uit.")
         if(!device.rootGranted)return fail(updated,"ROOT_MISSING","De nieuwe build draait, maar root is niet bevestigd. Controleer roottoestemming en Magisk; er wordt niets automatisch geflasht.")
         if(device.magiskCode!=31100)return updated.copy(stage=UpdateStage.RECOVERY_REQUIRED,errorCode="MAGISK_VERSION",message="Root werkt maar de Magisk-versie is niet de onderzochte 31.1.")
         if(device.snapshot in setOf(SnapshotState.MERGING,SnapshotState.INITIATED,SnapshotState.UNVERIFIED,SnapshotState.MERGE_NEEDS_REBOOT))return updated.copy(stage=UpdateStage.MERGING,
             observedTargetFingerprint=device.fingerprint,magiskEvidence=StepEvidence.OBSERVED_AFTER_BOOT,message="Nieuwe build en root bevestigd; snapshotproces ${device.snapshot} loopt nog. Start geen volgende OTA.")
-        if(device.snapshot!=SnapshotState.NONE || device.engine!=EngineState.IDLE || device.bootSuccessful!=true || !device.moduleInventoryKnown)return updated.copy(stage=UpdateStage.FINAL_CHECKS,
+        if(!DeviceCapabilities.snapshotSafe(device) || device.engine!=EngineState.IDLE || device.bootSuccessful!=true || !device.moduleInventoryKnown)return updated.copy(stage=UpdateStage.FINAL_CHECKS,
             observedTargetFingerprint=device.fingerprint,magiskEvidence=StepEvidence.OBSERVED_AFTER_BOOT,message="Nieuwe build/root bevestigd; wacht op succesvolle boot, snapshot NONE, idle-engine en module-inventaris.")
         if(!device.modules.containsAll(run.modulesBaseline))return fail(updated,"MODULE_INVENTORY_CHANGED","Een eerder waargenomen module of inschakelstatus ontbreekt. Functionele modulecompatibiliteit blijft handmatig te controleren.")
         if(device.bootloaderUnlocked!=run.baselineUnlocked || device.verifiedBootState!=run.baselineVerifiedBoot || device.fingerprint.isBlank())return updated.copy(stage=UpdateStage.RECOVERY_REQUIRED,errorCode="SECURITY_OR_IDENTITY_CHANGED",message="Kernelbootbeveiliging of firmware-identiteit ontbreekt of wijkt af.")
-        val backupOk=newStockBackup?.usableAsStock==true
+        val backupOk=newStockBackup?.usableFor(device)==true
         return updated.copy(stage=if(backupOk)UpdateStage.COMPLETE else UpdateStage.COMPLETE_REVIEW,observedTargetFingerprint=device.fingerprint,
             magiskEvidence=StepEvidence.OBSERVED_AFTER_BOOT,newStockBackupVerified=backupOk,errorCode=null,
             message=if(backupOk)"Doelbuild, juiste slot, root, succesvolle boot, modules, bootbeveiliging en afgeronde merge zijn werkelijk bevestigd. De nieuwe stockback-up is geauthenticeerd. Wallet en functionele modulecompatibiliteit blijven handmatig te controleren."

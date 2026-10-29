@@ -75,7 +75,7 @@ class MotorolaPackageImporter(private val context:Context) {
             coroutineContext.ensureActive()
             ImportSelection.requireUnchanged(files,selectionBefore)
             val destination=File(files,"selected-ota.zip")
-            require(destination.parentFile.canonicalFile==files && !Files.isSymbolicLink(destination.toPath()))
+            require(destination.parentFile?.canonicalFile==files && !Files.isSymbolicLink(destination.toPath()))
             val current=Os.lstat(staged.path);require(current.st_dev==after.st_dev && current.st_ino==after.st_ino && current.st_size==bytes && current.st_mtime==after.st_mtime && current.st_ctime==after.st_ctime)
             Files.move(staged.toPath(),destination.toPath(),StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING)
             val fd=Os.open(files.path,OsConstants.O_RDONLY or OsConstants.O_NOFOLLOW or OsConstants.O_CLOEXEC,0)

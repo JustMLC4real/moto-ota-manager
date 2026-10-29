@@ -26,7 +26,7 @@ internal object ImportTransactionCleanup {
     fun cleanup(transactions:File,transaction:File){
         val parent=transactions.absoluteFile
         val target=transaction.absoluteFile
-        require(parent.name=="transactions" && parent.parentFile.name=="motorola-import")
+        require(parent.name=="transactions" && parent.parentFile?.name=="motorola-import")
         require(parent.canonicalFile==parent && Files.isDirectory(parent.toPath(),NOFOLLOW_LINKS))
         require(target.name.matches(Regex("[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}")) && target.parentFile==parent)
         if(!Files.exists(target.toPath(),NOFOLLOW_LINKS))return

@@ -7,5 +7,16 @@
 local.properties
 *.jks
 *.keystore
+*.p12
+*.pfx
+keystore.properties
+signing.properties
+.env
+.env.*
+.secrets/
+secrets/
+signing/
+**/__pycache__/
+*.pyc
 *.hprof
 .DS_Store

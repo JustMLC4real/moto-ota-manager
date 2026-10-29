@@ -8,10 +8,10 @@ import java.util.Properties
 enum class MonitorOutcome {
     NEVER, DISABLED, UNSUPPORTED_DEVICE, ROOT_REQUIRED, STALE_OBSERVATION,
     DEVICE_BUSY, NO_NEW_RELEASE, METADATA_UNAVAILABLE, NEW_METADATA, NEW_PACKAGE_REFERENCE,
-    ALREADY_NOTIFIED, NOTIFICATIONS_DISABLED, CHECK_FAILED, STORE_CORRUPT
+    ALREADY_NOTIFIED, NOTIFICATIONS_DISABLED, CHECK_FAILED, STORE_CORRUPT, NEW_SERVER_OFFER
 }
 
-enum class MonitorNoticeKind { METADATA, PACKAGE_REFERENCE }
+enum class MonitorNoticeKind { METADATA, PACKAGE_REFERENCE, SERVER_OFFER }
 
 data class MonitorNotice(
     val identity: String,
@@ -164,6 +164,7 @@ object MonitorPolicy {
                 "Informatie over build $target gevonden. Dit is alleen metadata; controleer de officiële updater. Er is geen installeerbaar pakket bevestigd.")
             MonitorNoticeKind.PACKAGE_REFERENCE -> MonitorNotice(id, kind, target, "Nieuwe Motorola-pakketverwijzing",
                 "Een lokale verwijzing voor build $target gevonden. Beschikbaarheid, ondertekening en geschiktheid moeten nog worden gecontroleerd.")
+            MonitorNoticeKind.SERVER_OFFER -> error("Local metadata cannot declare a server offer")
         }
         return MonitorDecision(if (kind == MonitorNoticeKind.METADATA) MonitorOutcome.NEW_METADATA else MonitorOutcome.NEW_PACKAGE_REFERENCE,
             current, target, notice)
@@ -184,5 +185,6 @@ object MonitorPolicy {
         MonitorOutcome.NOTIFICATIONS_DISABLED -> "Nieuwe informatie gevonden, maar meldingen zijn niet toegestaan. Open de app om deze te bekijken."
         MonitorOutcome.CHECK_FAILED -> "Achtergrondcontrole kon niet worden voltooid; er is niets gewijzigd."
         MonitorOutcome.STORE_CORRUPT -> "Opgeslagen monitorinstellingen zijn onleesbaar; achtergrondcontrole is veilig uitgeschakeld."
+        MonitorOutcome.NEW_SERVER_OFFER -> "CDS heeft een nieuwe build gemeld; een installeerbaar geverifieerd pakket is niet bevestigd."
     }
 }

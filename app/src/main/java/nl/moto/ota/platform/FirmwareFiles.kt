@@ -17,7 +17,7 @@ import kotlin.coroutines.coroutineContext
 
 class FirmwareFiles(private val context: Context) {
     suspend fun import(uri: Uri, backup: Boolean = false): File = withContext(Dispatchers.IO) {
-        val limit = if (backup) 128L * 1024 * 1024 else FirmwareValidator.MAX_PACKAGE_BYTES
+        val limit = if (backup) nl.moto.ota.core.BootImageStreams.MAX_PACKED_BYTES else FirmwareValidator.MAX_PACKAGE_BYTES
         val destination = File(context.filesDir, if (backup) "selected-backup.bin" else "selected-ota.zip")
         requireNotNull(context.contentResolver.openInputStream(uri)).use { copyAtomic(it, destination, limit, null) }
         destination

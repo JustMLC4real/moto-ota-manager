@@ -57,7 +57,10 @@ object ObservationParsers {
             Regex("(?m)^Merge completion: *([0-9]+(?:\\.[0-9]+)?)% *$")
                 .findAll(dump.stdout).toList().singleOrNull()?.groupValues?.get(1)?.toDoubleOrNull()?.takeIf { it in 0.0..100.0 }
         } else null
-        return SnapshotObservation(state, percent, evidence)
+        return SnapshotObservation(state, percent, evidence, buildList {
+            global?.let { add(DiagnosticMessage("snapshot.tool", listOf(it))) }
+            halState?.let { add(DiagnosticMessage("snapshot.hal", listOf(it))) }
+        })
     }
 
     fun engine(observation: ProbeResult?): String {

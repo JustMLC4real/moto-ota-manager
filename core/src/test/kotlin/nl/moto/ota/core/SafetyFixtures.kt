@@ -12,7 +12,7 @@ internal fun safetyDevice() = DeviceState(
     snapshot = SnapshotState.NONE, engine = EngineState.IDLE, batteryPercent = 80, freeBytes = 50L * 1024 * 1024 * 1024,
     bootId = "fixture-boot-1", partitions = listOf("init_boot_a", "init_boot_b"), modules = listOf("fps", "module-b"),
     capturedAtMillis = System.currentTimeMillis(), bootSuccessful = true, bootloaderUnlocked = true, verifiedBootState = "orange",
-    moduleInventoryKnown = true, rootChecked = true
+    moduleInventoryKnown = true, rootChecked = true, sdkInt = 37, abUpdate = true, partitionInventoryKnown = true
 )
 
 internal fun initBootFixture(size: Int = 8192): ByteArray = ByteArray(size).apply {

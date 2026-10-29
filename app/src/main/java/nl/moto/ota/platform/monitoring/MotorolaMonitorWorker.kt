@@ -6,13 +6,29 @@ import androidx.work.WorkerParameters
 import kotlinx.coroutines.CancellationException
 import nl.moto.ota.core.*
 import nl.moto.ota.platform.*
+import nl.moto.ota.core.discovery.*
+import nl.moto.ota.platform.discovery.CdsController
 
-/** Reads local updater metadata only. It never requests an OTA or changes the updater. */
+/** Checks CDS only with separate online-sharing consent; local metadata remains the fallback. */
 class MotorolaMonitorWorker(appContext: Context, parameters: WorkerParameters) : CoroutineWorker(appContext, parameters) {
     override suspend fun doWork(): Result {
         val store = MonitorStore.get(applicationContext)
         val admitted = store.current()
         if (!admitted.enabled) return Result.success()
+        val cds = CdsController(applicationContext)
+        if (cds.consentGranted()) {
+            val inspection = DeviceInspector().inspect(applicationContext, rootRequested = false)
+            if (store.current().let { !it.enabled || it.generation != admitted.generation }) return Result.success()
+            val response = cds.check(inspection, applicationContext.resources.configuration.locales[0].language)
+            if (store.current().let { !it.enabled || it.generation != admitted.generation }) return Result.success()
+            val decision = CdsMonitorPolicy.evaluate(inspection.toDeviceState(), response, admitted.lastNoticeIdentity, System.currentTimeMillis())
+            if (response.status in setOf(CdsStatus.OFFER, CdsStatus.METADATA_ONLY, CdsStatus.NO_OFFER)) {
+                store.recordIfCurrent(admitted.generation, decision, System.currentTimeMillis(), MonitorNotifications(applicationContext)::publish)
+                return Result.success()
+            }
+            // Refusal/unavailability is not a no-update assertion. The existing
+            // bounded local reader can still provide an informational fallback.
+        }
         val runner = MonitorRunner(store, MonitorInspectionSource {
             fun stillEnabled() = store.current().let { it.enabled && it.generation == admitted.generation }
             if (!stillEnabled()) throw MonitorSupersededException()

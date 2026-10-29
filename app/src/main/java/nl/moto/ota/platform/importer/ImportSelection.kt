@@ -15,7 +15,7 @@ internal data class ImportSelectionIdentity(val device:Long,val inode:Long,val b
 internal object ImportSelection {
     fun capture(files:File):ImportSelectionIdentity? {
         val file=File(files,"selected-ota.zip")
-        require(file.parentFile.canonicalFile==files.canonicalFile && !Files.isSymbolicLink(file.toPath()))
+        require(file.parentFile?.canonicalFile==files.canonicalFile && !Files.isSymbolicLink(file.toPath()))
         val stat=try{Os.lstat(file.path)}catch(e:ErrnoException){if(e.errno==OsConstants.ENOENT)return null else throw e}
         require(OsConstants.S_ISREG(stat.st_mode))
         val nanos=Files.readAttributes(file.toPath(),BasicFileAttributes::class.java,NOFOLLOW_LINKS).lastModifiedTime().to(TimeUnit.NANOSECONDS)

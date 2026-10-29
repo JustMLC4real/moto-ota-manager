@@ -29,9 +29,16 @@ class DownloadManifestCodecTest {
         val complete=original.copy(job=original.job.copy(status=DownloadStatus.COMPLETED,downloadedBytes=200,packageSha256="a".repeat(64)))
         assertEquals(complete,DownloadManifestCodec.decode(DownloadManifestCodec.encode(complete)))
     }
-    @Test fun unexpectedModelRegionIdsAndTraversalAreRejected() {
+    @Test fun otherObservedMotorolaProfilePersistsWithoutAuthorizingInstallation() {
+        val value=manifest().copy(sourceModel="XT9999-2",sourceDevice="synthetic",sourceChannel="retus",
+            sourceFingerprint="motorola/synthetic_g/synthetic:17/SOURCE/1:user/release-keys")
+        assertEquals(value,DownloadManifestCodec.decode(DownloadManifestCodec.encode(value)))
+    }
+    @Test fun malformedIdentityAndTraversalAreRejected() {
         val original=manifest()
-        for(bad in listOf(original.copy(sourceModel="other"),original.copy(sourceChannel="retus"),original.copy(job=original.job.copy(id="../../private")))){
+        for(bad in listOf(original.copy(sourceModel="../private"),original.copy(sourceChannel="retus\nInjected"),
+            original.copy(sourceDevice="other"),original.copy(sourceFingerprint=source.fingerprint.replace("SOURCE/","OTHER/")),
+            original.copy(job=original.job.copy(id="../../private")))){
             try { DownloadManifestCodec.decode(DownloadManifestCodec.encode(bad));fail("Untrusted state accepted") }catch(_:IllegalArgumentException){}
         }
     }

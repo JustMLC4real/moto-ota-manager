@@ -20,7 +20,8 @@ class SandboxUpdateSession private constructor(val directory:File) {
         build="SIMULATED-SOURCE",fingerprint="SIMULATED/merc:17/source",slot="_b",rootGranted=true,rootChecked=true,magiskVersion="31.1",magiskCode=31100,
         virtualAb=true,snapshot=SnapshotState.NONE,engine=EngineState.IDLE,batteryPercent=80,freeBytes=20L*1024*1024*1024,bootId="SIMULATED-SOURCE-BOOT",
         partitions=listOf("init_boot_a","init_boot_b"),modules=listOf("fixture-module|enabled"),moduleInventoryKnown=true,bootSuccessful=true,
-        bootloaderUnlocked=true,verifiedBootState="orange",securityEvidenceSource="SIMULATED",simulated=true,capturedAtMillis=System.currentTimeMillis())
+        bootloaderUnlocked=true,verifiedBootState="orange",securityEvidenceSource="SIMULATED",simulated=true,capturedAtMillis=System.currentTimeMillis(),
+        sdkInt=37,abUpdate=true,partitionInventoryKnown=true)
         private set
     var run:UpdateRun=UpdateRun(simulated=true)
         private set

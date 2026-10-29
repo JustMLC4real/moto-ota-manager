@@ -36,7 +36,7 @@ public final class EngineProbe {
 
     /** Pure guard, independently testable without Android process APIs. */
     public static boolean supportsRuntime(int uid, int sdk) {
-        return uid == 0 && sdk == 37;
+        return uid == 0 && sdk >= 33 && sdk <= 37;
     }
 
     /** AOSP UpdateStatus numeric values, never a guessed transaction number. */

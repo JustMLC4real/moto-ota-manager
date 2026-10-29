@@ -27,8 +27,8 @@ internal class RestoreRootTransport(private val apkPath:String) {
         } }
         val err=thread(isDaemon=true) { process.errorStream.use { input -> val buffer=ByteArray(4096);while(input.read(buffer)>=0){} } }
         // Timeout is a failure requiring observation, never permission to retry a write.
-        val complete=process.waitFor(60,TimeUnit.SECONDS)
-        if(!complete)process.destroyForcibly()
+        val complete=process.waitFor(if(operation=="execute")660 else 300,TimeUnit.SECONDS)
+        if(!complete && operation!="execute")process.destroyForcibly()
         reader.join(1000);err.join(1000)
         if(!complete || reader.isAlive || oversized || process.exitValue()!=0)throw UpdateSafetyException("ROOT_HELPER_UNAVAILABLE_OR_INTERRUPTED")
         val text=synchronized(output){output.toString("UTF-8")}.trim()
@@ -39,23 +39,28 @@ internal class RestoreRootTransport(private val apkPath:String) {
 internal object RestoreRootProtocol {
     fun observation(environment:RestoreEnvironment):JSONObject {
         val d=environment.device
-        return JSONObject().put("schema",1).put("device",JSONObject()
+        return JSONObject().put("schema",2).put("device",JSONObject()
             .put("manufacturer",d.manufacturer).put("model",d.model).put("device",d.device).put("channel",d.channel)
             .put("android",d.androidVersion).put("build",d.build).put("fingerprint",d.fingerprint).put("bootId",d.bootId).put("slot",d.slot)
             .put("magiskCode",d.magiskCode).put("battery",d.batteryPercent).put("freeBytes",d.freeBytes)
-            .put("captured",d.capturedAtMillis).put("modules",JSONArray(d.modules)))
+            .put("captured",d.capturedAtMillis).put("modules",JSONArray(d.modules)).put("sdk",d.sdkInt)
+            .put("ab",d.abUpdate).put("virtualAb",d.virtualAb).put("snapshot",d.snapshot.name)
+            .put("partitions",JSONArray(d.partitions)).put("conflicts",JSONArray(d.identityConflicts)))
             .put("partitionBytes",environment.partitionBytes).put("activeSha256",environment.activeImageSha256)
             .put("automaticUpdatesDisabled",environment.automaticUpdatesDisabled==true).put("elapsed",environment.elapsedRealtimeMillis)
+            .put("partitionType",environment.partitionType).put("runtimeStockSha1",environment.runtimeStockSha1)
     }
     fun environment(json:JSONObject,stock:BackupValidation):RestoreEnvironment {
-        require(json.getInt("schema")==1)
+        require(json.getInt("schema")==2)
         val d=json.getJSONObject("device");val m=d.getJSONArray("modules")
+        fun strings(name:String)=d.getJSONArray(name).let {a->(0 until a.length()).map {a.getString(it)}}
         val device=DeviceState(manufacturer=d.getString("manufacturer"),model=d.getString("model"),device=d.getString("device"),channel=d.getString("channel"),
             androidVersion=d.getString("android"),build=d.getString("build"),fingerprint=d.getString("fingerprint"),bootId=d.getString("bootId"),slot=d.getString("slot"),
             magiskCode=d.getInt("magiskCode"),magiskVersion="31.1",batteryPercent=d.getInt("battery"),freeBytes=d.getLong("freeBytes"),capturedAtMillis=d.getLong("captured"),
-            modules=(0 until m.length()).map { m.getString(it) },rootChecked=true,rootGranted=true,virtualAb=true,snapshot=SnapshotState.NONE,engine=EngineState.IDLE,
-            partitions=listOf("init_boot_a","init_boot_b"),bootSuccessful=true,bootloaderUnlocked=true,verifiedBootState="orange",securityEvidenceSource="KERNEL_BOOTCONFIG",moduleInventoryKnown=true)
-        return RestoreEnvironment(device,json.getLong("partitionBytes"),json.getString("activeSha256"),json.getBoolean("automaticUpdatesDisabled"),stock,ExecutionMode.LIVE,json.getLong("elapsed"))
+            modules=(0 until m.length()).map { m.getString(it) },rootChecked=true,rootGranted=true,virtualAb=d.getBoolean("virtualAb"),snapshot=SnapshotState.valueOf(d.getString("snapshot")),engine=EngineState.IDLE,
+            partitions=strings("partitions"),bootSuccessful=true,bootloaderUnlocked=true,verifiedBootState="orange",securityEvidenceSource="KERNEL_BOOTCONFIG",moduleInventoryKnown=true,
+            sdkInt=d.getInt("sdk"),abUpdate=d.getBoolean("ab"),partitionInventoryKnown=true,identityConflicts=strings("conflicts"))
+        return RestoreEnvironment(device,json.getLong("partitionBytes"),json.getString("activeSha256"),json.getBoolean("automaticUpdatesDisabled"),stock,ExecutionMode.LIVE,json.getLong("elapsed"),json.getString("partitionType"),json.getString("runtimeStockSha1"))
     }
     fun receipt(r:StockRestoreResult):JSONObject=JSONObject().put("schema",1).put("transaction",r.transactionId).put("checkpoint",r.checkpoint.name)
         .put("observed",r.observedSha256).put("backup",r.backupSha256).put("stockRestored",r.stockRestored).put("failure",r.errorCode.orEmpty())

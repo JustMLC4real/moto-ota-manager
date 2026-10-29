@@ -24,11 +24,22 @@ class FirmwareValidatorTest {
         assertEquals("NEXT_BUILD", report.targetBuild); assertEquals(64, report.sha256.length)
     }
 
-    @Test fun differentModelIsRejected() = fixture(observed = device.copy(model = "XT0000-1")) { assertIssue(it, "DEVICE_PROFILE") }
+    @Test fun explicitlyDifferentSignedModelIsRejected() = fixture(observed = device.copy(model = "XT0000-1")) { assertIssue(it, "WRONG_MODEL") }
     @Test fun differentDeviceCodenameIsRejected() = fixture(changes = mapOf("pre-device" to "other")) { assertIssue(it, "WRONG_DEVICE") }
     @Test fun differentChannelIsRejected() = fixture(changes = mapOf("motorola-channel" to "retus")) { assertIssue(it, "WRONG_REGION") }
     @Test fun conflictingRegionAnnotationsAreRejected() = fixture(changes = mapOf("pre-channel" to "retus")) { assertIssue(it, "WRONG_REGION") }
-    @Test fun deviceWrongRegionIsRejected() = fixture(observed = device.copy(channel = "retus")) { assertIssue(it, "DEVICE_PROFILE") }
+    @Test fun deviceWrongRegionIsRejected() = fixture(observed = device.copy(channel = "retus")) { assertIssue(it, "WRONG_REGION") }
+    @Test fun conflictingMeasuredIdentityRemainsBlocked() = fixture(observed = device.copy(identityConflicts = listOf("MODEL"))) { assertIssue(it, "DEVICE_PROFILE") }
+    @Test fun anotherMotorolaModelUsesItsOwnExactSignedDeviceModelAndChannel() {
+        val source = sourceFp.replace("merc", "synthetic")
+        val target = targetFp.replace("merc", "synthetic")
+        fixture(observed = device.copy(model = "XT9999-2", device = "synthetic", channel = "retus", fingerprint = source),
+            changes = mapOf("pre-device" to "synthetic", "pre-model" to "XT9999-2", "motorola-channel" to "retus", "pre-build" to source, "post-build" to target),
+            propertyChanges = mapOf("SOURCE_FP" to source, "TARGET_FP" to target)) {
+            assertTrue(it.structureValid); assertTrue(it.compatible); assertTrue(it.regionVerified)
+            assertFalse(it.signatureVerified); assertFalse(it.readyForOfficialReview)
+        }
+    }
 
     @Test fun absentRegionMetadataIsExplicitlyUnproven() = fixture(remove = setOf("motorola-channel")) {
         assertFalse(it.regionVerified); assertFalse(it.readyForOfficialReview); assertTrue(it.issues.any { issue -> issue.code == "REGION_UNPROVEN" })
@@ -239,7 +250,7 @@ class FirmwareValidatorTest {
         removeEntries: Set<String> = emptySet(), extraEntries: Map<String, ByteArray> = emptyMap(),
         rawMetadataSuffix: String = "", assertion: (FirmwareReport) -> Unit
     ) {
-        val metadata = linkedMapOf("ota-type" to "AB", "pre-device" to "merc", "pre-build" to sourceFp,
+        val metadata = linkedMapOf("ota-type" to "AB", "pre-device" to "merc", "pre-model" to "XT2607-1", "pre-build" to sourceFp,
             "pre-build-incremental" to "source-incremental", "post-build" to targetFp,
             "post-build-incremental" to "target-incremental", "motorola-channel" to "reteu",
             "post-security-patch-level" to "2026-11-01", "post-timestamp" to "2000").apply { putAll(changes); remove.forEach { remove(it) } }

@@ -68,8 +68,10 @@ object DownloadManifestCodec {
         require(s("id").matches(Regex("[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}")))
         require(s("sourceBuild").matches(Regex("[A-Za-z0-9_.-]{1,100}")) && s("targetBuild").matches(Regex("[A-Za-z0-9_.-]{1,100}")))
         require(s("sourceBuild")!=s("targetBuild"))
-        require(s("model")=="XT2607-1"&&s("device")=="merc"&&s("channel")=="reteu")
-        require(s("fingerprint").length in 1..1024 && s("fingerprint").none { it.isISOControl() })
+        require(s("model").matches(Regex("[A-Za-z0-9][A-Za-z0-9_.+ -]{0,79}")) &&
+            s("device").matches(Regex("[A-Za-z0-9_.+-]{1,128}")) && s("channel").matches(Regex("[A-Za-z0-9_.+-]{1,128}")))
+        val sourceFingerprint = requireNotNull(MotorolaFingerprint.parse(s("fingerprint")))
+        require(sourceFingerprint.device == s("device") && sourceFingerprint.build == s("sourceBuild"))
         require(l("expected")<=FirmwareValidator.MAX_PACKAGE_BYTES&&l("downloaded")<=FirmwareValidator.MAX_PACKAGE_BYTES)
         require(l("expected")==0L||l("downloaded")<=l("expected"))
         require(s("wifi") in setOf("true","false"))

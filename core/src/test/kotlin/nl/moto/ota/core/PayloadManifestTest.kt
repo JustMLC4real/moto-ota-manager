@@ -27,13 +27,22 @@ class PayloadManifestTest {
         val parsed = PayloadManifest.decode(manifest)
         assertEquals(4096, parsed.blockSize)
         assertEquals(listOf("init_boot", "vendor"), parsed.partitionNames)
-        assertEquals(8_388_608L, parsed.initBootTarget.bytes)
-        assertEquals(hash.joinToString("") { "%02x".format(it) }, parsed.initBootTarget.sha256)
+        assertEquals(8_388_608L, requireNotNull(parsed.initBootTarget).bytes)
+        assertEquals(hash.joinToString("") { "%02x".format(it) }, requireNotNull(parsed.initBootTarget).sha256)
         assertEquals(parsed.initBootSource, parsed.initBootTarget)
     }
 
     @Test fun fullPayloadMayOmitSourceInfo() { assertNull(PayloadManifest.decode(partition(old = false)).initBootSource) }
-    @Test fun missingInitBootCannotCreateStockProof() { rejected(partition("boot")) }
+    @Test fun bootOnlyAndBothImageTypesHaveIndependentSourceAndTargetDigests() {
+        val boot = PayloadManifest.decode(partition("boot"))
+        assertNull(boot.initBootTarget)
+        assertEquals("boot", requireNotNull(boot.bootTarget).name)
+        assertEquals(boot.bootTarget, boot.bootSource)
+        val both = PayloadManifest.decode(partition("boot") + partition())
+        assertEquals(setOf("boot", "init_boot"), both.sourceImages.map { it.name }.toSet())
+        assertEquals(setOf("boot", "init_boot"), both.targetImages.map { it.name }.toSet())
+    }
+    @Test fun neitherSupportedImageCannotCreateStockProof() { rejected(partition("vendor_boot")) }
     @Test fun duplicatePartitionOrCriticalFieldsFailClosed() {
         rejected(partition() + partition())
         rejected(value(3, 4096) + value(3, 4096) + partition())
@@ -42,7 +51,7 @@ class PayloadManifestTest {
     }
     @Test fun malformedSizesHashesWireTypesAndLengthsAreRejected() {
         rejected(partition(info = digest(bytes = 0)))
-        rejected(partition(info = digest(bytes = 129L * 1024 * 1024)))
+        rejected(partition(info = digest(bytes = 513L * 1024 * 1024)))
         rejected(partition(info = digest(sha = hash.copyOf(31))))
         rejected(partition().dropLast(1).toByteArray())
         rejected(byteArrayOf(0))
@@ -72,8 +81,8 @@ class PayloadManifestTest {
         val path = System.getenv("MOTO_OTA_PATH")
         assumeTrue("Optional private historical OTA fixture", path != null && File(path).isFile)
         val manifest = PayloadManifest.inspect(File(path!!))
-        assertEquals(8_388_608L, manifest.initBootTarget.bytes)
-        assertEquals("9972073a2fdc3bd63ea3b33b3e26ec39f78ddea82ed3be274acc086a88c7c5ea", manifest.initBootTarget.sha256)
+        assertEquals(8_388_608L, requireNotNull(manifest.initBootTarget).bytes)
+        assertEquals("9972073a2fdc3bd63ea3b33b3e26ec39f78ddea82ed3be274acc086a88c7c5ea", requireNotNull(manifest.initBootTarget).sha256)
         assertEquals("2813c93926eae599bd3bd14c4e9e39b10bc3b2dd30134bff8fe594a3f8a67d29", manifest.initBootSource?.sha256)
     }
 }
