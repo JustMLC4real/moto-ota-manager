@@ -6,6 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,6 +43,7 @@ class ScreenActions(
 @Composable
 fun OverviewScreen(vm: MotoViewModel, actions: ScreenActions) {
     val context = LocalContext.current
+    val configuration = LocalConfiguration.current
     PageHeader(R.string.ui_overview_title, R.string.ui_overview_body)
     Panel(R.string.ui_device) {
         Text(vm.device.model.ifBlank { stringResource(R.string.ui_model_pending) }, style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.primary)
@@ -71,7 +73,7 @@ fun OverviewScreen(vm: MotoViewModel, actions: ScreenActions) {
             style = MaterialTheme.typography.titleSmall)
         Detail(R.string.ui_snapshot, snapshotTitle(vm.device.snapshot))
         vm.inspection?.snapshot?.mergePercent?.takeIf {vm.device.snapshot==SnapshotState.MERGING && it.isFinite() && it in 0.0..100.0}?.let {percent->
-            val formatted=java.text.NumberFormat.getNumberInstance(context.resources.configuration.locales[0]).apply {maximumFractionDigits=1}.format(percent)
+            val formatted=java.text.NumberFormat.getNumberInstance(configuration.locales[0]).apply {maximumFractionDigits=1}.format(percent)
             Detail(R.string.ui_merge_progress,"$formatted%")
         }
         Detail(R.string.ui_engine, engineTitle(vm.device.engine))
