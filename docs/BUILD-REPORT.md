@@ -10,8 +10,8 @@ De app is werkelijk gecompileerd voor **arm64-v8a en x86_64** en de geleverde de
 |---|---|
 | APK | `moto-ota-manager-debug.apk` |
 | Pakket / versie | `nl.moto.ota` / `0.3.0` / code `3` |
-| Omvang | 29,284,877 bytes |
-| SHA-256 | `01ee72a7b707141ec77afa2d5d2176dc26b49903deb8b693a8b8b38ec77f1084` |
+| Omvang | 28,451,334 bytes |
+| SHA-256 | `b554bf61757491117c19906199f57041ed907dd5c9d35214a890ad24cc4bfa84` |
 | Minimaal / target / compile | SDK 33 / 35 / 35 |
 | Native ABI's | arm64-v8a, x86_64 |
 | Signing | Android Debug, APK Signature Scheme v2 daadwerkelijk geverifieerd |
@@ -19,7 +19,7 @@ De app is werkelijk gecompileerd voor **arm64-v8a en x86_64** en de geleverde de
 
 [APK-verificatie](../evidence/release-0.3.0/apk-signature.txt) · [Werkelijke APK-metadata](../evidence/release-0.3.0/apk-badging.txt) · [Machineleesbaar resultaat](../evidence/release-0.3.0/verification-summary.json).
 
-De top-level `SHA256SUMS.txt` en `ARTIFACTS.json` horen bij de uiteindelijke APK en bron-ZIP. De `.git`-map, lokale SDK-configuratie, buildcache, echte firmwarebytes en private signing-/rootkeys horen niet in het bronarchief. De eerdere 0.2.0-artefacten zijn afzonderlijk bewaard; hun hashes gelden niet voor deze APK.
+De naast de APK en bron-ZIP geleverde `SHA256SUMS.txt` en `ARTIFACTS.json` horen bij de uiteindelijke APK en bron-ZIP. De `.git`-map, lokale SDK-configuratie, buildcache, echte firmwarebytes en private signing-/rootkeys horen niet in het bronarchief. De eerdere 0.2.0-artefacten zijn afzonderlijk bewaard; hun hashes gelden niet voor deze APK.
 
 ## Daadwerkelijk uitgevoerde controles
 
@@ -54,6 +54,18 @@ De emulator draait API35/x86_64/ranchu met 4096-byte kernelpages. Alle verpakte 
 De Vault-runtimetest vond `AccessDeniedException` voor hardlinks in deze Androidcontext en bewees vervolgens de geïmplementeerde duurzame kopiefallback, eigen inode en byte-isolatie. De oude aanname dat hardlinks altijd werken is verwijderd. [Werkelijke runtimewaarneming](../evidence/release-0.3.0/vault-runtime-strategy.txt).
 
 De opgenomen logs behouden de opdrachten, resultaten en foutmeldingen. Werkmappaden en JUnit-hostnamen zijn geanonimiseerd; regeleinden en afsluitende witruimte zijn genormaliseerd.
+
+## Schone bronbuild en geleverde APK
+
+De geleverde APK komt uit een nieuwe extractie van `git archive` van sourcecommit `48f664b2ae3d970db8cd369b3f628365ca316898`. Deze kopie had vooraf geen `local.properties`, `.gradle`, `.cxx` of modulebuildbestanden. De volledige opdracht hierboven is met `--no-build-cache` uitgevoerd: **BUILD SUCCESSFUL in 1m 56s; 89 van 89 taken uitgevoerd**. De bestaande SDK en dependencycache zijn wel opnieuw gebruikt.
+
+Ook in deze kopie slagen 312 core- en 117 app-JVM-tests; twee Windows-symlinkgevallen zijn overgeslagen. Daarna zijn de app- en test-APK uit juist deze build op de gecontroleerde wegwerpemulator geïnstalleerd: **51 tests geslaagd, nul skips/fouten**. De werkelijk geïnstalleerde APK-SHA256 is gelijk aan de hierboven geleverde APK. Herhalingen verhogen het gerapporteerde aantal unieke tests niet.
+
+[Schone buildlog](../evidence/release-0.3.0/build-clean-source.log) · [Geteste bronbestanden en SHA256 per buildinput](../evidence/release-0.3.0/clean-source-check.json) · [Schone JUnit-resultaten](../evidence/release-0.3.0/clean-jvm/) · [Geïnstalleerde APK-hash](../evidence/release-0.3.0/installed-apk-match.json).
+
+De digest van de vastgelegde buildinputs is `1faeab65b0f70b264aea5098f3f6b2dc26214a7733b04941454dcb4f3ea946df`. Na de geteste sourcecommit zijn uitsluitend documentatie en bewijsbestanden toegevoegd of bijgewerkt; het uiteindelijke bronarchief wordt tegen diezelfde inputlijst gecontroleerd. Het artefactmanifest vermeldt zowel de geteste sourcecommit als de uiteindelijke repositorycommit.
+
+De eerdere incrementele APK had een andere DEX-indeling en andere native bytes. Daarom is de schone APK afzonderlijk getest en gekozen voor oplevering. Er wordt geen byte-identieke reproduceerbaarheid tussen die builds geclaimd. [Gemeten entryverschillen](../evidence/release-0.3.0/incremental-apk-entry-diff.json).
 
 ## Iteratieve foutanalyse
 

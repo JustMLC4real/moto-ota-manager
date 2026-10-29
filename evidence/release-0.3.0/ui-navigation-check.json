@@ -1,7 +1,7 @@
 {
   "device": "emulator-5556",
   "qemu": true,
-  "apkSha256": "01ee72a7b707141ec77afa2d5d2176dc26b49903deb8b693a8b8b38ec77f1084",
+  "apkSha256": "b554bf61757491117c19906199f57041ed907dd5c9d35214a890ad24cc4bfa84",
   "notificationFlags": "CLEAR_TOP|SINGLE_TOP",
   "extra": "moto_open_tab=firmware",
   "firmwareTabVisible": true,

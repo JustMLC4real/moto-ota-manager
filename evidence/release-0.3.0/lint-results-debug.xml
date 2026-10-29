@@ -14,7 +14,7 @@
         errorLine1="            Class&lt;?> serviceManager = Class.forName(&quot;android.os.ServiceManager&quot;);"
         errorLine2="                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\EngineProbe.java"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\EngineProbe.java"
             line="107"
             column="39"/>
     </issue>
@@ -32,7 +32,7 @@
         errorLine1="        val binder = Class.forName(&quot;android.os.ServiceManager&quot;).getMethod(&quot;getService&quot;, String::class.java).invoke(null, &quot;android.os.UpdateEngineService&quot;) as? IBinder ?: return false"
         errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\staging\MotorolaStageProbe.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\staging\MotorolaStageProbe.kt"
             line="278"
             column="22"/>
     </issue>
@@ -50,7 +50,7 @@
         errorLine1="        val binder = Class.forName(&quot;android.os.ServiceManager&quot;).getMethod(&quot;getService&quot;,String::class.java)"
         errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt"
             line="353"
             column="22"/>
     </issue>
@@ -68,7 +68,7 @@
         errorLine1="    private static final String SDCARD_PARENT = &quot;/sdcard/Android/data/com.motorola.ccc.ota/files&quot;;"
         errorLine2="                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\FirmwareSignatureProbe.java"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\FirmwareSignatureProbe.java"
             line="24"
             column="49"/>
     </issue>
@@ -86,7 +86,7 @@
         errorLine1="    fun allowedFilesRoot(canonical:String):Boolean=canonical in setOf(&quot;/data/user/0/nl.moto.ota/files&quot;,&quot;/data/data/nl.moto.ota/files&quot;)"
         errorLine2="                                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\platform\importer\ImportRuntimePolicy.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\platform\importer\ImportRuntimePolicy.kt"
             line="5"
             column="72"/>
     </issue>
@@ -104,7 +104,7 @@
         errorLine1="    fun allowedFilesRoot(canonical:String):Boolean=canonical in setOf(&quot;/data/user/0/nl.moto.ota/files&quot;,&quot;/data/data/nl.moto.ota/files&quot;)"
         errorLine2="                                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\platform\importer\ImportRuntimePolicy.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\platform\importer\ImportRuntimePolicy.kt"
             line="5"
             column="105"/>
     </issue>
@@ -122,7 +122,7 @@
         errorLine1="    private const val FILES=&quot;/data/user/0/nl.moto.ota/files&quot;"
         errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\importer\MotorolaPackageImportProbe.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\importer\MotorolaPackageImportProbe.kt"
             line="20"
             column="30"/>
     </issue>
@@ -140,7 +140,7 @@
         errorLine1="    private const val USER_ROOT = &quot;/data/user/0/nl.moto.ota/files&quot;"
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\staging\MotorolaStageProbe.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\staging\MotorolaStageProbe.kt"
             line="29"
             column="36"/>
     </issue>
@@ -158,7 +158,7 @@
         errorLine1="    private const val DATA_ROOT = &quot;/data/data/nl.moto.ota/files&quot;"
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\staging\MotorolaStageProbe.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\staging\MotorolaStageProbe.kt"
             line="30"
             column="36"/>
     </issue>
@@ -176,7 +176,7 @@
         errorLine1="    private const val ROOT=&quot;/data/user/0/nl.moto.ota/files/update&quot;"
         errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt"
             line="34"
             column="29"/>
     </issue>
@@ -194,7 +194,7 @@
         errorLine1="            require(root.path in setOf(ROOT,&quot;/data/data/nl.moto.ota/files/update&quot;) &amp;&amp; root.isDirectory)"
         errorLine2="                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt"
             line="53"
             column="46"/>
     </issue>
@@ -210,7 +210,7 @@
         errorLine1="    implementation(platform(&quot;androidx.compose:compose-bom:2025.04.01&quot;))"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\build.gradle.kts"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\build.gradle.kts"
             line="34"
             column="20"/>
     </issue>
@@ -226,7 +226,7 @@
         errorLine1="    implementation(&quot;androidx.activity:activity-compose:1.10.1&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\build.gradle.kts"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\build.gradle.kts"
             line="35"
             column="20"/>
     </issue>
@@ -242,7 +242,7 @@
         errorLine1="    implementation(&quot;androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\build.gradle.kts"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\build.gradle.kts"
             line="39"
             column="20"/>
     </issue>
@@ -258,7 +258,7 @@
         errorLine1="    implementation(&quot;androidx.lifecycle:lifecycle-runtime-compose:2.9.0&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\build.gradle.kts"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\build.gradle.kts"
             line="40"
             column="20"/>
     </issue>
@@ -274,7 +274,7 @@
         errorLine1="    implementation(&quot;androidx.work:work-runtime-ktx:2.10.5&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\build.gradle.kts"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\build.gradle.kts"
             line="42"
             column="20"/>
     </issue>
@@ -290,7 +290,7 @@
         errorLine1="    androidTestImplementation(platform(&quot;androidx.compose:compose-bom:2025.04.01&quot;))"
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\build.gradle.kts"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\build.gradle.kts"
             line="44"
             column="31"/>
     </issue>
@@ -306,7 +306,7 @@
         errorLine1="    androidTestImplementation(&quot;androidx.test.ext:junit:1.2.1&quot;)"
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\build.gradle.kts"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\build.gradle.kts"
             line="46"
             column="31"/>
     </issue>
@@ -322,7 +322,7 @@
         errorLine1="    androidTestImplementation(&quot;androidx.work:work-testing:2.10.5&quot;)"
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\build.gradle.kts"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\build.gradle.kts"
             line="47"
             column="31"/>
     </issue>
@@ -338,7 +338,7 @@
         errorLine1="        try { System.load(file.path) }"
         errorLine2="              ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\platform\staging\AtomicStagePublisher.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\platform\staging\AtomicStagePublisher.kt"
             line="30"
             column="15"/>
     </issue>
@@ -354,7 +354,7 @@
         errorLine1="            availableBytes = { context.filesDir.usableSpace }, checkCancelled = { ctx.ensureActive() })"
         errorLine2="                                                ~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\platform\FirmwareFiles.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\platform\FirmwareFiles.kt"
             line="54"
             column="49"/>
     </issue>
@@ -370,7 +370,7 @@
         errorLine1="                availableBytes={store.directory.usableSpace},checkCancelled=::active,"
         errorLine2="                                                ~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\platform\download\OtaDownloadWorker.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\platform\download\OtaDownloadWorker.kt"
             line="71"
             column="49"/>
     </issue>
@@ -386,7 +386,7 @@
         errorLine1="        if (root) preferences.edit().putBoolean(&quot;root_reads_allowed&quot;, true).apply()"
         errorLine2="                  ~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\MotoViewModel.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\MotoViewModel.kt"
             line="101"
             column="19"/>
     </issue>
@@ -402,7 +402,7 @@
         errorLine1="        preferences.edit().putBoolean(&quot;root_reads_allowed&quot;, true).apply()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~">
         <location
-            file="<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\MotoViewModel.kt"
+            file="<WORKSPACE>\work\r03-48f664b2\moto-ota-manager\app\src\main\java\nl\moto\ota\MotoViewModel.kt"
             line="231"
             column="9"/>
     </issue>

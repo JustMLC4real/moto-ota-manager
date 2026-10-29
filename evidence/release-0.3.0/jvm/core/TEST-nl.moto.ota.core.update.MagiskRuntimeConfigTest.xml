@@ -1,8 +1,8 @@
-<testsuite name="nl.moto.ota.core.update.MagiskRuntimeConfigTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:10" hostname="local-build" time="0.003">
+<testsuite name="nl.moto.ota.core.update.MagiskRuntimeConfigTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:31" hostname="local-build" time="0.004">
   <properties />
-  <testcase name="unsupportedOrAmbiguousConfigSyntaxIsRejected" classname="nl.moto.ota.core.update.MagiskRuntimeConfigTest" time="0.001" />
-  <testcase name="readsStayBounded" classname="nl.moto.ota.core.update.MagiskRuntimeConfigTest" time="0.001" />
-  <testcase name="authenticatedOldImageWithSpoofedBuildStillFailsRuntimeAssociation" classname="nl.moto.ota.core.update.MagiskRuntimeConfigTest" time="0.0" />
+  <testcase name="unsupportedOrAmbiguousConfigSyntaxIsRejected" classname="nl.moto.ota.core.update.MagiskRuntimeConfigTest" time="0.002" />
+  <testcase name="readsStayBounded" classname="nl.moto.ota.core.update.MagiskRuntimeConfigTest" time="0.0" />
+  <testcase name="authenticatedOldImageWithSpoofedBuildStillFailsRuntimeAssociation" classname="nl.moto.ota.core.update.MagiskRuntimeConfigTest" time="0.001" />
   <testcase name="officialConfigHasOneExactStockAssociation" classname="nl.moto.ota.core.update.MagiskRuntimeConfigTest" time="0.0" />
   <testcase name="associationNeverReplacesStockAuthenticity" classname="nl.moto.ota.core.update.MagiskRuntimeConfigTest" time="0.0" />
   <testcase name="onlyKnownRuntimeRootsAreAccepted" classname="nl.moto.ota.core.update.MagiskRuntimeConfigTest" time="0.0" />

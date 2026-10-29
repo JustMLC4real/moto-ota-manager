@@ -1,4 +1,4 @@
-<testsuite name="nl.moto.ota.platform.EngineProbeSafetyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:14" hostname="local-build" time="0.002">
+<testsuite name="nl.moto.ota.platform.EngineProbeSafetyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:49" hostname="local-build" time="0.003">
   <properties />
   <testcase name="invalidProgressAndUnrecognizedStatusesRemainUnknown" classname="nl.moto.ota.platform.EngineProbeSafetyTest" time="0.002" />
   <testcase name="onlyExplicitRootOnReviewedAndroid17CanSubscribe" classname="nl.moto.ota.platform.EngineProbeSafetyTest" time="0.0" />

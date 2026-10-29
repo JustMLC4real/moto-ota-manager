@@ -1,4 +1,4 @@
-<testsuite name="nl.moto.ota.core.update.UpdateFailureTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:10" hostname="local-build" time="0.001">
+<testsuite name="nl.moto.ota.core.update.UpdateFailureTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:32" hostname="local-build" time="0.001">
   <properties />
   <testcase name="currentCoordinatorKeepsEngineAndMergeFailureFatalAfterLaterIdleOrExplicitRetries" classname="nl.moto.ota.core.update.UpdateFailureTest" time="0.001" />
   <system-out />

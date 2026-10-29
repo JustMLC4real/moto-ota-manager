@@ -1,32 +1,32 @@
-<testsuite name="nl.moto.ota.platform.InspectionMapperTest" tests="28" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:14" hostname="local-build" time="0.026">
+<testsuite name="nl.moto.ota.platform.InspectionMapperTest" tests="28" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:49" hostname="local-build" time="0.029">
   <properties />
   <testcase name="deniedRootIsRecordedAsCheckedWithoutGrant" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.003" />
   <testcase name="duplicatePartitionEvidenceIsNotAccepted" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.006" />
-  <testcase name="matchingSkuCannotOverrideConflictingTechnicalModel" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
-  <testcase name="realMotorolaBootMetadataWorksWhenBootctlIsAbsent" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.004" />
+  <testcase name="matchingSkuCannotOverrideConflictingTechnicalModel" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="realMotorolaBootMetadataWorksWhenBootctlIsAbsent" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.003" />
   <testcase name="exactSkuAndObservedProbesProduceMeasuredCompatibleDevice" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
-  <testcase name="conflictingBootSlotPropertiesAreUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="conflictingBootSlotPropertiesAreUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
   <testcase name="unexpectedBootSessionOutputCannotDriveRecoveryReconciliation" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
   <testcase name="failedRootCannotPromoteKernelFactsAndContradictorySlotsRemainUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
-  <testcase name="matchingMarketingNameCannotOverrideConflictingTechnicalSku" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="matchingMarketingNameCannotOverrideConflictingTechnicalSku" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
   <testcase name="slowInspectionRemainsStaleAfterMappingInsteadOfReceivingCompletionTimestamp" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.003" />
   <testcase name="unsupportedSlotCountIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
   <testcase name="freshnessIsPreservedRatherThanStampedWithMapperExecutionTime" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
   <testcase name="conflictingChannelsAreUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
-  <testcase name="malformedBatteryAndStorageEvidenceRemainUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
-  <testcase name="absentModuleInventoryIsDifferentFromMeasuredEmptyInventory" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
-  <testcase name="conflictingBootloaderPropertiesAreUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
-  <testcase name="bootctlExplicitFalseRemainsFalseAndMissingRemainsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="malformedBatteryAndStorageEvidenceRemainUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="absentModuleInventoryIsDifferentFromMeasuredEmptyInventory" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="conflictingBootloaderPropertiesAreUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="bootctlExplicitFalseRemainsFalseAndMissingRemainsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
   <testcase name="missingRootProbeIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
-  <testcase name="malformedMagiskOutputCannotPreserveKnownVersionCode" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
-  <testcase name="realKernelBootFactsRemainDistinctFromSpoofableProperties" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
-  <testcase name="successfulButEmptyBootctlOutputIsNotSlotEvidence" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
-  <testcase name="malformedSlotPropertyIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
-  <testcase name="bootPropertyAndBootctlSlotDisagreementIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
-  <testcase name="secondaryTechnicalSkuConflictBlocksDeviceProfile" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="malformedMagiskOutputCannotPreserveKnownVersionCode" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.002" />
+  <testcase name="realKernelBootFactsRemainDistinctFromSpoofableProperties" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="successfulButEmptyBootctlOutputIsNotSlotEvidence" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="malformedSlotPropertyIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="bootPropertyAndBootctlSlotDisagreementIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="secondaryTechnicalSkuConflictBlocksDeviceProfile" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
   <testcase name="timedOutRootDoesNotProveRootLoss" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
-  <testcase name="malformedModuleInventoryCannotBecomeBaseline" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
-  <testcase name="rootNotRequestedNeverMasqueradesAsMeasuredRootLoss" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="malformedModuleInventoryCannotBecomeBaseline" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="rootNotRequestedNeverMasqueradesAsMeasuredRootLoss" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
   <testcase name="malformedRootOutputIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
   <system-out />
   <system-err />

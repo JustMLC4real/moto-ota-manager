@@ -722,7 +722,7 @@ INSTRUMENTATION_STATUS: test=existingEmptyJournalFailsClosedWhileMissingJournalI
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_RESULT: stream=
 
-Time: 21.385
+Time: 21.719
 
 OK (51 tests)
 

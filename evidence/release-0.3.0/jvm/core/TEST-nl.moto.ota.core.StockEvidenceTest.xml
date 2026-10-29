@@ -1,12 +1,12 @@
-<testsuite name="nl.moto.ota.core.StockEvidenceTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:09" hostname="local-build" time="0.016">
+<testsuite name="nl.moto.ota.core.StockEvidenceTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:30" hostname="local-build" time="0.015">
   <properties />
   <testcase name="unsignedMalformedAndOtherDevicePackagesCannotCreateProofs" classname="nl.moto.ota.core.StockEvidenceTest" time="0.0" />
-  <testcase name="wrongProfileBuildIncrementalAndAndroidNeverReceiveReference" classname="nl.moto.ota.core.StockEvidenceTest" time="0.001" />
+  <testcase name="wrongProfileBuildIncrementalAndAndroidNeverReceiveReference" classname="nl.moto.ota.core.StockEvidenceTest" time="0.0" />
   <testcase name="signatureAndManifestProveContentButNeverClaimInstallationCompatibility" classname="nl.moto.ota.core.StockEvidenceTest" time="0.0" />
   <testcase name="unknownMergeBootOrRootCannotBindDownloadedClaims" classname="nl.moto.ota.core.StockEvidenceTest" time="0.013" />
-  <testcase name="invalidPersistedProofCannotCreateStockReference" classname="nl.moto.ota.core.StockEvidenceTest" time="0.001" />
+  <testcase name="invalidPersistedProofCannotCreateStockReference" classname="nl.moto.ota.core.StockEvidenceTest" time="0.0" />
   <testcase name="anyTrustStoreChangeRequiresNewSignatureVerification" classname="nl.moto.ota.core.StockEvidenceTest" time="0.0" />
-  <testcase name="onlySuccessfulFreshTargetBootBindsMeasuredSystemNamespace" classname="nl.moto.ota.core.StockEvidenceTest" time="0.001" />
+  <testcase name="onlySuccessfulFreshTargetBootBindsMeasuredSystemNamespace" classname="nl.moto.ota.core.StockEvidenceTest" time="0.0" />
   <testcase name="alreadyBoundSystemFingerprintCannotSilentlyChangeAlias" classname="nl.moto.ota.core.StockEvidenceTest" time="0.0" />
   <system-out />
   <system-err />

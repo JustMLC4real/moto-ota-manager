@@ -1,12 +1,15 @@
 {
   "version": "0.3.0",
-  "generatedAtUtc": "2026-10-29T08:34:14.488595+00:00",
+  "buildOrigin": "cleanSourceArchive",
+  "testedSourceCommit": "48f664b2ae3d970db8cd369b3f628365ca316898",
+  "buildInputSha256": "1faeab65b0f70b264aea5098f3f6b2dc26214a7733b04941454dcb4f3ea946df",
+  "generatedAtUtc": "2026-10-29T08:40:01.035242+00:00",
   "apk": {
     "file": "moto-ota-manager-debug.apk",
     "versionName": "0.3.0",
     "versionCode": 3,
-    "bytes": 29284877,
-    "sha256": "01ee72a7b707141ec77afa2d5d2176dc26b49903deb8b693a8b8b38ec77f1084",
+    "bytes": 28451334,
+    "sha256": "b554bf61757491117c19906199f57041ed907dd5c9d35214a890ad24cc4bfa84",
     "debugSigned": true,
     "signerCertificateSha256": "21e80a8850a8f89759b7fba9e6ce693f3fdbe53de921d1a584a3bca130f92865"
   },

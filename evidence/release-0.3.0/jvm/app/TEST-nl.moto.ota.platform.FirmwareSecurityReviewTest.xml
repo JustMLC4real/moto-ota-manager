@@ -1,10 +1,10 @@
-<testsuite name="nl.moto.ota.platform.FirmwareSecurityReviewTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:14" hostname="local-build" time="0.264">
+<testsuite name="nl.moto.ota.platform.FirmwareSecurityReviewTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:49" hostname="local-build" time="0.317">
   <properties />
-  <testcase name="endpointPolicyBlocksCredentialHostsRedirectTargetsAndLookalikes" classname="nl.moto.ota.platform.FirmwareSecurityReviewTest" time="0.024" />
-  <testcase name="correctLabelsAndSelfHashesNeverProveAnOfficialSignature" classname="nl.moto.ota.platform.FirmwareSecurityReviewTest" time="0.084" />
-  <testcase name="targetFingerprintMustBelongToMotorola" classname="nl.moto.ota.platform.FirmwareSecurityReviewTest" time="0.045" />
-  <testcase name="targetIncrementalLabelCannotContradictFingerprintBuild" classname="nl.moto.ota.platform.FirmwareSecurityReviewTest" time="0.061" />
-  <testcase name="targetFingerprintMustBelongToSameCodename" classname="nl.moto.ota.platform.FirmwareSecurityReviewTest" time="0.05" />
+  <testcase name="endpointPolicyBlocksCredentialHostsRedirectTargetsAndLookalikes" classname="nl.moto.ota.platform.FirmwareSecurityReviewTest" time="0.028" />
+  <testcase name="correctLabelsAndSelfHashesNeverProveAnOfficialSignature" classname="nl.moto.ota.platform.FirmwareSecurityReviewTest" time="0.095" />
+  <testcase name="targetFingerprintMustBelongToMotorola" classname="nl.moto.ota.platform.FirmwareSecurityReviewTest" time="0.064" />
+  <testcase name="targetIncrementalLabelCannotContradictFingerprintBuild" classname="nl.moto.ota.platform.FirmwareSecurityReviewTest" time="0.065" />
+  <testcase name="targetFingerprintMustBelongToSameCodename" classname="nl.moto.ota.platform.FirmwareSecurityReviewTest" time="0.065" />
   <system-out />
   <system-err />
 </testsuite>

@@ -1,9 +1,9 @@
-<testsuite name="nl.moto.ota.core.PrivacyTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:09" hostname="local-build" time="0.004">
+<testsuite name="nl.moto.ota.core.PrivacyTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:30" hostname="local-build" time="0.004">
   <properties />
   <testcase name="probeKeysCannotInjectRawOutputOrAdditionalReportLines" classname="nl.moto.ota.core.PrivacyTest" time="0.003" />
-  <testcase name="userControlledNewlinesCannotForgeSuccessInReport" classname="nl.moto.ota.core.PrivacyTest" time="0.001" />
+  <testcase name="userControlledNewlinesCannotForgeSuccessInReport" classname="nl.moto.ota.core.PrivacyTest" time="0.0" />
   <testcase name="simulatedObservationsAreExplicitlyMarked" classname="nl.moto.ota.core.PrivacyTest" time="0.0" />
-  <testcase name="sensitiveFieldsAreOmittedRatherThanExportedWithCosmeticRedaction" classname="nl.moto.ota.core.PrivacyTest" time="0.0" />
+  <testcase name="sensitiveFieldsAreOmittedRatherThanExportedWithCosmeticRedaction" classname="nl.moto.ota.core.PrivacyTest" time="0.001" />
   <system-out />
   <system-err />
 </testsuite>

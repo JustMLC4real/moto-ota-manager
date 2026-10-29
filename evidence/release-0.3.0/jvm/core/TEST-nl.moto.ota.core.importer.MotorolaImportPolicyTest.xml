@@ -1,22 +1,22 @@
-<testsuite name="nl.moto.ota.core.importer.MotorolaImportPolicyTest" tests="14" skipped="2" failures="0" errors="0" timestamp="2026-10-29T08:30:09" hostname="local-build" time="0.313">
+<testsuite name="nl.moto.ota.core.importer.MotorolaImportPolicyTest" tests="14" skipped="2" failures="0" errors="0" timestamp="2026-10-29T08:35:30" hostname="local-build" time="0.349">
   <properties />
-  <testcase name="destinationSymlinkIsRejectedWithoutTouchingItsTarget" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.009">
+  <testcase name="destinationSymlinkIsRejectedWithoutTouchingItsTarget" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.011">
     <skipped />
   </testcase>
-  <testcase name="atomicSourceReplacementDuringCopyRejectsReceiptAndPreservesSelection" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.037" />
-  <testcase name="fullHashedCopyCommitsExactBytesWithoutTrustingFirmware" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.05" />
+  <testcase name="atomicSourceReplacementDuringCopyRejectsReceiptAndPreservesSelection" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.045" />
+  <testcase name="fullHashedCopyCommitsExactBytesWithoutTrustingFirmware" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.055" />
   <testcase name="pathsAndMissingOrEmptySourceNeverBecomeImportCommands" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.006" />
-  <testcase name="sameSizeMutationWithRestoredMtimeStillRequiresSecondFullSourceHash" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.026" />
-  <testcase name="changedDestinationDuringCopyIsNotOverwritten" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.045" />
-  <testcase name="lowStoragePreservesPreviousCompleteDestination" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.007" />
+  <testcase name="sameSizeMutationWithRestoredMtimeStillRequiresSecondFullSourceHash" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.043" />
+  <testcase name="changedDestinationDuringCopyIsNotOverwritten" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.043" />
+  <testcase name="lowStoragePreservesPreviousCompleteDestination" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.008" />
   <testcase name="sourceSymlinksAreNotDiscoveredOrRead" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.002">
     <skipped />
   </testcase>
-  <testcase name="discoveryReturnsAtMostTwelveRegularBoundedCandidates" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.021" />
-  <testcase name="storageFailureDuringCopyNeverPublishesPartialBytes" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.024" />
+  <testcase name="discoveryReturnsAtMostTwelveRegularBoundedCandidates" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.022" />
+  <testcase name="storageFailureDuringCopyNeverPublishesPartialBytes" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.023" />
   <testcase name="destinationInsideOemDirectoryIsAlwaysRejected" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.005" />
   <testcase name="oversizedSparseSourceIsRejectedBeforeAnyCopy" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.005" />
-  <testcase name="discoveryRejectsDirectoryFloodInsteadOfUnboundedListing" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.075" />
+  <testcase name="discoveryRejectsDirectoryFloodInsteadOfUnboundedListing" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.08" />
   <testcase name="acceptsOnlyBoundedAsciiZipBasenames" classname="nl.moto.ota.core.importer.MotorolaImportPolicyTest" time="0.001" />
   <system-out />
   <system-err />

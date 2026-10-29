@@ -2,3 +2,6 @@
 10-29 06:43:52.973  4187  4253 I VaultRuntimeTest: Pin strategy=durable-copy; hardlink=AccessDeniedException; errno=not-exposed
 10-29 07:20:42.358  5251  5310 I VaultRuntimeTest: Pin strategy=durable-copy; hardlink=AccessDeniedException; errno=not-exposed
 10-29 07:28:23.910  5968  6028 I VaultRuntimeTest: Pin strategy=durable-copy; hardlink=AccessDeniedException; errno=not-exposed
+10-29 07:55:33.398  7431  7451 I VaultRuntimeTest: Pin strategy=durable-copy; hardlink=AccessDeniedException; errno=not-exposed
+10-29 08:31:23.905  8704  8730 I VaultRuntimeTest: Pin strategy=durable-copy; hardlink=AccessDeniedException; errno=not-exposed
+10-29 08:38:45.512  9687  9706 I VaultRuntimeTest: Pin strategy=durable-copy; hardlink=AccessDeniedException; errno=not-exposed

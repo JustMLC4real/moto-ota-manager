@@ -1,30 +1,30 @@
-<testsuite name="nl.moto.ota.platform.ObservationParsersTest" tests="25" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:14" hostname="local-build" time="0.017">
+<testsuite name="nl.moto.ota.platform.ObservationParsersTest" tests="25" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:49" hostname="local-build" time="0.018">
   <properties />
   <testcase name="duplicateMergePercentagesAreNotReportedAsOneCurrentMeasurement" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
   <testcase name="perPartitionStateDoesNotMasqueradeAsGlobalState" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
   <testcase name="aospLowercaseAndHyphenatedGlobalStateNamesAreRecognized" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
   <testcase name="failedSnapshotToolCanStillUseKnownHalValue" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
-  <testcase name="gzipBackupHasIndependentDigestAndNeverVerifiedProvenance" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.005" />
-  <testcase name="freshNoneFromBothSourcesIsIdleSnapshotEvidence" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
+  <testcase name="gzipBackupHasIndependentDigestAndNeverVerifiedProvenance" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.007" />
+  <testcase name="freshNoneFromBothSourcesIsIdleSnapshotEvidence" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
   <testcase name="shellRejectsArbitraryPropertyBeforeLaunchingProcess" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
   <testcase name="payloadFailureCannotBeHiddenByFollowingIdleStatus" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
-  <testcase name="engineCallbackMismatchOrMissingToolRemainsUnknown" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
+  <testcase name="engineCallbackMismatchOrMissingToolRemainsUnknown" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
   <testcase name="rootCommandsCannotWriteOrApplyAnything" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
   <testcase name="mergeCompletedRemainsDifferentFromNoUpdate" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
-  <testcase name="preferencesDecodeXmlEscapedJsonWithoutChangingCounters" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
+  <testcase name="preferencesDecodeXmlEscapedJsonWithoutChangingCounters" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.003" />
   <testcase name="unsupportedOrIncompleteSnapshotEvidenceDoesNotBecomeIdle" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
-  <testcase name="unknownOrMixedCaseSnapshotNamesStayUnknown" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
-  <testcase name="boundedEngineFollowReadsLastValidCallback" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
-  <testcase name="preferencesRejectExternalEntities" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
+  <testcase name="unknownOrMixedCaseSnapshotNamesStayUnknown" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
+  <testcase name="boundedEngineFollowReadsLastValidCallback" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
+  <testcase name="preferencesRejectExternalEntities" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
   <testcase name="conflictingIdleAndMergeEvidenceFailsClosed" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
-  <testcase name="mergingUsesOnlyGlobalEnumAndBoundsPercentage" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
-  <testcase name="aospHalSummaryCannotHideMorePreciseNonIdleGlobalStates" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
-  <testcase name="preferencesRejectDuplicateKeys" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.002" />
-  <testcase name="shellRejectsBackupPathInjectionBeforeLaunchingProcess" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
+  <testcase name="mergingUsesOnlyGlobalEnumAndBoundsPercentage" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
+  <testcase name="aospHalSummaryCannotHideMorePreciseNonIdleGlobalStates" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
+  <testcase name="preferencesRejectDuplicateKeys" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
+  <testcase name="shellRejectsBackupPathInjectionBeforeLaunchingProcess" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
   <testcase name="malformedOrDuplicateSuccessfulDumpCannotBeHiddenByHalNone" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
   <testcase name="inconsistentHalSummaryStillBlocksRatherThanLosingActiveMerge" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
   <testcase name="corruptGzipIsRejected" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
-  <testcase name="errorCallbackStaysError" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.001" />
+  <testcase name="errorCallbackStaysError" classname="nl.moto.ota.platform.ObservationParsersTest" time="0.0" />
   <system-out />
   <system-err />
 </testsuite>

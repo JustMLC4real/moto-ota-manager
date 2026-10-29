@@ -1,0 +1,14 @@
+{
+  "command": [
+    "zipalign",
+    "-c",
+    "-P",
+    "16",
+    "4",
+    "<APK>"
+  ],
+  "apkSha256": "b554bf61757491117c19906199f57041ed907dd5c9d35214a890ad24cc4bfa84",
+  "exitCode": 0,
+  "stdout": "",
+  "stderr": ""
+}

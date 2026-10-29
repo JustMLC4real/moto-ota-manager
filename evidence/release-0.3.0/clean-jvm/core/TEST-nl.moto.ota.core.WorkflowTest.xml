@@ -1,0 +1,33 @@
+<testsuite name="nl.moto.ota.core.WorkflowTest" tests="28" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:30" hostname="local-clean-build" time="0.012">
+  <properties />
+  <testcase name="missingDownloadOrPackageVerificationBlocks" classname="nl.moto.ota.core.WorkflowTest" time="0.003" />
+  <testcase name="unmeasuredRootAfterRebootIsNotFalselyReportedAsRootLoss" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="wrongActiveSlotIsNotSuccessEvenOnTargetBuild" classname="nl.moto.ota.core.WorkflowTest" time="0.001" />
+  <testcase name="corruptUnknownVersionOrIncompleteJournalStopsSafely" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="otaEngineErrorIsTerminalAndNotHiddenByLaterIdle" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="fingerprintAliasAfterRebootNeedsManualInvestigation" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="processDeathRestoresJournalThenReconcilesLiveObservations" classname="nl.moto.ota.core.WorkflowTest" time="0.001" />
+  <testcase name="currentBuildChangeWithoutNewBootIsContradiction" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="unchangedOrUnknownTargetIsBlocked" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="preflightFromDifferentObservationCannotStartWorkflow" classname="nl.moto.ota.core.WorkflowTest" time="0.001" />
+  <testcase name="activeMergeOrUnknownMergeCannotComplete" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="lostRootAfterRebootCannotBeSuccess" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="unsuccessfulOrUnknownBootCannotComplete" classname="nl.moto.ota.core.WorkflowTest" time="0.001" />
+  <testcase name="failedInactiveSlotMagiskStepIsRecordedAsFailure" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="compatibleUpdateStartsGuidanceWithoutClaimingStockRestored" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="missingModulesAndChangedSecurityAreNotFullSuccess" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="unknownModuleInventoryAndUnreviewedMagiskDoNotComplete" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="noUpdateKeepsIdleAndDoesNotClaimNoServerOffer" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="oldSlotAfterPendingOtaIsPossibleRollback" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="fullObservedOutcomeIncludesSuccessfulBootRootAndMerge" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="persistedManualNotesAndLineBreaksRoundTrip" classname="nl.moto.ota.core.WorkflowTest" time="0.001" />
+  <testcase name="targetBootWithoutPriorObservedOtaDoesNotProveWholeWorkflow" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="staleObservationsCannotConfirmPersistedSuccess" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="magiskCannotBeReportedBeforeObservedOta" classname="nl.moto.ota.core.WorkflowTest" time="0.001" />
+  <testcase name="manualStockRestoreNeverCountsAsObservedOta" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="simulatedAndRealEvidenceNeverMix" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <testcase name="enginePendingRebootIsDistinctFromMagiskPreparedAndSuccess" classname="nl.moto.ota.core.WorkflowTest" time="0.001" />
+  <testcase name="unexpectedRebootBeforeOtaRequiresRecovery" classname="nl.moto.ota.core.WorkflowTest" time="0.0" />
+  <system-out />
+  <system-err />
+</testsuite>

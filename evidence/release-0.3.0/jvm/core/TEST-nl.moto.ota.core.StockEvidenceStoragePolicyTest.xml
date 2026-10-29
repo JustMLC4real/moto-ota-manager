@@ -1,4 +1,4 @@
-<testsuite name="nl.moto.ota.core.StockEvidenceStoragePolicyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:09" hostname="local-build" time="0.001">
+<testsuite name="nl.moto.ota.core.StockEvidenceStoragePolicyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:30" hostname="local-build" time="0.001">
   <properties />
   <testcase name="verifiedProofCopiesMutableAnchorCollectionBeforePersistence" classname="nl.moto.ota.core.StockEvidenceStoragePolicyTest" time="0.001" />
   <testcase name="storedProofRequiresConsistentHashesSizesFingerprintsAndTrustAnchors" classname="nl.moto.ota.core.StockEvidenceStoragePolicyTest" time="0.0" />

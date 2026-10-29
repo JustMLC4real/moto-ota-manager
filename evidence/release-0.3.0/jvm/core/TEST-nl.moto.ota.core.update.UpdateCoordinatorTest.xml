@@ -1,31 +1,31 @@
-<testsuite name="nl.moto.ota.core.update.UpdateCoordinatorTest" tests="27" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:10" hostname="local-build" time="0.008">
+<testsuite name="nl.moto.ota.core.update.UpdateCoordinatorTest" tests="27" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:32" hostname="local-build" time="0.009">
   <properties />
   <testcase name="manualRestoreRemainsUnprovenUntilActualPartitionMeasurement" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
   <testcase name="changedSourceFingerprintOrStockHashInvalidatesHandoff" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
-  <testcase name="manualMagiskReportRemainsUnverifiedBeforeBoot" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
-  <testcase name="rootPermissionFailureCanBeRetriedOnlyByAnExplicitFreshTargetRead" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
+  <testcase name="manualMagiskReportRemainsUnverifiedBeforeBoot" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
+  <testcase name="rootPermissionFailureCanBeRetriedOnlyByAnExplicitFreshTargetRead" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
   <testcase name="unobservedOtaCannotBecomeACompleteGuidedRun" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
-  <testcase name="simulationCannotStartLiveRun" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
+  <testcase name="simulationCannotStartLiveRun" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
   <testcase name="interruptedWriterIsOnlyReconciledByReading" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
-  <testcase name="staleSourceObservationCannotAcknowledgeRebootOrLaunchWorkflowStep" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
-  <testcase name="unknownMetadataAndMixedModesNeverSucceed" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
+  <testcase name="staleSourceObservationCannotAcknowledgeRebootOrLaunchWorkflowStep" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
+  <testcase name="unknownMetadataAndMixedModesNeverSucceed" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
   <testcase name="authenticatedPackageCanBeAttachedWithoutErasingCompatibilityBlockers" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
   <testcase name="targetFingerprintNamespaceDoesNotOverrideMeasuredBoot" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
   <testcase name="moduleLossAndSecurityChangesRequireReview" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
-  <testcase name="forgedMagiskProofCannotConfirmAnImage" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
+  <testcase name="forgedMagiskProofCannotConfirmAnImage" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
   <testcase name="cancellationIsOnlyPossibleBeforeAnyRestoreOrPendingPlan" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
   <testcase name="missingNewStockProofDoesNotClaimNextUpdateReadiness" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
   <testcase name="officialRouteDoesNotRequireGenericPackageMetadataCompatibility" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
   <testcase name="targetBuildIsRequiredButDeclaredFingerprintIsOptional" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
-  <testcase name="pendingRebootObservesOtaButNotMagisk" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
-  <testcase name="journalRoundTripPreservesIndependentEvidence" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
+  <testcase name="pendingRebootObservesOtaButNotMagisk" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
+  <testcase name="journalRoundTripPreservesIndependentEvidence" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
   <testcase name="lateUiCallbacksCannotRegressTargetBootOrCompletedRun" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
   <testcase name="mergeAndUnknownStatesCannotBeComplete" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
   <testcase name="unreviewedTargetAndroidCannotBeQualifiedEvenWhenRootAndAllOtherChecksPass" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
   <testcase name="reportedMagiskFailureCannotRebootAndOnlyFreshSameSourceCanReleaseManualRetry" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
   <testcase name="actualTargetBuildAndSlotAreRequired" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
   <testcase name="idleEngineDoesNotMeanOtaApplied" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
-  <testcase name="rootHasToBeMeasuredAfterBoot" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
+  <testcase name="rootHasToBeMeasuredAfterBoot" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.001" />
   <testcase name="sourceBuildAfterNewBootIsPossibleRollback" classname="nl.moto.ota.core.update.UpdateCoordinatorTest" time="0.0" />
   <system-out />
   <system-err />

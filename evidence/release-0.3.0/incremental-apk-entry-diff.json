@@ -1,0 +1,91 @@
+{
+  "incrementalApkSha256": "01ee72a7b707141ec77afa2d5d2176dc26b49903deb8b693a8b8b38ec77f1084",
+  "cleanApkSha256": "b554bf61757491117c19906199f57041ed907dd5c9d35214a890ad24cc4bfa84",
+  "entries": [
+    {
+      "entry": "classes10.dex",
+      "cleanBytes": 20060,
+      "incrementalBytes": 95996
+    },
+    {
+      "entry": "classes11.dex",
+      "cleanBytes": 161436,
+      "incrementalBytes": 28268
+    },
+    {
+      "entry": "classes12.dex",
+      "cleanBytes": 95996,
+      "incrementalBytes": 12056
+    },
+    {
+      "entry": "classes13.dex",
+      "cleanBytes": 28268,
+      "incrementalBytes": 410412
+    },
+    {
+      "entry": "classes14.dex",
+      "cleanBytes": 12056,
+      "incrementalBytes": 41944
+    },
+    {
+      "entry": "classes15.dex",
+      "cleanBytes": 410408,
+      "incrementalBytes": 8636848
+    },
+    {
+      "entry": "classes16.dex",
+      "cleanBytes": 41944,
+      "incrementalBytes": 25448
+    },
+    {
+      "entry": "classes17.dex",
+      "cleanBytes": 8636848,
+      "incrementalBytes": 20060
+    },
+    {
+      "entry": "classes3.dex",
+      "cleanBytes": 25448,
+      "incrementalBytes": 234460
+    },
+    {
+      "entry": "classes4.dex",
+      "cleanBytes": 234460,
+      "incrementalBytes": 132320
+    },
+    {
+      "entry": "classes5.dex",
+      "cleanBytes": 132320,
+      "incrementalBytes": 34036
+    },
+    {
+      "entry": "classes6.dex",
+      "cleanBytes": 34036,
+      "incrementalBytes": 86776
+    },
+    {
+      "entry": "classes7.dex",
+      "cleanBytes": 86776,
+      "incrementalBytes": 45112
+    },
+    {
+      "entry": "classes8.dex",
+      "cleanBytes": 45112,
+      "incrementalBytes": 32252
+    },
+    {
+      "entry": "classes9.dex",
+      "cleanBytes": 32252,
+      "incrementalBytes": 161436
+    },
+    {
+      "entry": "lib/arm64-v8a/libmoto_stage_publish.so",
+      "cleanBytes": 10160,
+      "incrementalBytes": 10160
+    },
+    {
+      "entry": "lib/x86_64/libmoto_stage_publish.so",
+      "cleanBytes": 10472,
+      "incrementalBytes": 10472
+    }
+  ]
+}

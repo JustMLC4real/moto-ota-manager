@@ -2,7 +2,9 @@
   "target": "emulator-5556",
   "qemu": true,
   "package": "nl.moto.ota",
-  "installedApkSha256": "01ee72a7b707141ec77afa2d5d2176dc26b49903deb8b693a8b8b38ec77f1084",
-  "builtApkSha256": "01ee72a7b707141ec77afa2d5d2176dc26b49903deb8b693a8b8b38ec77f1084",
+  "buildOrigin": "cleanSourceArchive",
+  "testedSourceCommit": "48f664b2ae3d970db8cd369b3f628365ca316898",
+  "installedApkSha256": "b554bf61757491117c19906199f57041ed907dd5c9d35214a890ad24cc4bfa84",
+  "builtApkSha256": "b554bf61757491117c19906199f57041ed907dd5c9d35214a890ad24cc4bfa84",
   "equal": true
 }

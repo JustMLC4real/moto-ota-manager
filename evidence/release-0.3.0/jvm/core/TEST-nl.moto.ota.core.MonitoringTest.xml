@@ -1,23 +1,23 @@
-<testsuite name="nl.moto.ota.core.MonitoringTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:09" hostname="local-build" time="0.02">
+<testsuite name="nl.moto.ota.core.MonitoringTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:30" hostname="local-build" time="0.024">
   <properties />
-  <testcase name="encoderSanitizesUnsafeIdentifiersAndBoundsHistoryBeforeWriting" classname="nl.moto.ota.core.MonitoringTest" time="0.006" />
-  <testcase name="staleFutureAndAbsentCaptureTimesRemainQuiet" classname="nl.moto.ota.core.MonitoringTest" time="0.003" />
-  <testcase name="arbitraryHostAndUnknownResourceKindCannotBecomeNotification" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
+  <testcase name="encoderSanitizesUnsafeIdentifiersAndBoundsHistoryBeforeWriting" classname="nl.moto.ota.core.MonitoringTest" time="0.008" />
+  <testcase name="staleFutureAndAbsentCaptureTimesRemainQuiet" classname="nl.moto.ota.core.MonitoringTest" time="0.004" />
+  <testcase name="arbitraryHostAndUnknownResourceKindCannotBecomeNotification" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
   <testcase name="noticeIdentityIncludesInstalledBuildAndResourceKind" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
   <testcase name="installedTargetNeverNotifiesEvenWhenOfficialUrlRemainsCached" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
-  <testcase name="unrecognizedSchemaAndUnobservedMetadataNeverNotify" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
+  <testcase name="unrecognizedSchemaAndUnobservedMetadataNeverNotify" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
   <testcase name="missingMetadataCannotAssertThatThereIsNoServerUpdate" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
-  <testcase name="sameReleaseAndRotatingSignedUrlStayDeduplicated" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
+  <testcase name="sameReleaseAndRotatingSignedUrlStayDeduplicated" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
   <testcase name="unchangedResultRecordsSafeBoundedHistoryWithoutCallingSink" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
-  <testcase name="absentConfigurationDefaultsOffAndCorruptionFailsClosed" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
-  <testcase name="disabledAndSupersededGenerationNeverInvokeNotificationSink" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
-  <testcase name="blankOrUnsafeBuildNamesNeverReachNotifications" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
+  <testcase name="absentConfigurationDefaultsOffAndCorruptionFailsClosed" classname="nl.moto.ota.core.MonitoringTest" time="0.002" />
+  <testcase name="disabledAndSupersededGenerationNeverInvokeNotificationSink" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
+  <testcase name="blankOrUnsafeBuildNamesNeverReachNotifications" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
   <testcase name="deniedOrFailingNotificationDoesNotConsumeReleaseIdentity" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
   <testcase name="everyActiveOrUnknownSnapshotAndEngineStateRemainQuiet" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
   <testcase name="zipReferenceRemainsUnverifiedLead" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
   <testcase name="persistenceAndDiagnosticStringsExcludeSignedUrlsAndPrivateSourceIdentifiers" classname="nl.moto.ota.core.MonitoringTest" time="0.003" />
   <testcase name="onlyExactReviewedProfileAndAndroidVersionCanNotify" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
-  <testcase name="revokedAndUnmeasuredRootRemainQuiet" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
+  <testcase name="revokedAndUnmeasuredRootRemainQuiet" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
   <testcase name="freshNewMetadataCreatesInformationNoticeWithoutInstallabilityClaim" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />
   <testcase name="stateRoundTripPreservesOptInIntervalHistoryAndLastNotification" classname="nl.moto.ota.core.MonitoringTest" time="0.001" />
   <testcase name="publishedNoticeAndHistoryCommitTogetherAndSecondResultStaysQuiet" classname="nl.moto.ota.core.MonitoringTest" time="0.0" />

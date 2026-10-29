@@ -1,20 +1,20 @@
-<testsuite name="nl.moto.ota.core.ResumableTransferTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:30:09" hostname="local-build" time="0.346">
+<testsuite name="nl.moto.ota.core.ResumableTransferTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-10-29T08:35:30" hostname="local-build" time="0.525">
   <properties />
-  <testcase name="finalDigestAndSizeAreMeasuredFromCommittedBytes" classname="nl.moto.ota.core.ResumableTransferTest" time="0.029" />
-  <testcase name="signedUrlAndEntityValidatorAreNotInterpolatedIntoDiagnostics" classname="nl.moto.ota.core.ResumableTransferTest" time="0.011" />
-  <testcase name="redirectsMissingLengthEncodingAndDuplicateHeaderCasesFailClosed" classname="nl.moto.ota.core.ResumableTransferTest" time="0.01" />
-  <testcase name="storageRunningOutMidstreamRetainsOnlyDurableBytes" classname="nl.moto.ota.core.ResumableTransferTest" time="0.01" />
-  <testcase name="insufficientSpaceAndHashMismatchNeverPublish" classname="nl.moto.ota.core.ResumableTransferTest" time="0.014" />
-  <testcase name="serverReturning200AfterResumeRestartsPrivatePartialWithoutConcatenation" classname="nl.moto.ota.core.ResumableTransferTest" time="0.014" />
-  <testcase name="overlappingOrWrongTotalRangesAreRejected" classname="nl.moto.ota.core.ResumableTransferTest" time="0.009" />
-  <testcase name="truncatedAndOverlongBodiesCannotPublishEvenWithValidHttpHeaders" classname="nl.moto.ota.core.ResumableTransferTest" time="0.014" />
+  <testcase name="finalDigestAndSizeAreMeasuredFromCommittedBytes" classname="nl.moto.ota.core.ResumableTransferTest" time="0.038" />
+  <testcase name="signedUrlAndEntityValidatorAreNotInterpolatedIntoDiagnostics" classname="nl.moto.ota.core.ResumableTransferTest" time="0.01" />
+  <testcase name="redirectsMissingLengthEncodingAndDuplicateHeaderCasesFailClosed" classname="nl.moto.ota.core.ResumableTransferTest" time="0.011" />
+  <testcase name="storageRunningOutMidstreamRetainsOnlyDurableBytes" classname="nl.moto.ota.core.ResumableTransferTest" time="0.012" />
+  <testcase name="insufficientSpaceAndHashMismatchNeverPublish" classname="nl.moto.ota.core.ResumableTransferTest" time="0.015" />
+  <testcase name="serverReturning200AfterResumeRestartsPrivatePartialWithoutConcatenation" classname="nl.moto.ota.core.ResumableTransferTest" time="0.013" />
+  <testcase name="overlappingOrWrongTotalRangesAreRejected" classname="nl.moto.ota.core.ResumableTransferTest" time="0.011" />
+  <testcase name="truncatedAndOverlongBodiesCannotPublishEvenWithValidHttpHeaders" classname="nl.moto.ota.core.ResumableTransferTest" time="0.016" />
   <testcase name="commitGateCanRefuseAfterHashWithoutReplacingOldFile" classname="nl.moto.ota.core.ResumableTransferTest" time="0.013" />
-  <testcase name="changedEntityCannotBeAppendedToOldPrefix" classname="nl.moto.ota.core.ResumableTransferTest" time="0.007" />
-  <testcase name="cancelledTransferCannotCommitOrDestroyPreviousPackage" classname="nl.moto.ota.core.ResumableTransferTest" time="0.017" />
+  <testcase name="changedEntityCannotBeAppendedToOldPrefix" classname="nl.moto.ota.core.ResumableTransferTest" time="0.008" />
+  <testcase name="cancelledTransferCannotCommitOrDestroyPreviousPackage" classname="nl.moto.ota.core.ResumableTransferTest" time="0.016" />
   <testcase name="completeDurablePrefixFinishesAfterProcessDeathWithoutNetwork" classname="nl.moto.ota.core.ResumableTransferTest" time="0.008" />
   <testcase name="processDeathUncheckpointedTailIsTrimmedBeforeResume" classname="nl.moto.ota.core.ResumableTransferTest" time="0.012" />
   <testcase name="absentWeakValidatorOrDifferentSourceRestartsFromZero" classname="nl.moto.ota.core.ResumableTransferTest" time="0.031" />
-  <testcase name="interruptedNetworkRetainsOnlyDurablePrefixThenResumesExactEntity" classname="nl.moto.ota.core.ResumableTransferTest" time="0.139" />
+  <testcase name="interruptedNetworkRetainsOnlyDurablePrefixThenResumesExactEntity" classname="nl.moto.ota.core.ResumableTransferTest" time="0.303" />
   <testcase name="untrustedUrlAndOversizeResponsesFailBeforeReadingOrPublishing" classname="nl.moto.ota.core.ResumableTransferTest" time="0.006" />
   <system-out />
   <system-err />
