@@ -1,0 +1,16 @@
+<testsuite name="nl.moto.ota.platform.update.DirectOtaPropertiesTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-29T18:49:47" hostname="[HOST]" time="0.515">
+  <properties />
+  <testcase name="duplicateKnownAndUnknownKeysAreRejectedEvenIfTheirValuesAgree" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.049" />
+  <testcase name="packageOptionsCannotOverrideTheConstrainedRootAdaptersInstallFlags" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.021" />
+  <testcase name="eachVerificationHeaderIsMandatory" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.064" />
+  <testcase name="malformedLinesAndAmbiguousHeaderNamesAreRejected" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.146" />
+  <testcase name="missingEmptyAndWhollyBlankEntriesAreRejected" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.05" />
+  <testcase name="crlfAndBlankLinesDoNotAlterTheSignedHeaderValues" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.019" />
+  <testcase name="actualInflationLimitIsEnforcedWhenCentralDirectoryUnderstatesTheSize" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.044" />
+  <testcase name="understatedAndOverstatedEntryLengthsCannotBeAcceptedAsCompleteProperties" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.058" />
+  <testcase name="exactEntryLimitIsAcceptedAndOneExtraByteIsRejected" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.041" />
+  <testcase name="readsTheFourExactPayloadVerificationHeadersFromARealZip" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.002" />
+  <testcase name="malformedUtf8CannotBeSilentlyReplacedInsideAPropertyValue" classname="nl.moto.ota.platform.update.DirectOtaPropertiesTest" time="0.021" />
+  <system-out />
+  <system-err />
+</testsuite>

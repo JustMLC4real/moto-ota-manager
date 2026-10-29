@@ -14,6 +14,14 @@ Moto OTA Manager **1.0.0** brings device diagnostics, firmware inspection, resum
 
 The app separates a downloaded file, an authenticated package, a user-reported step and a verified device observation. An unknown result stays unknown. One reviewed start scopes subsequent actions, including the displayed partition writes, root-preservation steps and reboot; each action still needs fresh evidence. Unsupported or uncertain transitions pause. Android and Motorola retain their own update verification checks.
 
+## A clear view of each step
+
+| First-run guide | Official firmware | Dutch · dark appearance |
+|:---:|:---:|:---:|
+| <img src="docs/images/setup-en.png" width="240" alt="English first-run guide"> | <img src="docs/images/firmware-en.png" width="240" alt="Official firmware screen in English"> | <img src="docs/images/settings-nl-dark.png" width="240" alt="Dutch language and dark appearance settings"> |
+
+Actual screenshots of the signed release on a disposable Android emulator. Device values in the [overview](docs/images/overview-en.png) belong to that emulator. The [complete workflow demonstration](docs/images/simulation-nl-dark.png) is explicitly simulated; no phone update is shown.
+
 ## What you get
 
 | Feature | What it actually does |

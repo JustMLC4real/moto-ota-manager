@@ -1,0 +1,13 @@
+<testsuite name="nl.moto.ota.core.update.RunAuthorizationTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-29T18:48:37" hostname="[HOST]" time="0.025">
+  <properties />
+  <testcase name="onlyVerifiedSameTargetCanNarrowUnknownHashAndFingerprint" classname="nl.moto.ota.core.update.RunAuthorizationTest" time="0.011" />
+  <testcase name="codecRoundTripsCanonicalAuthorizationAndShortPermit" classname="nl.moto.ota.core.update.RunAuthorizationTest" time="0.002" />
+  <testcase name="sourceBootSlotBuildProfileAndFingerprintCannotChangeDuringRun" classname="nl.moto.ota.core.update.RunAuthorizationTest" time="0.002" />
+  <testcase name="everyAuthorizationScopeFieldIsHmacBound" classname="nl.moto.ota.core.update.RunAuthorizationTest" time="0.002" />
+  <testcase name="explicitStartAndFreshMeasuredSourceAreRequired" classname="nl.moto.ota.core.update.RunAuthorizationTest" time="0.001" />
+  <testcase name="wallClockAndMonotonicDeadlinesIndependentlyStopActions" classname="nl.moto.ota.core.update.RunAuthorizationTest" time="0.001" />
+  <testcase name="operationIsBoundToExactAuthorizationActionNoncePackageBootAndTimes" classname="nl.moto.ota.core.update.RunAuthorizationTest" time="0.003" />
+  <testcase name="codecRejectsDuplicateUnknownMissingBoundsPaddingAndMalformedUtf8" classname="nl.moto.ota.core.update.RunAuthorizationTest" time="0.001" />
+  <system-out />
+  <system-err />
+</testsuite>

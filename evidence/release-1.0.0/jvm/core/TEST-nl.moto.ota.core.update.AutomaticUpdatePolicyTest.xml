@@ -1,0 +1,21 @@
+<testsuite name="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-10-29T18:48:36" hostname="[HOST]" time="1.015">
+  <properties />
+  <testcase name="liveSelectionDoesNotWaiveFreshRootMergeOrIdentityReadiness" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.048" />
+  <testcase name="explicitWrongModelDeviceChannelAndConflictingRegionAnnotationsAreNeverWaived" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.177" />
+  <testcase name="liveSelectionCannotReplaceWholeZipSignaturePayloadHashOrStructureVerification" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.011" />
+  <testcase name="missingOrOutOfBoundsTargetImageDigestBlocksBeforeAnyRootOperation" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.011" />
+  <testcase name="inconsistentSignedSourceIncrementalOrDuplicateSourceFingerprintsCannotBeBridged" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.112" />
+  <testcase name="incrementalSourceDigestMustMatchTheWholeAuthenticatedCurrentBackupNotJustItsName" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.007" />
+  <testcase name="explicitDowngradeWipeAndUnknownInstructionsRemainBlockedWithAValidBridge" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.15" />
+  <testcase name="exactAndroidSourceAndLiveOemSelectionCanPassWithoutGuessingAProductAlias" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.036" />
+  <testcase name="wrongSystemSourceBuildIncrementalOrCodenameCannotBorrowTheVendorBridge" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.126" />
+  <testcase name="bootAndInitBootDigestBanksAreNotInterchangeable" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.009" />
+  <testcase name="opaqueLiveSelectionIsRequiredEvenForCorrectlySignedCompatibleMetadata" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.01" />
+  <testcase name="timestampSecurityPatchAndAndroidRollbackChecksAreIndependentOfLiveSelection" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.224" />
+  <testcase name="observedSignedVendorSourceBridgesTheSystemNamespaceButDoesNotBecomeSignedChannelMetadata" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.029" />
+  <testcase name="absentDifferentOrMerelySimilarVendorObservationCannotBridgeSignedAndroidPreconditions" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.007" />
+  <testcase name="matchingPayloadSourceCannotWaiveAnExplicitlyWrongSignedAndroidSource" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.035" />
+  <testcase name="fullOtaStillRequiresAProvenCurrentBackupAndAnExplicitLiveTarget" classname="nl.moto.ota.core.update.AutomaticUpdatePolicyTest" time="0.023" />
+  <system-out />
+  <system-err />
+</testsuite>

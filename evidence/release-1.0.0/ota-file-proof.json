@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "serial": "emulator-5556",
+  "qemu": true,
+  "scope": "temporary regular files only; no OTA/partition/power API",
+  "results": [
+    {
+      "schema": 1,
+      "case": "roundtrip",
+      "passed": true,
+      "bytes": 8192,
+      "sourceUnchanged": true,
+      "normalOtaLabel": true,
+      "cleanupComplete": true
+    },
+    {
+      "schema": 1,
+      "case": "reject",
+      "passed": true,
+      "bytes": 8192,
+      "sourceUnchanged": true,
+      "normalOtaLabel": true,
+      "cleanupComplete": true
+    }
+  ]
+}

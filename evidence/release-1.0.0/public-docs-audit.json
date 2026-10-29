@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "checkedAtUtc": "2026-10-29T18:57:37.236408+00:00",
+  "markdownLinks": {
+    "checkedMarkdownFiles": 42,
+    "missing": [],
+    "passed": true
+  },
+  "publicSnapshot": {
+    "checkedFiles": 521,
+    "passed": true,
+    "problems": [],
+    "limits": [
+      "No Git history scan",
+      "No image OCR",
+      "No credential validity probe",
+      "Manual review remains required"
+    ]
+  },
+  "historyPrivateKeyMarkers": {
+    "blobsChecked": 646,
+    "problems": [],
+    "passed": true,
+    "limits": [
+      "Private-key marker scan only; not comprehensive secret detection",
+      "No image OCR or credential validity probe"
+    ]
+  },
+  "passed": true
+}

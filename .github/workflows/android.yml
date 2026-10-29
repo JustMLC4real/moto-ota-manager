@@ -26,7 +26,7 @@ jobs:
       - run: python3 -m unittest discover -s tools/tests -v
       - run: sdkmanager "platforms;android-35" "build-tools;35.0.0" "ndk;27.2.12479018" "cmake;3.22.1"
       - run: chmod +x gradlew
-      - run: ./gradlew :core:test :app:testDebugUnitTest :app:lintDebug :app:assembleDebug :app:assembleDebugAndroidTest :app:assembleRelease :app:lintRelease :app:writeReleaseDependencyInventory --no-daemon --no-configuration-cache --console=plain
+      - run: ./gradlew :core:test :app:testDebugUnitTest :app:testReleaseUnitTest :app:lintDebug :app:assembleDebug :app:assembleDebugAndroidTest :app:assembleRelease :app:lintRelease :app:writeReleaseDependencyInventory --no-daemon --no-configuration-cache --console=plain
       - run: python3 tools/verify_apk_layout.py app/build/outputs/apk/debug/app-debug.apk
       - name: Validate non-debuggable unsigned release and kept dynamic APIs
         run: python3 tools/verify_release_apk.py app/build/outputs/apk/release/app-release-unsigned.apk --unsigned --build-tools "$ANDROID_HOME/build-tools/35.0.0"

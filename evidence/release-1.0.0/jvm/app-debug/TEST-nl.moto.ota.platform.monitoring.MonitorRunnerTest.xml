@@ -1,0 +1,15 @@
+<testsuite name="nl.moto.ota.platform.monitoring.MonitorRunnerTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-10-29T18:49:19" hostname="[HOST]" time="0.091">
+  <properties />
+  <testcase name="deniedNotificationCanBeDeliveredAfterPermissionIsGranted" classname="nl.moto.ota.platform.monitoring.MonitorRunnerTest" time="0.059" />
+  <testcase name="changedIntervalGenerationAlsoDiscardsAnAlreadyRunningCheck" classname="nl.moto.ota.platform.monitoring.MonitorRunnerTest" time="0.002" />
+  <testcase name="sourceFailuresProduceSanitizedHistoryAndStayQuiet" classname="nl.moto.ota.platform.monitoring.MonitorRunnerTest" time="0.013" />
+  <testcase name="cancellationPropagatesWithoutRecordingFailureOrPublishing" classname="nl.moto.ota.platform.monitoring.MonitorRunnerTest" time="0.002" />
+  <testcase name="absentMetadataRemainsUnknownInsteadOfRecordingFalseUpToDate" classname="nl.moto.ota.platform.monitoring.MonitorRunnerTest" time="0.002" />
+  <testcase name="revokedRootRecordsActionableStatusWithoutNotification" classname="nl.moto.ota.platform.monitoring.MonitorRunnerTest" time="0.002" />
+  <testcase name="defaultOffDoesNotInspectOrNotify" classname="nl.moto.ota.platform.monitoring.MonitorRunnerTest" time="0.002" />
+  <testcase name="newReferenceNotifiesOnceAndNextRunStaysQuiet" classname="nl.moto.ota.platform.monitoring.MonitorRunnerTest" time="0.002" />
+  <testcase name="configurationSupersededBeforeRootStopsQuietlyWithoutCancellingPeriodicWorker" classname="nl.moto.ota.platform.monitoring.MonitorRunnerTest" time="0.002" />
+  <testcase name="disablingDuringInspectionDiscardsResultAndPreventsNotification" classname="nl.moto.ota.platform.monitoring.MonitorRunnerTest" time="0.003" />
+  <system-out />
+  <system-err />
+</testsuite>

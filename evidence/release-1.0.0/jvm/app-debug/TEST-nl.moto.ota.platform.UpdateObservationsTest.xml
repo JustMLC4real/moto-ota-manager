@@ -1,0 +1,9 @@
+<testsuite name="nl.moto.ota.platform.UpdateObservationsTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-29T18:49:19" hostname="[HOST]" time="0.006">
+  <properties />
+  <testcase name="bootControlToolInitializersAreNeverLaunchedEvenForGetterProbes" classname="nl.moto.ota.platform.UpdateObservationsTest" time="0.001" />
+  <testcase name="fullDigestOnlyBelongsToTheExactObservedPartition" classname="nl.moto.ota.platform.UpdateObservationsTest" time="0.003" />
+  <testcase name="failedTruncatedTimedOutOrUnknownSlotNeverAuthorizes" classname="nl.moto.ota.platform.UpdateObservationsTest" time="0.002" />
+  <testcase name="automaticUpdateSettingHasThreeStates" classname="nl.moto.ota.platform.UpdateObservationsTest" time="0.0" />
+  <system-out />
+  <system-err />
+</testsuite>

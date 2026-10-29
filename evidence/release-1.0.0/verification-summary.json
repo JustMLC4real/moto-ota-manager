@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "versionCode": 4,
+  "checkedAtUtc": "2026-10-29T18:59:13.744483+00:00",
+  "testedSourceCommit": "198f66c41f49b2b6273d27c8e77485fdb768a42e",
+  "tests": {
+    "core": {
+      "tests": 388,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "suites": 30,
+      "passed": 386
+    },
+    "app": {
+      "tests": 131,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": 13,
+      "passed": 131
+    },
+    "android": {
+      "schemaVersion": 1,
+      "sourceLogSha256": "58b3a0cabe4ee0259032392eb0a1784bea39ecb79b3d9110ecc253695f2a18ea",
+      "complete": true,
+      "successful": true,
+      "tests": 96,
+      "passed": 92,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 4,
+      "runnerSeconds": 27.409,
+      "terminalStatusCounts": {
+        "-4": 4,
+        "0": 92
+      },
+      "skippedTests": [
+        {
+          "class": "nl.moto.ota.ReadOnlyDeviceValidationTest",
+          "test": "actualBackupMatchesTheAuthenticatedStockAndUpdaterResolvesExplicitly",
+          "kind": "assumption"
+        },
+        {
+          "class": "nl.moto.ota.ReadOnlyDeviceValidationTest",
+          "test": "existingHistoricalOtaPassesTheActualPlatformSignatureVerifier",
+          "kind": "assumption"
+        },
+        {
+          "class": "nl.moto.ota.ReadOnlyDeviceValidationTest",
+          "test": "realDiagnosticsMatchTheIndependentReadOnlyBaseline",
+          "kind": "assumption"
+        },
+        {
+          "class": "nl.moto.ota.ReadOnlyDeviceValidationTest",
+          "test": "cachedMotorolaMetadataDoesNotOfferTheInstalledUpdateAgain",
+          "kind": "assumption"
+        }
+      ]
+    },
+    "uniqueJvmAndroid": {
+      "tests": 615,
+      "passed": 609,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 6
+    }
+  },
+  "lint": {
+    "debug": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 60,
+      "Information": 0
+    },
+    "release": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 60,
+      "Information": 0
+    }
+  },
+  "shrinkingEnabled": false,
+  "apk": {
+    "verified": true,
+    "kind": "signed-release",
+    "version": "1.0.0",
+    "versionCode": 4,
+    "debuggable": false,
+    "apkSha256": "e64664cf1ee4a1d218787e64474151298809f5e9961e08505a8f9c341e4a03e8",
+    "signerCertificateSha256": "b8982eced488beec99ad33e0a87bf47f99e6d8b1a39f7d559ba86353bcb29bc6",
+    "permissions": [
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.FOREGROUND_SERVICE",
+      "android.permission.FOREGROUND_SERVICE_DATA_SYNC",
+      "android.permission.INTERNET",
+      "android.permission.POST_NOTIFICATIONS",
+      "android.permission.RECEIVE_BOOT_COMPLETED",
+      "android.permission.WAKE_LOCK",
+      "nl.moto.ota.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+    ],
+    "dynamicContract": {
+      "rootEntrypoints": [
+        "nl.moto.ota.rootprobe.EngineProbe",
+        "nl.moto.ota.rootprobe.FirmwareSignatureProbe",
+        "nl.moto.ota.rootprobe.StockRestoreProbe",
+        "nl.moto.ota.rootprobe.importer.MotorolaPackageImportProbe",
+        "nl.moto.ota.rootprobe.staging.MotorolaStageProbe",
+        "nl.moto.ota.rootprobe.MagiskRuntimeProbe",
+        "nl.moto.ota.rootprobe.DirectOtaProbe",
+        "nl.moto.ota.rootprobe.MagiskInactiveProbe",
+        "nl.moto.ota.rootprobe.ControlledRebootProbe"
+      ],
+      "workers": [
+        "nl.moto.ota.platform.download.OtaDownloadWorker",
+        "nl.moto.ota.platform.monitoring.MotorolaMonitorWorker",
+        "nl.moto.ota.platform.update.PostUpdateObserverWorker"
+      ],
+      "jni": "nl.moto.ota.platform.staging.AtomicStagePublisher"
+    },
+    "nativeLibraries": [
+      {
+        "file": "lib/arm64-v8a/libandroidx.graphics.path.so",
+        "loadAlignments": [
+          16384,
+          16384,
+          16384
+        ],
+        "relroEndModulo16384": [
+          8192
+        ]
+      },
+      {
+        "file": "lib/arm64-v8a/libmoto_stage_publish.so",
+        "loadAlignments": [
+          16384,
+          16384,
+          16384
+        ],
+        "relroEndModulo16384": [
+          0
+        ]
+      },
+      {
+        "file": "lib/x86_64/libandroidx.graphics.path.so",
+        "loadAlignments": [
+          16384,
+          16384,
+          16384
+        ],
+        "relroEndModulo16384": [
+          12288
+        ]
+      },
+      {
+        "file": "lib/x86_64/libmoto_stage_publish.so",
+        "loadAlignments": [
+          16384,
+          16384,
+          16384
+        ],
+        "relroEndModulo16384": [
+          0
+        ]
+      }
+    ]
+  },
+  "physicalDeviceUsed": false,
+  "physicalOtaOrPartitionWriteOrRebootPerformed": false,
+  "extraFileProofs": {
+    "magiskOfficialTools": 2,
+    "normalAndroidOtaPublication": 2
+  },
+  "limits": [
+    "No physical OTA/root-preservation qualification",
+    "No live Motorola CDS request with phone identifiers",
+    "API35 emulator uses 4KiB kernel pages; 16KiB ELF/ZIP alignment is a layout check only",
+    "Host fixture checks read an existing historical package; firmware bytes are not redistributed"
+  ]
+}

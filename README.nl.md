@@ -14,6 +14,14 @@ Moto OTA Manager **1.0.0** combineert toesteldiagnostiek, firmwareonderzoek, her
 
 Een ontvangen bestand, geauthenticeerd pakket, handmatig gemelde stap en geverifieerde toestelobservatie zijn afzonderlijke resultaten. Onbekend blijft onbekend. Eén beoordeelde start begrenst volgende handelingen, inclusief de getoonde partitieschrijfacties, rootbehoud en herstart; iedere actie vereist nog steeds vers bewijs. Niet-ondersteunde of onzekere overgangen pauzeren. Android en Motorola behouden hun eigen updatecontroles.
 
+## Iedere stap duidelijk in beeld
+
+| Introductie | Officiële firmware | Nederlands · donker |
+|:---:|:---:|:---:|
+| <img src="docs/images/setup-en.png" width="240" alt="Engelse introductie"> | <img src="docs/images/firmware-en.png" width="240" alt="Scherm voor officiële firmware"> | <img src="docs/images/settings-nl-dark.png" width="240" alt="Nederlandse taal- en thema-instellingen"> |
+
+Echte screenshots van de getekende release op een wegwerpemulator. De toestelwaarden in het [overzicht](docs/images/overview-nl-dark.png) horen bij die emulator. De [volledige workflowdemonstratie](docs/images/simulation-nl-dark.png) is zichtbaar gesimuleerd; hier is geen telefoonupdate uitgevoerd.
+
 ## Wat je krijgt
 
 | Functie | Werkelijk gedrag |

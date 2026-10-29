@@ -66,7 +66,7 @@ jobs:
           MOTO_RELEASE_KEY_PASSWORD: ${{ secrets.MOTO_RELEASE_KEY_PASSWORD }}
         run: |
           chmod +x gradlew
-          ./gradlew :core:test :app:testDebugUnitTest :app:assembleSignedRelease :app:lintRelease :app:writeReleaseDependencyInventory --no-daemon --no-configuration-cache --console=plain
+          ./gradlew :core:test :app:testDebugUnitTest :app:testReleaseUnitTest :app:assembleSignedRelease :app:lintRelease :app:writeReleaseDependencyInventory --no-daemon --no-configuration-cache --console=plain
       - name: Verify signature, manifest, dynamic interfaces and native layout
         env:
           MOTO_RELEASE_CERT_SHA256: ${{ vars.MOTO_RELEASE_CERT_SHA256 }}

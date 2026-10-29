@@ -1,0 +1,8 @@
+<testsuite name="nl.moto.ota.core.update.SandboxUpdateSessionTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-29T18:48:37" hostname="[HOST]" time="0.371">
+  <properties />
+  <testcase name="outOfOrderMockActionsDoNotChangePartitions" classname="nl.moto.ota.core.update.SandboxUpdateSessionTest" time="0.073" />
+  <testcase name="existingSandboxCannotBeAccidentallyRestartedOrReset" classname="nl.moto.ota.core.update.SandboxUpdateSessionTest" time="0.114" />
+  <testcase name="fullOfflineUpdateChangesTwoRegularFilesAndDurablyCompletes" classname="nl.moto.ota.core.update.SandboxUpdateSessionTest" time="0.184" />
+  <system-out />
+  <system-err />
+</testsuite>

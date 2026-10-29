@@ -1,0 +1,18 @@
+<testsuite name="nl.moto.ota.core.ReadOnlyMetadataTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-10-29T18:48:35" hostname="[HOST]" time="0.017">
+  <properties />
+  <testcase name="allKnownProtobufGlobalEnumsAreDecoded" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.008" />
+  <testcase name="phoneVirtualAbMessageHasKnownVersionMagicAndNoMerge" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.002" />
+  <testcase name="legacyStateFormatIsExactAndDoesNotTrimMalformedTextIntoNone" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.0" />
+  <testcase name="unknownAdditionalFieldsCanBeSkippedWithoutChangingKnownState" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.0" />
+  <testcase name="malformedAmbiguousAndUnknownStateEvidenceNeverBecomesNone" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.001" />
+  <testcase name="existingEmptyPhoneStateIsProto3DefaultNoneRatherThanMissingEvidence" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.0" />
+  <testcase name="invalidVirtualAbVersionMagicSizeAndEnumStayUnknown" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.001" />
+  <testcase name="virtualAbSnapshotSourceRuleMatchesTheAospHal" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.0" />
+  <testcase name="invalidBootControlBytesAreNeverRepairedOrAccepted" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.0" />
+  <testcase name="recordedSuffixIsOptionalAndNeverOverridesCurrentSlot" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.002" />
+  <testcase name="phoneBootControlCrcAndSlotBSuccessfulFlagAreDecodedWithUnusedSuffix" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.001" />
+  <testcase name="completeMessageIsValidatedAfterTheStateField" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.0" />
+  <testcase name="successfulBitWithoutRemainingTriesDoesNotMatchAospBootSuccess" classname="nl.moto.ota.core.ReadOnlyMetadataTest" time="0.0" />
+  <system-out />
+  <system-err />
+</testsuite>

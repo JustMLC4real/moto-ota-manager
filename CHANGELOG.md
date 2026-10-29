@@ -2,6 +2,8 @@
 
 ## 1.0.0 — first public release
 
+[Publication-ready release notes](docs/RELEASE-NOTES-1.0.0.md)
+
 - English/Dutch native app languages, a first-run tour, system/light/dark appearance and adaptive Compose navigation.
 - Measured Motorola capabilities across models, distinguishing `boot`/`init_boot`, A/B, traditional A/B and unsupported/unknown layouts.
 - Primary source-derived Motorola-CDS HTTPS detection with explicit identifier-sharing consent, strict context/resource validation and official-updater fallback.

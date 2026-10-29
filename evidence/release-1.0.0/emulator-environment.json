@@ -1,0 +1,12 @@
+{
+  "serial": "emulator-5556",
+  "properties": {
+    "ro.kernel.qemu": "1",
+    "ro.hardware": "ranchu",
+    "ro.build.version.sdk": "35",
+    "ro.product.cpu.abi": "x86_64",
+    "ro.product.model": "sdk_gphone64_x86_64"
+  },
+  "kernelPageBytes": 4096,
+  "physicalDeviceUsed": false
+}

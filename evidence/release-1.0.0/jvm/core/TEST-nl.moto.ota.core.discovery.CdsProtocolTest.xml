@@ -1,0 +1,17 @@
+<testsuite name="nl.moto.ota.core.discovery.CdsProtocolTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-10-29T18:48:35" hostname="[HOST]" time="0.02">
+  <properties />
+  <testcase name="trackingCannotEscapeFixedResourcesPath" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.009" />
+  <testcase name="sourceMismatchMissingTargetAndNonPositiveSizeFailClosed" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.001" />
+  <testcase name="completeZipAndMetadataReferencesStayDistinct" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.002" />
+  <testcase name="targetComesFromExplicitFingerprintNotTheResourceFilename" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.0" />
+  <testcase name="currentBuildIsNeverANewOffer" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.0" />
+  <testcase name="arbitraryHostsTagsAndHeadersCannotAuthorizeADownload" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.001" />
+  <testcase name="duplicateKeysTruncationHugeAndDeepResponsesFailClosed" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.001" />
+  <testcase name="resourcesRequestUsesReturnedTimestampAndSerialOnlyIdentity" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.002" />
+  <testcase name="requestUsesSourceObservedSerialOnlyIdentityAndActualStringBuildId" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.0" />
+  <testcase name="noOfferIsAResponseForThisContextOnly" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.001" />
+  <testcase name="protocolObjectsNeverInterpolateSerialGuidUrlOrResponseBody" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.002" />
+  <testcase name="missingAndConflictingIdentityCannotBeSilentlyReplaced" classname="nl.moto.ota.core.discovery.CdsProtocolTest" time="0.001" />
+  <system-out />
+  <system-err />
+</testsuite>

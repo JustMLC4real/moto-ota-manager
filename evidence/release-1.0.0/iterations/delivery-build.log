@@ -1,0 +1,255 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core:compileKotlin UP-TO-DATE
+> Task :core:compileJava NO-SOURCE
+> Task :core:processResources NO-SOURCE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :core:compileTestKotlin UP-TO-DATE
+> Task :core:compileTestJava NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :core:testClasses UP-TO-DATE
+> Task :core:test UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:compileDebugAidl UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:mergeDebugResources
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:parseDebugLocalResources
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:buildKotlinToolingMetadata UP-TO-DATE
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:compileReleaseAidl UP-TO-DATE
+> Task :app:generateReleaseBuildConfig UP-TO-DATE
+> Task :app:checkReleaseAarMetadata UP-TO-DATE
+> Task :app:generateReleaseResValues UP-TO-DATE
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:generateReleaseResources
+> Task :app:mergeReleaseResources
+> Task :app:processDebugResources
+> Task :app:packageReleaseResources
+> Task :app:parseReleaseLocalResources
+> Task :app:createReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksRelease UP-TO-DATE
+> Task :app:processReleaseMainManifest UP-TO-DATE
+> Task :app:processReleaseManifest UP-TO-DATE
+> Task :app:processReleaseManifestForPackage UP-TO-DATE
+> Task :app:processReleaseResources
+> Task :app:compileDebugKotlin
+> Task :app:compileReleaseKotlin
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:processDebugJavaRes UP-TO-DATE
+> Task :app:javaPreCompileRelease UP-TO-DATE
+> Task :app:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:bundleReleaseClassesToRuntimeJar
+> Task :app:bundleReleaseClassesToCompileJar
+> Task :app:compileReleaseUnitTestKotlin
+> Task :app:preReleaseUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileReleaseUnitTest UP-TO-DATE
+> Task :app:compileReleaseUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processReleaseJavaRes UP-TO-DATE
+> Task :app:processReleaseUnitTestJavaRes UP-TO-DATE
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:testReleaseUnitTest
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes UP-TO-DATE
+> Task :app:testDebugUnitTest
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:dexBuilderDebug
+> Task :app:mergeDebugGlobalSynthetics UP-TO-DATE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:configureCMakeDebug[arm64-v8a]
+> Task :app:buildCMakeDebug[arm64-v8a]
+> Task :app:configureCMakeDebug[x86_64]
+> Task :app:buildCMakeDebug[x86_64]
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :app:buildCMakeRelWithDebInfo[arm64-v8a]
+> Task :app:mergeProjectDexDebug
+> Task :app:configureCMakeRelWithDebInfo[x86_64]
+> Task :app:buildCMakeRelWithDebInfo[x86_64]
+> Task :app:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :app:mergeReleaseNativeLibs UP-TO-DATE
+> Task :app:stripReleaseDebugSymbols UP-TO-DATE
+> Task :app:extractReleaseNativeSymbolTables UP-TO-DATE
+> Task :app:mergeReleaseNativeDebugMetadata UP-TO-DATE
+> Task :app:verifyReleaseSigning
+> Task :app:checkReleaseDuplicateClasses UP-TO-DATE
+> Task :app:dexBuilderRelease
+> Task :app:desugarReleaseFileDependencies UP-TO-DATE
+> Task :app:mergeReleaseStartupProfile UP-TO-DATE
+> Task :app:mergeExtDexRelease UP-TO-DATE
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebug
+> Task :app:mergeReleaseArtProfile UP-TO-DATE
+> Task :app:mergeReleaseGlobalSynthetics UP-TO-DATE
+> Task :app:mergeReleaseShaders UP-TO-DATE
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeReleaseAssets UP-TO-DATE
+> Task :app:compressReleaseAssets UP-TO-DATE
+> Task :app:extractReleaseVersionControlInfo UP-TO-DATE
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:generateReleaseLintVitalReportModel
+> Task :app:mergeDexRelease
+> Task :app:compileReleaseArtProfile
+> Task :app:mergeReleaseJavaResource UP-TO-DATE
+> Task :app:optimizeReleaseResources
+> Task :app:collectReleaseDependencies UP-TO-DATE
+> Task :app:sdkReleaseDependencyData UP-TO-DATE
+> Task :app:validateSigningRelease UP-TO-DATE
+> Task :app:writeReleaseAppMetadata UP-TO-DATE
+> Task :app:writeReleaseSigningConfigVersions UP-TO-DATE
+> Task :app:preReleaseAndroidTestBuild SKIPPED
+> Task :app:compileReleaseAndroidTestAidl NO-SOURCE
+> Task :app:processReleaseAndroidTestManifest UP-TO-DATE
+> Task :app:generateReleaseAndroidTestBuildConfig UP-TO-DATE
+> Task :app:checkReleaseAndroidTestAarMetadata UP-TO-DATE
+> Task :app:generateReleaseAndroidTestResValues UP-TO-DATE
+> Task :app:mapReleaseAndroidTestSourceSetPaths UP-TO-DATE
+> Task :app:generateReleaseAndroidTestResources UP-TO-DATE
+> Task :app:mergeReleaseAndroidTestResources UP-TO-DATE
+> Task :app:processReleaseAndroidTestResources UP-TO-DATE
+> Task :app:compileReleaseAndroidTestKotlin
+> Task :app:javaPreCompileReleaseAndroidTest UP-TO-DATE
+> Task :app:compileReleaseAndroidTestJavaWithJavac UP-TO-DATE
+> Task :app:mergeReleaseAndroidTestShaders UP-TO-DATE
+> Task :app:compileReleaseAndroidTestShaders NO-SOURCE
+> Task :app:generateReleaseAndroidTestAssets UP-TO-DATE
+> Task :app:mergeReleaseAndroidTestAssets UP-TO-DATE
+> Task :app:compressReleaseAndroidTestAssets UP-TO-DATE
+> Task :app:checkReleaseAndroidTestDuplicateClasses UP-TO-DATE
+> Task :app:dexBuilderReleaseAndroidTest UP-TO-DATE
+> Task :app:desugarReleaseAndroidTestFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexReleaseAndroidTest UP-TO-DATE
+> Task :app:mergeDexReleaseAndroidTest UP-TO-DATE
+> Task :app:mergeReleaseAndroidTestGlobalSynthetics UP-TO-DATE
+> Task :app:processReleaseAndroidTestJavaRes UP-TO-DATE
+> Task :app:mergeReleaseAndroidTestJavaResource UP-TO-DATE
+> Task :app:mergeReleaseAndroidTestJniLibFolders UP-TO-DATE
+> Task :app:mergeReleaseAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripReleaseAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningReleaseAndroidTest UP-TO-DATE
+> Task :app:writeReleaseAndroidTestSigningConfigVersions UP-TO-DATE
+> Task :app:packageReleaseAndroidTest UP-TO-DATE
+> Task :app:createReleaseAndroidTestApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleReleaseAndroidTest UP-TO-DATE
+> Task :app:generateDebugLintReportModel
+> Task :app:generateDebugUnitTestLintModel
+> Task :app:lintVitalAnalyzeRelease
+> Task :app:lintVitalReportRelease SKIPPED
+> Task :app:lintVitalRelease SKIPPED
+> Task :app:packageRelease
+> Task :app:createReleaseApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleRelease
+> Task :app:assembleSignedRelease
+> Task :app:lintAnalyzeDebugUnitTest
+> Task :app:generateReleaseAndroidTestLintModel
+> Task :app:generateReleaseLintReportModel
+> Task :app:generateReleaseUnitTestLintModel
+> Task :app:lintAnalyzeDebug
+
+> Task :app:lintReportDebug
+Wrote HTML report to file:///[WORKSPACE]/outputs/moto-ota-manager/app/build/reports/lint-results-debug.html
+
+> Task :app:lintDebug FAILED
+Lint found 1 errors, 60 warnings. First failure:
+
+[WORKSPACE]\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\ui\AppScreens.kt:74: Error: Reading Configuration using LocalContext.current.resources.configuration [LocalContextConfigurationRead from androidx.compose.ui]
+            val formatted=java.text.NumberFormat.getNumberInstance(context.resources.configuration.locales[0]).apply {maximumFractionDigits=1}.format(percent)
+                                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "LocalContextConfigurationRead":
+   Changes to the Configuration object will not cause LocalContext reads to be
+   invalidated, so you may end up with stale values when the Configuration
+   changes. Instead, use LocalConfiguration.current to retrieve the
+   Configuration - this will recompose callers when the Configuration object
+   changes.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.ui
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+
+The full lint text report is located at:
+  [WORKSPACE]\outputs\moto-ota-manager\app\build\intermediates\lint_intermediate_text_report\debug\lintReportDebug\lint-results-debug.txt
+
+> Task :app:lintAnalyzeRelease
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:lintDebug'.
+> Lint found errors in the project; aborting build.
+
+  Fix the issues identified by lint, or create a baseline to see only new errors.
+  To create a baseline, run `gradlew updateLintBaseline` after adding the following to the module's build.gradle file:
+  ```
+  android {
+      lint {
+          baseline = file("lint-baseline.xml")
+      }
+  }
+  ```
+  For more details, see https://developer.android.com/studio/write/lint#snapshot
+
+  Lint found 1 errors, 60 warnings. First failure:
+
+  [WORKSPACE]\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\ui\AppScreens.kt:74: Error: Reading Configuration using LocalContext.current.resources.configuration [LocalContextConfigurationRead from androidx.compose.ui]
+              val formatted=java.text.NumberFormat.getNumberInstance(context.resources.configuration.locales[0]).apply {maximumFractionDigits=1}.format(percent)
+                                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+     Explanation for issues of type "LocalContextConfigurationRead":
+     Changes to the Configuration object will not cause LocalContext reads to be
+     invalidated, so you may end up with stale values when the Configuration
+     changes. Instead, use LocalConfiguration.current to retrieve the
+     Configuration - this will recompose callers when the Configuration object
+     changes.
+
+     Vendor: Jetpack Compose
+     Identifier: androidx.compose.ui
+     Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+
+  The full lint text report is located at:
+    [WORKSPACE]\outputs\moto-ota-manager\app\build\intermediates\lint_intermediate_text_report\debug\lintReportDebug\lint-results-debug.txt
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 2m 53s
+150 actionable tasks: 52 executed, 98 up-to-date

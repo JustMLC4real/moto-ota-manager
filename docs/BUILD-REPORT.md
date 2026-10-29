@@ -1,91 +1,86 @@
-# Build- en testrapport — 0.3.0
+# Build and test report — 1.0.0
 
-**29 oktober 2026 · nl.moto.ota · versionCode 3**
+**29 October 2026 · `nl.moto.ota` · versionCode4 · first public release**
 
-De app is werkelijk gecompileerd voor **arm64-v8a en x86_64** en de geleverde debug-APK is op de wegwerpemulator geïnstalleerd en getest. **480 tests slagen, nul fouten.** Twee host-JVM-symlinkgevallen zijn op Windows overgeslagen; de overeenkomstige source-/destinationgevallen zijn vervolgens zonder skip op Android getest. Geen telefoon is tijdens deze 0.3.0-afronding gebruikt, beschreven, bijgewerkt of herstart.
+Both APKs were built from a new extraction of committed source. **609 unique Kotlin/Android tests passed, 6 were deliberately skipped, and none failed.** Seven Python evidence-tool tests and four additional regular-file integration cases passed. The exact signed release APK was installed and tested on an explicitly verified disposable API35 emulator. No physical phone was used, flashed, updated or restarted during this release verification.
 
-## Artefact en ondertekening
+## Delivered release
 
-| Veld | Gemeten waarde |
+| Field | Measured result |
 |---|---|
-| APK | `moto-ota-manager-debug.apk` |
-| Pakket / versie | `nl.moto.ota` / `0.3.0` / code `3` |
-| Omvang | 28,451,334 bytes |
-| SHA-256 | `b554bf61757491117c19906199f57041ed907dd5c9d35214a890ad24cc4bfa84` |
-| Minimaal / target / compile | SDK 33 / 35 / 35 |
-| Native ABI's | arm64-v8a, x86_64 |
-| Signing | Android Debug, APK Signature Scheme v2 daadwerkelijk geverifieerd |
-| Certificaat SHA-256 | `21e80a8850a8f89759b7fba9e6ce693f3fdbe53de921d1a584a3bca130f92865` |
+| APK | `moto-ota-manager-1.0.0.apk` |
+| Version | 1.0.0 / code4 |
+| Bytes | 21,923,224 |
+| APK SHA256 | `e64664cf1ee4a1d218787e64474151298809f5e9961e08505a8f9c341e4a03e8` |
+| Certificate SHA256 | `b8982eced488beec99ad33e0a87bf47f99e6d8b1a39f7d559ba86353bcb29bc6` |
+| Signing | Maintained private release key; APK Signature Scheme v2 verified |
+| Debuggable / shrinking | false / disabled; complete runtime retained |
+| Minimum / target / compile SDK | 33 / 35 / 35 |
+| Native ABIs | arm64-v8a, x86_64 |
 
-[APK-verificatie](../evidence/release-0.3.0/apk-signature.txt) · [Werkelijke APK-metadata](../evidence/release-0.3.0/apk-badging.txt) · [Machineleesbaar resultaat](../evidence/release-0.3.0/verification-summary.json).
+[APK verification](../evidence/release-1.0.0/release-apk-verification.json) · [Signature](../evidence/release-1.0.0/apk-signature.txt) · [Metadata](../evidence/release-1.0.0/apk-badging.txt) · [Installed APK hash match](../evidence/release-1.0.0/installed-apk-match.json).
 
-De naast de APK en bron-ZIP geleverde `SHA256SUMS.txt` en `ARTIFACTS.json` horen bij de uiteindelijke APK en bron-ZIP. De `.git`-map, lokale SDK-configuratie, buildcache, echte firmwarebytes en private signing-/rootkeys horen niet in het bronarchief. De eerdere 0.2.0-artefacten zijn afzonderlijk bewaard; hun hashes gelden niet voor deze APK.
+The debug APK uses the same build inputs and remains debug-signed. Exact APK/source-ZIP checksums and the final repository commit are in the adjacent delivery `ARTIFACTS.json` and `SHA256SUMS.txt`. The new release signer cannot directly update an older debug-signed installation. Preserve recovery data before deliberate migration; no automatic uninstall occurs. [Signing identity](RELEASE-CERTIFICATE.md).
 
-## Daadwerkelijk uitgevoerde controles
+## Executed verification
 
-| Controle | Uitslag | Direct bewijs |
+| Check | Actual result | Evidence |
 |---|---|---|
-| Kotlin/JVM core | 312 geslaagd; 2 Windows-symlinkskips; 0 fouten | [JUnit-XML per coreklasse](../evidence/release-0.3.0/jvm/core/), [uitgevoerde testbuild](../evidence/release-0.3.0/build-core-and-app-tests.log) |
-| Android JVM/parsers/beleid | 117 geslaagd; 0 skips/fouten | [JUnit-XML per appklasse](../evidence/release-0.3.0/jvm/app/) |
-| Android API35-instrumentatie | 51 geslaagd; 0 skips/fouten | [Volledige runneruitvoer](../evidence/release-0.3.0/instrumentation-final.log), [uit de runnerrecords afgeleid JUnit-XML](../evidence/release-0.3.0/junit-emulator.xml) |
-| App-APK en test-APK | BUILD SUCCESSFUL | [Definitieve buildlog](../evidence/release-0.3.0/build-final.log) |
-| Native bibliotheken | Beide ABI's daadwerkelijk gecompileerd; positieve JNI no-clobber-test op emulator | [Native layout](../evidence/release-0.3.0/native-alignment.json), instrumentatieklasse MotorolaStagingRuntimeTest |
-| APK-uitlijning | `zipalign -c -P 16 4` geslaagd | [Uitvoer](../evidence/release-0.3.0/apk-zipalign.txt) |
-| Lint | 0 fouten, 24 waarschuwingen | [HTML](../evidence/release-0.3.0/lint-results-debug.html), [XML](../evidence/release-0.3.0/lint-results-debug.xml) |
-| Schermen en notificatieroute | Echte overzicht-/firmwareschermen; CLEAR_TOP/SINGLE_TOP met firmware-extra gecontroleerd | [Overzicht](../evidence/release-0.3.0/ui-overview-api35.png), [Firmware](../evidence/release-0.3.0/ui-firmware-api35.png), [routecheck](../evidence/release-0.3.0/ui-navigation-check.json) |
+| Core JVM | 388 discovered: 386 passed, 2 Windows symlink skips | [30 JUnit suites](../evidence/release-1.0.0/jvm/core/) |
+| App JVM | 131 passed; debug/release both ran, counted once | [13 release JUnit suites](../evidence/release-1.0.0/jvm/app/), build log below |
+| Signed release Android runtime | 96 discovered: 92 passed, 4 physical-fixture assumptions skipped, zero failures/errors | [Raw runner](../evidence/release-1.0.0/instrumentation-final.log), [derived XML](../evidence/release-1.0.0/junit-emulator.xml), [summary](../evidence/release-1.0.0/instrumentation-summary.json) |
+| Evidence parser | 7 Python tests passed; truncated/crashed/contradictory runners rejected | [Execution](../evidence/release-1.0.0/python-tool-tests.log), [tests](../tools/tests/test_instrumentation_to_junit.py) |
+| Official Magisk31.1 file tools | 2 actual native cases passed: synthetic 8MiB init_boot v4 and 32MiB boot v3; embedded stock SHA1, original full hash, KEEP flags and fstab verified | [Results](../evidence/release-1.0.0/magisk-file-tools-final.json), [tool output](../evidence/release-1.0.0/magisk-file-tools-final.log), [reproduction](../tools/test_magisk_file_patch.py) |
+| Normal Android OTA file boundary | 2 root-emulator file cases passed: exact bytes/hash, owner/mode/normal SELinux label, duplicate/wrong-hash rejection, unchanged source and cleanup | [Results](../evidence/release-1.0.0/ota-file-proof.json), [execution](../evidence/release-1.0.0/ota-file-proof.log), [reproduction](../tools/test_ota_payload_file.py) |
+| Actual APK contract | Root entrypoints, JNI/AIDL/Worker interfaces, manifest, expected certificate and both native ABI layouts passed | [Verifier result](../evidence/release-1.0.0/release-apk-verification.json) |
+| ZIP alignment | `zipalign -c -P 16 4` passed | [Output](../evidence/release-1.0.0/apk-zipalign.txt) |
+| Lint | Debug/release each: zero errors, 60 retained warnings | [Debug XML](../evidence/release-1.0.0/lint-results-debug.xml), [release XML](../evidence/release-1.0.0/lint-results-release.xml) |
+| Dependencies | 104 exact release modules queried against OSV; no matching advisories returned | [Inventory/hashes](../evidence/release-1.0.0/release-runtime.json), [dated query](../evidence/release-1.0.0/osv-audit.json) |
+| Presentation | EN/NL, native language switching, light/dark, tour, tab restoration, disclosure cancellation and complete file simulation passed | Runtime suite above; [actual screenshots](images/) |
 
-De 51 instrumenttests bestaan uit 7 importer-, 12 download-, 9 Vault-, 5 monitor-, 5 staging/JNI-, 5 duurzame-store-, 5 UI- en 3 Androidplatformgevallen. De volledige UI-simulatie doorloopt stock, OTA, Magisk, nieuwe boot en merge en controleert dat het echte workflowjournaal niet verandert.
+The two host skips concern Windows symlink privileges; corresponding Android file/symlink boundaries ran without those host skips. The four Android skips are explicitly opt-in `ReadOnlyDeviceValidationTest` cases. A non-Motorola emulator cannot supply their actual stock/OTA/device fixture. Skips are not passes. Repeated runs and variant duplicates do not increase the unique count.
 
-De nieuwe importer-opruimtests gebruiken echte eigen bestanden en symlinks: cancellation en een latere selectie laten geen grote transactie achter, verwijderen geen buitentarget en behouden selectie/backups/andere transacties. De downloadtests controleren ook dat een corrupt journaal veilig kan worden geïsoleerd zonder een eerder geselecteerde ZIP te verwijderen.
+Two optional host cases read an explicitly supplied existing historical OTA and passed. This is package-byte evidence, not a new device observation; firmware bytes are excluded from delivery. Ordinary CI without that private fixture skips those cases. Warnings retain version-dependent private APIs, restricted system paths and dependency recommendations. No lint error was suppressed to obtain green. OSV coverage is incomplete; no returned match is not a vulnerability guarantee.
 
-De core-suite heeft de expliciet aangewezen bestaande historische host-OTA werkelijk opnieuw onderzocht. De target-init_boot-manifesthash is `9972073a2fdc3bd63ea3b33b3e26ec39f78ddea82ed3be274acc086a88c7c5ea`; de sourcehash is de oorspronkelijke stock16-hash. Dit zijn gelezen pakketbytes, geen nieuwe telefoonmeting of installatie. Zonder die optionele private fixture slaat CI deze twee historische-pakketgevallen over.
+## Clean source build
 
-## Buildopdrachten en omgeving
+Tested source commit: `198f66c41f49b2b6273d27c8e77485fdb768a42e`. Source was extracted with `git archive` into a new directory without `.git`, local SDK configuration or generated module/cache folders. Existing SDK tools and downloaded dependencies were reused. With `--no-build-cache`: **BUILD SUCCESSFUL in 4m 12s; 155 of 155 tasks executed**.
 
 ```sh
-./gradlew :core:test :app:testDebugUnitTest :app:assembleDebug :app:assembleDebugAndroidTest :app:lintDebug --console=plain --no-daemon
-python3 tools/verify_apk_layout.py app/build/outputs/apk/debug/app-debug.apk
+./gradlew :core:test :app:testDebugUnitTest :app:testReleaseUnitTest \
+  :app:assembleDebug :app:assembleSignedRelease :app:assembleReleaseAndroidTest \
+  :app:lintDebug :app:lintRelease :app:writeReleaseDependencyInventory \
+  -Pmoto.testBuildType=release -Pkotlin.compiler.execution.strategy=in-process \
+  --no-daemon --no-build-cache --console=plain
 ```
 
-Windows gebruikt `gradlew.bat`. Toolchain: JDK17, Gradle8.11.1, AGP8.9.2, Kotlin/Compose-plugin2.1.20, compile/targetSDK35, NDK27.2.12479018 en CMake3.22.1. De tools/cache staan taakgebonden onder de werkmap. De primaire Androidtests zijn uitsluitend naar `emulator-5556` gestuurd nadat `ro.kernel.qemu=1` is gecontroleerd; de fysieke opt-in validatieklasse is niet gestart.
+Windows used `gradlew.bat`. Private signing variables were supplied outside the checkout and never logged. Toolchain: JDK17.0.20.1, Gradle8.11.1, AGP8.9.2, Kotlin/Compose plugin2.1.20, SDK35, NDK27.2.12479018, CMake3.22.1. [Full build log](../evidence/release-1.0.0/build-clean-source.log).
 
-De emulator draait API35/x86_64/ranchu met 4096-byte kernelpages. Alle verpakte native LOAD-segmenten zijn voor 16384 bytes uitgelijnd; de eigen JNI-bibliotheek heeft ook 16KiB-RELRO-uitlijning. Dit is gecontroleerde ELF/ZIP-layout, geen bewezen runtime op een fysieke 16KiB-kernel. De NDK27-build gebruikt de expliciete linkerflags uit [Androids page-size-documentatie](https://developer.android.com/guide/practices/page-sizes).
+The canonical build-input digest is `dd4896c700aae12517b16a6f8a0ce69bb78ade095dc39f37d5f377aaca2eba02`. The [input manifest](../evidence/release-1.0.0/clean-source-check.json) lists every app/core/Gradle input with actual extracted bytes and SHA256; `.bat` line endings follow `.gitattributes`. Later changes add documentation, CI refinements and evidence. Final archive verification compares every listed input with the tested bytes. Byte-identical builds across arbitrary machines are not claimed.
 
-De Vault-runtimetest vond `AccessDeniedException` voor hardlinks in deze Androidcontext en bewees vervolgens de geïmplementeerde duurzame kopiefallback, eigen inode en byte-isolatie. De oude aanname dat hardlinks altijd werken is verwijderd. [Werkelijke runtimewaarneming](../evidence/release-0.3.0/vault-runtime-strategy.txt).
+Only explicit `adb -s emulator-5556` commands were used after `ro.kernel.qemu=1` verification. The [emulator](../evidence/release-1.0.0/emulator-environment.json) is API35/x86_64/ranchu with 4096-byte kernel pages. ELF LOAD segments have 16384-byte alignment and ZIP alignment passes; physical 16KiB-kernel runtime remains untested.
 
-De opgenomen logs behouden de opdrachten, resultaten en foutmeldingen. Werkmappaden zijn met de XML-veilige markering `[WORKSPACE]` geanonimiseerd en JUnit-hostnamen vervangen. Regeleinden en afsluitende witruimte zijn genormaliseerd. Alle opgenomen XML-rapporten zijn na redactie opnieuw geparseerd.
+Workspace paths use XML-safe `[WORKSPACE]` redaction and JUnit hostnames are removed. All retained XML/JSON is reparsed. The instrumentation converter requires complete consistent terminal records and the runner footer; ADB exit status alone cannot establish success. [Machine-readable complete result](../evidence/release-1.0.0/verification-summary.json).
 
-## Schone bronbuild en geleverde APK
+## Iteration findings
 
-De geleverde APK komt uit een nieuwe extractie van `git archive` van sourcecommit `48f664b2ae3d970db8cd369b3f628365ca316898`. Deze kopie had vooraf geen `local.properties`, `.gradle`, `.cxx` of modulebuildbestanden. De volledige opdracht hierboven is met `--no-build-cache` uitgevoerd: **BUILD SUCCESSFUL in 1m 56s; 89 van 89 taken uitgevoerd**. De bestaande SDK en dependencycache zijn wel opnieuw gebruikt.
+[Earlier logs](../evidence/release-1.0.0/iterations/) are separate from the final green run. Optimized release instrumentation exposed missing shared Kotlin/Compose/WorkManager APIs; version1.0 ships the complete runtime, with optional R8 requiring separate qualification. A missing authorization-store directory now returns a typed fail-closed error. A localization assertion now compares the exact unknown-code fallback instead of rejecting legitimate prose. The last lint correction makes merge-progress number formatting recompose after an app-language change.
 
-Ook in deze kopie slagen 312 core- en 117 app-JVM-tests; twee Windows-symlinkgevallen zijn overgeslagen. Daarna zijn de app- en test-APK uit juist deze build op de gecontroleerde wegwerpemulator geïnstalleerd: **51 tests geslaagd, nul skips/fouten**. De werkelijk geïnstalleerde APK-SHA256 is gelijk aan de hierboven geleverde APK. Herhalingen verhogen het gerapporteerde aantal unieke tests niet.
+## Working, simulated and physically unqualified boundaries
 
-[Schone buildlog](../evidence/release-0.3.0/build-clean-source.log) · [Geteste bronbestanden en SHA256 per buildinput](../evidence/release-0.3.0/clean-source-check.json) · [Schone JUnit-resultaten](../evidence/release-0.3.0/clean-jvm/) · [Geïnstalleerde APK-hash](../evidence/release-0.3.0/installed-apk-match.json).
-
-De digest van de vastgelegde buildinputs is `1faeab65b0f70b264aea5098f3f6b2dc26214a7733b04941454dcb4f3ea946df`. Na de geteste sourcecommit zijn uitsluitend documentatie en bewijsbestanden toegevoegd of bijgewerkt; het uiteindelijke bronarchief wordt tegen diezelfde inputlijst gecontroleerd. Het artefactmanifest vermeldt zowel de geteste sourcecommit als de uiteindelijke repositorycommit.
-
-De eerdere incrementele APK had een andere DEX-indeling en andere native bytes. Daarom is de schone APK afzonderlijk getest en gekozen voor oplevering. Er wordt geen byte-identieke reproduceerbaarheid tussen die builds geclaimd. [Gemeten entryverschillen](../evidence/release-0.3.0/incremental-apk-entry-diff.json).
-
-## Iteratieve foutanalyse
-
-De opgenomen [iteratielogs](../evidence/release-0.3.0/iterations/) bewaren eerdere mislukte builds en correcties. Onder andere de afwijkende uitzondering bij ongeldige protobuf-wiretypes, een fixtureklokrace, ontbrekende publieke O_DIRECTORY-constanten, een bestaande verkeerde stagingbestemming, de hardlinkaanname, downloadjournaalcorruptie, lokale importcleanup en een door de laatste scan gevonden onduidelijke engine-inspringing zijn daadwerkelijk onderzocht en gecorrigeerd. De definitieve groene log en XML zijn leidend; een oudere foutlog wordt niet als de huidige uitslag gepresenteerd.
-
-## Wat werkt, wat gesimuleerd is en wat nog toestelvalidatie vraagt
-
-| Categorie | Afgebakend resultaat |
+| Boundary | Established result and limit |
 |---|---|
-| Werkelijke lokale appfuncties | Compose, filepicker/import, veilige bestandsoverdracht, pakketparsing/hash/signature-API, private opslag, duurzame workflow, Keystore, opt-in WorkManager-planning, export en expliciete officiële-apphandoffs. Testdekking is hierboven gespecificeerd. |
-| Eerder echt toestelbewijs | De 0.2.0-fase mat op XT2607-1 Android17 de root, slots, succesvolle boot, snapshotNONE, engineIDLE, Motorola-cache, stock17-backup en positieve platformsignature. Dit bewijst de toenmalige uitlezende adapters; [DEVICE-VALIDATION](DEVICE-VALIDATION.md) en [het bewaarde rapport](BUILD-REPORT-0.2.0.md) staan apart. |
-| Gesimuleerd | OTA-toepassing, Magisk-patching, reboot, slotovergang en merge in de volledige sandbox. Alleen kleine reguliere eigen bestanden worden werkelijk geschreven. HTTP/engine/toestelresponses in pure tests zijn fixtures/mocks. |
-| Nog niet fysiek uitgevoerd | Nieuwe live stockwriter, SDK37-import-/staginghelpers, toekomstige echte OTA en rootbehoud, werkelijke Motorola-FUSE-herkenning, functionele modules, Wallet/PlayIntegrity en Android18. |
+| Real app behavior | Compile/install, Compose/locales/tour, actual private files/AtomicFile/Keystore, import/transfer policies, scheduling/notification boundaries, persistence and dynamic entrypoints have recorded test coverage. |
+| Real ordinary-file integration | Genuine official Magisk tools patched synthetic Android images. Normal OTA-directory publication was checked with emulator root. Neither proof invokes partition, OTA-install or power APIs. |
+| Simulated device transition | The one-start demonstration uses small regular files and mocks root/slots/OTA/reboot/merge. The live journal remains unchanged and the UI labels simulation. |
+| Production code implemented | CDS HTTPS selection, complete OEM validation, active stock write/readback, UpdateEngine dispatch, inactive-slot Magisk write/readback and scoped reboot have real restricted adapters. Runtime gates stop unsupported or missing evidence. Code implementation is not physical qualification. |
+| Needs actual hardware qualification | Live CDS acceptance, OEM root/SELinux/Binder permissions, physical writes, complete OTA, target boot, retained root/modules/data and the next update's stock association. None was exercised for this release. |
+| Historical hardware evidence | Earlier XT2607-1 read-only observations remain in [DEVICE-VALIDATION](DEVICE-VALIDATION.md) and the [0.2 report](BUILD-REPORT-0.2.0.md). They are not current1.0 write/OTA proof. The [0.3 report](BUILD-REPORT-0.3.0.md) is historical too. |
 
-De acht nieuwe Magisk-configtests controleren de actuele back-upassociatie, inclusief oude authentieke stockbytes bij gespoofde buildproperties. Vóór schrijven leest de helper de begrensde runtimeconfig opnieuw; de SHA1 moet overeenkomen met de geauthenticeerde stock-image. Dezelfde gate draait in beide observe-rondes. [Bron en voorwaarden](UPDATE-WORKFLOW.md).
+Other Motorola models are evaluated from measured layout/identity/evidence; they are not all hardware-certified. Unknown layouts, unsupported/hidden/repacked Magisk, absent original bytes and unsafe snapshot/engine states retain safe fallbacks. avbroot custom-key/OTA signing is researched, not inserted into the original OEM trust chain. Wallet/Play Integrity, arbitrary module compatibility and guaranteed data preservation are not established by an emulator run.
 
-De beperkte stockwriter heeft een concrete bevestiging, volledige gepatchte preimage-backup, korte boot-/slot-/tijdgebonden one-use-toestemming, dubbele verse gates, readback en observation-only recovery. De block-I/O zelf is niet op de telefoon uitgevoerd. Er is geen bewezen atomair interlock met een tegelijk startende Motorola-updater; een I/O-stall of stroomuitval kan herstelbeoordeling vereisen. Een groene sandbox maakt die grens niet kleiner.
+## Nederlands
 
-Motorola's normale officiële aanbodroute blijft de voorkeursroute. Er is geen bewezen publieke catalogus/check-API voor dit profiel. **Lokale staging stopt zonder ondertekend reteu-bewijs**, ook bij een geldige ZIP-signature, een vertrouwde host of een downloadreceipt. De historische ZIP zonder kanaalveld wordt via deze automatisering niet gepubliceerd. Magisk op de inactieve slot blijft via de officiële app en is vóór de echte nieuwe boot handmatig gemeld, niet onafhankelijk gecertificeerd. De app installeert geen OTA, wijzigt geen bootslot, voert geen Magisk-installer uit en herstart niet zelf.
+De volledige release **1.0.0** is werkelijk vanuit schone broncode gebouwd, getekend en op de wegwerpemulator getest. **609 unieke Kotlin/Android-tests slagen, 6 zijn bewust overgeslagen; 7 Python-tests en 4 aanvullende bestandsintegratiegevallen slagen ook.** EN/NL, tour, thema's en de volledige bestandssimulatie zijn gecontroleerd. De geleverde APK is exact de geteste APK. Je telefoon is voor deze releasecontrole niet gebruikt. Echte partitieschrijfacties, een volledige Motorola-OTA en rootbehoud na de echte herstart vragen nog fysieke kwalificatie en worden hier niet als bewezen voorgesteld.
 
-Lintwaarschuwingen: acht nieuwere-dependencyberichten, acht vaste profielpadberichten, drie versiegebonden PrivateApi-reflecties, één beperkt laden van de eigen geïnstalleerde native bibliotheek, twee conservatieve ruimtechecks en twee KTX-stijlmeldingen. De compiler meldt daarnaast nullabilitywaarschuwingen bij door constructie vaste File-parents; de build faalt daar niet op. Er is geen lintfout genegeerd of veiligheidscheck uitgeschakeld om groen te verkrijgen.
-
-[Alle eisen tegenover bewijs en grenzen](REQUIREMENTS-AUDIT.md) · [Scenario-/testmatrix](TEST-MATRIX.md) · [Handmatige checklist](MANUAL-TESTS.md).
+[Requirements audit](REQUIREMENTS-AUDIT.md) · [Test matrix](TEST-MATRIX.md) · [Compatibility](COMPATIBILITY.md) · [Direct OTA boundaries](DIRECT-OTA.md) · [Release procedure](RELEASING.md).

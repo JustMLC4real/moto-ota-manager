@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "checkedAtUtc": "2026-10-29T11:51:29.3631421Z",
+  "aliasVerifiedByKeytool": "moto-ota-manager-release",
+  "keytoolPasswordInput": "environment only",
+  "passwordGenerator": "System.Security.Cryptography.RandomNumberGenerator",
+  "certificateSha256": "b8982eced488beec99ad33e0a87bf47f99e6d8b1a39f7d559ba86353bcb29bc6",
+  "certificateMatchesConfiguredExpectation": true,
+  "privateFilesOwnerOnlyAcl": true,
+  "signingDirectoryOutsideCheckout": true,
+  "generationRefusesOverwrite": true,
+  "privateMaterialCopiedToRepository": false,
+  "note": "Signing preparation only. Exact APK signature/build verification is a separate release gate."
+}

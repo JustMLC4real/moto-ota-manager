@@ -1,0 +1,1026 @@
+{
+  "schemaVersion": 1,
+  "testedSourceCommit": "198f66c41f49b2b6273d27c8e77485fdb768a42e",
+  "sha256CanonicalInputs": "dd4896c700aae12517b16a6f8a0ce69bb78ade095dc39f37d5f377aaca2eba02",
+  "inputs": [
+    {
+      "path": "app/build.gradle.kts",
+      "bytes": 7438,
+      "sha256": "9a1e0eecae62ef7c79ec04699c438ea2afb7f81e87b3d8c7e80d9a6d6ba644df"
+    },
+    {
+      "path": "app/proguard-rules.pro",
+      "bytes": 2388,
+      "sha256": "114ee9e4dac6dcf89d6b61cb4d1fa16e88e64820faefdd24254199f07b9a387e"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/PlatformSafetyTest.kt",
+      "bytes": 2025,
+      "sha256": "23a931af089742e0d91f53bdcf47b8158de71d0bd72811c2beb5d308c4ec1931"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/PresentationStateRule.kt",
+      "bytes": 3644,
+      "sha256": "d660342ccd78783743706f1519dbcc83ce734d25969680979909142b6fbf9ec3"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/PresentationUiTest.kt",
+      "bytes": 2672,
+      "sha256": "03eb16f4b38fc3578a0912585156d0cbd6be94113c01b56837ccd07d0475e32f"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/ReadOnlyDeviceValidationTest.kt",
+      "bytes": 5743,
+      "sha256": "b5ba1af363cd46f08350c3705301cbc3071ce5b8e0bfa7bf0bbe153541f73a1d"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/SafeUiTest.kt",
+      "bytes": 4588,
+      "sha256": "80ff4709bd1bb29825bf2674d75e42e620b312416a8a4741ac68d7f6130c561c"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/SetupTourUiTest.kt",
+      "bytes": 3047,
+      "sha256": "9a18e9337cd0b53591b73489a8f2c2896ac10389bb9c803895c84f1d2644e219"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/VaultRuntimeTest.kt",
+      "bytes": 14604,
+      "sha256": "9129cd362a0c048dc9fcdaa3125ec9e6d89bb111d478b7df9a6fa7a9832e8153"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/discovery/CdsControllerRuntimeTest.kt",
+      "bytes": 6008,
+      "sha256": "f1ab189a070fffd74f9bc2d60ccbfaf51dbddce8174a5409bbd695a4c3c8e287"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/download/DownloadRuntimeTest.kt",
+      "bytes": 12449,
+      "sha256": "40e8ab119b6ba21f53c67e68b06a9a00466a40791619f3721fadc706b97c5566"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/i18n/MessageRendererRuntimeTest.kt",
+      "bytes": 5534,
+      "sha256": "db613ee87608d7db73e0425023617bf28903ce75b9473b7ad075427b0efeb068"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/importer/MotorolaImporterGuardInstrumentedTest.kt",
+      "bytes": 8159,
+      "sha256": "8c23e3e162f5440e7fd688d76be22d39cc8f05a74ae5d8443ae8e795b1bdc34e"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/monitoring/MonitorRuntimeTest.kt",
+      "bytes": 6186,
+      "sha256": "b5489703be78d07074705a8a5a21a01789758c1c478992306a70cfcef1650036"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/staging/MotorolaStagingRuntimeTest.kt",
+      "bytes": 4120,
+      "sha256": "fbfda4bfae42c6f32118b2e864c907a6515407f078de2a41a73ac879401a0151"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/update/DirectOtaPreparedRuntimeTest.kt",
+      "bytes": 4304,
+      "sha256": "ed2e701c1b262e763e0800f104deb2af589adc6991fd7ee0e1cadaa7ed56746a"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/update/MagiskInactiveReceiptRuntimeTest.kt",
+      "bytes": 4958,
+      "sha256": "e4dff7f8da35533138b9929ec85d804fdb691551afebcabbd12e12d697fd2385"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/update/OtaPayloadFileProbe.kt",
+      "bytes": 2744,
+      "sha256": "2a6e1c0a9e5d3a2cff84aa4a85a6277773024e376100da3855240d3216d6f21c"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/update/RunAuthorizationStoreRuntimeTest.kt",
+      "bytes": 10471,
+      "sha256": "ea9affce92666eb0ef5983a85e8efe4b105c2edd0ba8a334f10bcaa20b4d6617"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/update/StockRestoreControllerRuntimeTest.kt",
+      "bytes": 5465,
+      "sha256": "e1e8e745c55b37e5ae6c511af3c16730c6ec724ff196de070e5a1dbc01fbb326"
+    },
+    {
+      "path": "app/src/androidTest/java/nl/moto/ota/platform/update/UpdateRunStoreInstrumentedTest.kt",
+      "bytes": 4114,
+      "sha256": "5281ede14d5fa12554a374d49e4307e7bb1f16fc32fb51c5b90700627e8e98e6"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "bytes": 1860,
+      "sha256": "22878962ca730b206c8b39106b630c9bb7df99c891c74e212a91b7ccced1800d"
+    },
+    {
+      "path": "app/src/main/aidl/android/os/IUpdateEngine.aidl",
+      "bytes": 3961,
+      "sha256": "7155317b3060c3174e55a3bef18e421243ded4d94bca797be4884f67999ad3eb"
+    },
+    {
+      "path": "app/src/main/aidl/android/os/IUpdateEngineCallback.aidl",
+      "bytes": 1168,
+      "sha256": "1db9d016d2206b2b7635cea8a1bfaeb582b63badb5b3bc695fca3aec73491c60"
+    },
+    {
+      "path": "app/src/main/assets/licenses/NOTICE.txt",
+      "bytes": 854,
+      "sha256": "8569992e585b4995d652864cf5c4ce3207201603f17b982821d41b2c52ecb987"
+    },
+    {
+      "path": "app/src/main/assets/licenses/apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "app/src/main/assets/licenses/project-mit.txt",
+      "bytes": 1086,
+      "sha256": "3f87b3e48b337e564e1546e27a34f8efa3e48d0e339c1f8da5821de3023ac6f6"
+    },
+    {
+      "path": "app/src/main/assets/licenses/skia-bsd.txt",
+      "bytes": 1507,
+      "sha256": "5f787c1dee3c56547f09ccc2906ab5f5293c4d8dd6c8654e573216c38e908dbd"
+    },
+    {
+      "path": "app/src/main/cpp/CMakeLists.txt",
+      "bytes": 589,
+      "sha256": "21bf29c511d739e710364b4ba90b3882588184b4c5c3e77f19e04ade81fe4603"
+    },
+    {
+      "path": "app/src/main/cpp/moto_stage_publish.c",
+      "bytes": 6823,
+      "sha256": "ff962b90730b5c7444f986ab0d8e825e0baa547fa31b70d249f3aaad550ca7d8"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/MainActivity.kt",
+      "bytes": 13421,
+      "sha256": "ecac10a7fd0b82417042106495e38773439601f92150edeae02e8239c708ad76"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/MotoViewModel.kt",
+      "bytes": 25682,
+      "sha256": "45242a08b0d4fd4dc8123af3e7a63a6f3f68be86be8759f41735df88bba7017f"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/DeviceInspector.kt",
+      "bytes": 13413,
+      "sha256": "570dc6d85f212170dd079c1d531478562dc5b3f913d484aec45c252ae427b435"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/DeviceTrustAnchors.kt",
+      "bytes": 988,
+      "sha256": "1bc46784de82e04fc2db687bcf468cf609489165d3b631d5c8aaf65f8dff7cef"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/DiagnosticModels.kt",
+      "bytes": 6008,
+      "sha256": "8e4c6d7dbae634c128b156dc1e71a3c9cc7a92738190e863c2215de1591bcdbb"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/FirmwareFiles.kt",
+      "bytes": 2828,
+      "sha256": "738bc862d21e84d2fa98f996e2d5da0cefc74cc2538585147e9456799c6e5d24"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/FirmwareVault.kt",
+      "bytes": 12484,
+      "sha256": "5b5d7f72ae5a2637549a955c7cf09876ca595b6eaaf690b91cdf557d345eacb4"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/InspectionMapper.kt",
+      "bytes": 9797,
+      "sha256": "5e272e4e42e77f4fbbdd928177ff2b5e8d064b6ba2728f4e18f02ca6864d9fab"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/MetadataObservations.kt",
+      "bytes": 6634,
+      "sha256": "62cc7a1b546a055b238bca84fd48d41db41f93b30bc67efcb7f27ae4150e8b1c"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/MotorolaMetadataParser.kt",
+      "bytes": 12332,
+      "sha256": "90cf0a248ef53ff756ad8f08f75e8240db21596bafd1f989bb88fe6fd9dc418a"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/ObservationParsers.kt",
+      "bytes": 7435,
+      "sha256": "7388eb52d62f7fa143ae277cf88a0f9dd664ae07bfe6e7349f098ec0906adbbb"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/OfficialApps.kt",
+      "bytes": 4251,
+      "sha256": "b1a3d4399ce02f3cdbcef6ac15527f5ae5fd37f8cf3107940cd6e72007364d01"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/ReadOnlyShell.kt",
+      "bytes": 8572,
+      "sha256": "d729cd2066df0d319c889606e8e2f04fc9b09ce904567be0144722441273d6fd"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/UpdateObservations.kt",
+      "bytes": 1210,
+      "sha256": "93e1b75d71f8c61a53653502c701d9121f4dbd2e1c2f7333ce98dcd8813e1a02"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/WorkflowStore.kt",
+      "bytes": 750,
+      "sha256": "41191c03f674b3b69049a3a871d51f35d7dcfd6a08c591b934667ce106b0cb32"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/discovery/CdsController.kt",
+      "bytes": 5154,
+      "sha256": "114c7dd6377c48996b5236b0af413e541be9df8a382127c73a4b7c6bfcb8be49"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/discovery/CdsIdentityReader.kt",
+      "bytes": 6220,
+      "sha256": "770312edfdb4d0a3acf97122cdb6df7b8de258353b35b0b05753f8e9dfed6411"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/discovery/CdsSelectionProof.kt",
+      "bytes": 2648,
+      "sha256": "c1eb4f75a266c5a31825da51f1684e07546fa34b8e33c868423081c36002b587"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/discovery/CdsTransport.kt",
+      "bytes": 5629,
+      "sha256": "7954fc3238ec75079e3b97e8154f49a131ea64d4ae47db3e63bb592d5b5ffb7e"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/discovery/LivePackageTransfer.kt",
+      "bytes": 6220,
+      "sha256": "a1f58bd2505d4baf8abed1228d790bb0d768af852f281477273b8186acedd923"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/download/DownloadActionReceiver.kt",
+      "bytes": 1270,
+      "sha256": "3111e6d11d0b310ba2e0715231b127ba9634b03c23fbdc49eb53f35720642131"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/download/DownloadController.kt",
+      "bytes": 10210,
+      "sha256": "8a5f309c2d798d5c5c88e9d862c78ac209f02137055f6f3c1074815054bf4d41"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/download/DownloadNotifications.kt",
+      "bytes": 3020,
+      "sha256": "1e403f9c1389052f7560fda04d6d1078cd3ef20397204b3b95d5f9a2dfd3e702"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/download/DownloadSecretStore.kt",
+      "bytes": 3017,
+      "sha256": "866cea8c41f0a68052053eb0a8da32a8794a65568bf5785653e968cdc1ab63b1"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/download/DownloadStore.kt",
+      "bytes": 7245,
+      "sha256": "12b167460c31f4e5e1531f3b94ddfa538f51ed45dee1eae9f1a18bcd07691fb9"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/download/OfficialHttpsTransport.kt",
+      "bytes": 1707,
+      "sha256": "8c6199d4bc74df3644903f3c7906a87b22ed36ec42f116f81f45d0e219f4d493"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/download/OtaDownloadWorker.kt",
+      "bytes": 7749,
+      "sha256": "70af2348b9c5d7f06f9d7eed90b74e8958c4550213d668c96b061cf7dc206e18"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/i18n/MessageRenderer.kt",
+      "bytes": 19789,
+      "sha256": "a39e07afd16acc4d1ccc6a46f7b318498b66b4530056d23dd1663907bca3cd4b"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/importer/ImportRuntimePolicy.kt",
+      "bytes": 776,
+      "sha256": "4c68553c6ec7ce8975001ee5a301ac78436496a485a9bf6156d1a397ea2d3f0e"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/importer/ImportSelection.kt",
+      "bytes": 1408,
+      "sha256": "3eadfc62330b782de4d5c9d85af26fe1725903e7934186a52cac286c817aad9c"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/importer/ImportTransactionCleanup.kt",
+      "bytes": 3542,
+      "sha256": "304ddce9a5648e7e53f4177f1b3ce89409474bb01ae24bbf9e08b87fdc64ca64"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/importer/ImporterTransport.kt",
+      "bytes": 2714,
+      "sha256": "44ed29a7b7144e2fd1262c1657696d70c1fa777449b6ef5716b5318d9a051f8a"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/importer/MotorolaPackageImporter.kt",
+      "bytes": 5376,
+      "sha256": "2991f46215c683a1e7e09fdb1dc6b294a5f79f3664552d1a461e260e88764f7b"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/monitoring/MonitorController.kt",
+      "bytes": 3621,
+      "sha256": "6354ebf6a2789cb69e35c74e68f6e891640800b42884648d60fd524b042809a4"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/monitoring/MonitorNotifications.kt",
+      "bytes": 4362,
+      "sha256": "83c83e0462239c7e187a73929dcecebe4a51e862dd442b05df9868de08c9ebb9"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/monitoring/MonitorRunner.kt",
+      "bytes": 2132,
+      "sha256": "403c52bc4c6147a99ad05c6634eabd490ba44699b452a9831dcb93b297f3f591"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/monitoring/MonitorStore.kt",
+      "bytes": 3532,
+      "sha256": "6bc83b6894fdad85d756aa25834dc7bad50afb2d51f0bb96785ca4f3d687729a"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/monitoring/MotorolaMonitorWorker.kt",
+      "bytes": 3792,
+      "sha256": "c4d98ecbf21edad9ed5f4123f49f638fb60e1d60533d8d6653cba248e24d46e8"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/staging/AtomicStagePublisher.kt",
+      "bytes": 2853,
+      "sha256": "f08b8327cf0f052f535b51ee88cb2a2e1bac728de907875e729cef8099297aa1"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/staging/MotorolaPackageStager.kt",
+      "bytes": 9649,
+      "sha256": "3f26fc890ca4ea485ecfd786b7f0c4aaf35269d75f5008988e92a23563b79622"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/AutomationDeviceCodec.kt",
+      "bytes": 2205,
+      "sha256": "5255f9270c146075def02c4e5511d39813e568f31869a6732be7a2afb143e2cc"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/ControlledRebootController.kt",
+      "bytes": 1449,
+      "sha256": "0942d7432925032718c6f7396374c49520e19791061d1f5fbefb158cb7cebbaa"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/DirectOtaController.kt",
+      "bytes": 7836,
+      "sha256": "3b5ca755d32eb24aae3068b799f0c2379496597eff4d395acc935d68547f511b"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/DirectOtaPreparedProtocol.kt",
+      "bytes": 3628,
+      "sha256": "dda92226b939e5e8706030d0e7984fe769a1747b50e3764d14805179114135a1"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/MagiskInactiveController.kt",
+      "bytes": 8542,
+      "sha256": "d10763c091ff48800a0359fa4c70fcf101dda4180127d3f45e02252b9cbcb7ba"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/MagiskInactiveProtocol.kt",
+      "bytes": 3860,
+      "sha256": "1e1aaf3b751758725faf73293721149eece0c7553bedde8e773a8ef2cb18c1e6"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/PostUpdateObserverWorker.kt",
+      "bytes": 2166,
+      "sha256": "6b92426b1da6397d89744a83263b467691d6223316ba73e1077a6fa1227757a9"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/RestoreRootProtocol.kt",
+      "bytes": 6311,
+      "sha256": "745ad9fad61aa782d273940595cd4351c45799fa044477939c74480363e4d54d"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/RunAuthorizationStore.kt",
+      "bytes": 13636,
+      "sha256": "d84bd307a86a87a8a4523cd03d60070a81001409406cba472bd850efaf194288"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/StockRestoreController.kt",
+      "bytes": 16780,
+      "sha256": "f4245d465dfc9f330b47be26c68f8aeff4e249072113699de80435536fb92414"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/UpdateAutomationService.kt",
+      "bytes": 12929,
+      "sha256": "9782700caff55a9e282ee6891d6a318477d9f447d2a8e9d83a66b5b94b1b15ab"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/platform/update/UpdateController.kt",
+      "bytes": 5626,
+      "sha256": "5122b6c733ab7a8b12a0ee6c08ec07305c5651427f8ad1a8d50b50cc2d267f8f"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/ControlledRebootProbe.kt",
+      "bytes": 2927,
+      "sha256": "623cd3e839915fe410f366ffd1c83f9220ed1622c2a7ab36c5df5741e8a773c9"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/DirectOtaProbe.kt",
+      "bytes": 13422,
+      "sha256": "9ce92ed1c9330074a045c5f8a86586ab5b037540396ed3d7e8020a068a8d3096"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/EngineProbe.java",
+      "bytes": 9812,
+      "sha256": "55a55021b61882a5e5564fbeeed4f5f2e5c4ef4c7a40a5fc5df383911004b828"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/FirmwareSignatureProbe.java",
+      "bytes": 7440,
+      "sha256": "06a1013142b4afa3240df418add8bb3b81dee3f74d159ce43003ee81ed3ae2dc"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/MagiskInactiveProbe.kt",
+      "bytes": 28005,
+      "sha256": "160d80a7afe859ed73cb9e8c15a6ab30003ff054a0caf7791ceeeac657f044e6"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/MagiskRuntimeProbe.kt",
+      "bytes": 1051,
+      "sha256": "32509f59b9d7e125fd09a4e0357d6ac4884ac777c1f225467d488bf2ff4d1304"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/RootOtaPayloadStore.kt",
+      "bytes": 4370,
+      "sha256": "8106a391ae88623b4d40a7a9dae207a2174b48e3597399f6bfd05be0207e8b28"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/RootRunAuthority.kt",
+      "bytes": 5196,
+      "sha256": "5f0847324c45dbb6ab020df7c7f51a4de8466378d3f022123b2005f2f696e49f"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/RootUpdateFacts.kt",
+      "bytes": 13319,
+      "sha256": "9d0df199455713eb7470baf27b7a0429b0016f17a44eb711fd0582a6340808b7"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/StockRestoreProbe.kt",
+      "bytes": 30535,
+      "sha256": "dd3f25811a265980069367ba90692bbe99bedb737ad152dc7bd9e205a0445200"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/importer/MotorolaPackageImportProbe.kt",
+      "bytes": 7844,
+      "sha256": "598241381e6dfba9042eb334b507ef4dbf92c07e4a6402ab3983212f965e7840"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/rootprobe/staging/MotorolaStageProbe.kt",
+      "bytes": 19906,
+      "sha256": "5071ecdaa4e6caf04e02323ecf26f600dfb10a1f0e7bb98510ee4b7f5e754af7"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/ui/AppScreens.kt",
+      "bytes": 24637,
+      "sha256": "4f75bbaf6591b335919d35f3c636b1bc873cf71447c0b0872ef254b72d548e6f"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/ui/AppSettings.kt",
+      "bytes": 1587,
+      "sha256": "8185c1c7658085f0e147d8c91243be1dc5304b78974af91d1f663412b5bfc124"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/ui/DownloadPanel.kt",
+      "bytes": 4917,
+      "sha256": "62868e0919096a9d0e183f9a7a525350b5203787c1cfc87f59f7c738df616eaa"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/ui/MotoTheme.kt",
+      "bytes": 2023,
+      "sha256": "06192d63e0fe6e7ade738d29f490ba060be024b4e50afe9bbc720895d574e3bc"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/ui/SettingsScreen.kt",
+      "bytes": 3573,
+      "sha256": "15c3ea41a15e91de5679214ae50512dfc7b407df2ec2100d4a087a77c2904699"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/ui/SetupTour.kt",
+      "bytes": 5908,
+      "sha256": "bfe9ce0ac02baa3785ee45f19eddc894a13f94fc1e0335071e4a56ccade84fde"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/ui/StateLabels.kt",
+      "bytes": 4207,
+      "sha256": "f948e506294f26e3933946c04ee6d1d23c89d804566c31c3dcdb89eb89a95519"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/ui/UiComponents.kt",
+      "bytes": 3612,
+      "sha256": "121d126e2c150589a5b795d06b4dc761a741640203dee31dd1e8b1cc307fd9be"
+    },
+    {
+      "path": "app/src/main/java/nl/moto/ota/ui/UiMessage.kt",
+      "bytes": 1410,
+      "sha256": "f61861bf15303ffc1bb27562d17ba78b4b3fa1908cbb85109afa397d8d4a8625"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_moto_monitor.xml",
+      "bytes": 353,
+      "sha256": "a6e82ff6fdce15e4062b6d6768655577122005e170faf4d8c3b2b231eb2f0492"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_moto_ota.xml",
+      "bytes": 452,
+      "sha256": "d509b15c9d28acb74fe64b7ccf27da2c9991a89b2af7d54654dcc0c8078273b9"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_nav_diagnostics.xml",
+      "bytes": 393,
+      "sha256": "901d6b2de8ec187b09e253e63f5b97e134cf3b9e4fa4b5ae830f141d82db4cb3"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_nav_firmware.xml",
+      "bytes": 507,
+      "sha256": "72bdf030939753ef32d953bd5d2a6bf4e54b5ea6b3fdefd2aa068d7d4f208577"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_nav_help.xml",
+      "bytes": 483,
+      "sha256": "a5b09ff347e125760546cb004a32e5836cdf406192a2f6966b5715e4fa3e3e7e"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_nav_overview.xml",
+      "bytes": 364,
+      "sha256": "d4158d0eb31e96099144506af158bf3164369518611eb73f15a0e1591eaf7c42"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_nav_settings.xml",
+      "bytes": 507,
+      "sha256": "ac1af46faa2fa68ecf5c5c09770f95f7003df1aa3c890b3cabf285b76c8c136e"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_nav_update.xml",
+      "bytes": 465,
+      "sha256": "d7a01222c7e30ac57a396f2dd7e091956ab5127e4514bca2cfdac7c8ef0e19b3"
+    },
+    {
+      "path": "app/src/main/res/values-nl/platform_strings.xml",
+      "bytes": 28390,
+      "sha256": "371d959dff1a3039516ee0673e0ab654f668cd51b2b24982414c7b847b23a0ac"
+    },
+    {
+      "path": "app/src/main/res/values-nl/strings.xml",
+      "bytes": 36457,
+      "sha256": "dc3312b63ae98efa345e1339213bd18807827abd5f44a479efd877d438addc27"
+    },
+    {
+      "path": "app/src/main/res/values/platform_strings.xml",
+      "bytes": 27455,
+      "sha256": "f3df0859444babbcadeb756df4d8774617801199c0700b1bf8c4023f1d0a148e"
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "bytes": 34998,
+      "sha256": "a4895931e5381383b7ab5e2c271d516d9913aa20da27f4988bae88cd6cc7589d"
+    },
+    {
+      "path": "app/src/main/res/xml/data_extraction_rules.xml",
+      "bytes": 671,
+      "sha256": "8b55ff5489071bb19a4e89967b604a16c0e4d1e87a2df3c73c64417314a59f22"
+    },
+    {
+      "path": "app/src/main/res/xml/locale_config.xml",
+      "bytes": 197,
+      "sha256": "07ce43c413642e5f5b18a4375d816a2c8595143c7c44c47ad7add7ec14c034e1"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/EngineProbeSafetyTest.kt",
+      "bytes": 1186,
+      "sha256": "10c7e46a53cb25bf0eff1acaf9d547e83fcef4fe89a351a3187598b413236ef7"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/FirmwareSecurityReviewTest.kt",
+      "bytes": 3938,
+      "sha256": "83b34ec7cd032f8e51a97646d04f3bbf17b998ee79d39f87a53e13e13bbc10e3"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/FirmwareSignatureProbeSafetyTest.kt",
+      "bytes": 1767,
+      "sha256": "6c903526bb59021b5e65c1de47d3c1928fc033eb109e2173be4ad07761acd683"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/InspectionMapperTest.kt",
+      "bytes": 10942,
+      "sha256": "0cf12f08d0e0cfa3c7a841493b23800622e4cf7260155c109b4ac1222a26095e"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/MetadataObservationsTest.kt",
+      "bytes": 5658,
+      "sha256": "c0342cb043e637aab7f76a62c8c5c235864039ad9fefd34a1a90c83e93201f9b"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/MotorolaMetadataParserTest.kt",
+      "bytes": 9574,
+      "sha256": "601fd326d1c838f53cf54daf50262304ca554b7ccf326a926ae1ce1b709ba078"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/ObservationParsersTest.kt",
+      "bytes": 9598,
+      "sha256": "ecdc42d263ed9df63f4b8a4cff18ea72c5848fe80002b017a7c5d7506b3cccff"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/OfficialAppsTest.kt",
+      "bytes": 3390,
+      "sha256": "a44aaafbe95ae3d5eec5f2543208b90a1e0bac3932883e84170ea3b952783109"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/UpdateObservationsTest.kt",
+      "bytes": 2669,
+      "sha256": "809846eb6f9753fc3141f4e4650d314e263f81fe713e92d4eb030c3c6cd1d4f8"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/discovery/HttpsCdsTransportTest.kt",
+      "bytes": 2307,
+      "sha256": "cc49edd528a7daded8339cbfb439dc126466d1784b6b936ebaa0290d77880fc8"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/importer/ImportRuntimePolicyTest.kt",
+      "bytes": 1776,
+      "sha256": "4eacc6f5248e3c52aa2b1719ae5306d5d4c44fe7925455edd28a7533ab6ad7ca"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/monitoring/MonitorRunnerTest.kt",
+      "bytes": 6948,
+      "sha256": "70d8f4b7aea0bd8519b3909c0427036799a99924d3495f218ee4479467d98e9e"
+    },
+    {
+      "path": "app/src/test/java/nl/moto/ota/platform/update/DirectOtaPropertiesTest.kt",
+      "bytes": 5318,
+      "sha256": "b1c855eeec2550e53e1d2cd4271e8b327ce8ee74e51dd82e268dbe6b01de6b62"
+    },
+    {
+      "path": "app/src/test/resources/motorola/observed-download-request.json",
+      "bytes": 537,
+      "sha256": "972123fa71666a9b6cff24a899c1689b5564dcca3a655c6501ae485b5285f64a"
+    },
+    {
+      "path": "app/src/test/resources/motorola/observed-updater-metadata.json",
+      "bytes": 1186,
+      "sha256": "522413c40e1ddd39af380ac30b0839a9350e2bc3708d2424ed502e0f49f1844d"
+    },
+    {
+      "path": "app/test-proguard-rules.pro",
+      "bytes": 453,
+      "sha256": "c68d5604eb50349be5189179ce6523bc8ae7a41b7e87c15341efa69ece73524a"
+    },
+    {
+      "path": "build.gradle.kts",
+      "bytes": 247,
+      "sha256": "0535017b1740d4bcdbc9520b57efccdd2bd25f9f6958c91b1f73af7f14f3831b"
+    },
+    {
+      "path": "core/build.gradle.kts",
+      "bytes": 181,
+      "sha256": "5e936261b27cba5c7be12cdf4bb72bb624af8499a9039606ab460959cf611575"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/BackupValidator.kt",
+      "bytes": 4512,
+      "sha256": "b198256a00fb0739b067573805b8989033725152634d1ae220738e025b980c42"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/BootImageStreams.kt",
+      "bytes": 6820,
+      "sha256": "6b82cab0056c50156883e2c1e22ccfae83c952049911224a73cf1cb3adaf8a1e"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/DeviceCapabilities.kt",
+      "bytes": 6424,
+      "sha256": "ceb44c306ff5e4e73127e7733a985762127ce4102ee5e431a83083e8b8f29979"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/DiscoveryEvidence.kt",
+      "bytes": 4105,
+      "sha256": "55fc664a747a8f40a015b2ef8c8b454f7820eeb0b5d6b9a63eda7d4e8375c125"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/DownloadJob.kt",
+      "bytes": 6286,
+      "sha256": "f26636529b82195fe3df4fc134e1dcf3b7e4923d6f9fabad7cdafc9329c3bbf4"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/FirmwareValidator.kt",
+      "bytes": 16517,
+      "sha256": "76af03e5418fc5397e0599389b03d0c1a83835b4fabf7608ce047e638b7d21fe"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/Models.kt",
+      "bytes": 2364,
+      "sha256": "277a4d559009e9893e825cec999c8a81fa9fb77a4c652c397c701a15d703ae7e"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/Monitoring.kt",
+      "bytes": 11850,
+      "sha256": "9fa2286c72bf9a7428b4122178e79c5ff81fb3195ffab452aace77b97fa357b2"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/PackageTransfer.kt",
+      "bytes": 2665,
+      "sha256": "4b748d6bf2afb738892b63e4d0d888872da6d4b26ee99aa9d1753b8120656a25"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/PayloadManifest.kt",
+      "bytes": 6764,
+      "sha256": "eec79629ba1e39f550d0525118a1a7e9e13096975ff2ab1788236b63f59aeb56"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/Privacy.kt",
+      "bytes": 2726,
+      "sha256": "916e3cf87485111a61972a48134cedd36352a48a1e67ada9e2494491fea334dc"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/ReadOnlyMetadata.kt",
+      "bytes": 7203,
+      "sha256": "754474f552f4ad1686f62e5162df750ef0ff0a48db03e1fc0dcc48a25ec79289"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/Readiness.kt",
+      "bytes": 4408,
+      "sha256": "f11ddf6e0e1138bfeaa5ab12ec092550d84103202790dbd4877e31d420a8df84"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/ResumableTransfer.kt",
+      "bytes": 11795,
+      "sha256": "6af1480cc72c88b2196bf2dc46df05476c0b1346a25eeb0432bf83888690703b"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/StockEvidence.kt",
+      "bytes": 16400,
+      "sha256": "e35843aa8e6fe3f4c7b975e6d19dc23474cdbe3992378185ecc8ddcc6a43c21c"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/VerifiedStockCatalog.kt",
+      "bytes": 2340,
+      "sha256": "b4e400faa288b82aca99415ec07732b8e0a3f17f665526ede94ea5df6efd5a8a"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/Workflow.kt",
+      "bytes": 13832,
+      "sha256": "5e26d6d2b7b61ba12dc1332e71493962cff1c3104c890af57b60997999bf2a8c"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/discovery/BoundedCdsJsonReader.kt",
+      "bytes": 5118,
+      "sha256": "bc48885f0334a312d888f269b2d630062a7d8650d2f6dcb69301e13af9d3e1b3"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/discovery/CdsMonitorPolicy.kt",
+      "bytes": 2103,
+      "sha256": "893e770a2fa752e13153c558519a323047292cf82d5d85a4995481a94fad3f26"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/discovery/CdsProtocol.kt",
+      "bytes": 11964,
+      "sha256": "ced13afdfd3dd94fb9a71d06f9eeca9523a5d34f251ec8f26fffdacdcd1e59ab"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/importer/MotorolaImportPolicy.kt",
+      "bytes": 9225,
+      "sha256": "d66fd3cf120f0dc08d6fa558e35d2394f2f45f6e824b903e5917501e28b77a98"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/staging/MotorolaStage.kt",
+      "bytes": 13834,
+      "sha256": "d665ab09ad34f140bc029f5380877d29fd88d07ed2859fbb2d0eb6bc31e9f04b"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/update/AutomaticUpdatePolicy.kt",
+      "bytes": 2348,
+      "sha256": "95f37507212fef5fa21fa23ce6d89e70396e00591741d9ee824af251f25ac694"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/update/MagiskRuntimeConfig.kt",
+      "bytes": 2271,
+      "sha256": "521e8e95b3d1d71ec5fd56da6d11c02440a634c6a4925b4dbf753d919698655a"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/update/RunAuthorization.kt",
+      "bytes": 12643,
+      "sha256": "fa55b0151dbe8dc424efbb456773a520a6a1402e50467ef115df296e29bd3661"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/update/RunAuthorizationCodec.kt",
+      "bytes": 6427,
+      "sha256": "c55ce546911f4e7a7580c4d6531b8c058b8d99cc50927b451a86df86fa702cb1"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/update/SandboxStockRestoreBackend.kt",
+      "bytes": 13594,
+      "sha256": "6dc17d0675f9cdc5e9ded60e6bee1992a6ee05175eb3623d9cfe8a0c3d7896da"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/update/SandboxUpdateSession.kt",
+      "bytes": 7237,
+      "sha256": "056ce2508beaf5b995be3800b0728a30ab2991578e2e7c29ebf599bc74f0c99c"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/update/StockRestore.kt",
+      "bytes": 12801,
+      "sha256": "3046c24fc9169a4c3c9a4ca10cd004473516f5611c9b0116ae321bb2e8e46739"
+    },
+    {
+      "path": "core/src/main/kotlin/nl/moto/ota/core/update/UpdateCoordinator.kt",
+      "bytes": 38876,
+      "sha256": "f5891dbd524965cce6533b449415e879a0998b40be1f2d706752b9d5c4dc36fc"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/BackupValidatorTest.kt",
+      "bytes": 4652,
+      "sha256": "404072f230a64cf504f7dedd856fbff4b8160517eef23de2081156057857e211"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/BootImageStreamsTest.kt",
+      "bytes": 4105,
+      "sha256": "f4f0c191472d3135160a8ef4b6b8b102eedbd30cd3e15f2226d464440e04cf54"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/DeviceCapabilitiesTest.kt",
+      "bytes": 5614,
+      "sha256": "80f64f960345295cb460c7fab6f69c57392620172e33024c1ff2a18756a5c746"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/DownloadManifestCodecTest.kt",
+      "bytes": 3699,
+      "sha256": "659d3d223b8b48a349b779102f4323d9cd68a0bd8562e47c11e6c7c13ce5580a"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/FirmwareDiscoveryTest.kt",
+      "bytes": 4448,
+      "sha256": "ff3ed041054d2cecb548aef0c9ad90622ff6c3fc464e01ef1e7e3cb9fde67a32"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/FirmwareValidatorTest.kt",
+      "bytes": 20789,
+      "sha256": "b9f9a3fe1f6a840c5d117e96aea7dc5b386db63b19f2cf678ac28a095ee69d11"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/MonitoringTest.kt",
+      "bytes": 12371,
+      "sha256": "1a0bb6644bba484d348e8ab138651e5c92017b59f22ac1f5bd185188214051cf"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/PackageTransferTest.kt",
+      "bytes": 4249,
+      "sha256": "f6304aa933c0073590423b8e8e4166044d4b321243c06221225a0d06481456a7"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/PayloadManifestTest.kt",
+      "bytes": 5014,
+      "sha256": "0a791fb0d316da8ba0dc7aced197807d99a85e06b210cc0238347323c9defaf6"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/PrivacyTest.kt",
+      "bytes": 2905,
+      "sha256": "2381039947f3c939563cedbf52d41c3593b702496338486dbd16107b5730fa54"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/ReadOnlyMetadataTest.kt",
+      "bytes": 6999,
+      "sha256": "6660aa98647261ff2c49e7246f8d704ec1e0193000947c9e892140da135db77d"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/ReadinessTest.kt",
+      "bytes": 3913,
+      "sha256": "517b93137fd96db9ce01fceb4f8de65fd55c29bbb45beb230bc1963eb497f5a5"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/ResumableTransferTest.kt",
+      "bytes": 12181,
+      "sha256": "6c6360ea1825f58538c073eb76d0d65305f5d86f85770f943f4654f41a02e2e9"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/SafetyFixtures.kt",
+      "bytes": 2533,
+      "sha256": "bf7a5df18762f159ac6c2c13e406a3b24a1c4510d6a49b63f406a374853246cc"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/StockEvidenceStoragePolicyTest.kt",
+      "bytes": 2715,
+      "sha256": "84c471b8e7a56b74a9990042fdae4d2d7fe7a863a70a37d9670a77df3bb9b595"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/StockEvidenceTest.kt",
+      "bytes": 11021,
+      "sha256": "d47d1374eeb9c028826999e568344049fc03acc1246c222c326c1e895b9e244a"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/VerifiedStockCatalogTest.kt",
+      "bytes": 3704,
+      "sha256": "f60d6c8bda6870f873d697738664437dcfaf4675ec5b34a1eb82b57229b0c578"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/WorkflowTest.kt",
+      "bytes": 10152,
+      "sha256": "3c5a82e10dbfbbb9a160d0796404b66e4a3c1eec1935798a0c8b14cbe45fb4b2"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/discovery/CdsMonitorPolicyTest.kt",
+      "bytes": 2031,
+      "sha256": "1dbb82a125a9e9ab357f9fa7239022ebb2ea77e68aa0ef6a59d03fa5a59f51e4"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/discovery/CdsProtocolTest.kt",
+      "bytes": 7414,
+      "sha256": "8a2e727f06d17bab9ada0b3f5da076db3d1e9ed8613f3fd47d248a64ca167111"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/importer/MotorolaImportPolicyTest.kt",
+      "bytes": 9635,
+      "sha256": "de68f3d26ef5f9371c5cda0de782c613967c6ba7be8bc197772476709e360205"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/staging/MotorolaStagePolicyTest.kt",
+      "bytes": 11083,
+      "sha256": "04d927f4d60055d269e029ad80afa356aa45fb528470eb49b7505527c7be43b5"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/staging/VerifiedStageTransferTest.kt",
+      "bytes": 5661,
+      "sha256": "4bd5b09d47df511ba76b03db3c27695f1e927abbcaa7736521d2c17c3de1babf"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/update/AutomaticUpdatePolicyTest.kt",
+      "bytes": 14691,
+      "sha256": "12359544b082f6e43bec9ab9e01d14255e17f0113deb09cbb22de91fa1a017ed"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/update/MagiskRuntimeConfigTest.kt",
+      "bytes": 3583,
+      "sha256": "2a86eb016db8b7e61c68392ae7840c91d5a94ffeb02a750f5ac4bff2572fec09"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/update/RunAuthorizationTest.kt",
+      "bytes": 7413,
+      "sha256": "59327657cff5b758f7cdd698e81d9b0cff3cd0f9571c51f8dc63fe2c667ebd10"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/update/SandboxUpdateSessionTest.kt",
+      "bytes": 2328,
+      "sha256": "e62c0fb054f17c000181eb5ad4cf5bc6c854c80607b6076db352839a6ef6aad4"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/update/StockRestoreTest.kt",
+      "bytes": 11164,
+      "sha256": "48d1a1acaf3d0132790174ba90a2c2638e050ad4dd96970522d8b9f65bf2543f"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/update/UniversalWorkflowTest.kt",
+      "bytes": 2800,
+      "sha256": "eada5d803275863eb208c1cf63b5247615f01e8e74e57a00ff5450a444726523"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/update/UpdateCoordinatorTest.kt",
+      "bytes": 15570,
+      "sha256": "d7d843d5e8c96f52b17c84ad007e6427418f6bf53b00be957895f7a96b3c3914"
+    },
+    {
+      "path": "core/src/test/kotlin/nl/moto/ota/core/update/UpdateFailureTest.kt",
+      "bytes": 1181,
+      "sha256": "18906cdb364051117a1356757c04eb8c6258f008040952560b4eed535f3c2363"
+    },
+    {
+      "path": "gradle.properties",
+      "bytes": 161,
+      "sha256": "8660c185c84358ee6d15dda9f71138cfaa0998d18bbb67e95f8ddfe3ea7e4e10"
+    },
+    {
+      "path": "gradle/LICENSE-APACHE-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.jar",
+      "bytes": 43583,
+      "sha256": "2db75c40782f5e8ba1fc278a5574bab070adccb2d21ca5a6e5ed840888448046"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.properties",
+      "bytes": 340,
+      "sha256": "1b9cd6961ee86eea17b2f912bddb22030492db23fc6dff07da6c30eccaaab0c4"
+    },
+    {
+      "path": "gradlew",
+      "bytes": 8784,
+      "sha256": "9cbbb4d68ff7fb5211c4d58f598ac9d8664c05fdcd1e5f59b7f2c3ac1ee00af0"
+    },
+    {
+      "path": "gradlew.bat",
+      "bytes": 2988,
+      "sha256": "0185617ab5c6acf9cefc39d786a8193cae26f351ef09de5986aafa70f3a475d2"
+    },
+    {
+      "path": "settings.gradle.kts",
+      "bytes": 292,
+      "sha256": "b59818594158310646aecda1bc957d8b6c5fda9285e4b5fc93fcd19f6149e199"
+    }
+  ],
+  "cleanBeforeBuild": true,
+  "noBuildCache": true,
+  "sharedSdkAndDependencyCache": true,
+  "note": "Source extracted from git archive before building. Final documentation/evidence commits must preserve every listed build input."
+}

@@ -1,0 +1,2221 @@
+INSTRUMENTATION_STATUS: class=nl.moto.ota.PlatformSafetyTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.PlatformSafetyTest:
+INSTRUMENTATION_STATUS: test=unsignedPackageCannotPassActualDeviceCertificateVerification
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.PlatformSafetyTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=unsignedPackageCannotPassActualDeviceCertificateVerification
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.PlatformSafetyTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=privateFileImportCommitsExactBytesWithoutShell
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.PlatformSafetyTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=privateFileImportCommitsExactBytesWithoutShell
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.PlatformSafetyTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=atomicAndroidJournalRestoresExpectationsWithoutClaimingSuccess
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.PlatformSafetyTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=atomicAndroidJournalRestoresExpectationsWithoutClaimingSuccess
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.PresentationUiTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.PresentationUiTest:
+INSTRUMENTATION_STATUS: test=appearanceIsPersistedAndDoesNotAuthorizeAnUpdate
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.PresentationUiTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in appearanceIsPersistedAndDoesNotAuthorizeAnUpdate(nl.moto.ota.PresentationUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=appearanceIsPersistedAndDoesNotAuthorizeAnUpdate
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.PresentationUiTest
+INSTRUMENTATION_STATUS: current=5
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=switchingLanguagesUsesAndroidAppLocalesAndSurvivesRecreation
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.PresentationUiTest
+INSTRUMENTATION_STATUS: current=5
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in switchingLanguagesUsesAndroidAppLocalesAndSurvivesRecreation(nl.moto.ota.PresentationUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=switchingLanguagesUsesAndroidAppLocalesAndSurvivesRecreation
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=6
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.ReadOnlyDeviceValidationTest:
+INSTRUMENTATION_STATUS: test=actualBackupMatchesTheAuthenticatedStockAndUpdaterResolvesExplicitly
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=6
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=org.junit.AssumptionViolatedException: got: <false>, expected: is <true>
+	at org.junit.Assume.assumeThat(Assume.java:106)
+	at org.junit.Assume.assumeTrue(Assume.java:50)
+	at nl.moto.ota.ReadOnlyDeviceValidationTest.explicitReadOnlyRunOnReviewedDeviceOnly(ReadOnlyDeviceValidationTest.kt:22)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at androidx.test.internal.runner.junit4.statement.RunBefores.evaluate(RunBefores.java:76)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:67)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:58)
+	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:446)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.ReadOnlyDeviceValidationTest:
+INSTRUMENTATION_STATUS: test=actualBackupMatchesTheAuthenticatedStockAndUpdaterResolvesExplicitly
+INSTRUMENTATION_STATUS_CODE: -4
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=7
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=existingHistoricalOtaPassesTheActualPlatformSignatureVerifier
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=7
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=org.junit.AssumptionViolatedException: got: <false>, expected: is <true>
+	at org.junit.Assume.assumeThat(Assume.java:106)
+	at org.junit.Assume.assumeTrue(Assume.java:50)
+	at nl.moto.ota.ReadOnlyDeviceValidationTest.explicitReadOnlyRunOnReviewedDeviceOnly(ReadOnlyDeviceValidationTest.kt:22)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at androidx.test.internal.runner.junit4.statement.RunBefores.evaluate(RunBefores.java:76)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:67)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:58)
+	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:446)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=existingHistoricalOtaPassesTheActualPlatformSignatureVerifier
+INSTRUMENTATION_STATUS_CODE: -4
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=8
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=realDiagnosticsMatchTheIndependentReadOnlyBaseline
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=8
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=org.junit.AssumptionViolatedException: got: <false>, expected: is <true>
+	at org.junit.Assume.assumeThat(Assume.java:106)
+	at org.junit.Assume.assumeTrue(Assume.java:50)
+	at nl.moto.ota.ReadOnlyDeviceValidationTest.explicitReadOnlyRunOnReviewedDeviceOnly(ReadOnlyDeviceValidationTest.kt:22)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at androidx.test.internal.runner.junit4.statement.RunBefores.evaluate(RunBefores.java:76)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:67)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:58)
+	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:446)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=realDiagnosticsMatchTheIndependentReadOnlyBaseline
+INSTRUMENTATION_STATUS_CODE: -4
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=9
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=cachedMotorolaMetadataDoesNotOfferTheInstalledUpdateAgain
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.ReadOnlyDeviceValidationTest
+INSTRUMENTATION_STATUS: current=9
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=org.junit.AssumptionViolatedException: got: <false>, expected: is <true>
+	at org.junit.Assume.assumeThat(Assume.java:106)
+	at org.junit.Assume.assumeTrue(Assume.java:50)
+	at nl.moto.ota.ReadOnlyDeviceValidationTest.explicitReadOnlyRunOnReviewedDeviceOnly(ReadOnlyDeviceValidationTest.kt:22)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at androidx.test.internal.runner.junit4.statement.RunBefores.evaluate(RunBefores.java:76)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:67)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:58)
+	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:446)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=cachedMotorolaMetadataDoesNotOfferTheInstalledUpdateAgain
+INSTRUMENTATION_STATUS_CODE: -4
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=10
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.SafeUiTest:
+INSTRUMENTATION_STATUS: test=demonstrationIsExplicitAndSeparateFromTheLiveJournal
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=10
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in demonstrationIsExplicitAndSeparateFromTheLiveJournal(nl.moto.ota.SafeUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=demonstrationIsExplicitAndSeparateFromTheLiveJournal
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=11
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=rootDiagnosticsRequiresAnExplicitDialogAndCanBeCancelled
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=11
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in rootDiagnosticsRequiresAnExplicitDialogAndCanBeCancelled(nl.moto.ota.SafeUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=rootDiagnosticsRequiresAnExplicitDialogAndCanBeCancelled
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=12
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=startsWithLocalReadOnlyDashboard
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=12
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in startsWithLocalReadOnlyDashboard(nl.moto.ota.SafeUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=startsWithLocalReadOnlyDashboard
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=13
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=oneStartRunsTheFullFileBackedSimulationWithoutChangingTheLiveJournal
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=13
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in oneStartRunsTheFullFileBackedSimulationWithoutChangingTheLiveJournal(nl.moto.ota.SafeUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=oneStartRunsTheFullFileBackedSimulationWithoutChangingTheLiveJournal
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=14
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=networkCheckRequiresItsOwnDisclosureAndCancelDoesNotEnableIt
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=14
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in networkCheckRequiresItsOwnDisclosureAndCancelDoesNotEnableIt(nl.moto.ota.SafeUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=networkCheckRequiresItsOwnDisclosureAndCancelDoesNotEnableIt
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=15
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=emulatorCannotOfferAnUnprovenStockWrite
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SafeUiTest
+INSTRUMENTATION_STATUS: current=15
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in emulatorCannotOfferAnUnprovenStockWrite(nl.moto.ota.SafeUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=emulatorCannotOfferAnUnprovenStockWrite
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SetupTourUiTest
+INSTRUMENTATION_STATUS: current=16
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.SetupTourUiTest:
+INSTRUMENTATION_STATUS: test=skipPersistsAndTheGuideCanBeOpenedAgain
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SetupTourUiTest
+INSTRUMENTATION_STATUS: current=16
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in skipPersistsAndTheGuideCanBeOpenedAgain(nl.moto.ota.SetupTourUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=skipPersistsAndTheGuideCanBeOpenedAgain
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SetupTourUiTest
+INSTRUMENTATION_STATUS: current=17
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=allFourTourPagesLeadToTheDashboardWithoutAuthorizingAnUpdate
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SetupTourUiTest
+INSTRUMENTATION_STATUS: current=17
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in allFourTourPagesLeadToTheDashboardWithoutAuthorizingAnUpdate(nl.moto.ota.SetupTourUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=allFourTourPagesLeadToTheDashboardWithoutAuthorizingAnUpdate
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SetupTourUiTest
+INSTRUMENTATION_STATUS: current=18
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=nativeDutchLanguageSwitchRetainsTourProgressAcrossRecreation
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.SetupTourUiTest
+INSTRUMENTATION_STATUS: current=18
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in nativeDutchLanguageSwitchRetainsTourProgressAcrossRecreation(nl.moto.ota.SetupTourUiTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+
+INSTRUMENTATION_STATUS: test=nativeDutchLanguageSwitchRetainsTourProgressAcrossRecreation
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=19
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.VaultRuntimeTest:
+INSTRUMENTATION_STATUS: test=sourceSymlinkEmptyFileAndOversizedSparseFileCannotBePinned
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=19
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=sourceSymlinkEmptyFileAndOversizedSparseFileCannotBePinned
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=20
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=syntheticStockFactsReloadAndBindOnlyAfterObservedTargetBoot
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=20
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=syntheticStockFactsReloadAndBindOnlyAfterObservedTargetBoot
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=21
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=pinnedInodeSurvivesAtomicDownloadReplacementAndSelectionReload
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=21
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=pinnedInodeSurvivesAtomicDownloadReplacementAndSelectionReload
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=22
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=callerSuppliedSignatureBooleanNeverBecomesPersistedTrust
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=22
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=callerSuppliedSignatureBooleanNeverBecomesPersistedTrust
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=23
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=successfulPinPrunesOnlyObsoleteRegularUuidPackages
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=23
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=successfulPinPrunesOnlyObsoleteRegularUuidPackages
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=24
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=selectedSymlinkAndEscapedVaultDirectoryFailClosed
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=24
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=selectedSymlinkAndEscapedVaultDirectoryFailClosed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=25
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=failedSelectionCommitPreservesPreviousSelectionAndRemovesNewPin
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=25
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=failedSelectionCommitPreservesPreviousSelectionAndRemovesNewPin
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=26
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=malformedOversizedAndMissingSelectionsFailClosed
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=26
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=malformedOversizedAndMissingSelectionsFailClosed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=27
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=malformedOversizedAndInvalidStockEvidenceCannotSupplyReference
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.VaultRuntimeTest
+INSTRUMENTATION_STATUS: current=27
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=malformedOversizedAndInvalidStockEvidenceCannotSupplyReference
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.discovery.CdsControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=28
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.discovery.CdsControllerRuntimeTest:
+INSTRUMENTATION_STATUS: test=missingIdentityServerFailureAndCancellationNeverConfirmAnOffer
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.discovery.CdsControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=28
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=missingIdentityServerFailureAndCancellationNeverConfirmAnOffer
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.discovery.CdsControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=29
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=revocationDuringIdentityReadPreventsTheFirstRequest
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.discovery.CdsControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=29
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=revocationDuringIdentityReadPreventsTheFirstRequest
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.discovery.CdsControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=30
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=consentPersistsOnlyTheBooleanAndRevocationStopsFutureReads
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.discovery.CdsControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=30
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=consentPersistsOnlyTheBooleanAndRevocationStopsFutureReads
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.discovery.CdsControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=31
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=checkAndResourceResponseBindBeforeExposingAPackage
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.discovery.CdsControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=31
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=checkAndResourceResponseBindBeforeExposingAPackage
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.discovery.CdsControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=32
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=noConsentMeansNoIdentityReadAndNoHttp
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.discovery.CdsControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=32
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=noConsentMeansNoIdentityReadAndNoHttp
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=33
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.download.DownloadRuntimeTest:
+INSTRUMENTATION_STATUS: test=explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=33
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker(DownloadRuntimeTest.kt:253)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker$default(DownloadRuntimeTest.kt:73)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload$1.invokeSuspend(DownloadRuntimeTest.kt:239)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload(DownloadRuntimeTest.kt:229)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 49 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload(nl.moto.ota.platform.download.DownloadRuntimeTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker(DownloadRuntimeTest.kt:253)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker$default(DownloadRuntimeTest.kt:73)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload$1.invokeSuspend(DownloadRuntimeTest.kt:239)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload(DownloadRuntimeTest.kt:229)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 49 more
+
+INSTRUMENTATION_STATUS: test=explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=34
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=pauseAndCancelBlockCommitWithoutChangingPreviousPackage
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=34
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=pauseAndCancelBlockCommitWithoutChangingPreviousPackage
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=35
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=atomicCommitPublishesExactBytesAndDurableCompletion
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=35
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=atomicCommitPublishesExactBytesAndDurableCompletion
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=36
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=manifestReloadsProgressAndNeverContainsSignedUrl
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=36
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=manifestReloadsProgressAndNeverContainsSignedUrl
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=37
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=interruptedAtomicManifestWriteKeepsPreviousJournalAndCorruptionFailsClosed
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=37
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=interruptedAtomicManifestWriteKeepsPreviousJournalAndCorruptionFailsClosed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=38
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=changedCiphertextAndSwappedJobSecretsFailAuthentication
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=38
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=changedCiphertextAndSwappedJobSecretsFailAuthentication
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=39
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=explicitCancelQuarantinesCorruptManifestAndBlocksOldWorkerCommit
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=39
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=explicitCancelQuarantinesCorruptManifestAndBlocksOldWorkerCommit
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=40
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=keystoreEncryptsWithRandomIvAndSurvivesObjectRecreation
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=40
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=keystoreEncryptsWithRandomIvAndSurvivesObjectRecreation
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=41
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=41
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoSuchMethodError: No static method success()LA1/A; in class LA1/A; or its super classes (declaration of 'A1.A' appears in /data/app/~~4s9SjTdEAU0OdMJUzd6ZRw==/nl.moto.ota-i0hBy2r4iF4vr9U5DabRtA==/base.apk)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground$1.invokeSuspend(DownloadRuntimeTest.kt:184)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground(DownloadRuntimeTest.kt:176)
+
+INSTRUMENTATION_STATUS: stream=
+Error in productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground(nl.moto.ota.platform.download.DownloadRuntimeTest):
+java.lang.NoSuchMethodError: No static method success()LA1/A; in class LA1/A; or its super classes (declaration of 'A1.A' appears in /data/app/~~4s9SjTdEAU0OdMJUzd6ZRw==/nl.moto.ota-i0hBy2r4iF4vr9U5DabRtA==/base.apk)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground$1.invokeSuspend(DownloadRuntimeTest.kt:184)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground(DownloadRuntimeTest.kt:176)
+
+INSTRUMENTATION_STATUS: test=productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=42
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=productionWorkerRefusesChangedFileInCommitRecoveryWindow
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=42
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker(DownloadRuntimeTest.kt:253)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker$default(DownloadRuntimeTest.kt:73)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$productionWorkerRefusesChangedFileInCommitRecoveryWindow$1.invokeSuspend(DownloadRuntimeTest.kt:195)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.productionWorkerRefusesChangedFileInCommitRecoveryWindow(DownloadRuntimeTest.kt:189)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 49 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in productionWorkerRefusesChangedFileInCommitRecoveryWindow(nl.moto.ota.platform.download.DownloadRuntimeTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker(DownloadRuntimeTest.kt:253)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker$default(DownloadRuntimeTest.kt:73)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$productionWorkerRefusesChangedFileInCommitRecoveryWindow$1.invokeSuspend(DownloadRuntimeTest.kt:195)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.productionWorkerRefusesChangedFileInCommitRecoveryWindow(DownloadRuntimeTest.kt:189)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 49 more
+
+INSTRUMENTATION_STATUS: test=productionWorkerRefusesChangedFileInCommitRecoveryWindow
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=43
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=manuallyReplacedSelectedPackageIsPreserved
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=43
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=manuallyReplacedSelectedPackageIsPreserved
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=44
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=pausedCancelledAndFailedProductionWorkersNeverRunNetwork
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.download.DownloadRuntimeTest
+INSTRUMENTATION_STATUS: current=44
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker(DownloadRuntimeTest.kt:253)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker$default(DownloadRuntimeTest.kt:73)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$pausedCancelledAndFailedProductionWorkersNeverRunNetwork$1.invokeSuspend(DownloadRuntimeTest.kt:204)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.pausedCancelledAndFailedProductionWorkersNeverRunNetwork(DownloadRuntimeTest.kt:201)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 49 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in pausedCancelledAndFailedProductionWorkersNeverRunNetwork(nl.moto.ota.platform.download.DownloadRuntimeTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker(DownloadRuntimeTest.kt:253)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker$default(DownloadRuntimeTest.kt:73)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$pausedCancelledAndFailedProductionWorkersNeverRunNetwork$1.invokeSuspend(DownloadRuntimeTest.kt:204)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.pausedCancelledAndFailedProductionWorkersNeverRunNetwork(DownloadRuntimeTest.kt:201)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 49 more
+
+INSTRUMENTATION_STATUS: test=pausedCancelledAndFailedProductionWorkersNeverRunNetwork
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.i18n.MessageRendererRuntimeTest
+INSTRUMENTATION_STATUS: current=45
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.i18n.MessageRendererRuntimeTest:
+INSTRUMENTATION_STATUS: test=cachedSnapshotAndBackupEvidenceRetainTypedDetailsAfterLanguageSwitch
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.i18n.MessageRendererRuntimeTest
+INSTRUMENTATION_STATUS: current=45
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=cachedSnapshotAndBackupEvidenceRetainTypedDetailsAfterLanguageSwitch
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.i18n.MessageRendererRuntimeTest
+INSTRUMENTATION_STATUS: current=46
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=notificationChannelNamesRefreshWithoutSendingANotice
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.i18n.MessageRendererRuntimeTest
+INSTRUMENTATION_STATUS: current=46
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=notificationChannelNamesRefreshWithoutSendingANotice
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.i18n.MessageRendererRuntimeTest
+INSTRUMENTATION_STATUS: current=47
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=allDiscoveryMonitorAndWorkflowStatesHaveLanguageResources
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.i18n.MessageRendererRuntimeTest
+INSTRUMENTATION_STATUS: current=47
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.junit.Assert.assertFalse(Assert.java:75)
+	at nl.moto.ota.platform.i18n.MessageRendererRuntimeTest.allDiscoveryMonitorAndWorkflowStatesHaveLanguageResources(MessageRendererRuntimeTest.kt:70)
+
+INSTRUMENTATION_STATUS: stream=
+Error in allDiscoveryMonitorAndWorkflowStatesHaveLanguageResources(nl.moto.ota.platform.i18n.MessageRendererRuntimeTest):
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.junit.Assert.assertFalse(Assert.java:75)
+	at nl.moto.ota.platform.i18n.MessageRendererRuntimeTest.allDiscoveryMonitorAndWorkflowStatesHaveLanguageResources(MessageRendererRuntimeTest.kt:70)
+
+INSTRUMENTATION_STATUS: test=allDiscoveryMonitorAndWorkflowStatesHaveLanguageResources
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.i18n.MessageRendererRuntimeTest
+INSTRUMENTATION_STATUS: current=48
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=cachedLegacyChecksAreRenderedInTheCurrentLanguage
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.i18n.MessageRendererRuntimeTest
+INSTRUMENTATION_STATUS: current=48
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=cachedLegacyChecksAreRenderedInTheCurrentLanguage
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=49
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest:
+INSTRUMENTATION_STATUS: test=actualSourceSymlinkIsNeitherDiscoveredNorRead
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=49
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=actualSourceSymlinkIsNeitherDiscoveredNorRead
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=50
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=lateSelectionFailureCleansOnlyItsStagedTransaction
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=50
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=lateSelectionFailureCleansOnlyItsStagedTransaction
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=51
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=actualDestinationSymlinkCannotReplaceItsTarget
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=51
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=actualDestinationSymlinkCannotReplaceItsTarget
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=52
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=fileBackedCopyDoesNotChangeSourceAndProducesExactPrivateBytes
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=52
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=fileBackedCopyDoesNotChangeSourceAndProducesExactPrivateBytes
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=53
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=lateSelectionCannotBeOverwrittenByAnOlderImport
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=53
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=lateSelectionCannotBeOverwrittenByAnOlderImport
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=54
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=cancelledTransactionCleanupDoesNotFollowChildSymlinkOrDeleteOtherData
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=54
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=cancelledTransactionCleanupDoesNotFollowChildSymlinkOrDeleteOtherData
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=55
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=normalAppUidCannotEnterRootImporter
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest
+INSTRUMENTATION_STATUS: current=55
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=normalAppUidCannotEnterRootImporter
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.monitoring.MonitorRuntimeTest
+INSTRUMENTATION_STATUS: current=56
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.monitoring.MonitorRuntimeTest:
+INSTRUMENTATION_STATUS: test=interruptedAtomicWriteRollsBackAndCorruptConfigurationFailsClosed
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.monitoring.MonitorRuntimeTest
+INSTRUMENTATION_STATUS: current=56
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=interruptedAtomicWriteRollsBackAndCorruptConfigurationFailsClosed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.monitoring.MonitorRuntimeTest
+INSTRUMENTATION_STATUS: current=57
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=failedOptOutStorageStillClosesGateAndCancelsScheduledWork
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.monitoring.MonitorRuntimeTest
+INSTRUMENTATION_STATUS: current=57
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoSuchFieldError: No field Companion of type Landroidx/work/WorkManager$Companion; in class LA1/S; or its superclasses (declaration of 'A1.S' appears in /data/app/~~4s9SjTdEAU0OdMJUzd6ZRw==/nl.moto.ota-i0hBy2r4iF4vr9U5DabRtA==/base.apk)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest$failedOptOutStorageStillClosesGateAndCancelsScheduledWork$1.invokeSuspend(MonitorRuntimeTest.kt:133)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:114)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest.failedOptOutStorageStillClosesGateAndCancelsScheduledWork(MonitorRuntimeTest.kt:123)
+
+INSTRUMENTATION_STATUS: stream=
+Error in failedOptOutStorageStillClosesGateAndCancelsScheduledWork(nl.moto.ota.platform.monitoring.MonitorRuntimeTest):
+java.lang.NoSuchFieldError: No field Companion of type Landroidx/work/WorkManager$Companion; in class LA1/S; or its superclasses (declaration of 'A1.S' appears in /data/app/~~4s9SjTdEAU0OdMJUzd6ZRw==/nl.moto.ota-i0hBy2r4iF4vr9U5DabRtA==/base.apk)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest$failedOptOutStorageStillClosesGateAndCancelsScheduledWork$1.invokeSuspend(MonitorRuntimeTest.kt:133)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:114)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest.failedOptOutStorageStillClosesGateAndCancelsScheduledWork(MonitorRuntimeTest.kt:123)
+
+INSTRUMENTATION_STATUS: test=failedOptOutStorageStillClosesGateAndCancelsScheduledWork
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.monitoring.MonitorRuntimeTest
+INSTRUMENTATION_STATUS: current=58
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=realPeriodicScheduleIsUniqueAndDisableCancelsIt
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.monitoring.MonitorRuntimeTest
+INSTRUMENTATION_STATUS: current=58
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoSuchFieldError: No field Companion of type Landroidx/work/WorkManager$Companion; in class LA1/S; or its superclasses (declaration of 'A1.S' appears in /data/app/~~4s9SjTdEAU0OdMJUzd6ZRw==/nl.moto.ota-i0hBy2r4iF4vr9U5DabRtA==/base.apk)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest$realPeriodicScheduleIsUniqueAndDisableCancelsIt$1.invokeSuspend(MonitorRuntimeTest.kt:106)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest.realPeriodicScheduleIsUniqueAndDisableCancelsIt(MonitorRuntimeTest.kt:103)
+
+INSTRUMENTATION_STATUS: stream=
+Error in realPeriodicScheduleIsUniqueAndDisableCancelsIt(nl.moto.ota.platform.monitoring.MonitorRuntimeTest):
+java.lang.NoSuchFieldError: No field Companion of type Landroidx/work/WorkManager$Companion; in class LA1/S; or its superclasses (declaration of 'A1.S' appears in /data/app/~~4s9SjTdEAU0OdMJUzd6ZRw==/nl.moto.ota-i0hBy2r4iF4vr9U5DabRtA==/base.apk)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest$realPeriodicScheduleIsUniqueAndDisableCancelsIt$1.invokeSuspend(MonitorRuntimeTest.kt:106)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest.realPeriodicScheduleIsUniqueAndDisableCancelsIt(MonitorRuntimeTest.kt:103)
+
+INSTRUMENTATION_STATUS: test=realPeriodicScheduleIsUniqueAndDisableCancelsIt
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.monitoring.MonitorRuntimeTest
+INSTRUMENTATION_STATUS: current=59
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=disabledProductionWorkerReturnsBeforeAnyDeviceInspection
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.monitoring.MonitorRuntimeTest
+INSTRUMENTATION_STATUS: current=59
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest$disabledProductionWorkerReturnsBeforeAnyDeviceInspection$1.invokeSuspend(MonitorRuntimeTest.kt:148)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest.disabledProductionWorkerReturnsBeforeAnyDeviceInspection(MonitorRuntimeTest.kt:93)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 47 more
+
+INSTRUMENTATION_STATUS: stream=
+Error in disabledProductionWorkerReturnsBeforeAnyDeviceInspection(nl.moto.ota.platform.monitoring.MonitorRuntimeTest):
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest$disabledProductionWorkerReturnsBeforeAnyDeviceInspection$1.invokeSuspend(MonitorRuntimeTest.kt:148)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest.disabledProductionWorkerReturnsBeforeAnyDeviceInspection(MonitorRuntimeTest.kt:93)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 47 more
+
+INSTRUMENTATION_STATUS: test=disabledProductionWorkerReturnsBeforeAnyDeviceInspection
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.monitoring.MonitorRuntimeTest
+INSTRUMENTATION_STATUS: current=60
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=durableOptInAndResultReloadTogetherWithoutSignedUrls
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.monitoring.MonitorRuntimeTest
+INSTRUMENTATION_STATUS: current=60
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=durableOptInAndResultReloadTogetherWithoutSignedUrls
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest
+INSTRUMENTATION_STATUS: current=61
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest:
+INSTRUMENTATION_STATUS: test=productionNativeEntryRejectsNonRootBeforeOpeningAnyDirectory
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest
+INSTRUMENTATION_STATUS: current=61
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=productionNativeEntryRejectsNonRootBeforeOpeningAnyDirectory
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest
+INSTRUMENTATION_STATUS: current=62
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=realRenameat2SandboxPublishesAtomicallyAndRefusesExistingDestination
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest
+INSTRUMENTATION_STATUS: current=62
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=realRenameat2SandboxPublishesAtomicallyAndRefusesExistingDestination
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest
+INSTRUMENTATION_STATUS: current=63
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=realAppUidCannotRunDedicatedRootProbe
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest
+INSTRUMENTATION_STATUS: current=63
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=realAppUidCannotRunDedicatedRootProbe
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest
+INSTRUMENTATION_STATUS: current=64
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=absentConfirmationCannotCreateRequestOrStartRoot
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest
+INSTRUMENTATION_STATUS: current=64
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=absentConfirmationCannotCreateRequestOrStartRoot
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest
+INSTRUMENTATION_STATUS: current=65
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=emulatorSdkCannotStageEvenWhenCheckboxesAreConfirmed
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest
+INSTRUMENTATION_STATUS: current=65
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=emulatorSdkCannotStageEvenWhenCheckboxesAreConfirmed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest
+INSTRUMENTATION_STATUS: current=66
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest:
+INSTRUMENTATION_STATUS: test=exactRootPublishedFactsRoundTripWithoutWeakeningTheTarget
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest
+INSTRUMENTATION_STATUS: current=66
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=exactRootPublishedFactsRoundTripWithoutWeakeningTheTarget
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest
+INSTRUMENTATION_STATUS: current=67
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=missingUnknownOrSignedMalformedPayloadFactsAreRejected
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest
+INSTRUMENTATION_STATUS: current=67
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=missingUnknownOrSignedMalformedPayloadFactsAreRejected
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest
+INSTRUMENTATION_STATUS: current=68
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=everyPersistedFactIncludingFilesystemIdentityIsAuthenticated
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest
+INSTRUMENTATION_STATUS: current=68
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=everyPersistedFactIncludingFilesystemIdentityIsAuthenticated
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest
+INSTRUMENTATION_STATUS: current=69
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=anOtherwiseAuthenticReceiptCannotBeUsedForAnotherRunBootPackageOrTarget
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest
+INSTRUMENTATION_STATUS: current=69
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=anOtherwiseAuthenticReceiptCannotBeUsedForAnotherRunBootPackageOrTarget
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest
+INSTRUMENTATION_STATUS: current=70
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest:
+INSTRUMENTATION_STATUS: test=mismatchedEmbeddedStockOrArbitraryToolNeverBecomesProof
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest
+INSTRUMENTATION_STATUS: current=70
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=mismatchedEmbeddedStockOrArbitraryToolNeverBecomesProof
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest
+INSTRUMENTATION_STATUS: current=71
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=unknownAndMissingReceiptFieldsFailClosed
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest
+INSTRUMENTATION_STATUS: current=71
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=unknownAndMissingReceiptFieldsFailClosed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest
+INSTRUMENTATION_STATUS: current=72
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=signedPreparedReceiptAndChangedRunAreNotInstalledEvidence
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest
+INSTRUMENTATION_STATUS: current=72
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=signedPreparedReceiptAndChangedRunAreNotInstalledEvidence
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest
+INSTRUMENTATION_STATUS: current=73
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=eachMutationRelevantFieldIsAuthenticated
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest
+INSTRUMENTATION_STATUS: current=73
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=eachMutationRelevantFieldIsAuthenticated
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest
+INSTRUMENTATION_STATUS: current=74
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=actualJsonTypesRoundTripToOpaqueCurrentTargetProof
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest
+INSTRUMENTATION_STATUS: current=74
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=actualJsonTypesRoundTripToOpaqueCurrentTargetProof
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=75
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest:
+INSTRUMENTATION_STATUS: test=changedPackageTargetOrMissingVerificationCannotClaimAnAction
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=75
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=changedPackageTargetOrMissingVerificationCannotClaimAnAction
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=76
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=inspectionOfAMissingAuthorizationCreatesNoKeyAndCannotActivateAWriter
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=76
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stack=android.system.ErrnoException: lstat failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.lstat(Native Method)
+	at libcore.io.ForwardingOs.lstat(ForwardingOs.java:475)
+	at libcore.io.BlockGuardOs.lstat(BlockGuardOs.java:250)
+	at libcore.io.ForwardingOs.lstat(ForwardingOs.java:475)
+	at android.system.Os.lstat(Os.java:444)
+	at nl.moto.ota.platform.update.RunAuthorizationStore.requireParent(Unknown Source:4)
+	at nl.moto.ota.platform.update.RunAuthorizationStore.requireDirectories(Unknown Source:16)
+	at nl.moto.ota.platform.update.RunAuthorizationStore.claim(Unknown Source:10)
+	at nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest.inspectionOfAMissingAuthorizationCreatesNoKeyAndCannotActivateAWriter(RunAuthorizationStoreRuntimeTest.kt:59)
+
+INSTRUMENTATION_STATUS: stream=
+Error in inspectionOfAMissingAuthorizationCreatesNoKeyAndCannotActivateAWriter(nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest):
+android.system.ErrnoException: lstat failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.lstat(Native Method)
+	at libcore.io.ForwardingOs.lstat(ForwardingOs.java:475)
+	at libcore.io.BlockGuardOs.lstat(BlockGuardOs.java:250)
+	at libcore.io.ForwardingOs.lstat(ForwardingOs.java:475)
+	at android.system.Os.lstat(Os.java:444)
+	at nl.moto.ota.platform.update.RunAuthorizationStore.requireParent(Unknown Source:4)
+	at nl.moto.ota.platform.update.RunAuthorizationStore.requireDirectories(Unknown Source:16)
+	at nl.moto.ota.platform.update.RunAuthorizationStore.claim(Unknown Source:10)
+	at nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest.inspectionOfAMissingAuthorizationCreatesNoKeyAndCannotActivateAWriter(RunAuthorizationStoreRuntimeTest.kt:59)
+
+INSTRUMENTATION_STATUS: test=inspectionOfAMissingAuthorizationCreatesNoKeyAndCannotActivateAWriter
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=77
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=aNewStoreCanInspectOldConsentButCannotReactivateItAfterAProcessRestart
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=77
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=aNewStoreCanInspectOldConsentButCannotReactivateItAfterAProcessRestart
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=78
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=aSymlinkCannotSubstituteForThePrivateAuthorizationFile
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=78
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=aSymlinkCannotSubstituteForThePrivateAuthorizationFile
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=79
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=scopeCannotBeNarrowedAfterAnActionWasAlreadyDispatched
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=79
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=scopeCannotBeNarrowedAfterAnActionWasAlreadyDispatched
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=80
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=anExistingNonterminalJournalBlocksANewRunBeforeKeyCreation
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=80
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=anExistingNonterminalJournalBlocksANewRunBeforeKeyCreation
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=81
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=aVerifiedSameTargetCanBePinnedAndClaimedExactlyOnce
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=81
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=aVerifiedSameTargetCanBePinnedAndClaimedExactlyOnce
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=82
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=aReusedUuidCannotOverwriteItsEarlierAuthorizationEvenAfterACompletedRun
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=82
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=aReusedUuidCannotOverwriteItsEarlierAuthorizationEvenAfterACompletedRun
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=83
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=staleFutureFailedAndRecoveryObservationsCannotAuthorizeDispatch
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=83
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=staleFutureFailedAndRecoveryObservationsCannotAuthorizeDispatch
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=84
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=aProgrammaticFalseConsentCannotCreateAnyAuthorityFiles
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=84
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=aProgrammaticFalseConsentCannotCreateAnyAuthorityFiles
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=85
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=tamperedMacScopeNeverMintsAnOperationAndLoadRemainsObservationOnly
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=85
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=tamperedMacScopeNeverMintsAnOperationAndLoadRemainsObservationOnly
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=86
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=changedSourceBootBuildFingerprintSlotAndTechnicalProfileCannotClaimAnAction
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest
+INSTRUMENTATION_STATUS: current=86
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=changedSourceBootBuildFingerprintSlotAndTechnicalProfileCannotClaimAnAction
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=87
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest:
+INSTRUMENTATION_STATUS: test=corruptBackupFailsBeforeExportingAnyByte
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=87
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=corruptBackupFailsBeforeExportingAnyByte
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=88
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=bootRecoveryLargerThanOldEightMiBLimitStreamsWithBoundedWrites
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=88
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=bootRecoveryLargerThanOldEightMiBLimitStreamsWithBoundedWrites
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=89
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=symlinkToDifferentPrivateFileIsRejected
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=89
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=symlinkToDifferentPrivateFileIsRejected
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=90
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=oldPerStepBooleanCannotAuthorizeAWrite
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=90
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=oldPerStepBooleanCannotAuthorizeAWrite
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=91
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=truncatedBackupAndForgedPlanCannotBeExported
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest
+INSTRUMENTATION_STATUS: current=91
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=truncatedBackupAndForgedPlanCannotBeExported
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest
+INSTRUMENTATION_STATUS: current=92
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest:
+INSTRUMENTATION_STATUS: test=atomicFileBackupIsRecoveredWhenBaseFileIsMissing
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest
+INSTRUMENTATION_STATUS: current=92
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=atomicFileBackupIsRecoveredWhenBaseFileIsMissing
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest
+INSTRUMENTATION_STATUS: current=93
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=oldConfirmationCannotClaimANewerPreparedTransaction
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest
+INSTRUMENTATION_STATUS: current=93
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=oldConfirmationCannotClaimANewerPreparedTransaction
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest
+INSTRUMENTATION_STATUS: current=94
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=oversizedJournalFailsClosedWithoutLoadingAllBytes
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest
+INSTRUMENTATION_STATUS: current=94
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=oversizedJournalFailsClosedWithoutLoadingAllBytes
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest
+INSTRUMENTATION_STATUS: current=95
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=recreatedControllerLoadsCriticalJournalWithoutDispatchingAnything
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest
+INSTRUMENTATION_STATUS: current=95
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=recreatedControllerLoadsCriticalJournalWithoutDispatchingAnything
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest
+INSTRUMENTATION_STATUS: current=96
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=existingEmptyJournalFailsClosedWhileMissingJournalIsIdle
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest
+INSTRUMENTATION_STATUS: current=96
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=96
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=existingEmptyJournalFailsClosedWhileMissingJournalIsIdle
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 1.578
+There were 20 failures:
+1) appearanceIsPersistedAndDoesNotAuthorizeAnUpdate(nl.moto.ota.PresentationUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+2) switchingLanguagesUsesAndroidAppLocalesAndSurvivesRecreation(nl.moto.ota.PresentationUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+3) demonstrationIsExplicitAndSeparateFromTheLiveJournal(nl.moto.ota.SafeUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+4) rootDiagnosticsRequiresAnExplicitDialogAndCanBeCancelled(nl.moto.ota.SafeUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+5) startsWithLocalReadOnlyDashboard(nl.moto.ota.SafeUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+6) oneStartRunsTheFullFileBackedSimulationWithoutChangingTheLiveJournal(nl.moto.ota.SafeUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+7) networkCheckRequiresItsOwnDisclosureAndCancelDoesNotEnableIt(nl.moto.ota.SafeUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+8) emulatorCannotOfferAnUnprovenStockWrite(nl.moto.ota.SafeUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+9) skipPersistsAndTheGuideCanBeOpenedAgain(nl.moto.ota.SetupTourUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+10) allFourTourPagesLeadToTheDashboardWithoutAuthorizingAnUpdate(nl.moto.ota.SetupTourUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+11) nativeDutchLanguageSwitchRetainsTourProgressAcrossRecreation(nl.moto.ota.SetupTourUiTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/compose/ui/platform/InfiniteAnimationPolicy;
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:405)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.<init>(AndroidComposeTestRule.android.kt:245)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule_androidKt.createAndroidComposeRule(AndroidComposeTestRule.android.kt:124)
+	at nl.moto.ota.PresentationUiTest.<init>(PresentationUiTest.kt:51)
+	... 32 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.compose.ui.platform.InfiniteAnimationPolicy
+	... 37 more
+12) explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload(nl.moto.ota.platform.download.DownloadRuntimeTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker(DownloadRuntimeTest.kt:253)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker$default(DownloadRuntimeTest.kt:73)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload$1.invokeSuspend(DownloadRuntimeTest.kt:239)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload(DownloadRuntimeTest.kt:229)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 49 more
+13) productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground(nl.moto.ota.platform.download.DownloadRuntimeTest)
+java.lang.NoSuchMethodError: No static method success()LA1/A; in class LA1/A; or its super classes (declaration of 'A1.A' appears in /data/app/~~4s9SjTdEAU0OdMJUzd6ZRw==/nl.moto.ota-i0hBy2r4iF4vr9U5DabRtA==/base.apk)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground$1.invokeSuspend(DownloadRuntimeTest.kt:184)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground(DownloadRuntimeTest.kt:176)
+14) productionWorkerRefusesChangedFileInCommitRecoveryWindow(nl.moto.ota.platform.download.DownloadRuntimeTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker(DownloadRuntimeTest.kt:253)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker$default(DownloadRuntimeTest.kt:73)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$productionWorkerRefusesChangedFileInCommitRecoveryWindow$1.invokeSuspend(DownloadRuntimeTest.kt:195)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.productionWorkerRefusesChangedFileInCommitRecoveryWindow(DownloadRuntimeTest.kt:189)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 49 more
+15) pausedCancelledAndFailedProductionWorkersNeverRunNetwork(nl.moto.ota.platform.download.DownloadRuntimeTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker(DownloadRuntimeTest.kt:253)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.worker$default(DownloadRuntimeTest.kt:73)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest$pausedCancelledAndFailedProductionWorkersNeverRunNetwork$1.invokeSuspend(DownloadRuntimeTest.kt:204)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.download.DownloadRuntimeTest.pausedCancelledAndFailedProductionWorkersNeverRunNetwork(DownloadRuntimeTest.kt:201)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 49 more
+16) allDiscoveryMonitorAndWorkflowStatesHaveLanguageResources(nl.moto.ota.platform.i18n.MessageRendererRuntimeTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.junit.Assert.assertFalse(Assert.java:75)
+	at nl.moto.ota.platform.i18n.MessageRendererRuntimeTest.allDiscoveryMonitorAndWorkflowStatesHaveLanguageResources(MessageRendererRuntimeTest.kt:70)
+17) failedOptOutStorageStillClosesGateAndCancelsScheduledWork(nl.moto.ota.platform.monitoring.MonitorRuntimeTest)
+java.lang.NoSuchFieldError: No field Companion of type Landroidx/work/WorkManager$Companion; in class LA1/S; or its superclasses (declaration of 'A1.S' appears in /data/app/~~4s9SjTdEAU0OdMJUzd6ZRw==/nl.moto.ota-i0hBy2r4iF4vr9U5DabRtA==/base.apk)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest$failedOptOutStorageStillClosesGateAndCancelsScheduledWork$1.invokeSuspend(MonitorRuntimeTest.kt:133)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:114)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest.failedOptOutStorageStillClosesGateAndCancelsScheduledWork(MonitorRuntimeTest.kt:123)
+18) realPeriodicScheduleIsUniqueAndDisableCancelsIt(nl.moto.ota.platform.monitoring.MonitorRuntimeTest)
+java.lang.NoSuchFieldError: No field Companion of type Landroidx/work/WorkManager$Companion; in class LA1/S; or its superclasses (declaration of 'A1.S' appears in /data/app/~~4s9SjTdEAU0OdMJUzd6ZRw==/nl.moto.ota-i0hBy2r4iF4vr9U5DabRtA==/base.apk)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest$realPeriodicScheduleIsUniqueAndDisableCancelsIt$1.invokeSuspend(MonitorRuntimeTest.kt:106)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest.realPeriodicScheduleIsUniqueAndDisableCancelsIt(MonitorRuntimeTest.kt:103)
+19) disabledProductionWorkerReturnsBeforeAnyDeviceInspection(nl.moto.ota.platform.monitoring.MonitorRuntimeTest)
+java.lang.NoClassDefFoundError: Failed resolution of: Landroidx/work/WorkerParameters$RuntimeExtras;
+	at androidx.work.testing.TestListenableWorkerBuilder.<init>(TestListenableWorkerBuilder.java:78)
+	at androidx.work.testing.TestListenableWorkerBuilder.from(TestListenableWorkerBuilder.java:388)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest$disabledProductionWorkerReturnsBeforeAnyDeviceInspection$1.invokeSuspend(MonitorRuntimeTest.kt:148)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(Unknown Source:10)
+	at kotlinx.coroutines.DispatchedTask.run(Unknown Source:128)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(Unknown Source:18)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Unknown Source:23)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Unknown Source:76)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:0)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Unknown Source:6)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:0)
+	at nl.moto.ota.platform.monitoring.MonitorRuntimeTest.disabledProductionWorkerReturnsBeforeAnyDeviceInspection(MonitorRuntimeTest.kt:93)
+	... 34 trimmed
+Caused by: java.lang.ClassNotFoundException: androidx.work.WorkerParameters$RuntimeExtras
+	... 47 more
+20) inspectionOfAMissingAuthorizationCreatesNoKeyAndCannotActivateAWriter(nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest)
+android.system.ErrnoException: lstat failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.lstat(Native Method)
+	at libcore.io.ForwardingOs.lstat(ForwardingOs.java:475)
+	at libcore.io.BlockGuardOs.lstat(BlockGuardOs.java:250)
+	at libcore.io.ForwardingOs.lstat(ForwardingOs.java:475)
+	at android.system.Os.lstat(Os.java:444)
+	at nl.moto.ota.platform.update.RunAuthorizationStore.requireParent(Unknown Source:4)
+	at nl.moto.ota.platform.update.RunAuthorizationStore.requireDirectories(Unknown Source:16)
+	at nl.moto.ota.platform.update.RunAuthorizationStore.claim(Unknown Source:10)
+	at nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest.inspectionOfAMissingAuthorizationCreatesNoKeyAndCannotActivateAWriter(RunAuthorizationStoreRuntimeTest.kt:59)
+
+FAILURES!!!
+Tests run: 96,  Failures: 20
+
+
+INSTRUMENTATION_CODE: -1

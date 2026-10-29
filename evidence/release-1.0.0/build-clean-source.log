@@ -1,0 +1,979 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:compileDebugAidl
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDebugBuildConfig
+> Task :app:checkDebugAarMetadata
+> Task :app:generateDebugResValues
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:mergeDebugResources
+> Task :app:packageDebugResources
+> Task :app:parseDebugLocalResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources
+> Task :app:javaPreCompileDebug
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:buildKotlinToolingMetadata
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:compileReleaseAidl
+> Task :app:generateReleaseBuildConfig
+> Task :app:checkReleaseAarMetadata
+> Task :app:generateReleaseResValues
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:generateReleaseResources
+> Task :app:mergeReleaseResources
+> Task :app:packageReleaseResources
+> Task :app:parseReleaseLocalResources
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease
+> Task :app:processReleaseMainManifest
+> Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
+> Task :app:processReleaseResources
+> Task :app:javaPreCompileRelease
+> Task :app:preReleaseUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileReleaseUnitTest
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:mergeDebugShaders
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:desugarDebugFileDependencies
+> Task :app:checkDebugDuplicateClasses
+> Task :core:compileKotlin
+> Task :core:compileJava NO-SOURCE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar
+> Task :app:mergeExtDexDebug
+> Task :core:compileTestKotlin
+> Task :core:compileTestJava NO-SOURCE
+> Task :core:testClasses UP-TO-DATE
+
+> Task :core:test
+
+BackupValidatorTest > differentCurrentBuildRejectsOldBackup PASSED
+
+BackupValidatorTest > unauthenticatedManifestCannotDeclareImageStock PASSED
+
+BackupValidatorTest > shellOutputOf83ExtraBytesIsRejected PASSED
+
+BackupValidatorTest > validGzipHasSameContentHashAsRaw PASSED
+
+BackupValidatorTest > gzipWithDamagedCrcIsRejected PASSED
+
+BackupValidatorTest > validCurrentReferenceAcceptsOnlyMatchingBytes PASSED
+
+BackupValidatorTest > truncatedImageIsRejected PASSED
+
+BackupValidatorTest > gzipWithTrailingShellOutputIsRejected PASSED
+
+BackupValidatorTest > fingerprintAliasIsNeverSilentlyTreatedAsEquivalent PASSED
+
+BackupValidatorTest > patchedContentMismatchRejectsEvenWellFormedHeader PASSED
+
+BackupValidatorTest > unknownHeaderVersionStopsSafely PASSED
+
+BackupValidatorTest > bootImageWithKernelIsNotInitBoot PASSED
+
+BackupValidatorTest > referenceForWrongRegionOrPartitionIsRejected PASSED
+
+BackupValidatorTest > unknownPartitionSizeAndMissingInputAreBlocked PASSED
+
+BackupValidatorTest > existingBootImgGzDoesNotProveCurrentStock PASSED
+
+BootImageStreamsTest > actualHeaderSeparatesBootAndInitBootWithoutAndroidVersionGuessing PASSED
+
+BootImageStreamsTest > gzipAndRawYieldIdenticalCompleteDigests PASSED
+
+BootImageStreamsTest > signedBootReferenceCanValidateBootWithoutChangingInitBootDefault PASSED
+
+BootImageStreamsTest > trailingGarbageAndARepeatedFooterAreRejected PASSED
+
+BootImageStreamsTest > unknownHeaderAndImpossibleExtentsNeverBecomeBootPartitions PASSED
+
+BootImageStreamsTest > largeImageIsMeasuredWithBoundedReadRequests PASSED
+
+BootImageStreamsTest > truncatedOrCorruptGzipAndOversizedRawFailBeforePublication PASSED
+
+DeviceCapabilitiesTest > nonMotorolaStillHasDiagnosticsButNoMotorolaActions PASSED
+
+DeviceCapabilitiesTest > unavailableOrUnresolvedUpdaterIsNotClaimedAvailable PASSED
+
+DeviceCapabilitiesTest > nonRootMotorolaCanUseItsOfficialUpdaterWithoutAFakeRootClaim PASSED
+
+DeviceCapabilitiesTest > identityConflictsBlockGuidanceAndWritingButKeepReadOnlyDiagnostics PASSED
+
+DeviceCapabilitiesTest > unknownAndroidDoesNotDisableOfficialNavigationOrInventAWriteAdapter PASSED
+
+DeviceCapabilitiesTest > qualifiedMercRetainsItsExistingCapabilities PASSED
+
+DeviceCapabilitiesTest > unknownInventoryAndContradictoryAbEvidenceAreNotGuessed PASSED
+
+DeviceCapabilitiesTest > staleOrDifferentBootAssociationCannotEnableWrites PASSED
+
+DeviceCapabilitiesTest > anotherMeasuredMotorolaCanBeQualifiedByProofWithoutAModelCatalog PASSED
+
+DeviceCapabilitiesTest > singleSlotMotorolaHasOfficialGuidanceButNoInactiveSlotProcedure PASSED
+
+DeviceCapabilitiesTest > associatedBackupDoesNotBecomeSignedStock PASSED
+
+DeviceCapabilitiesTest > bootAndInitBootLayoutsComeFromObservedPartitions PASSED
+
+DownloadManifestCodecTest > duplicateUnknownAndMissingFieldsCannotBecomeCompletedJobs PASSED
+
+DownloadManifestCodecTest > otherObservedMotorolaProfilePersistsWithoutAuthorizingInstallation PASSED
+
+DownloadManifestCodecTest > malformedIdentityAndTraversalAreRejected PASSED
+
+DownloadManifestCodecTest > impossibleCheckpointAndProgressBoundsAreRejected PASSED
+
+DownloadManifestCodecTest > interruptedDownloadRoundTripsWithoutPersistingUrl PASSED
+
+DownloadManifestCodecTest > completedStateNeedsExactLengthAndMeasuredDigest PASSED
+
+FirmwareDiscoveryTest > arbitraryExternalDownloadHostDoesNotBecomeOfficial PASSED
+
+FirmwareDiscoveryTest > missingUpdaterAndMetadataRemainUnknown PASSED
+
+FirmwareDiscoveryTest > alreadyInstalledCachedBuildIsNotNewUpdate PASSED
+
+FirmwareDiscoveryTest > unsupportedSchemaRemainsVisibleAsUntrustedLocalEvidence PASSED
+
+FirmwareDiscoveryTest > cachedAllowedUrlIsOnlyCandidateUntilPackageValidation PASSED
+
+FirmwareDiscoveryTest > signedDownloadReferenceDoesNotAppearInEvidenceString PASSED
+
+FirmwareDiscoveryTest > oldMetadataForInstalledTargetIsExplicitlyStale PASSED
+
+FirmwareDiscoveryTest > metadataResourceCannotBeDownloadedAsFullOtaEvenOnOfficialHost PASSED
+
+FirmwareDiscoveryTest > allowlistedUrlAloneNeverProvesFullOtaCandidate PASSED
+
+FirmwareDiscoveryTest > externalReportAloneCannotSupplyTrustedDownload PASSED
+
+FirmwareDiscoveryTest > noCachedMetadataDoesNotAssertThatMotorolaHasNoUpdate PASSED
+
+FirmwareDiscoveryTest > externalReleaseDoesNotOverrideUpToDateMotorolaResponse PASSED
+
+FirmwareValidatorTest > userdataWipeIsRejected PASSED
+
+FirmwareValidatorTest > deviceWrongRegionIsRejected PASSED
+
+FirmwareValidatorTest > oemVendorMetadataAndSystemPayloadRemainSeparateAndBlocked PASSED
+
+FirmwareValidatorTest > payloadHashMismatchNeverCountsAsVerified PASSED
+
+FirmwareValidatorTest > vendorFingerprintCannotReplaceRequiredSystemFingerprint PASSED
+
+FirmwareValidatorTest > absentAndroidMetadataIsRejected PASSED
+
+FirmwareValidatorTest > malformedTargetAndroidVersionIsRejected PASSED
+
+FirmwareValidatorTest > targetIncrementalMustMatchItsFingerprint PASSED
+
+FirmwareValidatorTest > equalTimestampRequiresReview PASSED
+
+FirmwareValidatorTest > targetOfAnotherCodenameIsRejected PASSED
+
+FirmwareValidatorTest > conflictingRegionAnnotationsAreRejected PASSED
+
+FirmwareValidatorTest > shortPayloadIsRejected PASSED
+
+FirmwareValidatorTest > standardMetadataCannotMasqueradeAsPayloadFingerprintProperties PASSED
+
+FirmwareValidatorTest > duplicateMetadataKeysAreRejected PASSED
+
+FirmwareValidatorTest > differentChannelIsRejected PASSED
+
+FirmwareValidatorTest > payloadSystemSourceCannotAliasVendorMetadataSource PASSED
+
+FirmwareValidatorTest > targetOfAnotherManufacturerIsRejected PASSED
+
+FirmwareValidatorTest > excessiveManifestLengthIsRejected PASSED
+
+FirmwareValidatorTest > metadataHashMismatchIsRejected PASSED
+
+FirmwareValidatorTest > malformedTimestampIsRejected PASSED
+
+FirmwareValidatorTest > wrongSourceIncrementalIsRejected PASSED
+
+FirmwareValidatorTest > partialPayloadFingerprintPairDoesNotReplaceStandardTarget PASSED
+
+FirmwareValidatorTest > alreadyInstalledBuildIsNotOfferedAgain PASSED
+
+FirmwareValidatorTest > conflictingMeasuredIdentityRemainsBlocked PASSED
+
+FirmwareValidatorTest > officialUrlPolicyAllowsOnlyExactTlsHost PASSED
+
+FirmwareValidatorTest > metadataSizeMismatchIsRejected PASSED
+
+FirmwareValidatorTest > missingSourceIncrementalCannotProveCompatibility PASSED
+
+FirmwareValidatorTest > absentTargetPatchDateIsRejected PASSED
+
+FirmwareValidatorTest > invalidPayloadFingerprintCannotBeExportedOrUsedAsTarget PASSED
+
+FirmwareValidatorTest > compatiblePackageStillRequiresActualDeviceSignatureVerification PASSED
+
+FirmwareValidatorTest > absentCurrentPatchDateIsRejected PASSED
+
+FirmwareValidatorTest > installedOemSystemTargetIsNotMisreportedAsAndroid15Downgrade PASSED
+
+FirmwareValidatorTest > payloadFileSizeMismatchIsRejected PASSED
+
+FirmwareValidatorTest > invalidPayloadMagicIsRejected PASSED
+
+FirmwareValidatorTest > userdebugFirmwareIsRejected PASSED
+
+FirmwareValidatorTest > differentDeviceCodenameIsRejected PASSED
+
+FirmwareValidatorTest > anotherMotorolaModelUsesItsOwnExactSignedDeviceModelAndChannel PASSED
+
+FirmwareValidatorTest > nonZipInputIsRejectedWithoutException PASSED
+
+FirmwareValidatorTest > absentPropertiesEntryIsRejected PASSED
+
+FirmwareValidatorTest > wrongSourceFingerprintIsRejected PASSED
+
+FirmwareValidatorTest > invalidCalendarPatchDateIsRejected PASSED
+
+FirmwareValidatorTest > emptyInputIsRejectedWithoutException PASSED
+
+FirmwareValidatorTest > futurePayloadVersionIsRejected PASSED
+
+FirmwareValidatorTest > malformedTargetFingerprintIsRejected PASSED
+
+FirmwareValidatorTest > androidDowngradeIsRejected PASSED
+
+FirmwareValidatorTest > unknownCurrentTimestampIsRejected PASSED
+
+FirmwareValidatorTest > missingCurrentIncrementalDoesNotFallBackToBuildId PASSED
+
+FirmwareValidatorTest > olderTimestampIsRejected PASSED
+
+FirmwareValidatorTest > absentPayloadEntryIsRejected PASSED
+
+FirmwareValidatorTest > absentRegionMetadataIsExplicitlyUnproven PASSED
+
+FirmwareValidatorTest > matchingPayloadPairDoesNotWeakenSourceIncrementalChecks PASSED
+
+FirmwareValidatorTest > malformedHashEncodingIsRejected PASSED
+
+FirmwareValidatorTest > zipTraversalEntryIsRejectedEvenWithoutExtraction PASSED
+
+FirmwareValidatorTest > matchingPayloadAndAndroidFingerprintsRetainExistingCompatibilityChecks PASSED
+
+> Task :app:compileDebugKotlin
+
+> Task :core:test
+
+FirmwareValidatorTest > observedHistoricalPackageIsCorrectlyDiagnosedWhenExplicitlyProvided PASSED
+
+FirmwareValidatorTest > testFirmwareIsRejected PASSED
+
+FirmwareValidatorTest > unknownCurrentAndroidVersionIsRejected PASSED
+
+FirmwareValidatorTest > missingSourceFingerprintCannotProveCompatibility PASSED
+
+FirmwareValidatorTest > missingTimestampIsRejected PASSED
+
+FirmwareValidatorTest > nonAbPackageIsRejected PASSED
+
+FirmwareValidatorTest > absoluteZipEntryIsRejected PASSED
+
+FirmwareValidatorTest > patchRollbackIsRejected PASSED
+
+FirmwareValidatorTest > explicitlyDifferentSignedModelIsRejected PASSED
+
+FirmwareValidatorTest > explicitDowngradeIsRejected PASSED
+
+MonitoringTest > encoderSanitizesUnsafeIdentifiersAndBoundsHistoryBeforeWriting PASSED
+
+MonitoringTest > staleFutureAndAbsentCaptureTimesRemainQuiet PASSED
+
+MonitoringTest > arbitraryHostAndUnknownResourceKindCannotBecomeNotification PASSED
+
+MonitoringTest > noticeIdentityIncludesInstalledBuildAndResourceKind PASSED
+
+MonitoringTest > installedTargetNeverNotifiesEvenWhenOfficialUrlRemainsCached PASSED
+
+MonitoringTest > unrecognizedSchemaAndUnobservedMetadataNeverNotify PASSED
+
+MonitoringTest > missingMetadataCannotAssertThatThereIsNoServerUpdate PASSED
+
+MonitoringTest > sameReleaseAndRotatingSignedUrlStayDeduplicated PASSED
+
+MonitoringTest > unchangedResultRecordsSafeBoundedHistoryWithoutCallingSink PASSED
+
+MonitoringTest > absentConfigurationDefaultsOffAndCorruptionFailsClosed PASSED
+
+MonitoringTest > disabledAndSupersededGenerationNeverInvokeNotificationSink PASSED
+
+MonitoringTest > blankOrUnsafeBuildNamesNeverReachNotifications PASSED
+
+MonitoringTest > deniedOrFailingNotificationDoesNotConsumeReleaseIdentity PASSED
+
+MonitoringTest > everyActiveOrUnknownSnapshotAndEngineStateRemainQuiet PASSED
+
+MonitoringTest > zipReferenceRemainsUnverifiedLead PASSED
+
+MonitoringTest > persistenceAndDiagnosticStringsExcludeSignedUrlsAndPrivateSourceIdentifiers PASSED
+
+MonitoringTest > onlyExactReviewedProfileAndAndroidVersionCanNotify PASSED
+
+MonitoringTest > revokedAndUnmeasuredRootRemainQuiet PASSED
+
+MonitoringTest > freshNewMetadataCreatesInformationNoticeWithoutInstallabilityClaim PASSED
+
+MonitoringTest > stateRoundTripPreservesOptInIntervalHistoryAndLastNotification PASSED
+
+MonitoringTest > publishedNoticeAndHistoryCommitTogetherAndSecondResultStaysQuiet PASSED
+
+PackageTransferTest > oversizeOrMisdeclaredDownloadIsRejected PASSED
+
+PackageTransferTest > truncatedDownloadNeverBecomesCompletedFile PASSED
+
+PackageTransferTest > networkFailureMidStreamPreservesPreviousPackageAndRemovesPartial PASSED
+
+PackageTransferTest > emptyInputNeverReplacesExistingPackage PASSED
+
+PackageTransferTest > successfulReplacementIsAtomicAndLeavesNoStalePartial PASSED
+
+PackageTransferTest > completedExactLengthTransferCommitsOnlyPackageBytes PASSED
+
+PackageTransferTest > storageExhaustionPreservesExistingFile PASSED
+
+PackageTransferTest > coroutineCancellationLeavesNoCompletedDownload PASSED
+
+PayloadManifestTest > realHistoricalSignedPackageContainsKnownStock17Target PASSED
+
+PayloadManifestTest > neitherSupportedImageCannotCreateStockProof PASSED
+
+PayloadManifestTest > fullPayloadMayOmitSourceInfo PASSED
+
+PayloadManifestTest > projectsSourceAndTargetDigestsWithoutParsingOperationBlobs PASSED
+
+PayloadManifestTest > readsOnlyBoundedManifestFromPayloadZip PASSED
+
+PayloadManifestTest > bootOnlyAndBothImageTypesHaveIndependentSourceAndTargetDigests PASSED
+
+PayloadManifestTest > malformedSizesHashesWireTypesAndLengthsAreRejected PASSED
+
+PayloadManifestTest > rejectsSlotSuffixedAndPathPartitionNames PASSED
+
+PayloadManifestTest > duplicatePartitionOrCriticalFieldsFailClosed PASSED
+
+PrivacyTest > probeKeysCannotInjectRawOutputOrAdditionalReportLines PASSED
+
+PrivacyTest > userControlledNewlinesCannotForgeSuccessInReport PASSED
+
+PrivacyTest > simulatedObservationsAreExplicitlyMarked PASSED
+
+PrivacyTest > reportLanguageChangesOnlyAllowlistedLabels PASSED
+
+PrivacyTest > sensitiveFieldsAreOmittedRatherThanExportedWithCosmeticRedaction PASSED
+
+ReadOnlyMetadataTest > allKnownProtobufGlobalEnumsAreDecoded PASSED
+
+ReadOnlyMetadataTest > phoneVirtualAbMessageHasKnownVersionMagicAndNoMerge PASSED
+
+ReadOnlyMetadataTest > legacyStateFormatIsExactAndDoesNotTrimMalformedTextIntoNone PASSED
+
+ReadOnlyMetadataTest > unknownAdditionalFieldsCanBeSkippedWithoutChangingKnownState PASSED
+
+ReadOnlyMetadataTest > malformedAmbiguousAndUnknownStateEvidenceNeverBecomesNone PASSED
+
+ReadOnlyMetadataTest > existingEmptyPhoneStateIsProto3DefaultNoneRatherThanMissingEvidence PASSED
+
+ReadOnlyMetadataTest > invalidVirtualAbVersionMagicSizeAndEnumStayUnknown PASSED
+
+ReadOnlyMetadataTest > virtualAbSnapshotSourceRuleMatchesTheAospHal PASSED
+
+ReadOnlyMetadataTest > invalidBootControlBytesAreNeverRepairedOrAccepted PASSED
+
+ReadOnlyMetadataTest > recordedSuffixIsOptionalAndNeverOverridesCurrentSlot PASSED
+
+ReadOnlyMetadataTest > phoneBootControlCrcAndSlotBSuccessfulFlagAreDecodedWithUnusedSuffix PASSED
+
+ReadOnlyMetadataTest > completeMessageIsValidatedAfterTheStateField PASSED
+
+ReadOnlyMetadataTest > successfulBitWithoutRemainingTriesDoesNotMatchAospBootSuccess PASSED
+
+ReadinessTest > unknownModuleInventoryBlocksPreflight PASSED
+
+ReadinessTest > noRootBlocksEvenWithValidBackup PASSED
+
+ReadinessTest > staleAndFutureDatedObservationsCannotAuthorizeActions PASSED
+
+ReadinessTest > observedCompatibleDeviceAndAuthenticatedBackupPassPreflight PASSED
+
+ReadinessTest > batteryAndUnknownVirtualAbAreBlocked PASSED
+
+ReadinessTest > futureAndroidAndUnknownBootSecurityRequireProfileReview PASSED
+
+ReadinessTest > unknownFutureMagiskVersionFailsClosed PASSED
+
+ReadinessTest > engineErrorAndPendingRebootBlockNewUpdate PASSED
+
+ReadinessTest > simulatedCompatibleDeviceNeverAuthorizesRealFlow PASSED
+
+ReadinessTest > missingSlotOrInitBootPartitionBlocks PASSED
+
+ReadinessTest > wrongModelAndRegionAreBlockedIndependently PASSED
+
+ReadinessTest > missingOrUnprovenBackupBlocks PASSED
+
+ReadinessTest > activeOrUnknownSnapshotStatesAlwaysBlock PASSED
+
+ReadinessTest > insufficientStorageBlocks PASSED
+
+ResumableTransferTest > finalDigestAndSizeAreMeasuredFromCommittedBytes PASSED
+
+ResumableTransferTest > signedUrlAndEntityValidatorAreNotInterpolatedIntoDiagnostics PASSED
+
+ResumableTransferTest > redirectsMissingLengthEncodingAndDuplicateHeaderCasesFailClosed PASSED
+
+ResumableTransferTest > storageRunningOutMidstreamRetainsOnlyDurableBytes PASSED
+
+ResumableTransferTest > insufficientSpaceAndHashMismatchNeverPublish PASSED
+
+ResumableTransferTest > serverReturning200AfterResumeRestartsPrivatePartialWithoutConcatenation PASSED
+
+ResumableTransferTest > overlappingOrWrongTotalRangesAreRejected PASSED
+
+ResumableTransferTest > truncatedAndOverlongBodiesCannotPublishEvenWithValidHttpHeaders PASSED
+
+ResumableTransferTest > commitGateCanRefuseAfterHashWithoutReplacingOldFile PASSED
+
+ResumableTransferTest > changedEntityCannotBeAppendedToOldPrefix PASSED
+
+ResumableTransferTest > cancelledTransferCannotCommitOrDestroyPreviousPackage PASSED
+
+ResumableTransferTest > completeDurablePrefixFinishesAfterProcessDeathWithoutNetwork PASSED
+
+ResumableTransferTest > processDeathUncheckpointedTailIsTrimmedBeforeResume PASSED
+
+ResumableTransferTest > absentWeakValidatorOrDifferentSourceRestartsFromZero PASSED
+
+ResumableTransferTest > interruptedNetworkRetainsOnlyDurablePrefixThenResumesExactEntity PASSED
+
+ResumableTransferTest > untrustedUrlAndOversizeResponsesFailBeforeReadingOrPublishing PASSED
+
+StockEvidenceStoragePolicyTest > verifiedProofCopiesMutableAnchorCollectionBeforePersistence PASSED
+
+StockEvidenceStoragePolicyTest > storedProofRequiresConsistentHashesSizesFingerprintsAndTrustAnchors PASSED
+
+StockEvidenceStoragePolicyTest > excessivelyLargeFingerprintCannotEnterStoredProof PASSED
+
+StockEvidenceTest > contradictorySignedModelChannelAndDeviceNeverAuthoriseWrites PASSED
+
+StockEvidenceTest > unverifiedHashesOrAnyTrustStoreChangeInvalidateProof PASSED
+
+StockEvidenceTest > antiRollbackUnknownPatchTimestampDowngradeOrWipeBlocksAllReferences PASSED
+
+StockEvidenceTest > unknownMergeRootBootAndStaleObservationsCannotBindOrReadProof PASSED
+
+StockEvidenceTest > targetClaimsBindOnlyAfterSuccessfulFreshActualTargetBoot PASSED
+
+StockEvidenceTest > authenticatedOldAndNewBootAndInitBootAreSeparateReferences PASSED
+
+StockEvidenceTest > currentTargetStillNeedsSuccessfulActualBootAndExactIncremental PASSED
+
+StockEvidenceTest > missingModelAndChannelAllowOnlyCurrentPartitionByteEvidence PASSED
+
+StockEvidenceTest > sourceWrongBuildIncrementalTimestampPatchAndProfileNeverReceiveReference PASSED
+
+StockEvidenceTest > otherMeasuredMotorolaCanUseItsOwnSignedProfileWithoutMercAlias PASSED
+
+StockEvidenceTest > alreadyInstalledSignedTargetCanProveCurrentPartitionWithoutPretendingAnUpgrade PASSED
+
+StockEvidenceTest > propertySpoofingCannotOverrideTrustedKernelSecurityOrReplaceIt PASSED
+
+StockEvidenceTest > signedSourceNamespaceBridgeNeedsExactIndependentVendorObservation PASSED
+
+StockEvidenceTest > fullPayloadWithoutOldPartitionDigestCannotProveCurrentStock PASSED
+
+StockEvidenceTest > downloadedTargetProductNamespaceIsNeverGuessed PASSED
+
+VerifiedStockCatalogTest > regionalModelAndDeviceDifferencesFailClosedEvenWithSameBuildAndKey PASSED
+
+VerifiedStockCatalogTest > previousAndFutureBuildsNeverReuseCurrentStockReference PASSED
+
+VerifiedStockCatalogTest > absentOrDifferentTrustAnchorsCannotActivateTheBuiltInReference PASSED
+
+VerifiedStockCatalogTest > independentlyAuthenticatedReferenceIsAvailableForExactMeasuredProfileAndDeviceKey PASSED
+
+VerifiedStockCatalogTest > signedPackageAndSystemFingerprintAliasesAreNotMeasuredFingerprintProof PASSED
+
+WorkflowTest > missingDownloadOrPackageVerificationBlocks PASSED
+
+WorkflowTest > unmeasuredRootAfterRebootIsNotFalselyReportedAsRootLoss PASSED
+
+WorkflowTest > wrongActiveSlotIsNotSuccessEvenOnTargetBuild PASSED
+
+WorkflowTest > corruptUnknownVersionOrIncompleteJournalStopsSafely PASSED
+
+WorkflowTest > otaEngineErrorIsTerminalAndNotHiddenByLaterIdle PASSED
+
+WorkflowTest > fingerprintAliasAfterRebootNeedsManualInvestigation PASSED
+
+WorkflowTest > processDeathRestoresJournalThenReconcilesLiveObservations PASSED
+
+WorkflowTest > currentBuildChangeWithoutNewBootIsContradiction PASSED
+
+WorkflowTest > unchangedOrUnknownTargetIsBlocked PASSED
+
+WorkflowTest > preflightFromDifferentObservationCannotStartWorkflow PASSED
+
+WorkflowTest > activeMergeOrUnknownMergeCannotComplete PASSED
+
+WorkflowTest > lostRootAfterRebootCannotBeSuccess PASSED
+
+WorkflowTest > unsuccessfulOrUnknownBootCannotComplete PASSED
+
+WorkflowTest > failedInactiveSlotMagiskStepIsRecordedAsFailure PASSED
+
+WorkflowTest > compatibleUpdateStartsGuidanceWithoutClaimingStockRestored PASSED
+
+WorkflowTest > missingModulesAndChangedSecurityAreNotFullSuccess PASSED
+
+WorkflowTest > unknownModuleInventoryAndUnreviewedMagiskDoNotComplete PASSED
+
+WorkflowTest > noUpdateKeepsIdleAndDoesNotClaimNoServerOffer PASSED
+
+WorkflowTest > oldSlotAfterPendingOtaIsPossibleRollback PASSED
+
+WorkflowTest > fullObservedOutcomeIncludesSuccessfulBootRootAndMerge PASSED
+
+WorkflowTest > persistedManualNotesAndLineBreaksRoundTrip PASSED
+
+WorkflowTest > targetBootWithoutPriorObservedOtaDoesNotProveWholeWorkflow PASSED
+
+WorkflowTest > staleObservationsCannotConfirmPersistedSuccess PASSED
+
+WorkflowTest > magiskCannotBeReportedBeforeObservedOta PASSED
+
+WorkflowTest > manualStockRestoreNeverCountsAsObservedOta PASSED
+
+WorkflowTest > simulatedAndRealEvidenceNeverMix PASSED
+
+WorkflowTest > enginePendingRebootIsDistinctFromMagiskPreparedAndSuccess PASSED
+
+WorkflowTest > unexpectedRebootBeforeOtaRequiresRecovery PASSED
+
+CdsMonitorPolicyTest > failuresUnknownInputRevocationAndHttpWarningsStayQuiet PASSED
+
+CdsMonitorPolicyTest > freshServerInformationIsInformationalAndDeduplicatedWithoutUrl PASSED
+
+CdsMonitorPolicyTest > staleSimulatedNonMotorolaAndConflictingIdentitiesStayQuiet PASSED
+
+CdsMonitorPolicyTest > noOfferUnchangedAndMissingTargetNeverNotify PASSED
+
+CdsProtocolTest > trackingCannotEscapeFixedResourcesPath PASSED
+
+CdsProtocolTest > sourceMismatchMissingTargetAndNonPositiveSizeFailClosed PASSED
+
+CdsProtocolTest > completeZipAndMetadataReferencesStayDistinct PASSED
+
+CdsProtocolTest > targetComesFromExplicitFingerprintNotTheResourceFilename PASSED
+
+CdsProtocolTest > currentBuildIsNeverANewOffer PASSED
+
+CdsProtocolTest > arbitraryHostsTagsAndHeadersCannotAuthorizeADownload PASSED
+
+CdsProtocolTest > duplicateKeysTruncationHugeAndDeepResponsesFailClosed PASSED
+
+CdsProtocolTest > resourcesRequestUsesReturnedTimestampAndSerialOnlyIdentity PASSED
+
+CdsProtocolTest > requestUsesSourceObservedSerialOnlyIdentityAndActualStringBuildId PASSED
+
+CdsProtocolTest > noOfferIsAResponseForThisContextOnly PASSED
+
+CdsProtocolTest > protocolObjectsNeverInterpolateSerialGuidUrlOrResponseBody PASSED
+
+CdsProtocolTest > missingAndConflictingIdentityCannotBeSilentlyReplaced PASSED
+
+MotorolaImportPolicyTest > destinationSymlinkIsRejectedWithoutTouchingItsTarget SKIPPED
+
+MotorolaImportPolicyTest > atomicSourceReplacementDuringCopyRejectsReceiptAndPreservesSelection PASSED
+
+MotorolaImportPolicyTest > fullHashedCopyCommitsExactBytesWithoutTrustingFirmware PASSED
+
+MotorolaImportPolicyTest > pathsAndMissingOrEmptySourceNeverBecomeImportCommands PASSED
+
+MotorolaImportPolicyTest > sameSizeMutationWithRestoredMtimeStillRequiresSecondFullSourceHash PASSED
+
+MotorolaImportPolicyTest > changedDestinationDuringCopyIsNotOverwritten PASSED
+
+MotorolaImportPolicyTest > lowStoragePreservesPreviousCompleteDestination PASSED
+
+MotorolaImportPolicyTest > sourceSymlinksAreNotDiscoveredOrRead SKIPPED
+
+MotorolaImportPolicyTest > discoveryReturnsAtMostTwelveRegularBoundedCandidates PASSED
+
+MotorolaImportPolicyTest > storageFailureDuringCopyNeverPublishesPartialBytes PASSED
+
+MotorolaImportPolicyTest > destinationInsideOemDirectoryIsAlwaysRejected PASSED
+
+MotorolaImportPolicyTest > oversizedSparseSourceIsRejectedBeforeAnyCopy PASSED
+
+MotorolaImportPolicyTest > discoveryRejectsDirectoryFloodInsteadOfUnboundedListing PASSED
+
+MotorolaImportPolicyTest > acceptsOnlyBoundedAsciiZipBasenames PASSED
+
+MotorolaStagePolicyTest > signedWrongOrConflictingChannelCannotBeOverriddenByRegionFlag PASSED
+
+MotorolaStagePolicyTest > staleMergeEngineAutomaticUpdateAndUnknownSafetyFailClosed PASSED
+
+MotorolaStagePolicyTest > copyOnlyOfficialReviewKeepsCompatibilityBlockedDespiteProvenChannel PASSED
+
+MotorolaStagePolicyTest > matchingProductSuffixDoesNotMakeWrongBuildOrIncrementalAcceptable PASSED
+
+MotorolaStagePolicyTest > oemNamespacesRemainSeparateAndNeedIndependentLivePropertyEvidence PASSED
+
+MotorolaStagePolicyTest > wrongProfileRuntimeBootAndChangedSourceAreBlocked PASSED
+
+MotorolaStagePolicyTest > unsignedUnpinnedOrWrongTargetPackagesAreBlocked PASSED
+
+MotorolaStagePolicyTest > channelTextOrRegionFlagAloneCannotProveSignedRegion PASSED
+
+MotorolaStagePolicyTest > missingSignedChannelBlocksEvenOfficialRouteCorrectDeviceAndExplicitWarningConsent PASSED
+
+MotorolaStagePolicyTest > signedReteuPreChannelOrConsistentDualDeclarationsAreAcceptedAfterVerification PASSED
+
+MotorolaStagePolicyTest > changedDurableRunCannotPublishUsingAnEarlierSnapshot PASSED
+
+MotorolaStagePolicyTest > userReportedStockAndMismatchedCurrentPartitionCannotStage PASSED
+
+MotorolaStagePolicyTest > wipeDowngradeRollbackAndUnknownTimesOrPatchAreBlocked PASSED
+
+MotorolaStagePolicyTest > bothConcreteConfirmationsAreRequired PASSED
+
+VerifiedStageTransferTest > fsyncedCopyIsPublishedOnlyAfterFullHashAndReadback PASSED
+
+VerifiedStageTransferTest > interruptionAndUnsupportedAtomicPrimitiveLeaveNoPublishedZip PASSED
+
+VerifiedStageTransferTest > uncertainPostPublishDurabilityNeverBecomesAReceiptOrAutomaticDeletion PASSED
+
+VerifiedStageTransferTest > corruptedSourceOrInsufficientSpaceCannotPublish PASSED
+
+VerifiedStageTransferTest > existingExactFileCanReturnReadbackReceiptWithoutAnotherWrite PASSED
+
+VerifiedStageTransferTest > concurrentDestinationAppearingAtPublicationIsPreserved PASSED
+
+VerifiedStageTransferTest > existingDifferentFileIsNeverReplaced PASSED
+
+VerifiedStageTransferTest > temporaryCopyCannotBePlacedInWatchedDirectory PASSED
+
+AutomaticUpdatePolicyTest > liveSelectionDoesNotWaiveFreshRootMergeOrIdentityReadiness PASSED
+
+AutomaticUpdatePolicyTest > explicitWrongModelDeviceChannelAndConflictingRegionAnnotationsAreNeverWaived PASSED
+
+AutomaticUpdatePolicyTest > liveSelectionCannotReplaceWholeZipSignaturePayloadHashOrStructureVerification PASSED
+
+AutomaticUpdatePolicyTest > missingOrOutOfBoundsTargetImageDigestBlocksBeforeAnyRootOperation PASSED
+
+AutomaticUpdatePolicyTest > inconsistentSignedSourceIncrementalOrDuplicateSourceFingerprintsCannotBeBridged PASSED
+
+AutomaticUpdatePolicyTest > incrementalSourceDigestMustMatchTheWholeAuthenticatedCurrentBackupNotJustItsName PASSED
+
+AutomaticUpdatePolicyTest > explicitDowngradeWipeAndUnknownInstructionsRemainBlockedWithAValidBridge PASSED
+
+AutomaticUpdatePolicyTest > exactAndroidSourceAndLiveOemSelectionCanPassWithoutGuessingAProductAlias PASSED
+
+AutomaticUpdatePolicyTest > wrongSystemSourceBuildIncrementalOrCodenameCannotBorrowTheVendorBridge PASSED
+
+AutomaticUpdatePolicyTest > bootAndInitBootDigestBanksAreNotInterchangeable PASSED
+
+AutomaticUpdatePolicyTest > opaqueLiveSelectionIsRequiredEvenForCorrectlySignedCompatibleMetadata PASSED
+
+AutomaticUpdatePolicyTest > timestampSecurityPatchAndAndroidRollbackChecksAreIndependentOfLiveSelection PASSED
+
+AutomaticUpdatePolicyTest > observedSignedVendorSourceBridgesTheSystemNamespaceButDoesNotBecomeSignedChannelMetadata PASSED
+
+AutomaticUpdatePolicyTest > absentDifferentOrMerelySimilarVendorObservationCannotBridgeSignedAndroidPreconditions PASSED
+
+AutomaticUpdatePolicyTest > matchingPayloadSourceCannotWaiveAnExplicitlyWrongSignedAndroidSource PASSED
+
+AutomaticUpdatePolicyTest > fullOtaStillRequiresAProvenCurrentBackupAndAnExplicitLiveTarget PASSED
+
+MagiskRuntimeConfigTest > unsupportedOrAmbiguousConfigSyntaxIsRejected PASSED
+
+MagiskRuntimeConfigTest > readsStayBounded PASSED
+
+MagiskRuntimeConfigTest > authenticatedOldImageWithSpoofedBuildStillFailsRuntimeAssociation PASSED
+
+MagiskRuntimeConfigTest > officialConfigHasOneExactStockAssociation PASSED
+
+MagiskRuntimeConfigTest > associationNeverReplacesStockAuthenticity PASSED
+
+MagiskRuntimeConfigTest > onlyKnownRuntimeRootsAreAccepted PASSED
+
+MagiskRuntimeConfigTest > missingDuplicateAndMalformedHashesAreRejected PASSED
+
+MagiskRuntimeConfigTest > crlfAndMissingFinalNewlineAreAccepted PASSED
+
+RunAuthorizationTest > onlyVerifiedSameTargetCanNarrowUnknownHashAndFingerprint PASSED
+
+RunAuthorizationTest > codecRoundTripsCanonicalAuthorizationAndShortPermit PASSED
+
+RunAuthorizationTest > sourceBootSlotBuildProfileAndFingerprintCannotChangeDuringRun PASSED
+
+RunAuthorizationTest > everyAuthorizationScopeFieldIsHmacBound PASSED
+
+RunAuthorizationTest > explicitStartAndFreshMeasuredSourceAreRequired PASSED
+
+RunAuthorizationTest > wallClockAndMonotonicDeadlinesIndependentlyStopActions PASSED
+
+RunAuthorizationTest > operationIsBoundToExactAuthorizationActionNoncePackageBootAndTimes PASSED
+
+RunAuthorizationTest > codecRejectsDuplicateUnknownMissingBoundsPaddingAndMalformedUtf8 PASSED
+
+SandboxUpdateSessionTest > outOfOrderMockActionsDoNotChangePartitions PASSED
+
+SandboxUpdateSessionTest > existingSandboxCannotBeAccidentallyRestartedOrReset PASSED
+
+SandboxUpdateSessionTest > fullOfflineUpdateChangesTwoRegularFilesAndDurablyCompletes PASSED
+
+StockRestoreTest > processDeathAfterReadbackRecoversByObservationWithoutAnotherWrite PASSED
+
+StockRestoreTest > consentAuthenticatesEveryFieldAndRoundTrips PASSED
+
+StockRestoreTest > wrongSourceNeverReachesWriteBoundary PASSED
+
+StockRestoreTest > interruptedWriteRetainsBackupAndRecoveryNeverReplays PASSED
+
+StockRestoreTest > sandboxWritesOnlyActiveRegularFileAfterFullVerifiedBackup PASSED
+
+StockRestoreTest > liveModeRequiresRuntimeAssociationAndRejectsSimulatedObservations PASSED
+
+StockRestoreTest > monotonicExpiryCannotBeUndoneByChangingWallClock PASSED
+
+StockRestoreTest > unknownOrEnabledAutomaticUpdatesBlockRestore PASSED
+
+StockRestoreTest > rootSecurityAndFreshnessAreIndependentlyRequired PASSED
+
+StockRestoreTest > explicitRecoveryOfUnchangedSourceRecapturesBackupInvalidatesOldTokenAndNeedsANewPlan PASSED
+
+StockRestoreTest > explicitConsentAndNoRebootAcknowledgmentAreBothRequired PASSED
+
+StockRestoreTest > processDeathAfterConsentIsDurableAndDoesNotWriteDuringRecovery PASSED
+
+StockRestoreTest > partialChangedSourceCannotBeReleasedForAnotherAttempt PASSED
+
+StockRestoreTest > consumedConsentCannotBeReplayedEvenWhenFileIsRestoredExternally PASSED
+
+StockRestoreTest > recoveryCannotClaimSuccessWhileAnotherWriterHoldsTheLock PASSED
+
+StockRestoreTest > changedPartitionHashOrBootRequiresANewPlan PASSED
+
+StockRestoreTest > sandboxRejectsARealDeviceAndLivePlans PASSED
+
+UniversalWorkflowTest > traditionalAbBootPartitionCanFinishWithoutAnInventedVirtualAbMerge PASSED
+
+UniversalWorkflowTest > measuredMotorolaStartsWithItsOwnIdentityAndCallerChosenAuthorizationId PASSED
+
+UniversalWorkflowTest > changingModelCodenameOrChannelCannotReuseAnotherMotorolasRun PASSED
+
+UpdateCoordinatorTest > manualRestoreRemainsUnprovenUntilActualPartitionMeasurement PASSED
+
+UpdateCoordinatorTest > changedSourceFingerprintOrStockHashInvalidatesHandoff PASSED
+
+UpdateCoordinatorTest > manualMagiskReportRemainsUnverifiedBeforeBoot PASSED
+
+UpdateCoordinatorTest > rootPermissionFailureCanBeRetriedOnlyByAnExplicitFreshTargetRead PASSED
+
+UpdateCoordinatorTest > unobservedOtaCannotBecomeACompleteGuidedRun PASSED
+
+UpdateCoordinatorTest > simulationCannotStartLiveRun PASSED
+
+UpdateCoordinatorTest > interruptedWriterIsOnlyReconciledByReading PASSED
+
+UpdateCoordinatorTest > staleSourceObservationCannotAcknowledgeRebootOrLaunchWorkflowStep PASSED
+
+UpdateCoordinatorTest > unknownMetadataAndMixedModesNeverSucceed PASSED
+
+UpdateCoordinatorTest > authenticatedPackageCanBeAttachedWithoutErasingCompatibilityBlockers PASSED
+
+UpdateCoordinatorTest > targetFingerprintNamespaceDoesNotOverrideMeasuredBoot PASSED
+
+UpdateCoordinatorTest > moduleLossAndSecurityChangesRequireReview PASSED
+
+UpdateCoordinatorTest > forgedMagiskProofCannotConfirmAnImage PASSED
+
+UpdateCoordinatorTest > cancellationIsOnlyPossibleBeforeAnyRestoreOrPendingPlan PASSED
+
+UpdateCoordinatorTest > missingNewStockProofDoesNotClaimNextUpdateReadiness PASSED
+
+UpdateCoordinatorTest > officialRouteDoesNotRequireGenericPackageMetadataCompatibility PASSED
+
+UpdateCoordinatorTest > targetBuildIsRequiredButDeclaredFingerprintIsOptional PASSED
+
+UpdateCoordinatorTest > pendingRebootObservesOtaButNotMagisk PASSED
+
+UpdateCoordinatorTest > journalRoundTripPreservesIndependentEvidence PASSED
+
+UpdateCoordinatorTest > lateUiCallbacksCannotRegressTargetBootOrCompletedRun PASSED
+
+UpdateCoordinatorTest > mergeAndUnknownStatesCannotBeComplete PASSED
+
+UpdateCoordinatorTest > unreviewedTargetAndroidCannotBeQualifiedEvenWhenRootAndAllOtherChecksPass PASSED
+
+UpdateCoordinatorTest > reportedMagiskFailureCannotRebootAndOnlyFreshSameSourceCanReleaseManualRetry PASSED
+
+UpdateCoordinatorTest > actualTargetBuildAndSlotAreRequired PASSED
+
+UpdateCoordinatorTest > idleEngineDoesNotMeanOtaApplied PASSED
+
+UpdateCoordinatorTest > rootHasToBeMeasuredAfterBoot PASSED
+
+UpdateCoordinatorTest > sourceBuildAfterNewBootIsPossibleRollback PASSED
+
+UpdateFailureTest > currentCoordinatorKeepsEngineAndMergeFailureFatalAfterLaterIdleOrExplicitRetries PASSED
+
+> Task :app:compileDebugJavaWithJavac
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:compileReleaseKotlin
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugJavaRes
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:testDebugUnitTest
+> Task :app:compileReleaseJavaWithJavac
+> Task :app:bundleReleaseClassesToRuntimeJar
+> Task :app:bundleReleaseClassesToCompileJar
+> Task :app:processReleaseJavaRes
+> Task :app:dexBuilderDebug
+> Task :app:mergeDebugGlobalSynthetics
+> Task :app:compileReleaseUnitTestKotlin
+> Task :app:compileReleaseUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processReleaseUnitTestJavaRes
+> Task :app:mergeDebugJavaResource
+> Task :app:testReleaseUnitTest
+> Task :app:mergeLibDexDebug
+> Task :app:mergeProjectDexDebug
+> Task :app:configureCMakeDebug[arm64-v8a]
+> Task :app:buildCMakeDebug[arm64-v8a]
+> Task :app:configureCMakeDebug[x86_64]
+> Task :app:buildCMakeDebug[x86_64]
+> Task :app:mergeDebugJniLibFolders
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:mergeDebugNativeLibs
+> Task :app:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :app:stripDebugDebugSymbols
+> Task :app:buildCMakeRelWithDebInfo[arm64-v8a]
+> Task :app:configureCMakeRelWithDebInfo[x86_64]
+> Task :app:buildCMakeRelWithDebInfo[x86_64]
+> Task :app:mergeReleaseJniLibFolders
+> Task :app:mergeReleaseNativeLibs
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+> Task :app:verifyReleaseSigning
+> Task :app:stripReleaseDebugSymbols
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:extractReleaseNativeSymbolTables
+> Task :app:dexBuilderRelease
+> Task :app:desugarReleaseFileDependencies
+> Task :app:mergeReleaseStartupProfile
+> Task :app:mergeReleaseNativeDebugMetadata
+> Task :app:mergeExtDexRelease
+> Task :app:mergeReleaseArtProfile
+> Task :app:mergeReleaseGlobalSynthetics
+> Task :app:mergeReleaseShaders
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeReleaseAssets
+> Task :app:mergeDexRelease
+> Task :app:compressReleaseAssets
+> Task :app:extractReleaseVersionControlInfo
+> Task :app:extractProguardFiles
+> Task :app:compileReleaseArtProfile
+> Task :app:generateReleaseLintVitalReportModel
+> Task :app:mergeReleaseJavaResource
+> Task :app:optimizeReleaseResources
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:validateSigningRelease
+> Task :app:writeReleaseAppMetadata
+> Task :app:writeReleaseSigningConfigVersions
+> Task :app:preReleaseAndroidTestBuild SKIPPED
+> Task :app:compileReleaseAndroidTestAidl NO-SOURCE
+> Task :app:processReleaseAndroidTestManifest
+> Task :app:generateReleaseAndroidTestBuildConfig
+> Task :app:checkReleaseAndroidTestAarMetadata
+> Task :app:generateReleaseAndroidTestResValues
+> Task :app:mapReleaseAndroidTestSourceSetPaths
+> Task :app:generateReleaseAndroidTestResources
+> Task :app:mergeReleaseAndroidTestResources
+> Task :app:processReleaseAndroidTestResources
+> Task :app:lintVitalAnalyzeRelease
+> Task :app:lintVitalReportRelease SKIPPED
+> Task :app:lintVitalRelease SKIPPED
+> Task :app:packageRelease
+> Task :app:createReleaseApkListingFileRedirect
+> Task :app:assembleRelease
+> Task :app:assembleSignedRelease
+> Task :app:javaPreCompileReleaseAndroidTest
+> Task :app:mergeReleaseAndroidTestShaders
+> Task :app:compileReleaseAndroidTestShaders NO-SOURCE
+> Task :app:generateReleaseAndroidTestAssets UP-TO-DATE
+> Task :app:mergeReleaseAndroidTestAssets
+> Task :app:compressReleaseAndroidTestAssets
+> Task :app:checkReleaseAndroidTestDuplicateClasses
+> Task :app:desugarReleaseAndroidTestFileDependencies
+> Task :app:mergeExtDexReleaseAndroidTest
+> Task :app:mergeReleaseAndroidTestJniLibFolders
+> Task :app:mergeReleaseAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripReleaseAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningReleaseAndroidTest
+> Task :app:writeReleaseAndroidTestSigningConfigVersions
+> Task :app:generateDebugLintReportModel
+> Task :app:generateDebugUnitTestLintModel
+> Task :app:compileReleaseAndroidTestKotlin
+> Task :app:compileReleaseAndroidTestJavaWithJavac
+> Task :app:dexBuilderReleaseAndroidTest
+> Task :app:mergeDexReleaseAndroidTest
+> Task :app:mergeReleaseAndroidTestGlobalSynthetics
+> Task :app:processReleaseAndroidTestJavaRes
+> Task :app:mergeReleaseAndroidTestJavaResource
+> Task :app:packageReleaseAndroidTest
+> Task :app:createReleaseAndroidTestApkListingFileRedirect
+> Task :app:assembleReleaseAndroidTest
+> Task :app:lintAnalyzeDebugUnitTest
+> Task :app:generateReleaseAndroidTestLintModel
+> Task :app:generateReleaseLintReportModel
+> Task :app:generateReleaseUnitTestLintModel
+> Task :app:lintAnalyzeDebug
+
+> Task :app:lintReportDebug
+Wrote HTML report to file:///[WORKSPACE]/work/release-1.0/clean-source-198f66c/app/build/reports/lint-results-debug.html
+
+> Task :app:lintDebug
+> Task :app:lintAnalyzeReleaseAndroidTest
+> Task :app:lintAnalyzeRelease
+> Task :app:writeReleaseDependencyInventory
+> Task :app:lintAnalyzeReleaseUnitTest
+
+> Task :app:lintReportRelease
+Wrote HTML report to file:///[WORKSPACE]/work/release-1.0/clean-source-198f66c/app/build/reports/lint-results-release.html
+
+> Task :app:lintRelease
+
+BUILD SUCCESSFUL in 4m 12s
+155 actionable tasks: 155 executed
