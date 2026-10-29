@@ -33,7 +33,7 @@ jobs:
         run: python3 tools/verify_release_apk.py app/build/outputs/apk/release/app-release-unsigned.apk --unsigned --build-tools "$ANDROID_HOME/build-tools/35.0.0"
       - name: Audit resolved release dependency advisories
         run: python3 tools/audit_dependencies.py --inventory app/build/reports/dependencies/release-runtime.json --output app/build/reports/dependencies/osv-audit.json
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: debug-and-unsigned-release-validation
@@ -71,7 +71,7 @@ jobs:
           arch: x86_64
           disable-animations: true
           script: ./gradlew :app:connectedDebugAndroidTest --no-daemon --no-configuration-cache --console=plain
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: emulator-ui-reports
