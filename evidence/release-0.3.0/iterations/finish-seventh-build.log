@@ -684,8 +684,8 @@ UpdateCoordinatorTest > sourceBuildAfterNewBootIsPossibleRollback PASSED
 > Task :app:stripDebugAndroidTestDebugSymbols NO-SOURCE
 
 > Task :app:compileDebugKotlin
-w: file:///<WORKSPACE>/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/platform/importer/ImportSelection.kt:18:17 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
-w: file:///<WORKSPACE>/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/platform/importer/MotorolaPackageImporter.kt:77:21 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
+w: file:///[WORKSPACE]/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/platform/importer/ImportSelection.kt:18:17 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
+w: file:///[WORKSPACE]/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/platform/importer/MotorolaPackageImporter.kt:77:21 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
 
 > Task :app:compileDebugJavaWithJavac UP-TO-DATE
 > Task :app:bundleDebugClassesToRuntimeJar
@@ -720,7 +720,7 @@ w: file:///<WORKSPACE>/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/pl
 > Task :app:lintAnalyzeDebug
 
 > Task :app:lintReportDebug
-Wrote HTML report to file:///<WORKSPACE>/outputs/moto-ota-manager/app/build/reports/lint-results-debug.html
+Wrote HTML report to file:///[WORKSPACE]/outputs/moto-ota-manager/app/build/reports/lint-results-debug.html
 
 > Task :app:lintDebug
 

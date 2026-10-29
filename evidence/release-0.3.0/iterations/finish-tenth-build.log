@@ -245,8 +245,8 @@ FirmwareValidatorTest > zipTraversalEntryIsRejectedEvenWithoutExtraction PASSED
 FirmwareValidatorTest > matchingPayloadAndAndroidFingerprintsRetainExistingCompatibilityChecks PASSED
 
 > Task :app:compileDebugKotlin
-w: file:///<WORKSPACE>/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/rootprobe/StockRestoreProbe.kt:149:37 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
-w: file:///<WORKSPACE>/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/rootprobe/StockRestoreProbe.kt:150:35 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
+w: file:///[WORKSPACE]/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/rootprobe/StockRestoreProbe.kt:149:37 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
+w: file:///[WORKSPACE]/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/rootprobe/StockRestoreProbe.kt:150:35 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
 
 > Task :core:test
 
@@ -747,15 +747,15 @@ UpdateFailureTest > currentCoordinatorKeepsEngineAndMergeFailureFatalAfterLaterI
 > Task :app:lintAnalyzeDebug
 
 > Task :app:lintReportDebug
-Wrote HTML report to file:///<WORKSPACE>/outputs/moto-ota-manager/app/build/reports/lint-results-debug.html
+Wrote HTML report to file:///[WORKSPACE]/outputs/moto-ota-manager/app/build/reports/lint-results-debug.html
 
 > Task :app:lintDebug FAILED
 Lint found 1 errors, 24 warnings. First failure:
 
-<WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt:339: Error: Suspicious indentation: This is indented but is not continuing the previous expression (var received=false...) [SuspiciousIndentation]
+[WORKSPACE]\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt:339: Error: Suspicious indentation: This is indented but is not continuing the previous expression (var received=false...) [SuspiciousIndentation]
         var received=false
       ~~~~~~~~~~~~~~~~~~~~
-    <WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt:338: Previous statement here
+    [WORKSPACE]\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt:338: Previous statement here
 
    Explanation for issues of type "SuspiciousIndentation":
    This check looks for cases where the indentation suggests a grouping that
@@ -786,7 +786,7 @@ Lint found 1 errors, 24 warnings. First failure:
 
 
 The full lint text report is located at:
-  <WORKSPACE>\outputs\moto-ota-manager\app\build\intermediates\lint_intermediate_text_report\debug\lintReportDebug\lint-results-debug.txt
+  [WORKSPACE]\outputs\moto-ota-manager\app\build\intermediates\lint_intermediate_text_report\debug\lintReportDebug\lint-results-debug.txt
 
 FAILURE: Build failed with an exception.
 
@@ -807,10 +807,10 @@ Execution failed for task ':app:lintDebug'.
 
   Lint found 1 errors, 24 warnings. First failure:
 
-  <WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt:339: Error: Suspicious indentation: This is indented but is not continuing the previous expression (var received=false...) [SuspiciousIndentation]
+  [WORKSPACE]\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt:339: Error: Suspicious indentation: This is indented but is not continuing the previous expression (var received=false...) [SuspiciousIndentation]
           var received=false
         ~~~~~~~~~~~~~~~~~~~~
-      <WORKSPACE>\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt:338: Previous statement here
+      [WORKSPACE]\outputs\moto-ota-manager\app\src\main\java\nl\moto\ota\rootprobe\StockRestoreProbe.kt:338: Previous statement here
 
      Explanation for issues of type "SuspiciousIndentation":
      This check looks for cases where the indentation suggests a grouping that
@@ -841,7 +841,7 @@ Execution failed for task ':app:lintDebug'.
 
 
   The full lint text report is located at:
-    <WORKSPACE>\outputs\moto-ota-manager\app\build\intermediates\lint_intermediate_text_report\debug\lintReportDebug\lint-results-debug.txt
+    [WORKSPACE]\outputs\moto-ota-manager\app\build\intermediates\lint_intermediate_text_report\debug\lintReportDebug\lint-results-debug.txt
 
 * Try:
 > Run with --stacktrace option to get the stack trace.

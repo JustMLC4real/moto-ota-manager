@@ -655,7 +655,7 @@ UpdateCoordinatorTest > sourceBuildAfterNewBootIsPossibleRollback PASSED
 
 > Task :app:compileDebugKotlin FAILED
 59 actionable tasks: 16 executed, 43 up-to-date
-e: file:///<WORKSPACE>/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/rootprobe/staging/MotorolaStageProbe.kt:177:78 Unresolved reference 'O_DIRECTORY'.
+e: file:///[WORKSPACE]/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/rootprobe/staging/MotorolaStageProbe.kt:177:78 Unresolved reference 'O_DIRECTORY'.
 
 FAILURE: Build failed with an exception.
 

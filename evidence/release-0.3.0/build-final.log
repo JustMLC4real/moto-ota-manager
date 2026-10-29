@@ -672,9 +672,9 @@ UpdateCoordinatorTest > sourceBuildAfterNewBootIsPossibleRollback PASSED
 UpdateFailureTest > currentCoordinatorKeepsEngineAndMergeFailureFatalAfterLaterIdleOrExplicitRetries PASSED
 
 > Task :app:compileDebugKotlin
-w: file:///<WORKSPACE>/work/r03-48f664b2/moto-ota-manager/app/src/main/java/nl/moto/ota/platform/importer/ImportSelection.kt:18:17 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
-w: file:///<WORKSPACE>/work/r03-48f664b2/moto-ota-manager/app/src/main/java/nl/moto/ota/platform/importer/ImportTransactionCleanup.kt:29:48 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
-w: file:///<WORKSPACE>/work/r03-48f664b2/moto-ota-manager/app/src/main/java/nl/moto/ota/platform/importer/MotorolaPackageImporter.kt:78:21 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
+w: file:///[WORKSPACE]/work/r03-48f664b2/moto-ota-manager/app/src/main/java/nl/moto/ota/platform/importer/ImportSelection.kt:18:17 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
+w: file:///[WORKSPACE]/work/r03-48f664b2/moto-ota-manager/app/src/main/java/nl/moto/ota/platform/importer/ImportTransactionCleanup.kt:29:48 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
+w: file:///[WORKSPACE]/work/r03-48f664b2/moto-ota-manager/app/src/main/java/nl/moto/ota/platform/importer/MotorolaPackageImporter.kt:78:21 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
 
 > Task :app:compileDebugJavaWithJavac
 > Task :app:bundleDebugClassesToCompileJar
@@ -746,7 +746,7 @@ w: file:///<WORKSPACE>/work/r03-48f664b2/moto-ota-manager/app/src/main/java/nl/m
 > Task :app:lintAnalyzeDebug
 
 > Task :app:lintReportDebug
-Wrote HTML report to file:///<WORKSPACE>/work/r03-48f664b2/moto-ota-manager/app/build/reports/lint-results-debug.html
+Wrote HTML report to file:///[WORKSPACE]/work/r03-48f664b2/moto-ota-manager/app/build/reports/lint-results-debug.html
 
 > Task :app:lintDebug
 

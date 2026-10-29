@@ -745,7 +745,7 @@ UpdateFailureTest > currentCoordinatorKeepsEngineAndMergeFailureFatalAfterLaterI
 > Task :app:lintAnalyzeDebug
 
 > Task :app:lintReportDebug
-Wrote HTML report to file:///<WORKSPACE>/outputs/moto-ota-manager/app/build/reports/lint-results-debug.html
+Wrote HTML report to file:///[WORKSPACE]/outputs/moto-ota-manager/app/build/reports/lint-results-debug.html
 
 > Task :app:lintDebug
 

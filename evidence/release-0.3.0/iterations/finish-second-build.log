@@ -230,8 +230,8 @@ FirmwareValidatorTest > zipTraversalEntryIsRejectedEvenWithoutExtraction PASSED
 FirmwareValidatorTest > matchingPayloadAndAndroidFingerprintsRetainExistingCompatibilityChecks PASSED
 
 > Task :app:compileDebugKotlin FAILED
-e: file:///<WORKSPACE>/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/MotoViewModel.kt:137:66 Argument type mismatch: actual type is 'String?', but 'String' was expected.
-e: file:///<WORKSPACE>/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/rootprobe/StockRestoreProbe.kt:222:113 Unresolved reference 'O_DIRECTORY'.
+e: file:///[WORKSPACE]/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/MotoViewModel.kt:137:66 Argument type mismatch: actual type is 'String?', but 'String' was expected.
+e: file:///[WORKSPACE]/outputs/moto-ota-manager/app/src/main/java/nl/moto/ota/rootprobe/StockRestoreProbe.kt:222:113 Unresolved reference 'O_DIRECTORY'.
 
 > Task :core:test
 
@@ -588,7 +588,7 @@ Execution failed for task ':app:compileDebugKotlin'.
 -----------
 * What went wrong:
 Execution failed for task ':core:test'.
-> There were failing tests. See the report at: file:///<WORKSPACE>/outputs/moto-ota-manager/core/build/reports/tests/test/index.html
+> There were failing tests. See the report at: file:///[WORKSPACE]/outputs/moto-ota-manager/core/build/reports/tests/test/index.html
 
 * Try:
 > Run with --scan to get full insights.

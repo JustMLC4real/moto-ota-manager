@@ -1,6 +1,6 @@
 {
   "testedSourceCommit": "48f664b2ae3d970db8cd369b3f628365ca316898",
-  "cleanSourceRoot": "<WORKSPACE>\\work\\r03-48f664b2\\moto-ota-manager",
+  "cleanSourceRoot": "[WORKSPACE]\\work\\r03-48f664b2\\moto-ota-manager",
   "sourceArchiveSha256": "d39f59e9392d3248a761345041f1881130c4e4541d1ccdcab658a48f84b2558e",
   "buildInputSha256": "1faeab65b0f70b264aea5098f3f6b2dc26214a7733b04941454dcb4f3ea946df",
   "buildInputs": [

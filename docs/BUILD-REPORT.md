@@ -53,7 +53,7 @@ De emulator draait API35/x86_64/ranchu met 4096-byte kernelpages. Alle verpakte 
 
 De Vault-runtimetest vond `AccessDeniedException` voor hardlinks in deze Androidcontext en bewees vervolgens de geïmplementeerde duurzame kopiefallback, eigen inode en byte-isolatie. De oude aanname dat hardlinks altijd werken is verwijderd. [Werkelijke runtimewaarneming](../evidence/release-0.3.0/vault-runtime-strategy.txt).
 
-De opgenomen logs behouden de opdrachten, resultaten en foutmeldingen. Werkmappaden en JUnit-hostnamen zijn geanonimiseerd; regeleinden en afsluitende witruimte zijn genormaliseerd.
+De opgenomen logs behouden de opdrachten, resultaten en foutmeldingen. Werkmappaden zijn met de XML-veilige markering `[WORKSPACE]` geanonimiseerd en JUnit-hostnamen vervangen. Regeleinden en afsluitende witruimte zijn genormaliseerd. Alle opgenomen XML-rapporten zijn na redactie opnieuw geparseerd.
 
 ## Schone bronbuild en geleverde APK
 
@@ -69,7 +69,7 @@ De eerdere incrementele APK had een andere DEX-indeling en andere native bytes. 
 
 ## Iteratieve foutanalyse
 
-De opgenomen [iteratielogs](../evidence/release-0.3.0/iterations/) bewaren eerdere mislukte builds en correcties. Onder andere de afwijkende uitzondering bij ongeldige protobuf-wiretypes, een fixtureklokrace, ontbrekende publieke O_DIRECTORY-constanten, een bestaande verkeerde stagingbestemming, de hardlinkaanname, downloadjournaalcorruptie lokale importcleanup en een door de laatste scan gevonden onduidelijke engine-inspringing zijn daadwerkelijk onderzocht en gecorrigeerd. De definitieve groene log en XML zijn leidend; een oudere foutlog wordt niet als de huidige uitslag gepresenteerd.
+De opgenomen [iteratielogs](../evidence/release-0.3.0/iterations/) bewaren eerdere mislukte builds en correcties. Onder andere de afwijkende uitzondering bij ongeldige protobuf-wiretypes, een fixtureklokrace, ontbrekende publieke O_DIRECTORY-constanten, een bestaande verkeerde stagingbestemming, de hardlinkaanname, downloadjournaalcorruptie, lokale importcleanup en een door de laatste scan gevonden onduidelijke engine-inspringing zijn daadwerkelijk onderzocht en gecorrigeerd. De definitieve groene log en XML zijn leidend; een oudere foutlog wordt niet als de huidige uitslag gepresenteerd.
 
 ## Wat werkt, wat gesimuleerd is en wat nog toestelvalidatie vraagt
 
