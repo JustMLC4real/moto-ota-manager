@@ -1,4 +1,4 @@
-# Expected app release certificate — 1.0.0
+# Expected app release certificate — 1.0.1
 
 This public identity is for the **Moto OTA Manager app APK**, package `nl.moto.ota`. It is separate from Motorola firmware certificates, Android Verified Boot keys and Magisk image provenance.
 

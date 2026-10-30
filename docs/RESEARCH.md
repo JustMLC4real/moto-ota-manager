@@ -1,4 +1,4 @@
-# Research and evidence map — 1.0.0
+# Research and evidence map — 1.0.1
 
 Research distinguishes upstream contracts, observed implementation details, app policy, synthetic execution and physical-device qualification. A successful manual update shows feasibility for that recorded device state; it does not establish a stable third-party API for every Motorola model.
 

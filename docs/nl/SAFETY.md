@@ -1,4 +1,4 @@
-# Veiligheid en bewijs — 1.0.0
+# Veiligheid en bewijs — 1.0.1
 
 [English](../SAFETY.md) · [Workflow](UPDATE-WORKFLOW.md)
 

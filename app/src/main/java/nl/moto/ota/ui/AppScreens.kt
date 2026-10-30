@@ -1,9 +1,14 @@
 package nl.moto.ota.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalConfiguration
@@ -18,7 +23,6 @@ import nl.moto.ota.R
 import nl.moto.ota.core.*
 import nl.moto.ota.core.discovery.CdsStatus
 import nl.moto.ota.core.update.*
-import nl.moto.ota.platform.UpdateObservations
 import nl.moto.ota.platform.update.UpdateAutomationService
 import nl.moto.ota.platform.i18n.CheckMessageDomain
 import nl.moto.ota.platform.i18n.MessageRenderer
@@ -45,47 +49,53 @@ fun OverviewScreen(vm: MotoViewModel, actions: ScreenActions) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     PageHeader(R.string.ui_overview_title, R.string.ui_overview_body)
-    Panel(R.string.ui_device) {
-        Text(vm.device.model.ifBlank { stringResource(R.string.ui_model_pending) }, style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.primary)
-        Text(listOf(vm.device.device, vm.device.channel).filter(String::isNotBlank).joinToString(" · "), style = MaterialTheme.typography.bodySmall)
+    StatusPanel {
+        StatusBadge(stringResource(if (vm.device.rootGranted) R.string.ui_device_checked else R.string.ui_device_local))
+        Text(vm.device.model.ifBlank { stringResource(R.string.ui_model_pending) },
+            style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
+        Text(listOf(vm.device.device, vm.device.channel).filter(String::isNotBlank).joinToString(" · "),
+            style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Detail(R.string.ui_android_build, "${vm.device.androidVersion.ifBlank { "?" }} · ${vm.device.build.ifBlank { stringResource(R.string.ui_unknown) }}")
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(20.dp)) {
-            Column(Modifier.weight(1f)) { Detail(R.string.ui_security_patch, vm.device.securityPatch) }
-            Column(Modifier.weight(1f)) { Detail(R.string.ui_slots, "${vm.device.slot.ifBlank { "?" }} → ${vm.device.inactiveSlot.ifBlank { "?" }}") }
+        Button(onClick = actions.checkDevice, enabled = !vm.busy,
+            modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("check_device")) {
+            Text(stringResource(if (vm.busy) R.string.ui_check_progress else R.string.ui_check_device))
         }
-        Detail(R.string.ui_root_magisk, "${stringResource(if (vm.device.rootGranted) R.string.ui_root_granted else R.string.ui_root_unconfirmed)} · ${vm.device.magiskVersion.ifBlank { stringResource(R.string.ui_unknown) }}")
-        Detail(R.string.ui_battery_storage, "${vm.device.batteryPercent.takeIf { it >= 0 } ?: "?"}% · ${displaySize(vm.device.freeBytes)}")
-        OutlinedButton(onClick = actions.checkDevice, enabled = !vm.busy, modifier = Modifier.fillMaxWidth().testTag("check_device")) { Text(stringResource(R.string.ui_check_device)) }
     }
-    Panel(R.string.ui_support) {
-        Text(stringResource(when (vm.capabilities.supportTier) {
+    Panel(R.string.ui_readiness) {
+        StatusBadge(stringResource(if (vm.readiness.ready) R.string.ui_ready else R.string.ui_blocked))
+        Detail(R.string.ui_availability, vm.online.result?.let { MessageRenderer.cds(context, it) } ?: MessageRenderer.discovery(context, vm.discovery))
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            Column(Modifier.weight(1f)) { Detail(R.string.ui_security_patch, vm.device.securityPatch) }
+            Column(Modifier.weight(1f)) { Detail(R.string.ui_battery_storage, "${vm.device.batteryPercent.takeIf { it >= 0 } ?: "?"}% · ${displaySize(vm.device.freeBytes)}") }
+        }
+        OutlinedButton(onClick = { actions.navigate(Destination.FIRMWARE) }, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.ui_find_updates))
+        }
+        TextButton(onClick = { actions.navigate(Destination.UPDATE) }, enabled = !vm.busy) { Text(stringResource(R.string.ui_open_update)) }
+    }
+    if (vm.readiness.blockers.isNotEmpty()) ExpandablePanel(R.string.ui_next_steps,
+        summary = stringResource(R.string.ui_checks_attention_count, vm.readiness.blockers.size), tag = "readiness_details") {
+        vm.readiness.blockers.forEach { Text(MessageRenderer.check(context, it, CheckMessageDomain.READINESS), style = MaterialTheme.typography.bodyMedium) }
+    }
+    ExpandablePanel(R.string.ui_device_details, summary = stringResource(R.string.ui_device_details_summary), tag = "device_details") {
+        Detail(R.string.ui_root_magisk, "${stringResource(if (vm.device.rootGranted) R.string.ui_root_granted else R.string.ui_root_unconfirmed)} · ${vm.device.magiskVersion.ifBlank { stringResource(R.string.ui_unknown) }}")
+        Detail(R.string.ui_slots, "${vm.device.slot.ifBlank { "?" }} → ${vm.device.inactiveSlot.ifBlank { "?" }}")
+        Detail(R.string.ui_snapshot, snapshotTitle(vm.device.snapshot))
+        vm.inspection?.snapshot?.mergePercent?.takeIf { vm.device.snapshot == SnapshotState.MERGING && it.isFinite() && it in 0.0..100.0 }?.let { percent ->
+            val formatted = java.text.NumberFormat.getNumberInstance(configuration.locales[0]).apply { maximumFractionDigits = 1 }.format(percent)
+            Detail(R.string.ui_merge_progress, "$formatted%")
+            AnimatedProgress((percent / 100).toFloat())
+        }
+        Detail(R.string.ui_engine, engineTitle(vm.device.engine))
+        Detail(R.string.ui_original_backup, stringResource(if (vm.backup?.usableAsStock == true) R.string.ui_proven else R.string.ui_unproven))
+        Detail(R.string.ui_support, stringResource(when (vm.capabilities.supportTier) {
             DeviceSupportTier.QUALIFIED_MERC, DeviceSupportTier.PROOF_QUALIFIED -> R.string.ui_support_qualified
             DeviceSupportTier.MOTOROLA_GUIDED -> R.string.ui_support_guided
             DeviceSupportTier.MOTOROLA_DIAGNOSTIC -> R.string.ui_support_diagnostics
             else -> R.string.ui_support_other
-        }), style = MaterialTheme.typography.titleSmall)
+        }))
         Detail(R.string.ui_boot_layout, layoutTitle(vm.capabilities.bootLayout))
         if (vm.device.securityPropertyMismatch) Text(stringResource(R.string.ui_security_mismatch), style = MaterialTheme.typography.bodySmall)
-    }
-    Panel(R.string.ui_readiness) {
-        Text(stringResource(if (vm.readiness.ready) R.string.ui_ready else R.string.ui_blocked),
-            color = if (vm.readiness.ready) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-            style = MaterialTheme.typography.titleSmall)
-        Detail(R.string.ui_snapshot, snapshotTitle(vm.device.snapshot))
-        vm.inspection?.snapshot?.mergePercent?.takeIf {vm.device.snapshot==SnapshotState.MERGING && it.isFinite() && it in 0.0..100.0}?.let {percent->
-            val formatted=java.text.NumberFormat.getNumberInstance(configuration.locales[0]).apply {maximumFractionDigits=1}.format(percent)
-            Detail(R.string.ui_merge_progress,"$formatted%")
-        }
-        Detail(R.string.ui_engine, engineTitle(vm.device.engine))
-        Detail(R.string.ui_original_backup, stringResource(if (vm.backup?.usableAsStock == true) R.string.ui_proven else R.string.ui_unproven))
-        Detail(R.string.ui_availability, vm.online.result?.let { MessageRenderer.cds(context, it) } ?: MessageRenderer.discovery(context, vm.discovery))
-        Button(onClick = { actions.navigate(Destination.UPDATE) }, enabled = !vm.busy, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.ui_open_update)) }
-    }
-    if (vm.readiness.blockers.isNotEmpty()) ExpandablePanel(R.string.ui_next_steps, initiallyExpanded = false) {
-        vm.readiness.blockers.forEach { Text(MessageRenderer.check(context, it, CheckMessageDomain.READINESS), style = MaterialTheme.typography.bodyMedium) }
-    }
-    Panel(R.string.ui_quick_actions) {
-        OutlinedButton(onClick = { actions.navigate(Destination.FIRMWARE) }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.ui_find_updates)) }
         TextButton(onClick = { actions.navigate(Destination.DIAGNOSTICS) }) { Text(stringResource(R.string.ui_view_diagnostics)) }
     }
 }
@@ -93,55 +103,81 @@ fun OverviewScreen(vm: MotoViewModel, actions: ScreenActions) {
 @Composable
 fun FirmwareScreen(vm: MotoViewModel, actions: ScreenActions) {
     val context = LocalContext.current
+    val attention = vm.online.result?.status in setOf(CdsStatus.INPUT_MISSING, CdsStatus.UNSUPPORTED_REGION,
+        CdsStatus.UNKNOWN_RESPONSE, CdsStatus.HTTP_ERROR, CdsStatus.NETWORK_ERROR)
     PageHeader(R.string.ui_firmware_title, R.string.ui_firmware_body)
-    Panel(R.string.ui_server_check) {
-        Text(stringResource(R.string.ui_server_check_body))
-        vm.online.result?.let { result ->
-            Text(MessageRenderer.cds(context, result), color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.titleSmall)
-            if (result.targetBuild.isNotBlank()) Detail(R.string.ui_target_build, result.targetBuild)
-            result.targetVersion?.let { Detail(R.string.ui_target_android, it.toString()) }
-            if (result.status in setOf(CdsStatus.OFFER, CdsStatus.METADATA_ONLY)) Text(stringResource(R.string.ui_server_offer_note), style = MaterialTheme.typography.bodySmall)
+    StatusPanel(attention = attention) {
+        Text(stringResource(R.string.ui_server_check), style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Crossfade(targetState = vm.online.result, animationSpec = tween(180), label = "officialResult") { result ->
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                if (result == null) {
+                    Text(stringResource(R.string.ui_firmware_check_ready), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.ui_server_check_body), style = MaterialTheme.typography.bodyMedium)
+                } else {
+                    // Errors and missing fields stay in the main card, never inside a disclosure.
+                    Text(MessageRenderer.cds(context, result), style = MaterialTheme.typography.titleMedium,
+                        color = if (attention) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface)
+                    if (result.targetBuild.isNotBlank()) Detail(R.string.ui_target_build, result.targetBuild)
+                    result.targetVersion?.let { Detail(R.string.ui_target_android, it.toString()) }
+                    if (result.status in setOf(CdsStatus.OFFER, CdsStatus.METADATA_ONLY))
+                        Text(stringResource(R.string.ui_server_offer_note), style = MaterialTheme.typography.bodySmall)
+                }
+            }
         }
-        Button(onClick = actions.checkOnline, enabled = !vm.busy && !vm.demo, modifier = Modifier.fillMaxWidth().testTag("check_online")) {
+        Button(onClick = actions.checkOnline, enabled = !vm.busy && !vm.demo,
+            modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("check_online")) {
             Text(stringResource(if (vm.online.checking) R.string.ui_check_server_busy else R.string.ui_check_updates))
         }
-        if (vm.candidateAvailable) OutlinedButton(onClick = actions.download, enabled = !vm.busy && !vm.demo, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.ui_download_candidate)) }
+        if (vm.candidateAvailable) OutlinedButton(onClick = actions.download, enabled = !vm.busy && !vm.demo,
+            modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.ui_download_candidate)) }
         TextButton(onClick = actions.openUpdater, enabled = !vm.demo && !vm.busy) { Text(stringResource(R.string.ui_open_system_updates)) }
     }
     if (!vm.demo) DownloadProgressPanel(vm.downloadJob, vm.busy, true, vm::pauseDownload, vm::resumeDownload, vm::cancelDownload, vm::inspectSaved)
-    Panel(R.string.ui_monitoring) {
-        Text(stringResource(R.string.ui_monitoring_body), style = MaterialTheme.typography.bodyMedium)
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Text(stringResource(R.string.ui_monitoring_switch), modifier = Modifier.weight(1f))
-            Switch(checked = vm.monitorState.enabled, onCheckedChange = actions.monitor, enabled = !vm.busy && !vm.demo)
-        }
-        if (!vm.notificationsAllowed) Text(stringResource(R.string.ui_notifications_denied), style = MaterialTheme.typography.bodySmall)
-        Detail(R.string.ui_last_result, MessageRenderer.monitor(context, vm.monitorState.lastOutcome))
-        if (vm.monitorState.lastCheckedAtMillis > 0) Detail(R.string.ui_last_check, DateFormat.getDateTimeInstance().format(Date(vm.monitorState.lastCheckedAtMillis)))
-        TextButton(onClick = vm::checkMonitoringNow, enabled = vm.monitorState.enabled && !vm.busy && !vm.demo) { Text(stringResource(R.string.ui_check_local)) }
-    }
-    Panel(R.string.ui_package_inspect) {
-        Text(stringResource(R.string.ui_package_inspect_body))
-        OutlinedButton(onClick = actions.importOta, enabled = !vm.busy && !vm.demo, modifier = Modifier.fillMaxWidth().testTag("import_ota")) { Text(stringResource(R.string.ui_choose_ota)) }
-        TextButton(onClick = vm::inspectSaved, enabled = !vm.busy && !vm.demo) { Text(stringResource(R.string.ui_inspect_saved)) }
-        vm.firmware?.let { report ->
-            HorizontalDivider()
+    vm.firmware?.let { report ->
+        Panel(R.string.ui_package_result) {
+            StatusBadge(stringResource(if (report.signatureVerified && report.compatible) R.string.ui_package_verified else R.string.ui_package_needs_checks))
             Detail(R.string.ui_source_target, "${vm.device.build} → ${report.targetBuild}")
-            Detail(R.string.ui_target_android, report.targetAndroidVersion)
             Detail(R.string.ui_package_size, displaySize(report.packageBytes))
+            report.issues.forEach { Text(MessageRenderer.check(context, it, CheckMessageDomain.FIRMWARE),
+                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error) }
+            OutlinedButton(onClick = vm::verify, enabled = !vm.busy && !vm.demo && report.structureValid && report.payloadHashValid,
+                modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.ui_verify_signature)) }
+            vm.verificationProgress?.let {
+                AnimatedProgress(it / 100f)
+                Text(stringResource(R.string.ui_verification_progress, it), style = MaterialTheme.typography.bodySmall)
+            }
+        }
+        ExpandablePanel(R.string.ui_package_details, tag = "package_details") {
+            Detail(R.string.ui_target_android, report.targetAndroidVersion)
             Detail(R.string.ui_package_structure, stringResource(if (report.structureValid) R.string.ui_valid else R.string.ui_invalid))
             Detail(R.string.ui_payload_hash, stringResource(if (report.payloadHashValid) R.string.ui_matches else R.string.ui_unproven))
             Detail(R.string.ui_source_compatibility, stringResource(if (report.compatible) R.string.ui_checks_passed else R.string.ui_not_ready))
             Detail(R.string.ui_region, stringResource(if (report.regionVerified) R.string.ui_channel_match else R.string.ui_unproven))
             Detail(R.string.ui_signature, stringResource(if (report.signatureVerified) R.string.ui_signature_verified else R.string.ui_unproven))
             Detail("SHA-256", report.sha256)
-            report.issues.forEach { Text(MessageRenderer.check(context, it, CheckMessageDomain.FIRMWARE), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error) }
-            OutlinedButton(onClick = vm::verify, enabled = !vm.busy && !vm.demo && report.structureValid && report.payloadHashValid) { Text(stringResource(R.string.ui_verify_signature)) }
-            vm.verificationProgress?.let { Text(stringResource(R.string.ui_verification_progress, it)) }
             Text(stringResource(R.string.ui_package_signature_note), style = MaterialTheme.typography.bodySmall)
         }
     }
-    ExpandablePanel(R.string.ui_local_fallback) {
+    ExpandablePanel(R.string.ui_monitoring,
+        summary = stringResource(if (vm.monitorState.enabled) R.string.ui_monitoring_on else R.string.ui_monitoring_off), tag = "monitoring_details") {
+        Text(stringResource(R.string.ui_monitoring_body), style = MaterialTheme.typography.bodyMedium)
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            Text(stringResource(R.string.ui_monitoring_switch), modifier = Modifier.weight(1f))
+            Switch(checked = vm.monitorState.enabled, onCheckedChange = actions.monitor,
+                enabled = !vm.busy && !vm.demo, modifier = Modifier.testTag("monitoring_switch"))
+        }
+        if (!vm.notificationsAllowed) Text(stringResource(R.string.ui_notifications_denied), style = MaterialTheme.typography.bodySmall)
+        Detail(R.string.ui_last_result, MessageRenderer.monitor(context, vm.monitorState.lastOutcome))
+        if (vm.monitorState.lastCheckedAtMillis > 0) Detail(R.string.ui_last_check, DateFormat.getDateTimeInstance().format(Date(vm.monitorState.lastCheckedAtMillis)))
+        TextButton(onClick = vm::checkMonitoringNow, enabled = vm.monitorState.enabled && !vm.busy && !vm.demo) { Text(stringResource(R.string.ui_check_local)) }
+    }
+    ExpandablePanel(R.string.ui_package_inspect, summary = stringResource(R.string.ui_import_summary), tag = "import_details") {
+        Text(stringResource(R.string.ui_package_inspect_body))
+        OutlinedButton(onClick = actions.importOta, enabled = !vm.busy && !vm.demo, modifier = Modifier.fillMaxWidth().testTag("import_ota")) { Text(stringResource(R.string.ui_choose_ota)) }
+        TextButton(onClick = vm::inspectSaved, enabled = !vm.busy && !vm.demo) { Text(stringResource(R.string.ui_inspect_saved)) }
+    }
+    ExpandablePanel(R.string.ui_local_fallback, summary = stringResource(R.string.ui_local_fallback_summary), tag = "local_firmware_details") {
         Text(MessageRenderer.discovery(context, vm.discovery))
         Text(stringResource(R.string.ui_find_existing_body), style = MaterialTheme.typography.bodySmall)
         OutlinedButton(onClick = vm::discoverExistingPackages, enabled = !vm.busy && !vm.demo && vm.device.rootGranted) { Text(stringResource(R.string.ui_find_existing)) }
@@ -149,7 +185,7 @@ fun FirmwareScreen(vm: MotoViewModel, actions: ScreenActions) {
             TextButton(onClick = { vm.importExistingPackage(candidate.id) }, enabled = !vm.busy && !vm.demo) { Text(stringResource(R.string.ui_existing_candidate, index + 1, displaySize(candidate.bytes))) }
         }
     }
-    ExpandablePanel(R.string.ui_image_vault) {
+    ExpandablePanel(R.string.ui_image_vault, summary = stringResource(R.string.ui_image_vault_summary), tag = "image_vault_details") {
         Text(stringResource(R.string.ui_image_vault_body))
         OutlinedButton(onClick = actions.importImage, enabled = !vm.busy && !vm.demo) { Text(stringResource(R.string.ui_choose_image)) }
         vm.backup?.let { backup ->
@@ -166,55 +202,78 @@ fun UpdateScreen(vm: MotoViewModel, actions: ScreenActions) {
     val context = LocalContext.current
     PageHeader(R.string.ui_update_title, R.string.ui_update_body)
     if (vm.demo) {
-        Panel(R.string.ui_simulation_title) {
+        StatusPanel {
+            Text(stringResource(R.string.ui_simulation_title), style = MaterialTheme.typography.titleLarge)
             Text(stringResource(R.string.ui_simulation_body))
-            Button(onClick = vm::simulateOneTap, enabled = !vm.busy, modifier = Modifier.fillMaxWidth().testTag("run_simulation")) { Text(stringResource(R.string.ui_simulation_start)) }
-            if (vm.sandboxActive && vm.workflow.stage == UpdateStage.COMPLETE) Text(stringResource(R.string.ui_simulation_finished), color = MaterialTheme.colorScheme.primary, modifier = Modifier.testTag("simulation_complete"))
+            Button(onClick = vm::simulateOneTap, enabled = !vm.busy,
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("run_simulation")) { Text(stringResource(R.string.ui_simulation_start)) }
+            if (vm.sandboxActive && vm.workflow.stage == UpdateStage.COMPLETE) Text(stringResource(R.string.ui_simulation_finished),
+                color = MaterialTheme.colorScheme.primary, modifier = Modifier.testTag("simulation_complete"))
             TextButton(onClick = { vm.scan(false) }, enabled = !vm.busy) { Text(stringResource(R.string.ui_exit_simulation)) }
         }
     } else {
         Panel(R.string.ui_update_plan) {
             Detail(R.string.ui_source_target, "${vm.device.build.ifBlank { "?" }} → ${vm.observedTargetBuild.ifBlank { stringResource(R.string.ui_update_target_pending) }}")
             Detail(R.string.ui_slots, "${vm.device.slot.ifBlank { "?" }} → ${vm.device.inactiveSlot.ifBlank { "?" }}")
-            Text(stringResource(R.string.ui_update_plan_body))
+            Text(stringResource(R.string.ui_update_plan_body), style = MaterialTheme.typography.bodyMedium)
+            HorizontalDivider()
+            // The full authorization stays visible immediately before Start.
             Text(stringResource(R.string.ui_complete_run_consent), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
             Text(stringResource(R.string.ui_complete_run_privacy), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Button(onClick = actions.startUpdate, enabled = !vm.busy && vm.capabilities.motorola,
-                modifier = Modifier.fillMaxWidth().testTag("start_one_tap_update")) { Text(stringResource(R.string.ui_start_update)) }
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("start_one_tap_update")) { Text(stringResource(R.string.ui_start_update)) }
             if (!vm.capabilities.motorola) Text(stringResource(R.string.ui_motorola_required), style = MaterialTheme.typography.bodySmall)
         }
     }
-    Panel(R.string.ui_update_progress) {
-        if(vm.automationActive) {
-            Text(stringResource(UpdateAutomationService.phaseResource(vm.automation.phase)),style=MaterialTheme.typography.titleSmall)
-            if(vm.automation.totalBytes>0 && vm.automation.downloadedBytes<vm.automation.totalBytes){
-                LinearProgressIndicator(progress={vm.automation.downloadedBytes.toFloat()/vm.automation.totalBytes},modifier=Modifier.fillMaxWidth())
-                Text("${displaySize(vm.automation.downloadedBytes)} / ${displaySize(vm.automation.totalBytes)}",style=MaterialTheme.typography.bodySmall)
-            }else LinearProgressIndicator(modifier=Modifier.fillMaxWidth())
+    val steps = listOf(R.string.ui_step_verify, R.string.ui_step_restore, R.string.ui_step_install, R.string.ui_step_magisk, R.string.ui_step_finish)
+    val activeStep = when (vm.workflow.stage) {
+        UpdateStage.IDLE, UpdateStage.PRECHECK_BLOCKED -> 0
+        UpdateStage.STOCK_PREPARATION, UpdateStage.STOCK_CONFIRMATION, UpdateStage.STOCK_WRITE_RUNNING -> 1
+        UpdateStage.STOCK_RESTORED, UpdateStage.AWAITING_OFFICIAL_OTA, UpdateStage.OTA_APPLYING -> 2
+        UpdateStage.MAGISK_REQUIRED, UpdateStage.MAGISK_REPORTED_UNVERIFIED, UpdateStage.REBOOT_BY_SYSTEM_UPDATER -> 3
+        else -> 4
+    }
+    StatusPanel(attention = vm.workflow.errorCode != null) {
+        Text(stringResource(R.string.ui_update_progress), style = MaterialTheme.typography.labelLarge)
+        AnimatedContent(targetState = vm.workflow.stage, label = "workflowStage") { stage ->
+            Text(stageTitle(stage), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
         }
-        Text(stageTitle(vm.workflow.stage), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
-        Text(MessageRenderer.workflow(context, vm.workflow))
-        Text(vm.message.resolve(context), style = MaterialTheme.typography.bodySmall)
-        val steps = listOf(R.string.ui_step_verify, R.string.ui_step_restore, R.string.ui_step_install, R.string.ui_step_magisk, R.string.ui_step_finish)
-        val activeStep = when (vm.workflow.stage) {
-            UpdateStage.IDLE, UpdateStage.PRECHECK_BLOCKED -> 0
-            UpdateStage.STOCK_PREPARATION, UpdateStage.STOCK_CONFIRMATION, UpdateStage.STOCK_WRITE_RUNNING -> 1
-            UpdateStage.STOCK_RESTORED, UpdateStage.AWAITING_OFFICIAL_OTA, UpdateStage.OTA_APPLYING -> 2
-            UpdateStage.MAGISK_REQUIRED, UpdateStage.MAGISK_REPORTED_UNVERIFIED, UpdateStage.REBOOT_BY_SYSTEM_UPDATER -> 3
-            else -> 4
+        val workflowMessage = MessageRenderer.workflow(context, vm.workflow)
+        Text(workflowMessage, style = MaterialTheme.typography.bodyMedium)
+        val message = vm.message.resolve(context)
+        if (message != workflowMessage) Text(message, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        if (vm.automationActive) {
+            Text(stringResource(UpdateAutomationService.phaseResource(vm.automation.phase)), style = MaterialTheme.typography.titleSmall)
+            if (vm.automation.totalBytes > 0 && vm.automation.downloadedBytes < vm.automation.totalBytes) {
+                AnimatedProgress(vm.automation.downloadedBytes.toFloat() / vm.automation.totalBytes)
+                Text("${displaySize(vm.automation.downloadedBytes)} / ${displaySize(vm.automation.totalBytes)}", style = MaterialTheme.typography.bodySmall)
+            } else LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
         }
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            steps.forEachIndexed { index, _ ->
+                Surface(modifier = Modifier.weight(1f).height(5.dp), shape = CircleShape,
+                    color = if (index <= activeStep) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant) {}
+            }
+        }
+        Text(stringResource(R.string.ui_workflow_step, activeStep + 1, steps.size, stringResource(steps[activeStep])),
+            style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        if (vm.workflow.errorCode != null) Detail(R.string.ui_diagnostic_code, vm.workflow.errorCode.orEmpty())
+        TextButton(onClick = actions.checkDevice, enabled = !vm.busy) { Text(stringResource(R.string.ui_refresh_progress)) }
+    }
+    ExpandablePanel(R.string.ui_workflow_details, tag = "workflow_details") {
         steps.forEachIndexed { index, title ->
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text(if (index < activeStep || vm.workflow.stage == UpdateStage.COMPLETE) "✓" else "${index + 1}", color = if (index <= activeStep) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
-                Text(stringResource(title), style = MaterialTheme.typography.bodyMedium, fontWeight = if (index == activeStep) FontWeight.SemiBold else FontWeight.Normal)
+                Text(if (index < activeStep || vm.workflow.stage == UpdateStage.COMPLETE) "✓" else "${index + 1}",
+                    color = if (index <= activeStep) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(stringResource(title), style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = if (index == activeStep) FontWeight.SemiBold else FontWeight.Normal)
             }
         }
         if (vm.workflow.sourceBuild.isNotBlank()) Detail(R.string.ui_source_target, "${vm.workflow.sourceBuild} → ${vm.workflow.targetBuild}")
         Detail(R.string.ui_stock_restore, evidenceTitle(vm.workflow.stockRestoreEvidence))
         Detail(R.string.ui_magisk_target, evidenceTitle(vm.workflow.magiskEvidence))
-        if (vm.workflow.errorCode != null) Detail(R.string.ui_diagnostic_code, vm.workflow.errorCode.orEmpty())
-        TextButton(onClick = actions.checkDevice, enabled = !vm.busy) { Text(stringResource(R.string.ui_refresh_progress)) }
     }
+
     if (!vm.demo) ExpandablePanel(R.string.ui_advanced_recovery) {
         Text(stringResource(R.string.ui_advanced_recovery_body), style = MaterialTheme.typography.bodySmall)
         if (vm.workflow.stage in setOf(UpdateStage.STOCK_WRITE_RUNNING, UpdateStage.RECOVERY_REQUIRED) && vm.workflow.restoreTransactionId.isNotBlank()) {

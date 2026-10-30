@@ -1,4 +1,4 @@
-# Stock-image provenance / Herkomst van stock-images — 1.0.0
+# Stock-image provenance / Herkomst van stock-images — 1.0.1
 
 ## Nederlands
 

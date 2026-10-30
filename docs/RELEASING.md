@@ -1,8 +1,8 @@
-# Release guide — 1.0.0
+# Release guide — 1.0.1
 
 [Nederlands](nl/RELEASING.md)
 
-The first public release is `1.0.0`, Android version code 4, package `nl.moto.ota`. The delivered release is non-debuggable and retains the complete runtime, with code and resource shrinking off by default. R8 is an opt-in research configuration requiring full qualification. A completed local build is separate from publishing a GitHub Release.
+The current release is `1.0.1`, Android version code 5, package `nl.moto.ota`. The delivered release is non-debuggable and retains the complete runtime, with code and resource shrinking off by default. R8 is an opt-in research configuration requiring full qualification. A completed local build is separate from publishing a GitHub Release.
 
 The expected public app signing identity is recorded in [RELEASE-CERTIFICATE](RELEASE-CERTIFICATE.md). It is not a firmware or AVB key.
 

@@ -1,4 +1,4 @@
-# Integratiekeuzes — 1.0.0
+# Integratiekeuzes — 1.0.1
 
 [English](../INTEGRATION-DECISIONS.md) · [Onderzoek](../RESEARCH.md)
 

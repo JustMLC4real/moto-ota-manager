@@ -1,4 +1,4 @@
-# Monitoring, discovery and downloads — 1.0.0
+# Monitoring, discovery and downloads — 1.0.1
 
 [Nederlands](nl/MONITORING-AND-DOWNLOADS.md)
 

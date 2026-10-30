@@ -1,7 +1,10 @@
 package nl.moto.ota
 
+import android.os.ParcelFileDescriptor
+import android.provider.Settings
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.test.platform.app.InstrumentationRegistry
 import nl.moto.ota.platform.update.UpdateController
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -45,5 +48,106 @@ class PresentationUiTest {
         assertEquals("LIGHT", presentation.preference("appearance"))
         assertEquals(before, UpdateController(compose.activity).load())
         assertEquals(false, presentation.rootReadsAllowed())
+    }
+
+    @Test fun firmwareToolsExpandWithoutAuthorizingRootNetworkOrAnUpdate() {
+        waitUntilReady()
+        val before = UpdateController(compose.activity).load()
+        compose.onNodeWithTag("nav_firmware").performClick()
+        compose.onNodeWithTag("check_online").assertExists()
+        compose.onNodeWithTag("import_ota").assertDoesNotExist()
+        compose.onNodeWithTag("monitoring_switch").assertDoesNotExist()
+        compose.onNodeWithTag("import_details").performScrollTo().performClick()
+        compose.onNodeWithTag("import_ota").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithTag("import_details").performScrollTo().performClick()
+        compose.onNodeWithTag("import_ota").assertDoesNotExist()
+        compose.onNodeWithTag("monitoring_details").performScrollTo().performClick()
+        compose.onNodeWithTag("monitoring_switch").performScrollTo().assertExists()
+        assertEquals(false, presentation.rootReadsAllowed())
+        assertEquals(false, nl.moto.ota.platform.discovery.CdsController(compose.activity).consentGranted())
+        assertEquals(before, UpdateController(compose.activity).load())
+    }
+
+    @Test fun firmwareDisclosureSurvivesNavigationAndActivityRecreation() {
+        waitUntilReady()
+        compose.onNodeWithTag("nav_firmware").performClick()
+        compose.onNodeWithTag("import_details").performScrollTo().performClick()
+        compose.onNodeWithTag("import_ota").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithTag("nav_overview").performClick()
+        compose.onNodeWithTag("nav_firmware").performClick()
+        compose.onNodeWithTag("import_ota").performScrollTo().assertIsDisplayed()
+        compose.activityRule.scenario.recreate()
+        compose.waitForIdle()
+        compose.onNodeWithTag("nav_firmware").assertIsSelected()
+        compose.onNodeWithTag("import_ota").performScrollTo().assertIsDisplayed()
+        assertEquals(false, presentation.rootReadsAllowed())
+    }
+
+    @Test fun simulationKeepsTheExpandedImportAndMonitorActionsDisabled() {
+        waitUntilReady()
+        val before = UpdateController(compose.activity).load()
+        compose.onNodeWithTag("nav_diagnostics").performClick()
+        compose.onNodeWithTag("open_simulation").performScrollTo().performClick()
+        compose.onNodeWithTag("nav_firmware").performClick()
+        compose.onNodeWithTag("check_online").assertIsNotEnabled()
+        compose.onNodeWithTag("import_details").performScrollTo().performClick()
+        compose.onNodeWithTag("import_ota").performScrollTo().assertIsNotEnabled()
+        compose.onNodeWithTag("monitoring_details").performScrollTo().performClick()
+        compose.onNodeWithTag("monitoring_switch").performScrollTo().assertIsNotEnabled()
+        assertEquals(before, UpdateController(compose.activity).load())
+        assertEquals(false, presentation.rootReadsAllowed())
+    }
+
+    @Test fun reducedMotionKeepsNavigationDisclosuresAndPermissionChoicesUsable() {
+        waitUntilReady()
+        val resolver = compose.activity.contentResolver
+        val key = Settings.Global.ANIMATOR_DURATION_SCALE
+        val previous = Settings.Global.getString(resolver, key)
+        val before = UpdateController(compose.activity).load()
+        try {
+            animationScaleCommand("settings put global animator_duration_scale 0")
+            assertEquals(0f, Settings.Global.getFloat(resolver, key), 0f)
+            // A fresh composition observes the platform setting before any transitions.
+            compose.activityRule.scenario.recreate()
+            compose.waitForIdle()
+            waitUntilReady()
+            compose.onNodeWithTag("nav_firmware").performClick()
+            compose.onNodeWithTag("nav_firmware").assertIsSelected()
+            compose.onNodeWithTag("import_details").performScrollTo().performClick()
+            compose.onNodeWithTag("import_ota").performScrollTo().assertIsDisplayed()
+            compose.onNodeWithTag("import_details").performScrollTo().performClick()
+            compose.onNodeWithTag("import_ota").assertDoesNotExist()
+            compose.onNodeWithTag("check_online").performScrollTo().performClick()
+            compose.onNodeWithText(presentation.text(R.string.ui_online_privacy)).assertIsDisplayed()
+            compose.onNodeWithText(presentation.text(R.string.ui_cancel)).performClick()
+            compose.onNodeWithTag("nav_overview").performClick()
+            compose.onNodeWithTag("nav_overview").assertIsSelected()
+            compose.onNodeWithTag("check_device").performScrollTo().performClick()
+            compose.onNodeWithText(presentation.text(R.string.ui_root_diagnostic_title)).assertIsDisplayed()
+            compose.onNodeWithText(presentation.text(R.string.ui_cancel)).performClick()
+            assertEquals(false, presentation.rootReadsAllowed())
+            assertEquals(false, nl.moto.ota.platform.discovery.CdsController(compose.activity).consentGranted())
+            assertEquals(before, UpdateController(compose.activity).load())
+        } finally {
+            if (previous == null) {
+                animationScaleCommand("settings delete global animator_duration_scale")
+            } else {
+                val quoted = "'" + previous.replace("'", "'\\''") + "'"
+                animationScaleCommand("settings put global animator_duration_scale $quoted")
+            }
+            assertEquals(previous, Settings.Global.getString(resolver, key))
+        }
+    }
+
+    private fun animationScaleCommand(command: String) {
+        ParcelFileDescriptor.AutoCloseInputStream(
+            InstrumentationRegistry.getInstrumentation().uiAutomation.executeShellCommand(command)
+        ).bufferedReader().use { it.readText() }
+    }
+
+    private fun waitUntilReady() {
+        compose.waitUntil(30_000) {
+            compose.onAllNodes(hasTestTag("check_device") and isEnabled()).fetchSemanticsNodes().isNotEmpty()
+        }
     }
 }

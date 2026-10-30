@@ -1,4 +1,4 @@
-# Monitoring, detectie en downloads — 1.0.0
+# Monitoring, detectie en downloads — 1.0.1
 
 [English](../MONITORING-AND-DOWNLOADS.md)
 

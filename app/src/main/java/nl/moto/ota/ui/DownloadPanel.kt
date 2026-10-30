@@ -30,7 +30,7 @@ fun DownloadProgressPanel(job: DownloadJob?, busy: Boolean, enabled: Boolean, on
         if (job.targetBuild.isNotBlank()) Detail(R.string.ui_target_build, job.targetBuild)
         if (job.expectedBytes > 0) {
             val fraction = (job.downloadedBytes.toDouble() / job.expectedBytes).coerceIn(0.0, 1.0).toFloat()
-            LinearProgressIndicator(progress = { fraction }, modifier = Modifier.fillMaxWidth())
+            AnimatedProgress(fraction)
             Text(stringResource(R.string.ui_download_progress, displaySize(job.downloadedBytes), displaySize(job.expectedBytes), (fraction * 100).toInt()))
         } else if (active) {
             LinearProgressIndicator(Modifier.fillMaxWidth())

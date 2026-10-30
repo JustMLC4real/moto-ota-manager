@@ -1,4 +1,4 @@
-# Requirements audit — 1.0.0
+# Requirements audit — 1.0.1
 
 The original 25-section specification and subsequent user direction define the scope. Later direction adds measured cross-model Motorola support, English/Dutch presentation, a first-run tour, public release engineering, CDS as the primary detector and one initial scope covering subsequent update actions. Separate confirmations from the original brief are superseded by that initial scoped intent. The prohibition on destructive physical-device testing during development remains.
 
@@ -20,7 +20,7 @@ This is a source/evidence map. Only [BUILD-REPORT](BUILD-REPORT.md) establishes 
 | Process death and recovery | AtomicFile journal, exact transaction/source binding, durable consumption, recovery under writer lock and no automatic replay/rollback | Corrupt/unknown state is recovery required; never reset it to an empty successful run. |
 | Privacy and exports | Allowlisted local EN/NL report, separate consent-only identifiers, encrypted download references, disabled Android backup/transfer, no automatic upload | Real network checks disclose their listed data. Private storage/MACs cannot defeat a separate full-root compromise. |
 | Tests and documentation | [TEST-MATRIX](TEST-MATRIX.md) maps all twenty requested scenarios and additional capability/authorization/runtime/UI cases; EN/NL user guides and [manual plan](MANUAL-TESTS.md) | Synthetic, emulator and historical hardware evidence are labelled independently. Current totals must come from actual reports. |
-| GitHub-ready first release | Version1.0.0/code4, MIT/NOTICE, templates, pinned Actions, source hygiene scan, signing environment, actual APK verifier and dependency inventory; complete runtime by default, opt-in R8 requires full qualification | Local readiness does not publish a repository or release. No private key, user firmware or OEM decompiled source belongs in the archive. |
+| GitHub-ready first release | Version1.0.1/code5, MIT/NOTICE, templates, pinned Actions, source hygiene scan, signing environment, actual APK verifier and dependency inventory; complete runtime by default, opt-in R8 requires full qualification | Local readiness does not publish a repository or release. No private key, user firmware or OEM decompiled source belongs in the archive. |
 | Research and future Android | [Current research](RESEARCH.md), pinned CDS/Magisk/avbroot decisions, separate [roadmap](ROADMAP.md) | API38/Android18, other Magisk versions and changed OEM contracts are not silently approved. |
 
 The complete software delivery requires its current APK, source archive and final concrete logs. Future physical qualification remains a separate activity; it is not silently performed to fill this audit.

@@ -1,4 +1,4 @@
-# Installation and first run — 1.0.0
+# Installation and first run — 1.0.1
 
 [Nederlands](nl/INSTALLATION.md) · [Compatibility](COMPATIBILITY.md) · [Safety](SAFETY.md)
 

@@ -1,4 +1,4 @@
-# Bekende beperkingen — 1.0.0
+# Bekende beperkingen — 1.0.1
 
 [English](../KNOWN-LIMITATIONS.md)
 

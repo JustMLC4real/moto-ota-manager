@@ -72,8 +72,8 @@
     <string name="ui_critical_no_reboot_body">Stockherstel of de update is nog bezig. Houd de huidige rootsessie actief. Open Bijwerken om de volgende stap te controleren.</string>
     <string name="ui_critical_final">Rond de updatecontroles af</string>
     <string name="ui_critical_final_body">Controleer de nieuwe boot, root en snapshot-merge voordat je een volgende update start.</string>
-    <string name="ui_overview_title">Je Motorola in één oogopslag</string>
-    <string name="ui_overview_body">Controleer de toestelstatus en zie wat klaar is voor de volgende officiële update.</string>
+    <string name="ui_overview_title">Je toestel</string>
+    <string name="ui_overview_body">Software, root en updatestatus in één oogopslag.</string>
     <string name="ui_device">Toestel</string>
     <string name="ui_model_pending">Wachten op toestelgegevens</string>
     <string name="ui_android_build">Android en build</string>
@@ -109,9 +109,9 @@
     <string name="ui_gib">%1$s GiB</string>
     <string name="ui_mib">%1$s MiB</string>
     <string name="ui_firmware_title">Officiële updates</string>
-    <string name="ui_firmware_body">Controleer rechtstreeks bij Motorola en verifieer de firmware voordat die gebruikt kan worden.</string>
+    <string name="ui_firmware_body">Zoek en verifieer officiële Motorola-firmware.</string>
     <string name="ui_server_check">Motorola-updateservice</string>
-    <string name="ui_server_check_body">De hoofdcontrole vraagt Motorola naar updates voor jouw toestel en softwarekanaal. Lokale updatergegevens en bestandsimport blijven beschikbaar.</string>
+    <string name="ui_server_check_body">Controleer Motorola voor jouw toestel en softwarekanaal.</string>
     <string name="ui_check_updates">Controleer op updates</string>
     <string name="ui_check_server_busy">Motorola wordt gecontroleerd…</string>
     <string name="ui_open_system_updates">Open Motorola-systeemupdates</string>
@@ -136,7 +136,7 @@
     <string name="ui_target_build">Doelbuild</string>
     <string name="ui_target_android">Android-doelversie</string>
     <string name="ui_download_candidate">Download aangeboden update</string>
-    <string name="ui_local_fallback">Andere manieren om je update te vinden</string>
+    <string name="ui_local_fallback">Cache van Motorola-app</string>
     <string name="ui_local_metadata">Lokale Motorola-metadata</string>
     <string name="ui_find_existing">Zoek een gedownload Motorola-pakket</string>
     <string name="ui_find_existing_body">Lees een bestaande ZIP uit Motorola’s appmap zonder het originele bestand te wijzigen.</string>
@@ -183,10 +183,10 @@
     <string name="ui_root_diagnostic_body">Geef Moto OTA Manager roottoegang via Magisk → Superuser. Deze controle leest toestelgegevens, slots, snapshots, updatestatus, back-ups en de module-inventaris. Er wordt niets geïnstalleerd, hersteld of herstart.</string>
     <string name="ui_read_diagnostics">Diagnostiek uitlezen</string>
     <string name="ui_update_title">Eén update. Eén duidelijke route.</string>
-    <string name="ui_update_body">Start hier het volledige ondersteunde updateproces. De app controleert elke stap en stopt wanneer het bewijs niet overeenkomt.</string>
+    <string name="ui_update_body">Bekijk het plan en volg je update.</string>
     <string name="ui_update_plan">Jouw updateplan</string>
     <string name="ui_update_target_pending">Volgend geschikt officieel aanbod</string>
-    <string name="ui_update_plan_body">De app controleert Motorola, downloadt het aangeboden pakket, verifieert het, bewaart de huidige gepatchte image, herstelt de passende stockpartitie, past de OTA toe, bereidt Magisk voor op het volgende slot en herstart wanneer de laatste controles vóór de boot slagen.</string>
+    <string name="ui_update_plan_body">Motorola controleren → downloaden en verifiëren → gepatchte image bewaren → stock herstellen → OTA installeren → Magisk voorbereiden → herstart na controles.</string>
     <string name="ui_complete_run_consent">Door te starten geef je akkoord voor de benodigde partitieschrijfacties, OTA-installatie, Magisk-voorbereiding en herstart voor deze update. Er volgen geen afzonderlijke bevestigingen.</string>
     <string name="ui_complete_run_privacy">De controle deelt je serienummer, build-GUID, firmware- en toestelgegevens, kanaal en taal met Motorola. Bewaar een aparte back-up van belangrijke bestanden en herstart niet handmatig terwijl de update loopt.</string>
     <string name="ui_start_update">Start update en herstart</string>
@@ -378,4 +378,22 @@
     <string name="ui_failure_detail_code">%1$s
 Diagnosecode: %2$s</string>
     <string name="ui_merge_progress">Voortgang snapshotmerge</string>
+    <string name="ui_expanded">Uitgeklapt</string>
+    <string name="ui_collapsed">Ingeklapt</string>
+    <string name="ui_device_checked">Root beschikbaar</string>
+    <string name="ui_device_local">Lokaal toesteloverzicht</string>
+    <string name="ui_checks_attention_count">%1$d controles om te bekijken</string>
+    <string name="ui_device_details">Toestelgegevens</string>
+    <string name="ui_device_details_summary">Root, slots, back-up en ondersteuning</string>
+    <string name="ui_firmware_check_ready">Klaar om te controleren</string>
+    <string name="ui_package_verified">Handtekening en bron geverifieerd</string>
+    <string name="ui_package_needs_checks">Verificatie nodig</string>
+    <string name="ui_package_details">Details van pakketverificatie</string>
+    <string name="ui_monitoring_on">Aan · beheerd door Android</string>
+    <string name="ui_monitoring_off">Uit · optionele updatemeldingen</string>
+    <string name="ui_import_summary">Open een officiële OTA-ZIP of opgeslagen pakket</string>
+    <string name="ui_local_fallback_summary">Lokale metadata en bestaande downloads</string>
+    <string name="ui_image_vault_summary">Importeer een bootimage of Magisk-back-up</string>
+    <string name="ui_workflow_step">Stap %1$d van %2$d · %3$s</string>
+    <string name="ui_workflow_details">Stappen en verificatiebewijs</string>
 </resources>

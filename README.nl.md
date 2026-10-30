@@ -6,11 +6,11 @@
 
 Kotlin · Jetpack Compose · Android 13+ · English / Nederlands · MIT
 
-[Download 1.0.0](https://github.com/JustMLC4real/moto-ota-manager/releases/tag/v1.0.0) · [Aan de slag](docs/nl/INSTALLATION.md) · [Compatibiliteit](docs/nl/COMPATIBILITY.md) · [Buildbewijs](docs/BUILD-REPORT.md) · [English README](README.md)
+[Download 1.0.1](https://github.com/JustMLC4real/moto-ota-manager/releases/tag/v1.0.1) · [Aan de slag](docs/nl/INSTALLATION.md) · [Compatibiliteit](docs/nl/COMPATIBILITY.md) · [Buildbewijs](docs/BUILD-REPORT.md) · [English README](README.md)
 
 </div>
 
-Moto OTA Manager **1.0.0** combineert toesteldiagnostiek, firmwareonderzoek, hervatbare downloads en een duurzame begeleide updateworkflow in één Android-app. De app is ontwikkeld rond de Motorola Edge 70 Pro **XT2607-1 / merc / reteu** en beoordeelt andere Motorola-toestellen op hun werkelijk gemeten mogelijkheden.
+Moto OTA Manager **1.0.1** combineert toesteldiagnostiek, firmwareonderzoek, hervatbare downloads en een duurzame begeleide updateworkflow in één Android-app. De app is ontwikkeld rond de Motorola Edge 70 Pro **XT2607-1 / merc / reteu** en beoordeelt andere Motorola-toestellen op hun werkelijk gemeten mogelijkheden.
 
 Een ontvangen bestand, geauthenticeerd pakket, handmatig gemelde stap en geverifieerde toestelobservatie zijn afzonderlijke resultaten. Onbekend blijft onbekend. Eén beoordeelde start begrenst volgende handelingen, inclusief de getoonde partitieschrijfacties, rootbehoud en herstart; iedere actie vereist nog steeds vers bewijs. Niet-ondersteunde of onzekere overgangen pauzeren. Android en Motorola behouden hun eigen updatecontroles.
 
@@ -78,7 +78,7 @@ ANDROID_SERIAL=emulator-5554 ./gradlew :app:connectedDebugAndroidTest --no-daemo
 
 De fysieke validatietest vereist aparte opt-in en wordt standaard overgeslagen. Selecteer je telefoon nooit voor de emulatorsuite. [Testmatrix](docs/TEST-MATRIX.md).
 
-Releasebuilds zijn niet-debuggable, ondertekend en afzonderlijk gecontroleerd. Versie 1.0.0 bevat de volledige runtime zonder codeverkleining: geoptimaliseerde release-instrumentatie toonde gedeelde-library-ABI-fouten aan. R8 blijft optioneel voor verdere kwalificatie. Ondertekenen vereist je eigen private releasesleutel; er staat geen sleutel in de bron en unsigned CI-uitvoer is geen installeerbare release. [Releasehandleiding](docs/nl/RELEASING.md) · [Release-engineering](docs/RELEASE-ENGINEERING.md).
+Releasebuilds zijn niet-debuggable, ondertekend en afzonderlijk gecontroleerd. Versie 1.0.1 bevat de volledige runtime zonder codeverkleining: geoptimaliseerde release-instrumentatie toonde gedeelde-library-ABI-fouten aan. R8 blijft optioneel voor verdere kwalificatie. Ondertekenen vereist je eigen private releasesleutel; er staat geen sleutel in de bron en unsigned CI-uitvoer is geen installeerbare release. [Releasehandleiding](docs/nl/RELEASING.md) · [Release-engineering](docs/RELEASE-ENGINEERING.md).
 
 ## Repository
 

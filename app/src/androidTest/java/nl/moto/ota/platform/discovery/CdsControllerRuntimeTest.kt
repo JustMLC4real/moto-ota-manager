@@ -60,6 +60,30 @@ class CdsControllerRuntimeTest {
         controller.setConsent(true)
         assertEquals(CdsStatus.CONSENT_REQUIRED,controller.check(inspection).status)
     }
+    @Test fun measuredFifteenHexGuidAndMissingDisplayReachTheCheckWithoutInventingIdentity()=runBlocking {
+        val measuredGuid="abc0123456789de"
+        val properties=mapOf("ro.serialno" to "SYNTHETIC_SERIAL", "ro.boot.serialno" to "SYNTHETIC_SERIAL",
+            "ro.mot.build.guid" to measuredGuid, "ro.product.manufacturer" to "motorola",
+            "ro.product.model" to "Synthetic Motorola", "ro.boot.hardware.sku" to "XT0000-1",
+            "ro.product.device" to "sample", "ro.product.name" to "sample_g", "ro.boot.carrier" to "reteu",
+            "ro.build.id" to "CURRENT", "ro.build.fingerprint" to "motorola/sample_g/sample:17/CURRENT/123:user/release-keys",
+            "ro.build.version.release" to "17", "ro.build.version.incremental" to "123")
+        var reads=0
+        var requests=0
+        val controller=CdsController(context,CdsTransport { url,body ->
+            requests++
+            assertEquals("https://moto-cds.appspot.com/cds/upgrade/1/check/ctx/ota/key/$measuredGuid",url)
+            assertTrue(body.toString(Charsets.UTF_8).contains("\"product\":\"sample_g\""))
+            CdsHttpResponse(200,"""{"proceed":false,"context":"ota","contextKey":"$measuredGuid","contentTimestamp":0}""")
+        },CdsIdentityReader { reads++; properties })
+        controller.setConsent(true)
+        assertEquals(CdsStatus.NO_OFFER,controller.check(inspection).status)
+        assertEquals(1,reads)
+        assertEquals(1,requests)
+        assertNull(controller.selectionProof())
+        assertNull(controller.state.value.result!!.packageReference)
+        assertEquals(mapOf("enabled" to true),context.getSharedPreferences("cds-network-consent",Context.MODE_PRIVATE).all)
+    }
     @Test fun checkAndResourceResponseBindBeforeExposingAPackage()=runBlocking {
         val urls=mutableListOf<String>()
         val controller=CdsController(context,CdsTransport { url,body->

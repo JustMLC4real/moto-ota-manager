@@ -1,8 +1,8 @@
-# Motorola CDS provider — 1.0.0
+# Motorola CDS provider — 1.0.1
 
 [English](CDS-PROVIDER.md) · [Nederlands](nl/CDS-PROVIDER.md)
 
-The primary online detector is an independent Kotlin client for the production CDS protocol observed in [FixeQD/motorola-update, commit 272f1c9](https://github.com/FixeQD/motorola-update/tree/272f1c9bbe930a00ed76fe65d481f5cb108dacdf). It uses real HTTPS by default. Tests inject synthetic identities and responses. No live request with a real device identifier was made during implementation.
+The primary online detector is an independent Kotlin client for the production CDS protocol observed in [FixeQD/motorola-update, commit 272f1c9](https://github.com/FixeQD/motorola-update/tree/272f1c9bbe930a00ed76fe65d481f5cb108dacdf). It uses real HTTPS by default. Tests inject synthetic identities and responses; their success does not establish live Motorola acceptance.
 
 This is an internal integration derived from source observations, not a documented public Motorola SDK. Server acceptance, rollout decisions and future schema stability are not guaranteed. The official updater, recognizable local cache and explicit package import remain fallbacks.
 
@@ -11,6 +11,14 @@ This is an internal integration derived from source observations, not a document
 Before an identity read or HTTP request, the user must explicitly allow online sharing. Only the consent boolean is stored. A dedicated fixed read then obtains the serial number and build-context GUID. They never enter ordinary probes, `Inspection`, reports, WorkManager input or histories. No IMEI, phone permission, OEM credential or account credential is used.
 
 Requests send the serial number, GUID, measured manufacturer/model/product/device/channel, build ID/fingerprint/incremental, Android version, app language and available brand/hardware/locale information. The destination sees normal connection metadata, including the network IP. Identifiers and raw responses remain in memory. An authorized download URL moves into the downloader's encrypted secret store. Revocation stops future requests and discards the controller result; an already transmitted request cannot be recalled.
+
+## Measured identity selection
+
+The build-context key is the unchanged value of `ro.mot.build.guid`. Version 1.0.1 accepts exactly 15 or 40 hexadecimal characters; the old 40-only check could incorrectly report a measured Motorola GUID as missing before any HTTP request. A [device report in Motorola's source repository](https://github.com/MotorolaMobilityLLC/kernel-msm/issues/752) records the 15-character form. This is an observed input format, not a public CDS contract. The client never pads, hashes or fabricates the value, and it does not substitute guessed property aliases. An absent or invalid value still blocks the online check.
+
+For the request's product, the reader prefers the measured `ro.vendor.product.display` used by the observed OEM reader. When that property is empty, it uses the measured `ro.product.name`, as in the [research repository's original request example](https://github.com/FixeQD/motorola-update/blob/272f1c9bbe930a00ed76fe65d481f5cb108dacdf/README.md). Both absent still means the OEM product is missing. This fallback does not create a product from the model, device codename or fingerprint.
+
+The dedicated identity read must agree with the preceding inspection where comparable fields are present. The product name must agree with the build fingerprint's product; manufacturer, device and build must also be consistent. Available vendor fingerprint evidence must match the manufacturer and device, while an older vendor build is allowed. Conflicting serial, channel or technical model values remain blocking. A Play Integrity Fix configuration or another property override that produces such conflicts cannot supply the fallback identity; these consistency checks do not prove that every possible spoof has been detected.
 
 ## Protocol boundaries
 
@@ -41,4 +49,4 @@ Background checks require monitor opt-in plus online consent. Only a fresh diffe
 
 The research repository is labelled [AGPL 3.0](https://github.com/FixeQD/motorola-update/blob/272f1c9bbe930a00ed76fe65d481f5cb108dacdf/LICENSE) and contains decompiled OEM sources. Those files remain outside this distribution. No OEM implementation, credentials, firmware or binary is copied into this independently written client.
 
-`CdsProtocolTest`, `CdsMonitorPolicyTest`, `HttpsCdsTransportTest` and emulator-only `CdsControllerRuntimeTest` describe synthetic coverage for binding, bounds, reference kinds, endpoint refusal, consent, revocation and cancellation. Actual executions and results belong in [BUILD-REPORT](BUILD-REPORT.md).
+`CdsIdentityReaderTest` and `CdsProtocolTest` include synthetic 15-/40-character GUIDs, measured product fallback, missing-input rejection and conflicting identity cases. `CdsMonitorPolicyTest`, `HttpsCdsTransportTest` and emulator-only `CdsControllerRuntimeTest` cover protocol/transport/controller boundaries including binding, bounds, reference kinds, endpoint refusal, consent, revocation and cancellation. Actual executions and results belong in [BUILD-REPORT](BUILD-REPORT.md). Neither fixtures nor emulator results qualify a complete physical Motorola update or retained root after reboot.

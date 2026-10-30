@@ -11,6 +11,11 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,6 +23,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -75,6 +81,7 @@ fun MotoApp(vm: MotoViewModel = viewModel(), openFirmwareRequest: Int = 0,openUp
     var onlineDialog by remember { mutableStateOf(false) }
     var launchFailure by remember { mutableStateOf<UiMessage?>(null) }
     var notificationAction by rememberSaveable { mutableStateOf("") }
+    val destinationState = rememberSaveableStateHolder()
     val lifecycle = LocalLifecycleOwner.current
     DisposableEffect(lifecycle) {
         val observer = LifecycleEventObserver { _, event -> if (event == Lifecycle.Event.ON_RESUME) vm.onResume() }
@@ -135,14 +142,20 @@ fun MotoApp(vm: MotoViewModel = viewModel(), openFirmwareRequest: Int = 0,openUp
             val wide = maxWidth >= 840.dp
             Scaffold(
                 topBar = {
-                    TopAppBar(title = { Text(stringResource(R.string.ui_app_name), style = MaterialTheme.typography.titleLarge) }, actions = {
+                    TopAppBar(title = {
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Icon(painterResource(R.drawable.ic_moto_ota), contentDescription = null,
+                                modifier = Modifier.size(28.dp), tint = Color.Unspecified)
+                            Text(stringResource(R.string.ui_app_name), style = MaterialTheme.typography.titleMedium)
+                        }
+                    }, colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background), actions = {
                         IconButton(onClick = { reviewTour = true }, modifier = Modifier.testTag("open_setup")) {
                             Icon(painterResource(R.drawable.ic_nav_help), stringResource(R.string.ui_help))
                         }
                     })
                 },
                 bottomBar = {
-                    if (!wide) NavigationBar {
+                    if (!wide) NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
                         Destination.entries.forEach { destination ->
                             NavigationBarItem(selected = tab == destination, onClick = { tab = destination },
                                 icon = { Icon(painterResource(destination.icon), contentDescription = null) },
@@ -162,20 +175,23 @@ fun MotoApp(vm: MotoViewModel = viewModel(), openFirmwareRequest: Int = 0,openUp
                         }
                     }
                     Box(Modifier.weight(1f).fillMaxHeight(), contentAlignment = Alignment.TopCenter) {
-                        key(tab) {
-                            LazyColumn(state = rememberLazyListState(), modifier = Modifier.widthIn(max = 960.dp).fillMaxHeight().testTag("screen_${tab.tag}"),
-                                contentPadding = PaddingValues(horizontal = if (wide) 32.dp else 20.dp, vertical = 16.dp),
-                                verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        Crossfade(targetState = tab, animationSpec = tween(180), label = "destination") { destination ->
+                            destinationState.SaveableStateProvider(destination.name) {
+                            LazyColumn(state = rememberLazyListState(), modifier = Modifier.widthIn(max = 840.dp).fillMaxHeight().testTag("screen_${destination.tag}"),
+                                contentPadding = PaddingValues(horizontal = if (wide) 32.dp else 20.dp, vertical = 20.dp),
+                                verticalArrangement = Arrangement.spacedBy(12.dp)) {
                                 item {
-                                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                                        if (vm.busy) LinearProgressIndicator(Modifier.fillMaxWidth())
+                                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                                        AnimatedVisibility(vm.busy, enter = fadeIn(tween(160)), exit = fadeOut(tween(120))) {
+                                            LinearProgressIndicator(Modifier.fillMaxWidth())
+                                        }
                                         if (vm.demo) Notice(stringResource(R.string.ui_simulation), vm.message.resolve(context))
                                         if (!vm.demo && vm.workflow.criticalSession) {
                                             val sourceBoot = vm.device.bootId.isBlank() || vm.device.bootId == vm.workflow.sourceBootId
                                             Notice(stringResource(if (sourceBoot) R.string.ui_critical_no_reboot else R.string.ui_critical_final),
                                                 stringResource(if (sourceBoot) R.string.ui_critical_no_reboot_body else R.string.ui_critical_final_body), critical = true)
                                         }
-                                        when (tab) {
+                                        when (destination) {
                                             Destination.OVERVIEW -> OverviewScreen(vm, actions)
                                             Destination.FIRMWARE -> FirmwareScreen(vm, actions)
                                             Destination.UPDATE -> UpdateScreen(vm, actions)
@@ -185,6 +201,7 @@ fun MotoApp(vm: MotoViewModel = viewModel(), openFirmwareRequest: Int = 0,openUp
                                         }
                                     }
                                 }
+                            }
                             }
                         }
                     }

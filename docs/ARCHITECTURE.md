@@ -1,4 +1,4 @@
-# Architecture — 1.0.0
+# Architecture — 1.0.1
 
 The repository has a pure Kotlin/JVM `core` module and an Android `app` module. Policies and parsers do not depend on Android. Android adapters own transport, storage, system observations, privileged processes and UI. A UI state or saved journal cannot substitute for an observed operating-system result.
 

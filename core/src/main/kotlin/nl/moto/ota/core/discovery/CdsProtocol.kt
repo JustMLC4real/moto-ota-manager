@@ -53,21 +53,28 @@ object CdsProtocol {
     const val MAX_PACKAGE_BYTES = 12L * 1024 * 1024 * 1024
     private val token = Regex("[A-Za-z0-9_. -]{1,160}")
     private val build = Regex("[A-Za-z0-9_.-]{1,120}")
-    private val hex40 = Regex("[A-Fa-f0-9]{40}")
+    // Motorola's measured ro.mot.build.guid is commonly 15 hex characters, not
+    // necessarily a full SHA-1. Preserve the observed value; never pad or hash it.
+    // Primary device report: MotorolaMobilityLLC/kernel-msm issue #752.
+    private val contextKey = Regex("(?:[A-Fa-f0-9]{15}|[A-Fa-f0-9]{40})")
     private val fingerprint = Regex("[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+:[A-Za-z0-9_.-]+/([A-Za-z0-9_.-]+)/[A-Za-z0-9_.-]+:[A-Za-z0-9_,.-]+/[A-Za-z0-9_,.-]+")
 
     fun missing(identity: CdsIdentity, nowMillis: Long): List<CdsInputField> = buildList {
         val d = identity.device
         if (!d.manufacturer.equals("motorola", true)) add(CdsInputField.MANUFACTURER)
         if (!identity.serialNumber.matches(Regex("[A-Za-z0-9_-]{1,64}")) || identity.serialNumber.lowercase() in setOf("unknown", "null", "serial_number_not_available")) add(CdsInputField.SERIAL_NUMBER)
-        if (!identity.contextKey.matches(hex40)) add(CdsInputField.CONTEXT_KEY)
+        if (!identity.contextKey.matches(contextKey)) add(CdsInputField.CONTEXT_KEY)
         if (!identity.model.matches(token)) add(CdsInputField.MODEL)
         if (!identity.product.matches(token)) add(CdsInputField.PRODUCT)
         if (!d.device.matches(build)) add(CdsInputField.DEVICE)
         if (!d.channel.matches(build)) add(CdsInputField.CARRIER)
         if (!identity.buildId.matches(build) || identity.buildId != d.build) add(CdsInputField.BUILD_ID)
-        if (!fingerprint.matches(d.fingerprint)) add(CdsInputField.BUILD_FINGERPRINT)
-        if (d.simulated || d.identityConflicts.isNotEmpty()) add(CdsInputField.IDENTITY)
+        val sourceFingerprint = fingerprint.matchEntire(d.fingerprint)
+        if (sourceFingerprint == null) add(CdsInputField.BUILD_FINGERPRINT)
+        val sourceParts = d.fingerprint.substringBefore(':').split('/')
+        val fingerprintConflict = sourceFingerprint != null &&
+            (!sourceParts[0].equals(d.manufacturer, true) || sourceParts[2] != d.device || sourceFingerprint.groupValues[1] != d.build)
+        if (d.simulated || d.identityConflicts.isNotEmpty() || fingerprintConflict) add(CdsInputField.IDENTITY)
         if (d.capturedAtMillis <= 0 || nowMillis - d.capturedAtMillis !in 0..120_000) add(CdsInputField.FRESH_OBSERVATION)
     }
 

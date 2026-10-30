@@ -1,4 +1,4 @@
-# Compatibility and evidence — 1.0.0
+# Compatibility and evidence — 1.0.1
 
 [Nederlands](nl/COMPATIBILITY.md)
 

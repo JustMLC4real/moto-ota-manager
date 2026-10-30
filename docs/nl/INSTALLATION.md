@@ -1,4 +1,4 @@
-# Installatie en eerste gebruik — 1.0.0
+# Installatie en eerste gebruik — 1.0.1
 
 [English](../INSTALLATION.md) · [Compatibiliteit](COMPATIBILITY.md) · [Veiligheid](SAFETY.md)
 

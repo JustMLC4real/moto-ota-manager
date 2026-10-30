@@ -112,10 +112,11 @@ def parse(text):
             raise InvalidInstrumentation("Failure footer count does not match records")
     elif failed_footer or success_footers != [str(expected)]:
         raise InvalidInstrumentation("Successful terminal records disagree with runner footer")
-    times = re.findall(r"(?m)^Time: (\d+(?:\.\d+)?)\s*$", text)
+    # JUnit formats this field with the device locale, including Dutch commas.
+    times = re.findall(r"(?m)^Time: (\d+(?:[.,]\d+)?)\s*$", text)
     if len(times) != 1:
         raise InvalidInstrumentation("Missing or ambiguous measured runner duration")
-    return sorted(results.values(), key=lambda result: result.current), times[0]
+    return sorted(results.values(), key=lambda result: result.current), times[0].replace(",", ".")
 
 
 def reports(text, source_sha256):

@@ -1,4 +1,4 @@
-# Safety and evidence — 1.0.0
+# Safety and evidence — 1.0.1
 
 [Nederlands](nl/SAFETY.md) · [Workflow](UPDATE-WORKFLOW.md)
 

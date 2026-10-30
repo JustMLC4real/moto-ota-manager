@@ -70,6 +70,7 @@ fun SetupTour(settings: AppSettings, onFinished: () -> Unit) {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun LanguageChoices(settings: AppSettings) {
     // Reading configuration makes a change made in Android's app-language screen visible here.
@@ -77,10 +78,11 @@ fun LanguageChoices(settings: AppSettings) {
     val selected = remember(configuration) { settings.languageTag() }
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         Text(stringResource(R.string.ui_language), style = MaterialTheme.typography.titleSmall)
-        listOf("" to R.string.ui_system_default, "en" to R.string.ui_english, "nl" to R.string.ui_dutch).forEach { (tag, label) ->
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(selected = selected == tag, onClick = { settings.selectLanguage(tag) }, modifier = Modifier.testTag("language_${tag.ifEmpty { "system" }}"))
-                TextButton(onClick = { settings.selectLanguage(tag) }) { Text(stringResource(label)) }
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            listOf("" to R.string.ui_system_default, "en" to R.string.ui_english, "nl" to R.string.ui_dutch).forEach { (tag, label) ->
+                FilterChip(selected = selected == tag, onClick = { settings.selectLanguage(tag) },
+                    label = { Text(stringResource(label)) },
+                    modifier = Modifier.heightIn(min = 48.dp).testTag("language_${tag.ifEmpty { "system" }}"))
             }
         }
     }

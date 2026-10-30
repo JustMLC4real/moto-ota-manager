@@ -1,4 +1,4 @@
-# Integration decisions — 1.0.0
+# Integration decisions — 1.0.1
 
 [Nederlands](nl/INTEGRATION-DECISIONS.md) · [Research](RESEARCH.md)
 

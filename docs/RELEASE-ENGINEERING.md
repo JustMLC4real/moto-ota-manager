@@ -1,8 +1,8 @@
-# Release engineering — 1.0.0
+# Release engineering — 1.0.1
 
 ## Nederlands
 
-`versionName=1.0.0`, `versionCode=4`, application ID `nl.moto.ota`. `release` is expliciet niet-debuggable. Versie 1.0.0 bevat de volledige runtime: code- en resourceverkleining staan standaard uit. Echte release-instrumentatie toonde bij R8 gedeelde-library-ABI-fouten aan, waaronder verwijderde Kotlin-, Compose- en WorkManager-methoden/classes. De grotere APK behoudt dezelfde functies en wordt als release getest. `-Pmoto.minifyRelease=true` blijft een optionele onderzoeksbuild die opnieuw volledig moet worden gekwalificeerd. De behoudregels blijven aanwezig voor die build. `tools/verify_release_apk.py` controleert de daadwerkelijke DEX-entrypoints, het manifest, ABI's en ondertekening van de gekozen APK.
+`versionName=1.0.1`, `versionCode=5`, application ID `nl.moto.ota`. `release` is expliciet niet-debuggable. Versie 1.0.0 bevat de volledige runtime: code- en resourceverkleining staan standaard uit. Echte release-instrumentatie toonde bij R8 gedeelde-library-ABI-fouten aan, waaronder verwijderde Kotlin-, Compose- en WorkManager-methoden/classes. De grotere APK behoudt dezelfde functies en wordt als release getest. `-Pmoto.minifyRelease=true` blijft een optionele onderzoeksbuild die opnieuw volledig moet worden gekwalificeerd. De behoudregels blijven aanwezig voor die build. `tools/verify_release_apk.py` controleert de daadwerkelijke DEX-entrypoints, het manifest, ABI's en ondertekening van de gekozen APK.
 
 Voor een lokale getekende release zijn exact vier omgevingsvariabelen vereist:
 
@@ -31,7 +31,7 @@ Reguliere PR/push-CI gebruikt geen signingsecrets. Zij bouwt debug en unsigned r
 
 ## English
 
-The release is **1.0.0 / code4**, package `nl.moto.ota`, non-debuggable, and retains the complete runtime. Code/resource shrinking is off by default after actual optimized release instrumentation exposed shared Kotlin/Compose/WorkManager ABI failures. The app's functions are unchanged; the APK is larger. `-Pmoto.minifyRelease=true` remains an opt-in research build requiring full qualification. Supply all four `MOTO_RELEASE_*` signing variables above; keep the keystore outside the checkout. `:app:assembleSignedRelease` requires private release signing. Plain `:app:assembleRelease` without secrets produces unsigned CI output and never falls back to debug signing.
+The release is **1.0.1 / code5**, package `nl.moto.ota`, non-debuggable, and retains the complete runtime. Code/resource shrinking is off by default after actual optimized release instrumentation exposed shared Kotlin/Compose/WorkManager ABI failures. The app's functions are unchanged; the APK is larger. `-Pmoto.minifyRelease=true` remains an opt-in research build requiring full qualification. Supply all four `MOTO_RELEASE_*` signing variables above; keep the keystore outside the checkout. `:app:assembleSignedRelease` requires private release signing. Plain `:app:assembleRelease` without secrets produces unsigned CI output and never falls back to debug signing.
 
 Pin the independent public signing fingerprint in `MOTO_RELEASE_CERT_SHA256` and run `tools/verify_release_apk.py`. This verifies the actual APK contract without installing, invoking root or accessing a phone. It does not certify firmware safety. Preserve the new private key for future updates; a release signed by it cannot directly replace the older debug-signed installation. Export recovery data before a deliberate migration. No automatic uninstall or data deletion is performed.
 

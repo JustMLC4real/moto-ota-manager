@@ -68,6 +68,15 @@ class InstrumentationEvidenceTest(unittest.TestCase):
         self.assertEqual(1, result["skipped"])
         self.assertEqual(0, result["passed"])
 
+    def test_dutch_runner_duration_is_normalized_without_changing_test_outcomes(self):
+        text = status(1) + status(0) + footer().replace("Time: 1.25", "Time: 1,25")
+        xml, result = parser.reports(text, "0" * 64)
+        self.assertEqual(1.25, result["runnerSeconds"])
+        self.assertEqual("1.25", xml.get("time"))
+        self.assertEqual(1, result["passed"])
+        with self.assertRaises(parser.InvalidInstrumentation):
+            parser.parse(text.replace("Time: 1,25", "Time: 1,25\nTime: 1.25"))
+
 
 if __name__ == "__main__":
     unittest.main()

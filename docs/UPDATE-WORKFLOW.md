@@ -1,4 +1,4 @@
-# Update workflow and recovery — 1.0.0
+# Update workflow and recovery — 1.0.1
 
 [Nederlands](nl/UPDATE-WORKFLOW.md) · [Compatibility](COMPATIBILITY.md) · [Safety](SAFETY.md)
 

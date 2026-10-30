@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.1 — update-check fix and cleaner interface
+
+[Release notes](docs/RELEASE-NOTES-1.0.1.md)
+
+- Fix incorrect rejection of measured 15-character Motorola build GUIDs; keep full 40-character GUID support without padding or guessing values.
+- Use the observed product name when the legacy vendor display property is empty, while rejecting conflicting source identities.
+- Make overview, firmware and update screens concise, with secondary tools behind accessible disclosures and compact language/theme choices.
+- Add finite tab, status, disclosure and measured-progress animations that follow the system animation duration scale.
+- Add reader/protocol/runtime regressions for the reported failure, disclosure and reduced-motion tests, and support Dutch decimal formatting in retained JUnit runner evidence.
+
 ## 1.0.0 — first public release
 
 [Publication-ready release notes](docs/RELEASE-NOTES-1.0.0.md)

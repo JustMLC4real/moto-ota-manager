@@ -1,4 +1,4 @@
-# Read-only manual qualification plan — 1.0.0
+# Read-only manual qualification plan — 1.0.1
 
 This plan validates presentation and observations on a selected Motorola. It does not authorize a stock write, OTA, inactive-slot patch, slot change or phone reboot. The current development round uses mocks/emulators; do not connect a phone just to complete these checks. Historical reference-device reads are in [DEVICE-VALIDATION](DEVICE-VALIDATION.md).
 

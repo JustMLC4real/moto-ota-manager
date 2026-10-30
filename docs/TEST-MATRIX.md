@@ -1,4 +1,4 @@
-# Test matrix and evidence limits — 1.0.0
+# Test matrix and evidence limits — 1.0.1
 
 This matrix maps requested scenarios to actual test classes. It documents coverage, not execution counts. [BUILD-REPORT](BUILD-REPORT.md) identifies which exact build and tests ran, with their logs and reports. A fixture proves behavior for that fixture; it is not a physical Motorola OTA.
 

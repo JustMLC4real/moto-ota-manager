@@ -10,9 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import nl.moto.ota.BuildConfig
 import nl.moto.ota.R
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SettingsScreen(settings: AppSettings,onlineConsent:Boolean=false,canChangeNetwork:Boolean=true,
                    onOnlineConsent:(Boolean)->Unit={},onTour: () -> Unit) {
@@ -24,11 +26,11 @@ fun SettingsScreen(settings: AppSettings,onlineConsent:Boolean=false,canChangeNe
         Text(stringResource(R.string.ui_language_body), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
     Panel(R.string.ui_appearance) {
-        listOf(AppAppearance.SYSTEM to R.string.ui_appearance_system, AppAppearance.LIGHT to R.string.ui_appearance_light,
-            AppAppearance.DARK to R.string.ui_appearance_dark).forEach { (appearance, label) ->
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(selected = settings.appearance == appearance, onClick = { settings.selectAppearance(appearance) }, modifier = Modifier.testTag("theme_${appearance.name.lowercase()}"))
-                TextButton(onClick = { settings.selectAppearance(appearance) }) { Text(stringResource(label)) }
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            listOf(AppAppearance.SYSTEM to R.string.ui_appearance_system, AppAppearance.LIGHT to R.string.ui_appearance_light,
+                AppAppearance.DARK to R.string.ui_appearance_dark).forEach { (appearance, label) ->
+                FilterChip(selected = settings.appearance == appearance, onClick = { settings.selectAppearance(appearance) },
+                    label = { Text(stringResource(label)) }, modifier = Modifier.heightIn(min = 48.dp).testTag("theme_${appearance.name.lowercase()}"))
             }
         }
     }

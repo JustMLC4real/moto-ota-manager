@@ -1,4 +1,4 @@
-# Compatibiliteit en bewijs — 1.0.0
+# Compatibiliteit en bewijs — 1.0.1
 
 [English](../COMPATIBILITY.md)
 

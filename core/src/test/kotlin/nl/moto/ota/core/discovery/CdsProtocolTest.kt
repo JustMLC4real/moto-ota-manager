@@ -32,6 +32,35 @@ class CdsProtocolTest {
         val bad=CdsIdentity(d,"unknown","not-a-guid","","","OTHER")
         assertTrue(CdsProtocol.missing(bad,now).containsAll(listOf(CdsInputField.SERIAL_NUMBER,CdsInputField.CONTEXT_KEY,CdsInputField.MODEL,CdsInputField.PRODUCT,CdsInputField.BUILD_ID,CdsInputField.IDENTITY)))
     }
+    @Test fun measuredFifteenHexContextKeysAreNotMistakenForMissingSha1() {
+        val observed = "aB0123456789cDe"
+        val base = identity()
+        val id = CdsIdentity(base.device, base.serialNumber, observed, base.model, base.product, base.buildId)
+        assertTrue(CdsProtocol.missing(id, now).isEmpty())
+        assertTrue(CdsProtocol.checkUrl(id).endsWith("/key/$observed"))
+        assertTrue(CdsProtocol.checkBody(id).toString(Charsets.UTF_8).contains("\"otaSourceSha1\":\"$observed\""))
+        val reply = response().replace(guid, observed)
+        assertEquals(CdsStatus.OFFER, CdsProtocol.parseCheck(reply, id)!!.result.status)
+        assertNull(CdsProtocol.parseCheck(reply.replace("\"contextKey\":\"$observed\"", "\"contextKey\":\"${observed.lowercase()}\""), id))
+        assertNull(CdsProtocol.parseCheck(response(), id))
+    }
+    @Test fun unsupportedContextLengthsAndUrlSyntaxAreStillRejected() {
+        val base = identity()
+        listOf("", "a".repeat(14), "a".repeat(16), "a".repeat(39), "a".repeat(41), "x".repeat(15),
+            "abc0123456789de/", "abc0123456789de?x", " abc0123456789de", "abc0123456789de\n").forEach { key ->
+            val id = CdsIdentity(base.device, base.serialNumber, key, base.model, base.product, base.buildId)
+            assertTrue(CdsInputField.CONTEXT_KEY in CdsProtocol.missing(id, now))
+        }
+    }
+    @Test fun wellFormedSpoofedFingerprintsCannotSupplyAnotherDeviceOrBuild() {
+        val base = identity()
+        listOf("google/bluejay/bluejay:17/CURRENT/123:user/release-keys",
+            "motorola/product/otherdevice:17/CURRENT/123:user/release-keys",
+            "motorola/product/testdevice:17/OTHER/123:user/release-keys").forEach { source ->
+            val id = CdsIdentity(base.device.copy(fingerprint = source), base.serialNumber, base.contextKey, base.model, base.product, base.buildId)
+            assertTrue(CdsInputField.IDENTITY in CdsProtocol.missing(id, now))
+        }
+    }
     @Test fun noOfferIsAResponseForThisContextOnly() {
         assertEquals(CdsStatus.NO_OFFER,CdsProtocol.parseCheck(response(false),identity())!!.result.status)
         assertNull(CdsProtocol.parseCheck(response(false).replace(guid,"b".repeat(40)),identity()))

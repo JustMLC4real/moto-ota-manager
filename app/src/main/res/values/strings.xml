@@ -72,8 +72,8 @@
     <string name="ui_critical_no_reboot_body">Stock restore or the update is still in progress. Keep the current root session running. Open Update to check the next step.</string>
     <string name="ui_critical_final">Finish the update checks</string>
     <string name="ui_critical_final_body">Check the new boot, root and snapshot merge before starting another update.</string>
-    <string name="ui_overview_title">Your Motorola, at a glance</string>
-    <string name="ui_overview_body">Check device health and see what is ready for the next official update.</string>
+    <string name="ui_overview_title">Your device</string>
+    <string name="ui_overview_body">Software, root and update status at a glance.</string>
     <string name="ui_device">Device</string>
     <string name="ui_model_pending">Waiting for device information</string>
     <string name="ui_android_build">Android and build</string>
@@ -109,9 +109,9 @@
     <string name="ui_gib">%1$s GiB</string>
     <string name="ui_mib">%1$s MiB</string>
     <string name="ui_firmware_title">Official updates</string>
-    <string name="ui_firmware_body">Check Motorola directly, then verify the firmware before it can be used.</string>
+    <string name="ui_firmware_body">Find and verify official Motorola firmware.</string>
     <string name="ui_server_check">Motorola update service</string>
-    <string name="ui_server_check_body">The primary check contacts Motorola for your current device and software channel. Local updater metadata and file import remain available.</string>
+    <string name="ui_server_check_body">Check Motorola for your current device and software channel.</string>
     <string name="ui_check_updates">Check for updates</string>
     <string name="ui_check_server_busy">Checking Motorola…</string>
     <string name="ui_open_system_updates">Open Motorola system updates</string>
@@ -136,7 +136,7 @@
     <string name="ui_target_build">Target build</string>
     <string name="ui_target_android">Target Android version</string>
     <string name="ui_download_candidate">Download offered update</string>
-    <string name="ui_local_fallback">Other ways to find your update</string>
+    <string name="ui_local_fallback">Motorola app cache</string>
     <string name="ui_local_metadata">Local Motorola metadata</string>
     <string name="ui_find_existing">Find a downloaded Motorola package</string>
     <string name="ui_find_existing_body">Read an existing ZIP from Motorola’s app folder without changing the original file.</string>
@@ -183,10 +183,10 @@
     <string name="ui_root_diagnostic_body">Grant Moto OTA Manager root access in Magisk → Superuser. This check reads device properties, slots, snapshots, update status, backups and module inventory. It does not install, restore or restart anything.</string>
     <string name="ui_read_diagnostics">Read diagnostics</string>
     <string name="ui_update_title">One update. One clear route.</string>
-    <string name="ui_update_body">Start the complete supported update process here. The app checks each step and stops if the evidence does not match.</string>
+    <string name="ui_update_body">Review the plan, then follow your update.</string>
     <string name="ui_update_plan">Your update plan</string>
     <string name="ui_update_target_pending">Next suitable official offer</string>
-    <string name="ui_update_plan_body">The app checks Motorola, downloads the offered package, verifies it, preserves the current patched image, restores the matching stock partition, applies the OTA, prepares Magisk on the next slot and restarts when the final pre-boot checks pass.</string>
+    <string name="ui_update_plan_body">Check Motorola → download and verify → back up the patched image → restore stock → install OTA → prepare Magisk → restart after checks.</string>
     <string name="ui_complete_run_consent">By starting, you approve the required partition writes, OTA installation, Magisk preparation and restart for this update. There are no separate confirmations later.</string>
     <string name="ui_complete_run_privacy">The check shares your serial number, build GUID, firmware and device details, channel and language with Motorola. Keep a separate backup of important files and do not restart manually while the update is running.</string>
     <string name="ui_start_update">Start update and restart</string>
@@ -378,4 +378,22 @@
     <string name="ui_failure_detail_code">%1$s
 Diagnostic code: %2$s</string>
     <string name="ui_merge_progress">Snapshot merge progress</string>
+    <string name="ui_expanded">Expanded</string>
+    <string name="ui_collapsed">Collapsed</string>
+    <string name="ui_device_checked">Root available</string>
+    <string name="ui_device_local">Local device overview</string>
+    <string name="ui_checks_attention_count">%1$d checks to review</string>
+    <string name="ui_device_details">Device details</string>
+    <string name="ui_device_details_summary">Root, slots, backup and support</string>
+    <string name="ui_firmware_check_ready">Ready to check</string>
+    <string name="ui_package_verified">Signature and source verified</string>
+    <string name="ui_package_needs_checks">Verification needed</string>
+    <string name="ui_package_details">Package verification details</string>
+    <string name="ui_monitoring_on">Enabled · managed by Android</string>
+    <string name="ui_monitoring_off">Off · optional update notifications</string>
+    <string name="ui_import_summary">Open an official OTA ZIP or a saved package</string>
+    <string name="ui_local_fallback_summary">Local metadata and existing downloads</string>
+    <string name="ui_image_vault_summary">Import a boot image or Magisk backup</string>
+    <string name="ui_workflow_step">Step %1$d of %2$d · %3$s</string>
+    <string name="ui_workflow_details">Steps and verification evidence</string>
 </resources>

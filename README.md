@@ -6,11 +6,11 @@
 
 Kotlin · Jetpack Compose · Android 13+ · English / Nederlands · MIT
 
-[Download 1.0.0](https://github.com/JustMLC4real/moto-ota-manager/releases/tag/v1.0.0) · [Get started](docs/INSTALLATION.md) · [Compatibility](docs/COMPATIBILITY.md) · [Build evidence](docs/BUILD-REPORT.md) · [Nederlandse README](README.nl.md)
+[Download 1.0.1](https://github.com/JustMLC4real/moto-ota-manager/releases/tag/v1.0.1) · [Get started](docs/INSTALLATION.md) · [Compatibility](docs/COMPATIBILITY.md) · [Build evidence](docs/BUILD-REPORT.md) · [Nederlandse README](README.nl.md)
 
 </div>
 
-Moto OTA Manager **1.0.0** brings device diagnostics, firmware inspection, resumable downloads and a persistent guided update workflow into one Android app. It was developed around the Motorola Edge 70 Pro **XT2607-1 / merc / reteu** and evaluates other Motorola devices from their observed capabilities.
+Moto OTA Manager **1.0.1** brings device diagnostics, firmware inspection, resumable downloads and a persistent guided update workflow into one Android app. It was developed around the Motorola Edge 70 Pro **XT2607-1 / merc / reteu** and evaluates other Motorola devices from their observed capabilities.
 
 The app separates a downloaded file, an authenticated package, a user-reported step and a verified device observation. An unknown result stays unknown. One reviewed start scopes subsequent actions, including the displayed partition writes, root-preservation steps and reboot; each action still needs fresh evidence. Unsupported or uncertain transitions pause. Android and Motorola retain their own update verification checks.
 
@@ -78,7 +78,7 @@ ANDROID_SERIAL=emulator-5554 ./gradlew :app:connectedDebugAndroidTest --no-daemo
 
 The physical-device validation test is opt-in and is skipped by default. Never select your phone for the emulator suite. [Test matrix](docs/TEST-MATRIX.md).
 
-Release builds are non-debuggable, signed and independently checked. Version 1.0.0 ships the complete runtime without code shrinking: optimized release instrumentation exposed shared-library ABI failures. R8 remains opt-in for further qualification. Signing requires your own private release key; no key is committed and unsigned CI output is not an installable release. [Release guide](docs/RELEASING.md) · [Release engineering](docs/RELEASE-ENGINEERING.md).
+Release builds are non-debuggable, signed and independently checked. Version 1.0.1 ships the complete runtime without code shrinking: optimized release instrumentation exposed shared-library ABI failures. R8 remains opt-in for further qualification. Signing requires your own private release key; no key is committed and unsigned CI output is not an installable release. [Release guide](docs/RELEASING.md) · [Release engineering](docs/RELEASE-ENGINEERING.md).
 
 ## Repository
 

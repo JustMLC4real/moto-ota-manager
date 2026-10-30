@@ -8,6 +8,7 @@ import javax.net.ssl.HttpsURLConnection
 import java.util.WeakHashMap
 import nl.moto.ota.core.LocalContentKind
 import nl.moto.ota.core.discovery.*
+import nl.moto.ota.BuildConfig
 
 class CdsHttpResponse(val status: Int, val body: String) {
     override fun toString(): String = "CdsHttpResponse(status=$status, body=redacted)"
@@ -35,7 +36,7 @@ class HttpsCdsTransport : CdsTransport {
             connection.doOutput = true
             connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
             connection.setRequestProperty("Accept", "application/json")
-            connection.setRequestProperty("User-Agent", "Moto-OTA-Manager/1.0.0")
+            connection.setRequestProperty("User-Agent", "Moto-OTA-Manager/${BuildConfig.VERSION_NAME}")
             connection.setFixedLengthStreamingMode(body.size)
             connection.outputStream.use { it.write(body) }
             val code = connection.responseCode
