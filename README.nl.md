@@ -16,11 +16,13 @@ Een ontvangen bestand, geauthenticeerd pakket, handmatig gemelde stap en geverif
 
 ## Iedere stap duidelijk in beeld
 
-| Introductie | Officiële firmware | Nederlands · donker |
+| Overzicht | Officiële firmware | Instellingen |
 |:---:|:---:|:---:|
-| <img src="docs/images/setup-en.png" width="240" alt="Engelse introductie"> | <img src="docs/images/firmware-en.png" width="240" alt="Scherm voor officiële firmware"> | <img src="docs/images/settings-nl-dark.png" width="240" alt="Nederlandse taal- en thema-instellingen"> |
+| <img src="docs/images/overview-nl-dark.png" width="240" alt="Nederlands toesteloverzicht"> | <img src="docs/images/firmware-nl-dark.png" width="240" alt="Scherm voor officiële firmware"> | <img src="docs/images/settings-nl-dark.png" width="240" alt="Nederlandse taal- en thema-instellingen"> |
 
 Echte screenshots van de getekende release op een wegwerpemulator. De toestelwaarden in het [overzicht](docs/images/overview-nl-dark.png) horen bij die emulator. De [volledige workflowdemonstratie](docs/images/simulation-nl-dark.png) is zichtbaar gesimuleerd; hier is geen telefoonupdate uitgevoerd.
+
+[Bekijk de animaties](https://github.com/JustMLC4real/moto-ota-manager/releases/download/v1.0.1/moto-ota-manager-1.0.1-preview.mp4) · [Wijzigingen in 1.0.1](docs/RELEASE-NOTES-1.0.1.md)
 
 ## Wat je krijgt
 

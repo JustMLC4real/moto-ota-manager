@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Moto OTA Manager Release
+Signer #1 certificate SHA-256 digest: b8982eced488beec99ad33e0a87bf47f99e6d8b1a39f7d559ba86353bcb29bc6
+Signer #1 certificate SHA-1 digest: f8633f7139dc25390dec57574491229183dce9db
+Signer #1 certificate MD5 digest: 9dbe434a74e6a3011e922f6772da04c9
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 4096
+Signer #1 public key SHA-256 digest: ad4f9f926204ce73078bb75428fe4758660f8299191f18aa47cb2123cf25a81e
+Signer #1 public key SHA-1 digest: a778bec2bc5b42e385c37003c008ecb001398f86
+Signer #1 public key MD5 digest: 4b70e14991b3980234199e28d57bbc38

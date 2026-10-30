@@ -1,0 +1,17 @@
+<testsuite name="nl.moto.ota.core.DeviceCapabilitiesTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-10-30T07:54:08" hostname="[HOST]" time="0.02">
+  <properties />
+  <testcase name="nonMotorolaStillHasDiagnosticsButNoMotorolaActions" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.013" />
+  <testcase name="unavailableOrUnresolvedUpdaterIsNotClaimedAvailable" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.0" />
+  <testcase name="nonRootMotorolaCanUseItsOfficialUpdaterWithoutAFakeRootClaim" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.0" />
+  <testcase name="identityConflictsBlockGuidanceAndWritingButKeepReadOnlyDiagnostics" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.0" />
+  <testcase name="unknownAndroidDoesNotDisableOfficialNavigationOrInventAWriteAdapter" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.002" />
+  <testcase name="qualifiedMercRetainsItsExistingCapabilities" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.0" />
+  <testcase name="unknownInventoryAndContradictoryAbEvidenceAreNotGuessed" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.001" />
+  <testcase name="staleOrDifferentBootAssociationCannotEnableWrites" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.0" />
+  <testcase name="anotherMeasuredMotorolaCanBeQualifiedByProofWithoutAModelCatalog" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.001" />
+  <testcase name="singleSlotMotorolaHasOfficialGuidanceButNoInactiveSlotProcedure" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.0" />
+  <testcase name="associatedBackupDoesNotBecomeSignedStock" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.001" />
+  <testcase name="bootAndInitBootLayoutsComeFromObservedPartitions" classname="nl.moto.ota.core.DeviceCapabilitiesTest" time="0.001" />
+  <system-out />
+  <system-err />
+</testsuite>

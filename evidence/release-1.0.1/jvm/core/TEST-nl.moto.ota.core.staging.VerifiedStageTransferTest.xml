@@ -1,0 +1,13 @@
+<testsuite name="nl.moto.ota.core.staging.VerifiedStageTransferTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-30T07:54:20" hostname="[HOST]" time="0.307">
+  <properties />
+  <testcase name="fsyncedCopyIsPublishedOnlyAfterFullHashAndReadback" classname="nl.moto.ota.core.staging.VerifiedStageTransferTest" time="0.05" />
+  <testcase name="interruptionAndUnsupportedAtomicPrimitiveLeaveNoPublishedZip" classname="nl.moto.ota.core.staging.VerifiedStageTransferTest" time="0.055" />
+  <testcase name="uncertainPostPublishDurabilityNeverBecomesAReceiptOrAutomaticDeletion" classname="nl.moto.ota.core.staging.VerifiedStageTransferTest" time="0.039" />
+  <testcase name="corruptedSourceOrInsufficientSpaceCannotPublish" classname="nl.moto.ota.core.staging.VerifiedStageTransferTest" time="0.057" />
+  <testcase name="existingExactFileCanReturnReadbackReceiptWithoutAnotherWrite" classname="nl.moto.ota.core.staging.VerifiedStageTransferTest" time="0.02" />
+  <testcase name="concurrentDestinationAppearingAtPublicationIsPreserved" classname="nl.moto.ota.core.staging.VerifiedStageTransferTest" time="0.055" />
+  <testcase name="existingDifferentFileIsNeverReplaced" classname="nl.moto.ota.core.staging.VerifiedStageTransferTest" time="0.019" />
+  <testcase name="temporaryCopyCannotBePlacedInWatchedDirectory" classname="nl.moto.ota.core.staging.VerifiedStageTransferTest" time="0.01" />
+  <system-out />
+  <system-err />
+</testsuite>

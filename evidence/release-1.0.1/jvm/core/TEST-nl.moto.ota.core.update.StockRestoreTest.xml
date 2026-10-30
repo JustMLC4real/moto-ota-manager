@@ -1,0 +1,22 @@
+<testsuite name="nl.moto.ota.core.update.StockRestoreTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-10-30T07:54:22" hostname="[HOST]" time="0.956">
+  <properties />
+  <testcase name="processDeathAfterReadbackRecoversByObservationWithoutAnotherWrite" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.124" />
+  <testcase name="consentAuthenticatesEveryFieldAndRoundTrips" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.006" />
+  <testcase name="wrongSourceNeverReachesWriteBoundary" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.05" />
+  <testcase name="interruptedWriteRetainsBackupAndRecoveryNeverReplays" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.101" />
+  <testcase name="sandboxWritesOnlyActiveRegularFileAfterFullVerifiedBackup" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.106" />
+  <testcase name="liveModeRequiresRuntimeAssociationAndRejectsSimulatedObservations" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.0" />
+  <testcase name="monotonicExpiryCannotBeUndoneByChangingWallClock" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.002" />
+  <testcase name="unknownOrEnabledAutomaticUpdatesBlockRestore" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.001" />
+  <testcase name="rootSecurityAndFreshnessAreIndependentlyRequired" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.0" />
+  <testcase name="explicitRecoveryOfUnchangedSourceRecapturesBackupInvalidatesOldTokenAndNeedsANewPlan" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.187" />
+  <testcase name="explicitConsentAndNoRebootAcknowledgmentAreBothRequired" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.001" />
+  <testcase name="processDeathAfterConsentIsDurableAndDoesNotWriteDuringRecovery" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.111" />
+  <testcase name="partialChangedSourceCannotBeReleasedForAnotherAttempt" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.093" />
+  <testcase name="consumedConsentCannotBeReplayedEvenWhenFileIsRestoredExternally" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.122" />
+  <testcase name="recoveryCannotClaimSuccessWhileAnotherWriterHoldsTheLock" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.016" />
+  <testcase name="changedPartitionHashOrBootRequiresANewPlan" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.002" />
+  <testcase name="sandboxRejectsARealDeviceAndLivePlans" classname="nl.moto.ota.core.update.StockRestoreTest" time="0.032" />
+  <system-out />
+  <system-err />
+</testsuite>

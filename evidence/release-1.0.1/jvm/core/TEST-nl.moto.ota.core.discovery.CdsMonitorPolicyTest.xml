@@ -1,0 +1,9 @@
+<testsuite name="nl.moto.ota.core.discovery.CdsMonitorPolicyTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-30T07:54:20" hostname="[HOST]" time="0.004">
+  <properties />
+  <testcase name="failuresUnknownInputRevocationAndHttpWarningsStayQuiet" classname="nl.moto.ota.core.discovery.CdsMonitorPolicyTest" time="0.002" />
+  <testcase name="freshServerInformationIsInformationalAndDeduplicatedWithoutUrl" classname="nl.moto.ota.core.discovery.CdsMonitorPolicyTest" time="0.002" />
+  <testcase name="staleSimulatedNonMotorolaAndConflictingIdentitiesStayQuiet" classname="nl.moto.ota.core.discovery.CdsMonitorPolicyTest" time="0.0" />
+  <testcase name="noOfferUnchangedAndMissingTargetNeverNotify" classname="nl.moto.ota.core.discovery.CdsMonitorPolicyTest" time="0.0" />
+  <system-out />
+  <system-err />
+</testsuite>

@@ -1,0 +1,33 @@
+<testsuite name="nl.moto.ota.platform.InspectionMapperTest" tests="28" skipped="0" failures="0" errors="0" timestamp="2026-10-30T07:55:35" hostname="[HOST]" time="0.047">
+  <properties />
+  <testcase name="deniedRootIsRecordedAsCheckedWithoutGrant" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.009" />
+  <testcase name="duplicatePartitionEvidenceIsNotAccepted" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.008" />
+  <testcase name="matchingSkuCannotOverrideConflictingTechnicalModel" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="realMotorolaBootMetadataWorksWhenBootctlIsAbsent" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.005" />
+  <testcase name="exactSkuAndObservedProbesProduceMeasuredCompatibleDevice" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="conflictingBootSlotPropertiesAreUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="unexpectedBootSessionOutputCannotDriveRecoveryReconciliation" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="failedRootCannotPromoteKernelFactsAndContradictorySlotsRemainUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="matchingMarketingNameCannotOverrideConflictingTechnicalSku" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="slowInspectionRemainsStaleAfterMappingInsteadOfReceivingCompletionTimestamp" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.007" />
+  <testcase name="unsupportedSlotCountIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="freshnessIsPreservedRatherThanStampedWithMapperExecutionTime" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="conflictingChannelsAreUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="malformedBatteryAndStorageEvidenceRemainUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="absentModuleInventoryIsDifferentFromMeasuredEmptyInventory" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="conflictingBootloaderPropertiesAreUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="bootctlExplicitFalseRemainsFalseAndMissingRemainsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="missingRootProbeIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="malformedMagiskOutputCannotPreserveKnownVersionCode" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="realKernelBootFactsRemainDistinctFromSpoofableProperties" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="successfulButEmptyBootctlOutputIsNotSlotEvidence" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="malformedSlotPropertyIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="bootPropertyAndBootctlSlotDisagreementIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="secondaryTechnicalSkuConflictBlocksDeviceProfile" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="timedOutRootDoesNotProveRootLoss" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <testcase name="malformedModuleInventoryCannotBecomeBaseline" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="rootNotRequestedNeverMasqueradesAsMeasuredRootLoss" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.0" />
+  <testcase name="malformedRootOutputIsUnknown" classname="nl.moto.ota.platform.InspectionMapperTest" time="0.001" />
+  <system-out />
+  <system-err />
+</testsuite>

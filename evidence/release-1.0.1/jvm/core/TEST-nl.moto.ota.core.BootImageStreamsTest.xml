@@ -1,0 +1,12 @@
+<testsuite name="nl.moto.ota.core.BootImageStreamsTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-30T07:54:08" hostname="[HOST]" time="0.074">
+  <properties />
+  <testcase name="actualHeaderSeparatesBootAndInitBootWithoutAndroidVersionGuessing" classname="nl.moto.ota.core.BootImageStreamsTest" time="0.004" />
+  <testcase name="gzipAndRawYieldIdenticalCompleteDigests" classname="nl.moto.ota.core.BootImageStreamsTest" time="0.005" />
+  <testcase name="signedBootReferenceCanValidateBootWithoutChangingInitBootDefault" classname="nl.moto.ota.core.BootImageStreamsTest" time="0.002" />
+  <testcase name="trailingGarbageAndARepeatedFooterAreRejected" classname="nl.moto.ota.core.BootImageStreamsTest" time="0.003" />
+  <testcase name="unknownHeaderAndImpossibleExtentsNeverBecomeBootPartitions" classname="nl.moto.ota.core.BootImageStreamsTest" time="0.001" />
+  <testcase name="largeImageIsMeasuredWithBoundedReadRequests" classname="nl.moto.ota.core.BootImageStreamsTest" time="0.058" />
+  <testcase name="truncatedOrCorruptGzipAndOversizedRawFailBeforePublication" classname="nl.moto.ota.core.BootImageStreamsTest" time="0.0" />
+  <system-out />
+  <system-err />
+</testsuite>

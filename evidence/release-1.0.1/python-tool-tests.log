@@ -1,0 +1,13 @@
+test_complete_failure_produces_red_report (test_instrumentation_to_junit.InstrumentationEvidenceTest.test_complete_failure_produces_red_report) ... ok
+test_duplicate_terminal_is_rejected (test_instrumentation_to_junit.InstrumentationEvidenceTest.test_duplicate_terminal_is_rejected) ... ok
+test_dutch_runner_duration_is_normalized_without_changing_test_outcomes (test_instrumentation_to_junit.InstrumentationEvidenceTest.test_dutch_runner_duration_is_normalized_without_changing_test_outcomes) ... ok
+test_footer_and_numtests_must_agree (test_instrumentation_to_junit.InstrumentationEvidenceTest.test_footer_and_numtests_must_agree) ... ok
+test_junit_ignore_does_not_require_start_event (test_instrumentation_to_junit.InstrumentationEvidenceTest.test_junit_ignore_does_not_require_start_event) ... ok
+test_lying_green_footer_is_rejected (test_instrumentation_to_junit.InstrumentationEvidenceTest.test_lying_green_footer_is_rejected) ... ok
+test_success_and_assumption_are_distinct_and_xml_safe (test_instrumentation_to_junit.InstrumentationEvidenceTest.test_success_and_assumption_are_distinct_and_xml_safe) ... ok
+test_truncation_and_crash_cannot_be_green (test_instrumentation_to_junit.InstrumentationEvidenceTest.test_truncation_and_crash_cannot_be_green) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.003s
+
+OK

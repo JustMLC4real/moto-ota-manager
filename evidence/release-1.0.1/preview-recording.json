@@ -1,0 +1,8 @@
+{
+  "emulatorOnly": true,
+  "framesAreActualApp": true,
+  "duration": "7.708333",
+  "bytes": 329943,
+  "networkOrUpdateAction": false,
+  "note": "Android screenrecord omits unchanged trailing frames; recording wall time was15seconds."
+}

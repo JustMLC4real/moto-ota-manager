@@ -1,0 +1,259 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="AndroidJUnitRunner" tests="101" failures="0" errors="0" skipped="4" time="52.286">
+  <properties>
+    <property name="sourceLogSha256" value="812d71b7beb5af832a370de054b8d1399226b1fa5f1d761a3eae0e875dbfe352" />
+  </properties>
+  <testcase classname="nl.moto.ota.PlatformSafetyTest" name="unsignedPackageCannotPassActualDeviceCertificateVerification" />
+  <testcase classname="nl.moto.ota.PlatformSafetyTest" name="privateFileImportCommitsExactBytesWithoutShell" />
+  <testcase classname="nl.moto.ota.PlatformSafetyTest" name="atomicAndroidJournalRestoresExpectationsWithoutClaimingSuccess" />
+  <testcase classname="nl.moto.ota.PresentationUiTest" name="reducedMotionKeepsNavigationDisclosuresAndPermissionChoicesUsable" />
+  <testcase classname="nl.moto.ota.PresentationUiTest" name="appearanceIsPersistedAndDoesNotAuthorizeAnUpdate" />
+  <testcase classname="nl.moto.ota.PresentationUiTest" name="switchingLanguagesUsesAndroidAppLocalesAndSurvivesRecreation" />
+  <testcase classname="nl.moto.ota.PresentationUiTest" name="simulationKeepsTheExpandedImportAndMonitorActionsDisabled" />
+  <testcase classname="nl.moto.ota.PresentationUiTest" name="firmwareToolsExpandWithoutAuthorizingRootNetworkOrAnUpdate" />
+  <testcase classname="nl.moto.ota.PresentationUiTest" name="firmwareDisclosureSurvivesNavigationAndActivityRecreation" />
+  <testcase classname="nl.moto.ota.ReadOnlyDeviceValidationTest" name="actualBackupMatchesTheAuthenticatedStockAndUpdaterResolvesExplicitly">
+    <skipped message="org.junit.AssumptionViolatedException: got: &lt;false&gt;, expected: is &lt;true&gt;" type="assumption">org.junit.AssumptionViolatedException: got: &lt;false&gt;, expected: is &lt;true&gt;
+	at org.junit.Assume.assumeThat(Assume.java:106)
+	at org.junit.Assume.assumeTrue(Assume.java:50)
+	at nl.moto.ota.ReadOnlyDeviceValidationTest.explicitReadOnlyRunOnReviewedDeviceOnly(ReadOnlyDeviceValidationTest.kt:22)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at androidx.test.internal.runner.junit4.statement.RunBefores.evaluate(RunBefores.java:76)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:67)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:58)
+	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:446)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+</skipped>
+  </testcase>
+  <testcase classname="nl.moto.ota.ReadOnlyDeviceValidationTest" name="existingHistoricalOtaPassesTheActualPlatformSignatureVerifier">
+    <skipped message="org.junit.AssumptionViolatedException: got: &lt;false&gt;, expected: is &lt;true&gt;" type="assumption">org.junit.AssumptionViolatedException: got: &lt;false&gt;, expected: is &lt;true&gt;
+	at org.junit.Assume.assumeThat(Assume.java:106)
+	at org.junit.Assume.assumeTrue(Assume.java:50)
+	at nl.moto.ota.ReadOnlyDeviceValidationTest.explicitReadOnlyRunOnReviewedDeviceOnly(ReadOnlyDeviceValidationTest.kt:22)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at androidx.test.internal.runner.junit4.statement.RunBefores.evaluate(RunBefores.java:76)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:67)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:58)
+	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:446)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+</skipped>
+  </testcase>
+  <testcase classname="nl.moto.ota.ReadOnlyDeviceValidationTest" name="realDiagnosticsMatchTheIndependentReadOnlyBaseline">
+    <skipped message="org.junit.AssumptionViolatedException: got: &lt;false&gt;, expected: is &lt;true&gt;" type="assumption">org.junit.AssumptionViolatedException: got: &lt;false&gt;, expected: is &lt;true&gt;
+	at org.junit.Assume.assumeThat(Assume.java:106)
+	at org.junit.Assume.assumeTrue(Assume.java:50)
+	at nl.moto.ota.ReadOnlyDeviceValidationTest.explicitReadOnlyRunOnReviewedDeviceOnly(ReadOnlyDeviceValidationTest.kt:22)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at androidx.test.internal.runner.junit4.statement.RunBefores.evaluate(RunBefores.java:76)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:67)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:58)
+	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:446)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+</skipped>
+  </testcase>
+  <testcase classname="nl.moto.ota.ReadOnlyDeviceValidationTest" name="cachedMotorolaMetadataDoesNotOfferTheInstalledUpdateAgain">
+    <skipped message="org.junit.AssumptionViolatedException: got: &lt;false&gt;, expected: is &lt;true&gt;" type="assumption">org.junit.AssumptionViolatedException: got: &lt;false&gt;, expected: is &lt;true&gt;
+	at org.junit.Assume.assumeThat(Assume.java:106)
+	at org.junit.Assume.assumeTrue(Assume.java:50)
+	at nl.moto.ota.ReadOnlyDeviceValidationTest.explicitReadOnlyRunOnReviewedDeviceOnly(ReadOnlyDeviceValidationTest.kt:22)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at androidx.test.internal.runner.junit4.statement.RunBefores.evaluate(RunBefores.java:76)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:67)
+	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:58)
+	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:446)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+</skipped>
+  </testcase>
+  <testcase classname="nl.moto.ota.SafeUiTest" name="demonstrationIsExplicitAndSeparateFromTheLiveJournal" />
+  <testcase classname="nl.moto.ota.SafeUiTest" name="rootDiagnosticsRequiresAnExplicitDialogAndCanBeCancelled" />
+  <testcase classname="nl.moto.ota.SafeUiTest" name="startsWithLocalReadOnlyDashboard" />
+  <testcase classname="nl.moto.ota.SafeUiTest" name="oneStartRunsTheFullFileBackedSimulationWithoutChangingTheLiveJournal" />
+  <testcase classname="nl.moto.ota.SafeUiTest" name="networkCheckRequiresItsOwnDisclosureAndCancelDoesNotEnableIt" />
+  <testcase classname="nl.moto.ota.SafeUiTest" name="emulatorCannotOfferAnUnprovenStockWrite" />
+  <testcase classname="nl.moto.ota.SetupTourUiTest" name="skipPersistsAndTheGuideCanBeOpenedAgain" />
+  <testcase classname="nl.moto.ota.SetupTourUiTest" name="allFourTourPagesLeadToTheDashboardWithoutAuthorizingAnUpdate" />
+  <testcase classname="nl.moto.ota.SetupTourUiTest" name="nativeDutchLanguageSwitchRetainsTourProgressAcrossRecreation" />
+  <testcase classname="nl.moto.ota.platform.VaultRuntimeTest" name="sourceSymlinkEmptyFileAndOversizedSparseFileCannotBePinned" />
+  <testcase classname="nl.moto.ota.platform.VaultRuntimeTest" name="syntheticStockFactsReloadAndBindOnlyAfterObservedTargetBoot" />
+  <testcase classname="nl.moto.ota.platform.VaultRuntimeTest" name="pinnedInodeSurvivesAtomicDownloadReplacementAndSelectionReload" />
+  <testcase classname="nl.moto.ota.platform.VaultRuntimeTest" name="callerSuppliedSignatureBooleanNeverBecomesPersistedTrust" />
+  <testcase classname="nl.moto.ota.platform.VaultRuntimeTest" name="successfulPinPrunesOnlyObsoleteRegularUuidPackages" />
+  <testcase classname="nl.moto.ota.platform.VaultRuntimeTest" name="selectedSymlinkAndEscapedVaultDirectoryFailClosed" />
+  <testcase classname="nl.moto.ota.platform.VaultRuntimeTest" name="failedSelectionCommitPreservesPreviousSelectionAndRemovesNewPin" />
+  <testcase classname="nl.moto.ota.platform.VaultRuntimeTest" name="malformedOversizedAndMissingSelectionsFailClosed" />
+  <testcase classname="nl.moto.ota.platform.VaultRuntimeTest" name="malformedOversizedAndInvalidStockEvidenceCannotSupplyReference" />
+  <testcase classname="nl.moto.ota.platform.discovery.CdsControllerRuntimeTest" name="missingIdentityServerFailureAndCancellationNeverConfirmAnOffer" />
+  <testcase classname="nl.moto.ota.platform.discovery.CdsControllerRuntimeTest" name="revocationDuringIdentityReadPreventsTheFirstRequest" />
+  <testcase classname="nl.moto.ota.platform.discovery.CdsControllerRuntimeTest" name="consentPersistsOnlyTheBooleanAndRevocationStopsFutureReads" />
+  <testcase classname="nl.moto.ota.platform.discovery.CdsControllerRuntimeTest" name="checkAndResourceResponseBindBeforeExposingAPackage" />
+  <testcase classname="nl.moto.ota.platform.discovery.CdsControllerRuntimeTest" name="measuredFifteenHexGuidAndMissingDisplayReachTheCheckWithoutInventingIdentity" />
+  <testcase classname="nl.moto.ota.platform.discovery.CdsControllerRuntimeTest" name="noConsentMeansNoIdentityReadAndNoHttp" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="explicitManualImportRecoversCorruptJournalWithoutResumingAnyDownload" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="pauseAndCancelBlockCommitWithoutChangingPreviousPackage" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="atomicCommitPublishesExactBytesAndDurableCompletion" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="manifestReloadsProgressAndNeverContainsSignedUrl" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="interruptedAtomicManifestWriteKeepsPreviousJournalAndCorruptionFailsClosed" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="changedCiphertextAndSwappedJobSecretsFailAuthentication" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="explicitCancelQuarantinesCorruptManifestAndBlocksOldWorkerCommit" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="keystoreEncryptsWithRandomIvAndSurvivesObjectRecreation" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="productionWorkerRecoversCrashAfterRenameWithoutHttpOrForeground" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="productionWorkerRefusesChangedFileInCommitRecoveryWindow" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="manuallyReplacedSelectedPackageIsPreserved" />
+  <testcase classname="nl.moto.ota.platform.download.DownloadRuntimeTest" name="pausedCancelledAndFailedProductionWorkersNeverRunNetwork" />
+  <testcase classname="nl.moto.ota.platform.i18n.MessageRendererRuntimeTest" name="cachedSnapshotAndBackupEvidenceRetainTypedDetailsAfterLanguageSwitch" />
+  <testcase classname="nl.moto.ota.platform.i18n.MessageRendererRuntimeTest" name="notificationChannelNamesRefreshWithoutSendingANotice" />
+  <testcase classname="nl.moto.ota.platform.i18n.MessageRendererRuntimeTest" name="allDiscoveryMonitorAndWorkflowStatesHaveLanguageResources" />
+  <testcase classname="nl.moto.ota.platform.i18n.MessageRendererRuntimeTest" name="cachedLegacyChecksAreRenderedInTheCurrentLanguage" />
+  <testcase classname="nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest" name="actualSourceSymlinkIsNeitherDiscoveredNorRead" />
+  <testcase classname="nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest" name="lateSelectionFailureCleansOnlyItsStagedTransaction" />
+  <testcase classname="nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest" name="actualDestinationSymlinkCannotReplaceItsTarget" />
+  <testcase classname="nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest" name="fileBackedCopyDoesNotChangeSourceAndProducesExactPrivateBytes" />
+  <testcase classname="nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest" name="lateSelectionCannotBeOverwrittenByAnOlderImport" />
+  <testcase classname="nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest" name="cancelledTransactionCleanupDoesNotFollowChildSymlinkOrDeleteOtherData" />
+  <testcase classname="nl.moto.ota.platform.importer.MotorolaImporterGuardInstrumentedTest" name="normalAppUidCannotEnterRootImporter" />
+  <testcase classname="nl.moto.ota.platform.monitoring.MonitorRuntimeTest" name="interruptedAtomicWriteRollsBackAndCorruptConfigurationFailsClosed" />
+  <testcase classname="nl.moto.ota.platform.monitoring.MonitorRuntimeTest" name="failedOptOutStorageStillClosesGateAndCancelsScheduledWork" />
+  <testcase classname="nl.moto.ota.platform.monitoring.MonitorRuntimeTest" name="realPeriodicScheduleIsUniqueAndDisableCancelsIt" />
+  <testcase classname="nl.moto.ota.platform.monitoring.MonitorRuntimeTest" name="disabledProductionWorkerReturnsBeforeAnyDeviceInspection" />
+  <testcase classname="nl.moto.ota.platform.monitoring.MonitorRuntimeTest" name="durableOptInAndResultReloadTogetherWithoutSignedUrls" />
+  <testcase classname="nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest" name="productionNativeEntryRejectsNonRootBeforeOpeningAnyDirectory" />
+  <testcase classname="nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest" name="realRenameat2SandboxPublishesAtomicallyAndRefusesExistingDestination" />
+  <testcase classname="nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest" name="realAppUidCannotRunDedicatedRootProbe" />
+  <testcase classname="nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest" name="absentConfirmationCannotCreateRequestOrStartRoot" />
+  <testcase classname="nl.moto.ota.platform.staging.MotorolaStagingRuntimeTest" name="emulatorSdkCannotStageEvenWhenCheckboxesAreConfirmed" />
+  <testcase classname="nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest" name="exactRootPublishedFactsRoundTripWithoutWeakeningTheTarget" />
+  <testcase classname="nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest" name="missingUnknownOrSignedMalformedPayloadFactsAreRejected" />
+  <testcase classname="nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest" name="everyPersistedFactIncludingFilesystemIdentityIsAuthenticated" />
+  <testcase classname="nl.moto.ota.platform.update.DirectOtaPreparedRuntimeTest" name="anOtherwiseAuthenticReceiptCannotBeUsedForAnotherRunBootPackageOrTarget" />
+  <testcase classname="nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest" name="mismatchedEmbeddedStockOrArbitraryToolNeverBecomesProof" />
+  <testcase classname="nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest" name="unknownAndMissingReceiptFieldsFailClosed" />
+  <testcase classname="nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest" name="signedPreparedReceiptAndChangedRunAreNotInstalledEvidence" />
+  <testcase classname="nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest" name="eachMutationRelevantFieldIsAuthenticated" />
+  <testcase classname="nl.moto.ota.platform.update.MagiskInactiveReceiptRuntimeTest" name="actualJsonTypesRoundTripToOpaqueCurrentTargetProof" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="changedPackageTargetOrMissingVerificationCannotClaimAnAction" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="inspectionOfAMissingAuthorizationCreatesNoKeyAndCannotActivateAWriter" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="aNewStoreCanInspectOldConsentButCannotReactivateItAfterAProcessRestart" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="aSymlinkCannotSubstituteForThePrivateAuthorizationFile" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="scopeCannotBeNarrowedAfterAnActionWasAlreadyDispatched" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="anExistingNonterminalJournalBlocksANewRunBeforeKeyCreation" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="aVerifiedSameTargetCanBePinnedAndClaimedExactlyOnce" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="aReusedUuidCannotOverwriteItsEarlierAuthorizationEvenAfterACompletedRun" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="staleFutureFailedAndRecoveryObservationsCannotAuthorizeDispatch" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="aProgrammaticFalseConsentCannotCreateAnyAuthorityFiles" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="tamperedMacScopeNeverMintsAnOperationAndLoadRemainsObservationOnly" />
+  <testcase classname="nl.moto.ota.platform.update.RunAuthorizationStoreRuntimeTest" name="changedSourceBootBuildFingerprintSlotAndTechnicalProfileCannotClaimAnAction" />
+  <testcase classname="nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest" name="corruptBackupFailsBeforeExportingAnyByte" />
+  <testcase classname="nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest" name="bootRecoveryLargerThanOldEightMiBLimitStreamsWithBoundedWrites" />
+  <testcase classname="nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest" name="symlinkToDifferentPrivateFileIsRejected" />
+  <testcase classname="nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest" name="oldPerStepBooleanCannotAuthorizeAWrite" />
+  <testcase classname="nl.moto.ota.platform.update.StockRestoreControllerRuntimeTest" name="truncatedBackupAndForgedPlanCannotBeExported" />
+  <testcase classname="nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest" name="atomicFileBackupIsRecoveredWhenBaseFileIsMissing" />
+  <testcase classname="nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest" name="oldConfirmationCannotClaimANewerPreparedTransaction" />
+  <testcase classname="nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest" name="oversizedJournalFailsClosedWithoutLoadingAllBytes" />
+  <testcase classname="nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest" name="recreatedControllerLoadsCriticalJournalWithoutDispatchingAnything" />
+  <testcase classname="nl.moto.ota.platform.update.UpdateRunStoreInstrumentedTest" name="existingEmptyJournalFailsClosedWhileMissingJournalIsIdle" />
+</testsuite>

@@ -22,6 +22,8 @@ The app separates a downloaded file, an authenticated package, a user-reported s
 
 Actual screenshots of the signed release on a disposable Android emulator. Device values in the [overview](docs/images/overview-en.png) belong to that emulator. The [complete workflow demonstration](docs/images/simulation-nl-dark.png) is explicitly simulated; no phone update is shown.
 
+[Watch the interface in motion](https://github.com/JustMLC4real/moto-ota-manager/releases/download/v1.0.1/moto-ota-manager-1.0.1-preview.mp4) · [What changed in 1.0.1](docs/RELEASE-NOTES-1.0.1.md)
+
 ## What you get
 
 | Feature | What it actually does |

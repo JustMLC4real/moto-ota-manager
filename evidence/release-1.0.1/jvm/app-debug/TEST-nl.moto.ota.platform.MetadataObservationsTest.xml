@@ -1,0 +1,18 @@
+<testsuite name="nl.moto.ota.platform.MetadataObservationsTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-10-30T07:55:35" hostname="[HOST]" time="0.031">
+  <properties />
+  <testcase name="unstableOrPartialSnapshotFileCannotBecomeIdle" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.004" />
+  <testcase name="hexReaderRejectsCompressionMarkersAndUnexpectedBytes" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.002" />
+  <testcase name="callbackErrorCannotBeHiddenByFollowingIdleOrMalformedProgress" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.013" />
+  <testcase name="kernelFactsAreStrictAndDuplicateOrUnknownKeysAreRejected" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.001" />
+  <testcase name="existingEmptyProtoIsNoneButMissingOrDeniedReadIsUnknown" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.001" />
+  <testcase name="rootHelperRejectsApkPathInjectionBeforeExecution" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.002" />
+  <testcase name="directIdleRequiresConsistentVabAndEmptyReadableSnapshotDirectory" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.002" />
+  <testcase name="currentMergeAndFailureAreNeverHiddenByHalNone" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.001" />
+  <testcase name="realCallbackSchemaAcceptsOnlyConsistentCurrentStatus" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.002" />
+  <testcase name="contradictorySuccessfulToolsCannotBeOverriddenByIdleFiles" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.0" />
+  <testcase name="onlyTheTwoFixedUpdaterReadsUseTheGlobalNamespace" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.002" />
+  <testcase name="privilegedPropertyStillRejectsInjectionBeforeExecution" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.0" />
+  <testcase name="signatureProbeRejectsTraversalBeforeRootExecution" classname="nl.moto.ota.platform.MetadataObservationsTest" time="0.0" />
+  <system-out />
+  <system-err />
+</testsuite>

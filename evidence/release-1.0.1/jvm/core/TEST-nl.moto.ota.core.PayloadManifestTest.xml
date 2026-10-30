@@ -1,0 +1,14 @@
+<testsuite name="nl.moto.ota.core.PayloadManifestTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-10-30T07:54:19" hostname="[HOST]" time="0.053">
+  <properties />
+  <testcase name="realHistoricalSignedPackageContainsKnownStock17Target" classname="nl.moto.ota.core.PayloadManifestTest" time="0.032" />
+  <testcase name="neitherSupportedImageCannotCreateStockProof" classname="nl.moto.ota.core.PayloadManifestTest" time="0.001" />
+  <testcase name="fullPayloadMayOmitSourceInfo" classname="nl.moto.ota.core.PayloadManifestTest" time="0.001" />
+  <testcase name="projectsSourceAndTargetDigestsWithoutParsingOperationBlobs" classname="nl.moto.ota.core.PayloadManifestTest" time="0.001" />
+  <testcase name="readsOnlyBoundedManifestFromPayloadZip" classname="nl.moto.ota.core.PayloadManifestTest" time="0.015" />
+  <testcase name="bootOnlyAndBothImageTypesHaveIndependentSourceAndTargetDigests" classname="nl.moto.ota.core.PayloadManifestTest" time="0.0" />
+  <testcase name="malformedSizesHashesWireTypesAndLengthsAreRejected" classname="nl.moto.ota.core.PayloadManifestTest" time="0.001" />
+  <testcase name="rejectsSlotSuffixedAndPathPartitionNames" classname="nl.moto.ota.core.PayloadManifestTest" time="0.0" />
+  <testcase name="duplicatePartitionOrCriticalFieldsFailClosed" classname="nl.moto.ota.core.PayloadManifestTest" time="0.001" />
+  <system-out />
+  <system-err />
+</testsuite>

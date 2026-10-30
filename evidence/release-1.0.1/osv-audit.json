@@ -1,0 +1,12 @@
+{
+  "status": "no-matching-advisories-returned",
+  "queriedAtUtc": "2026-10-30T08:01:39.032227+00:00",
+  "source": "https://api.osv.dev/v1/querybatch",
+  "moduleCount": 104,
+  "findings": [],
+  "limits": [
+    "Advisory coverage is incomplete",
+    "Not a license audit",
+    "No physical-device or OTA safety claim"
+  ]
+}

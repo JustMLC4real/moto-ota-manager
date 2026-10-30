@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "sourceLogSha256": "812d71b7beb5af832a370de054b8d1399226b1fa5f1d761a3eae0e875dbfe352",
+  "complete": true,
+  "successful": true,
+  "tests": 101,
+  "passed": 97,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 4,
+  "runnerSeconds": 52.286,
+  "terminalStatusCounts": {
+    "-4": 4,
+    "0": 97
+  },
+  "skippedTests": [
+    {
+      "class": "nl.moto.ota.ReadOnlyDeviceValidationTest",
+      "test": "actualBackupMatchesTheAuthenticatedStockAndUpdaterResolvesExplicitly",
+      "kind": "assumption"
+    },
+    {
+      "class": "nl.moto.ota.ReadOnlyDeviceValidationTest",
+      "test": "existingHistoricalOtaPassesTheActualPlatformSignatureVerifier",
+      "kind": "assumption"
+    },
+    {
+      "class": "nl.moto.ota.ReadOnlyDeviceValidationTest",
+      "test": "realDiagnosticsMatchTheIndependentReadOnlyBaseline",
+      "kind": "assumption"
+    },
+    {
+      "class": "nl.moto.ota.ReadOnlyDeviceValidationTest",
+      "test": "cachedMotorolaMetadataDoesNotOfferTheInstalledUpdateAgain",
+      "kind": "assumption"
+    }
+  ]
+}
