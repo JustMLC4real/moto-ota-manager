@@ -1,6 +1,5 @@
 package nl.moto.ota
 
-import android.os.ParcelFileDescriptor
 import android.provider.Settings
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -105,7 +104,7 @@ class PresentationUiTest {
         val previous = Settings.Global.getString(resolver, key)
         val before = UpdateController(compose.activity).load()
         try {
-            animationScaleCommand("settings put global animator_duration_scale 0")
+            setAnimationScale("0")
             assertEquals(0f, Settings.Global.getFloat(resolver, key), 0f)
             // A fresh composition observes the platform setting before any transitions.
             compose.activityRule.scenario.recreate()
@@ -129,20 +128,20 @@ class PresentationUiTest {
             assertEquals(false, nl.moto.ota.platform.discovery.CdsController(compose.activity).consentGranted())
             assertEquals(before, UpdateController(compose.activity).load())
         } finally {
-            if (previous == null) {
-                animationScaleCommand("settings delete global animator_duration_scale")
-            } else {
-                val quoted = "'" + previous.replace("'", "'\\''") + "'"
-                animationScaleCommand("settings put global animator_duration_scale $quoted")
-            }
+            setAnimationScale(previous)
             assertEquals(previous, Settings.Global.getString(resolver, key))
         }
     }
 
-    private fun animationScaleCommand(command: String) {
-        ParcelFileDescriptor.AutoCloseInputStream(
-            InstrumentationRegistry.getInstrumentation().uiAutomation.executeShellCommand(command)
-        ).bufferedReader().use { it.readText() }
+    private fun setAnimationScale(value: String?) {
+        val automation = InstrumentationRegistry.getInstrumentation().uiAutomation
+        automation.adoptShellPermissionIdentity(android.Manifest.permission.WRITE_SECURE_SETTINGS)
+        try {
+            check(Settings.Global.putString(compose.activity.contentResolver,
+                Settings.Global.ANIMATOR_DURATION_SCALE, value))
+        } finally {
+            automation.dropShellPermissionIdentity()
+        }
     }
 
     private fun waitUntilReady() {
